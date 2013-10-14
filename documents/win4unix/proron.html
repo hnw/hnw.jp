@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>WWW life with Proxomitron</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="./index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>ぷろろんのすすめ</h1>
+
+<p>
+Proxomitron（通称ぷろろん、他の呼び名「おみとろん」などの方がメジャーなのかも）という、
+Windows用のローカルプロクシがあります。
+色々な意味で面白いので、紹介するページを作ってみます。
+</p>
+<p>
+このソフト、検索すると胡散臭いコミュニティの人が使ってることが多いみたいですけど、
+ブラウザの挙動に不満を持つ全て人に有用なソフトなので、
+騙されたと思って使ってみてください。
+</p>
+<p>
+筆者は、このソフトのおかげで<a href="http://www.google.com/"
+>Google</a>を1.28倍便利に使えるようになった気がします。
+</p>
+<p>
+追記：しばらくメンテしてなかったら、googleのcache関係のは全部古くなっちゃいました。
+そもそもGoogle-cache non-jaの問題は解決してるしね。
+随時やるよりも、bookmarkletで適宜やった方が向いているものもありそうです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="intro">はじめに</a></h2>
+
+<p>
+ダウンロードしてください。
+前バージョンのNaoko-3（バージョンナンバーです）はイマイチですので、
+Naoko-4 （ついにβが取れた）を落として下さい。
+以下の記述は全部 Naoko-4 ( beta-five 以降 ) が前提です。
+</p>
+<p>
+昔のバージョンでは、
+インストーラ付きバージョンは動かないこともあったみたいなので、
+zip なブツを Program Files にぶちこんで使うほうがいいかも。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+
+<h2><a name="install">準備</a></h2>
+
+<p>
+落としてきて、筆者がしたことは次のとおりです。
+</p>
+<ul>
+  <li> タスクトレイをダブルクリックして出てくる画面がサイケデリックで吐きそうなので、
+       config で落ち着いた感じにした。（一回終了させると直る）
+  <li> IE のプロクシの設定を localhost:8080 にした。
+  <li> スタートアップにProxomitronへのショートカットを作った。
+</ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="list">デフォルトのリストについて</a></h2>
+
+<p>
+Listsディレクトリの下には、
+便利なルールのリストファイルが転がってます。これの解説を。
+</p>
+<p>
+Proxomitronを通すとうまく動かないようなサイト/ページがあった場合、
+まずは「Bypass」ボタンを試してみるといい。
+これを押すと、Proxomitronが一切フィルターをかけないようになる。
+これで今度は見えるようであれば、
+Bypass List.txtに次のように追記してやれば、
+そのURLに対してだけはBypassモードでアクセスするようになる。
+本当は原因追及して余計なフィルタだけ外すべきなのだが、
+それが面倒ならこれでOKだろう。
+</p>
+<pre>
+[^/]++hnw.jp/documents/
+</pre>
+<p>
+あるURL以下は絶対に見ない、というものがある場合は
+URL Killfile.txtに次のように追記してやればOK。
+このリストは「URL-Killer: kill-a-URL (out)」で使われている。
+</p>
+<pre>
+[^/]++.yimg.jp/adv/
+</pre>
+<p>
+「Content-Type: Fix MIME types (In)」というルールファイルで、
+Webサーバでうまく設定されてないファイルのMIME typeを、
+拡張子によって変更することができる。
+例えば動画ファイルをtext/plainなどと返すような設定のサーバに対しては、
+MIME Fix List.txtに次のように追記してやればOK。</p>
+<pre>
+asf $SET(0=video/x-ms-asf)
+asx $SET(0=video/x-ms-asf)
+avi $SET(0=video/msvideo)
+wmv $SET(0=video/x-ms-wmv)
+wvx $SET(0=video/x-ms-wvx)
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="match">マッチングルールについて（書きかけ）</a></h2>
+
+<p>
+ぷろろんを少し使ってみればすぐ気づくと思いますが、
+ぷろろんのマッチングルールの記述方法はかなりいかれています。
+UNIX の正規表現とも DOS のワイルドカードともつかない奇怪な表現な上に、
+マニュアルに書いてある情報量は足りなさすぎるので、
+ストレスたまりまくりです。
+</p>
+<p>
+UNIX ( 特に Perl ) の正規表現に慣れた人が困惑するであろう点を列挙していきます。
+</p>
+<ul>
+  <li> *はDOSのワイルドカード風だが、最短一致。Perlで言うと.*?か。
+
+  <li> \1はMatch中で前方参照の意味で使うことはできないが、Replaceの中で使うとMatchの部分文字列の参照となる。
+  <ul>
+    <li> Match中で単体で使うと*と同じ。Perlで言うと(.*?)のような意味になる。
+    <li> Match中で(expression)\1などとすると、その表現に\1という名前を付けたことになる。
+    <li> 特に指定のない()を参照することはできないし、\1などの数字は出現順序と全く無関係。
+  </ul>
+
+  <li> ++ は最短一致。Perlで言うところの*?と同じ。
+  <li> +は正規表現的に対応するものは無い。最長一致的だが、先の表現をlookup(?)することはない。
+</ul>
+
+<p>
+また、Web Page FilterのBounds Matchでのマッチングは、Matching Expressionを見ないで行われるので、必要十分な表現を書く必要があります。
+</p>
+<p>
+基本的に、いわゆる正規表現より能力は低いようです。
+好意的に見れば、
+性能を考えてわざとバックトラックが起こらないように設計してあるってことかも。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p>
+以下、便利なルールの紹介です。適当にdefault.cfgに追記してみてください。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="google_alias">Google-cache alias</a></h2>
+
+<p>
+あるページに対応するGoogleのキャッシュにアクセスするのに、
+http://cache/www.〜のような形式でアクセスします。
+</p>
+<p>
+少なくともIE5の場合、
+「ローカルアドレスにはプロクシサーバを使用しない」をオフにしないと、
+cacheというサーバを探しにいくので注意しましょう。
+</p>
+<pre>
+[HTTP headers]
+In = FALSE
+Out = TRUE
+Key = "URL: Google-cache alias"
+Match = "http://cache/\1"
+Replace = "$JUMP(http://www.google.com/search?q=cache:\1)"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="google_nonja">Google-cache non-ja</a></h2>
+
+<p>
+Googleのキャッシュにアクセスするとき、
+「このページはGoogleのキャッシュです」とかいうメッセージと
+本文との文字コードが違ってるために、
+本文の方がぐちゃぐちゃになって思わず呪いの言葉を吐くことがあるかと思いますが、
+このGoogleのメッセージを英語にしてしまう試みです。
+</p>
+<pre>
+[HTTP headers]
+In = FALSE
+Out = TRUE
+Key = "Accept-Language: Google-cache non-ja"
+URL = "www.google.com/search?q=cache:"
+Match = "*"
+
+In = FALSE
+Out = TRUE
+Key = "URL: Google-cache non-ja"
+URL = "www.google.com/search?q=cache:"
+Match = "\1hl=ja"
+Replace = "$RDIR(\1hl=)"
+
+In = FALSE
+Out = TRUE
+Key = "Cookie: Google-cache non-ja"
+URL = "www.google.com/search?q=cache:"
+Match = "\1LD=ja\2"
+Replace = "\1LD=en\2"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="google_linkrel">Google-cache link rel</a></h2>
+
+<p>
+GoogleのキャッシュのHTML中のリンクは全て実際のファイルへのリンクになりますが、
+このうち、相対指定されている全てのリンクをGoogleのキャッシュへのリンクに書き換えます。
+この結果、Googleのキャッシュを使ったネットサーフが可能になります。
+落ちてるとか、死ぬほど遠いサイトを見るのに有効ですが、
+不人気なサイト（例えばこのページ）だと
+数ヶ月前の内容がキャッシュされてたりします（泣）。
+</p>
+<p>
+問題点は色々あると思うので、ご意見お待ちしてます。
+</p>
+<pre>
+[Patterns]
+Name = "Google-cache link rel"
+Active = TRUE
+URL = "www.google.com/search?q=cache:"
+Bounds = "&lt;a\s[^&gt;]++href=*&lt;/a&gt;"
+Limit = 900
+Match = "&lt;a\s\1href="([^/][^:'"]+)\2" \3&gt;\4&lt;/a&gt;"
+        "$URL((www.google.com/search?q=cache:([^/]+/)+)\9[^/]+)"
+Replace = "&lt;a \1href="http://\9\2" \3&gt;\4&lt;/a&gt;"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="docomo">User-Agent: DoCoMo / J-PHONE</a></h2>
+
+<p>
+User-Agent を他のものにするというのはデフォルトで用意されてるんで、
+全然珍しくもないんですが、
+BlockList を使ってまずいサイトを外すことで常用してます。
+ある意味かなり嫌がらせかも。
+</p>
+<p>
+最近はブラウザ側で切り替えるようにしたので、あまり使ってません。
+</p>
+<p>
+さすがにデフォルトでは用意されてないんで、 J-PHONE も作ってみました。
+</p>
+<pre>
+[HTTP headers]
+In = FALSE
+Out = TRUE
+Key = "User-Agent: DoCoMo"
+URL = "(^$LST(Deny503i))"
+Match = "*"
+Replace = "DoCoMo/1.0/D503i/c10"
+
+In = FALSE
+Out = TRUE
+Key = "User-Agent: J-PHONE"
+Match = "*"
+Replace = "J-PHONE/2.0/J-SH03"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="tr_alias">Translator alias</a></h2>
+
+<p>
+ExciteやIBMの翻訳サービスを使って英語のページを翻訳するのに、
+http://tr/www.〜のような形式でアクセスします。
+名前やオプションは適当にしてください。
+現在どっちをメインに使うかテスト中ですが、
+exciteのを原文つきで表示するのが一番ましかな、という感触です。
+</p>
+<p>
+どっちもGETでのアクセスを禁止されたらいきなり動かなくなるんだけどね…。
+</p>
+<p>
+<a href="#google_alias">Google-cache alias</a>同様、
+「ローカルアドレスにはプロクシサーバを使用しない」をオフにしましょう。
+</p>
+<pre>
+[HTTP headers]
+In = FALSE
+Out = TRUE
+Key = "URL: (tr) Excite Translator alias"
+Match = "http://tr/\1"
+Replace = "$JUMP(http://www.excite.co.jp/world/url/?wb_lp=ENJA&amp;wb_dis=3&amp;wb_url=http://\1)"
+
+In = FALSE
+Out = TRUE
+Key = "URL: (tr2) IBM Translator alias"
+Match = "http://tr2/\1"
+Replace = "$JUMP(http://demo.alphaworks.ibm.com/cgi-bin/mtconnect?lang=jp&amp;text=http://\1)"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="ime_nu">ime.nu Redirector</a></h2>
+
+<p>
+2chでリンクを書くと、なぜか ime.nu ドメインのページを1枚かまされて、
+次のページへGO!とか言われますね。
+Refererを隠すっていう目的なんでしょうけど、あれ、とってもうざいですね。
+ごちゃごちゃ言わんとはよ次のページ見せんかーい、
+という短気なあなたも今日から安心。
+ぷろろんが何とかします。
+</p>
+<pre>
+[HTTP headers]
+In = FALSE
+Out = TRUE
+Key = "URL: ime.nu Redirector (Out)"
+Match = "http://(ime\.nu|pinktower\.com)/\1"
+Replace = "$JUMP(http://\1)"
+</pre>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="bookmarks">リンク集</a></h2>
+<p>
+日本語の資料は少ないっすね…。
+</p>
+    <ul>
+      <li><a href="http://www.proxomitron.org/"
+	  >The Proxomitron</a> 本家<br>
+      <li><a href="http://www.pluto.dti.ne.jp/~tengu/proxomitron/"
+	  >Proxomitron-J</a> 日本語ページ<br>
+      <li><a href="http://pcweb.mycom.co.jp/special/2000/proxomitron/index.html"
+	  >Webブラウジングを快適にする「The Proxomitron」</a
+          > MYCOM PC WEB の記事。<br>
+
+    </ul>
+
+<address>
+hanawa <a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2003-08-24 17:43:16 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../../index.html">[home]</a>
+<a href="./index.html">[back]</a>
+</p>
+
+</body>
+</html>

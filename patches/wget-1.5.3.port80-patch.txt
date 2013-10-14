@@ -1,0 +1,53 @@
+*** wget-1.5.3/src/http.c~	Thu Sep 10 22:14:44 1998
+--- wget-1.5.3/src/http.c	Tue Oct  5 05:37:28 1999
+***************
+*** 470,479 ****
+    sprintf (request, "\
+  %s %s HTTP/1.0\r\n\
+  User-Agent: %s\r\n\
+! Host: %s:%d\r\n\
+  Accept: %s\r\n\
+  %s%s%s%s%s%s\r\n",
+! 	  command, path, useragent, remhost, remport, HTTP_ACCEPT, 
+  	  referer ? referer : "", 
+  	  wwwauth ? wwwauth : "", 
+  	  proxyauth ? proxyauth : "", 
+--- 470,482 ----
+    sprintf (request, "\
+  %s %s HTTP/1.0\r\n\
+  User-Agent: %s\r\n\
+! Host: %s%s%.0d\r\n\
+  Accept: %s\r\n\
+  %s%s%s%s%s%s\r\n",
+! 	  command, path, useragent, remhost, 
+! 	  (remport == 80) ? "" : ":",
+! 	  (remport == 80) ? 0 : remport,
+! 	  HTTP_ACCEPT,
+  	  referer ? referer : "", 
+  	  wwwauth ? wwwauth : "", 
+  	  proxyauth ? proxyauth : "", 
+*** wget-1.5.3/src/url.c~	Fri Sep 11 09:23:26 1998
+--- wget-1.5.3/src/url.c	Tue Oct  5 05:38:28 1999
+***************
+*** 689,697 ****
+      }
+    memcpy (res + l, host, lh);
+    l += lh;
+!   res[l++] = ':';
+!   long_to_string (res + l, (long)u->port);
+!   l += numdigit (u->port);
+    res[l++] = '/';
+    memcpy (res + l, dir, ld);
+    l += ld;
+--- 689,699 ----
+      }
+    memcpy (res + l, host, lh);
+    l += lh;
+!   if (u->port != 80) {
+!     res[l++] = ':';
+!     long_to_string (res + l, (long)u->port);
+!     l += numdigit (u->port);
+!   }
+    res[l++] = '/';
+    memcpy (res + l, dir, ld);
+    l += ld;

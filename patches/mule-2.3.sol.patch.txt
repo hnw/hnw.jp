@@ -1,0 +1,49 @@
+*** mule/src/Makefile~	Mon Oct 12 20:50:28 1998
+--- mule/src/Makefile	Tue Oct 13 19:09:07 1998
+***************
+*** 23,29 ****
+  VPATH=/usr/local/src/mule/src
+  CC=gcc
+  CPP=gcc -E
+! CFLAGS=-O2 -pipe -DHAVE_VFORK -I/usr/local/include -L/usr/local/lib -R/usr/local/lib
+  LN_S=ln -s
+  # Substitute an assignment for the MAKE variable, because
+  # BSD doesn't have it as a default.
+--- 23,29 ----
+  VPATH=/usr/local/src/mule/src
+  CC=gcc
+  CPP=gcc -E
+! CFLAGS=-O2 -pipe -DHAVE_VFORK
+  LN_S=ln -s
+  # Substitute an assignment for the MAKE variable, because
+  # BSD doesn't have it as a default.
+*** mule/src/keyboard.c~	Fri Feb  3 10:21:28 1995
+--- mule/src/keyboard.c	Mon Oct 12 20:48:42 1998
+***************
+*** 534,539 ****
+--- 534,541 ----
+  static Lisp_Object modify_event_symbol ();
+  static Lisp_Object make_lispy_switch_frame ();
+  
++ static echo ();
++ 
+  /* > 0 if we are to echo keystrokes.  */
+  static int echo_keystrokes;
+  
+***************
+*** 651,657 ****
+  /* Display the current echo string, and begin echoing if not already
+     doing so.  */
+  
+! echo ()
+  {
+    if (!immediate_echo)
+      {
+--- 653,659 ----
+  /* Display the current echo string, and begin echoing if not already
+     doing so.  */
+  
+! static echo ()
+  {
+    if (!immediate_echo)
+      {

@@ -1,0 +1,59 @@
+*** wget-1.5.3/src/http.c~	Thu Sep 10 22:14:44 1998
+--- wget-1.5.3/src/http.c	Sat Sep 11 04:25:13 1999
+***************
+*** 467,485 ****
+  			    + (opt.user_header ? strlen (opt.user_header) : 0)
+  			    + 64);
+    /* Construct the request.  */
+!   sprintf (request, "\
+  %s %s HTTP/1.0\r\n\
+  User-Agent: %s\r\n\
+  Host: %s:%d\r\n\
+  Accept: %s\r\n\
+  %s%s%s%s%s%s\r\n",
+! 	  command, path, useragent, remhost, remport, HTTP_ACCEPT, 
+! 	  referer ? referer : "", 
+! 	  wwwauth ? wwwauth : "", 
+! 	  proxyauth ? proxyauth : "", 
+! 	  range ? range : "",
+! 	  pragma_h, 
+! 	  opt.user_header ? opt.user_header : "");
+    DEBUGP (("---request begin---\n%s---request end---\n", request));
+     /* Free the temporary memory.  */
+    FREE_MAYBE (wwwauth);
+--- 467,501 ----
+  			    + (opt.user_header ? strlen (opt.user_header) : 0)
+  			    + 64);
+    /* Construct the request.  */
+!   if (remport == 80) {
+!       sprintf (request, "\
+! %s %s HTTP/1.0\r\n\
+! User-Agent: %s\r\n\
+! Host: %s\r\n\
+! Accept: %s\r\n\
+! %s%s%s%s%s%s\r\n",
+! 	       command, path, useragent, remhost, HTTP_ACCEPT, 
+! 	       referer ? referer : "", 
+! 	       wwwauth ? wwwauth : "", 
+! 	       proxyauth ? proxyauth : "", 
+! 	       range ? range : "",
+! 	       pragma_h, 
+! 	       opt.user_header ? opt.user_header : "");
+!   } else {
+!       sprintf (request, "\
+  %s %s HTTP/1.0\r\n\
+  User-Agent: %s\r\n\
+  Host: %s:%d\r\n\
+  Accept: %s\r\n\
+  %s%s%s%s%s%s\r\n",
+! 	       command, path, useragent, remhost, remport, HTTP_ACCEPT, 
+! 	       referer ? referer : "", 
+! 	       wwwauth ? wwwauth : "", 
+! 	       proxyauth ? proxyauth : "", 
+! 	       range ? range : "",
+! 	       pragma_h, 
+! 	       opt.user_header ? opt.user_header : "");
+!   }
+    DEBUGP (("---request begin---\n%s---request end---\n", request));
+     /* Free the temporary memory.  */
+    FREE_MAYBE (wwwauth);

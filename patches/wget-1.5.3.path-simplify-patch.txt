@@ -1,0 +1,17 @@
+*** wget-1.5.3/src/utils.c~	Sun Dec 12 07:05:55 1999
+--- wget-1.5.3/src/utils.c	Sun Dec 12 07:05:42 1999
+***************
+*** 345,350 ****
+--- 345,356 ----
+        if (!path[start])
+  	break;
+  
++       if (start-1 >= 0 && path[start-1] == ':' &&
++ 	  path[start] == '/' && path[start+1] == '/') {
++ 
++ 	  start++;
++       }
++ 
+        /* Handle multiple `/'s in a row.  */
+        while (path[i] == '/')
+  	i++;

@@ -1,0 +1,10 @@
+#!/usr/local/bin/perl
+print "Pragma: no-cache\n";
+print "cache-control: no-cache\n";
+print "Content-type: text/html\n";
+print "\n";
+print "<PRE>\n";
+foreach (sort(keys(%ENV))) {
+    print $_, " = ", $ENV{$_}, "\n";
+}
+print "</PRE>\n";

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../css/default.css" type="text/css">
+<title>hanawa's tools</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<p class="header">
+<a href="../index.html">[home]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>10分ツール</h1>
+
+<p class="abstract">
+てきとーに作られたツール達。
+大抵の改行コードはLFなので、Windows の人は注意してください。
+また、Perlスクリプトは全て ".pl.txt" という拡張子でアップロードしてあります。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+
+<h2><a name="convexec">convexec</a></h2>
+
+<div class="indent">
+<p>
+        CygwinのパスをWin32のパスに変換することで、
+        CygwinのシェルからWin32のツールを使いやすくするプログラムです。
+</p>
+<p>
+  もう少しましな説明：<a href="convexec.txt">[readme(SJIS)]</a><br>
+  悩まずダウンロード：<a href="convexec.tgz">[package(tgz)]</a><br>
+</p>
+</div>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a class="title" href="whois.pl.txt">whois.pl</a></h2>
+
+<p>
+        whois で、ドメインに応じて適当なwhoisサーバに問い合わせるラッパーです。
+        FreeBSDやDebianのwhoisは世界中のwhoisサーバを知っているのですが、
+        RedHatやSolarisのwhoisでgTLD以外のドメインを問い合わせる場合、
+        whoisサーバをユーザーがコマンドラインオプションで指定する必要があり、
+        タイプするのがだるい人も多いかと思います。
+        そこで、<a href="http://www.gnu.org/software/jwhois/jwhois.html"
+        >jwhois</a>から情報をパクってきてラッパーを作ってみました。
+</p>
+<p>
+        こんなツールを使うなら、まともなwhoisをコンパイルした方がいいとは思います。
+        特に<a href="http://www.gnu.org/software/jwhois/jwhois.html"
+        >jwhois</a>は、whois情報の提供がHTTPのみのドメインからも
+        情報を取ってきてくれる優れものです。
+        いちいちコンパイルするのはだるい、という人にだけ価値のあるスクリプトです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a class="title" href="jpginfo.pl.txt">jpginfo.pl</a></h2>
+
+<p>
+        JPEG のマーカーを順にたどりながらファイルの情報を表示するスクリプト。
+        当初はPerlでバイナリデータを扱う実験プロジェクトでしたが、
+        今や常用スクリプトの一つ。
+        wgetでダウンロードしてきたファイル群に対してまず「jpginfo *」とやってます。
+</p>
+<p>
+        ちなみに0xffを改行文字として扱っており、
+        バイナリデータを扱う実験としても成功しています。
+        もちろん、JPEGフォーマットが比較的特殊なのも関係していますので、
+        あらゆるバイナリデータをPerlでうまく扱えるわけでもありませんが。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a class="title" href="usocat.pl.txt">usocat.pl</a></h2>
+
+<p>
+        usojpegファイルを結合するスクリプト。
+        usojpegファイルとは作者が便宜上つけた呼び名で、
+        あるファイル分割ツールが吐く分割ファイルのこと。
+        分割ファイルを拾って適当に処理したら復元できたので公開する。
+</p>
+<p>
+        その分割ツールは多分このツールだ、というのがあるのだが、
+        本物を使ったことがないので分割ツール名に確信が持てない。
+</p>
+<!-- というか候補が2個あるんですが。 脳天唐竹割り？ うそぴょんII？ -->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a class="title" href="mkfn.pl.txt">mkfn.pl</a></h2>
+
+<p>
+        連続するファイル名を作るスクリプト。
+        説明しにくいんだけど (^^;
+        ほぼ（作者の）思った通りに動きます。(w
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a class="title" href="rename.pl.txt">rename.pl</a></h2>
+
+<p>
+        ファイル名変更。
+        赤ラクダ本に載ってたものの改造。これは確かに便利。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="mikaka.pl.txt">mikaka.pl</a></h2>
+
+<p>
+       みかか暗号化。
+       一応実用レベルだと思います。
+       現状では本家（謎）と互換性のない部分もあります。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="url2link.pl.txt">url2link.pl</a></h2>
+
+<p>
+       入力テキストのURLっぽい部分をHTMLのリンクにする。
+       それほど使い道はなさそうです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="printenv.pl.txt">printenv.pl</a></h2>
+
+<p>
+        名前の通りのなげやりなCGI。
+        こんなもん sh で書けといわれた。
+        <a href="http://lightning.prohosting.com/~g5432/cgi-bin/printenv.pl"
+        >[example]</a>
+</p>
+
+<!-- 
+
+<p>
+========== ボツ作品の墓場 ==========
+</p>
+<ul>
+  <li> <a href="httpfilt.pl.txt"><strong>httpfilt.pl</strong></a>
+<p>
+        まだまだ作りかけ。
+        Web ページの広告を切り落とそうという企画。
+        CGI Proxy を知って気力超減退。
+        この内容が CGI Proxy のパッチとして多少生きていなくもない。
+        （そのパッチを公開する気はあまりないけど）
+</p>
+
+  <li> <a href="same-md5.pl.txt"><strong>same-md5.pl</strong></a>
+<p>
+        作りかけのはず。
+        リストの中から md5 値が同じファイルを探すもの。
+        落としてきたブツを既に持っているかどうかを知るのが目的。
+        必要性を感じなくなったので放ってある。
+</p>
+
+-->
+
+<address>
+hanawa<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2003-10-04 07:35:05 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../index.html">[home]</a>
+</p>
+
+</body>
+</html>

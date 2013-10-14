@@ -1,0 +1,64 @@
+#!/usr/bin/perl -w
+#
+# usojpg.pl version 0.03 - usojpeg-encryption/decryption program
+# copyright (c) 2003 hanawa <y@hnw.jp>
+
+$VERSION="0.03";
+
+use Getopt::Long;
+
+%opt = (
+  'help|h'             => \$opt_help,
+  'version|v'          => \$opt_version,
+  );
+
+Getopt::Long::Configure("bundling", "no_ignore_case");
+
+&GetOptions(%opt);
+
+if ($opt_help) {
+  &show_help();
+} elsif ($opt_version) {
+  &show_version();
+}
+
+unless (@ARGV) {
+  &show_help();
+} else {
+  binmode(STDOUT);
+  foreach (@ARGV) {
+    my($str,$head);
+    $size = -s $_;
+    if (! -f _) {
+      print STDERR "$_ is not a regular file. Ignored.\n";
+      next;
+    }
+    if ($size < 32) {
+      print STDERR "$_ is too small. Ignored.\n";
+      next;
+    }
+    open(FH, $_) or next;
+    binmode(FH);    
+    read(FH, $head, 32);
+    if ($head =~ /\xff\xd8\xff\xe0\x00\x10JFIF.{10}2\.reVGEPJOSU/) {
+      read(FH, $str, $size-32);
+      print scalar(reverse($str));
+    } elsif ($head =~ /\xff\xd8\xff\xe0\x00\x10JFIF.{10}USOJPEGVer\.2/) {
+      read(FH, $str, $size-32);
+      print scalar($str);
+    } else {
+      print STDERR "$_ is not usojpeg file. Ignored.\n";
+    }
+    close(FH);
+  }
+}
+
+sub show_help {
+  print STDERR "usage: $0 [file]... \n";
+  exit;
+}
+sub show_version {
+  print STDERR "usojpeg.pl version $VERSION\n";
+  print STDERR "copyright (c) 2003 hanawa <y\@hnw.jp>\n";
+  exit;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>how to use rpm</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+    <h1>rpmのつかいかた(なげやり)</h1>
+
+<p class="abstract">
+社内用のメモを公開してみます。
+</p>
+
+<ul>
+  <li>インストール
+<pre>
+    $ rpm -ihv samba-2.0.7-ja_1.3
+</pre>
+
+  <li>上書きアップデート
+<pre>
+    $ rpm -Uhv samba-2.0.7-ja_1.3
+</pre>
+
+  <li>パッケージの中身チェック
+<pre>
+    $ rpm -qlp uudeview-0.5.13-5vl1.i386.rpm 
+</pre>
+
+
+  <li>いま入ってるパッケージのバージョン知りたい
+<pre>
+    $ rpm -q uudeview
+    uudeview-0.5.13-5vl1
+</pre>
+
+  <li>あのパッケージ入ってる？
+<pre>
+    $ rpm -qa | grep uudeview
+    uudeview-0.5.13-5vl1
+</pre>
+
+  <li>パッケージ名はわかるんだけど、ファイルどこに置いた?
+<pre>
+    $ rpm -ql uudeview
+    /usr/bin/uudeview
+    /usr/bin/....
+</pre>
+
+  <li>このファイル、何のパッケージから湧いた?
+<pre>
+    $ rpm -qf /usr/bin/uudeview
+    uudeview-0.5.13-5vl1
+</pre>
+
+  <li>パッケージ消す
+<pre>
+    $ rpm -e uudeview
+</pre>
+
+  <li>リビルド
+<pre>
+    $ rpm --rebuild hoge.src.rpm
+</pre>
+
+  <li>リビルド(別のやりかた)
+<pre>
+    $ rpm -ihv hoge.src.rpm
+    $ cd ~/RPM/SPECS
+    $ rpm -bb --target=i586 hoge.spec
+</pre>
+
+</ul>
+
+<address>
+hanawa <a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2003-03-22 14:45:23 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../../index.html">[home]</a>
+<a href="./index.html">[back]</a>
+</p>
+
+</body>
+</html>

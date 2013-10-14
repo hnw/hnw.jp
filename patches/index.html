@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<title>hanawa's patches</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<a href="../index.html">[home]</a>
+<hr>
+
+<font size=6><strong>10秒パッチ</strong></font>
+
+<p>
+てきとーに作られたパッチ達。詳細はパッチ参照。
+</p>
+
+<ul>
+  <li> <a href="wget-1.5.3.cygwin11-patch.txt"><strong>wget 1.5.3 cygwin 1.1 patch </strong></a>
+<p>
+        cygwin1.1や、b20.1であっても割と最新版を追いかけている場合は
+        wgetがうまくコンパイルできないはずだが、それに対するパッチ。
+        h_errnoはDLLの中にあるようなので、
+        そのように宣言を変更したところ、うまく動いているようだ。
+</p>
+  <li> <a href="wget-1.5.3.parse-dir-patch.txt"><strong>wget 1.5.3 parse_dir() patch</strong></a>
+<p>
+       parse_dir() で "?" 以降の "/" をファイルパスの区切りだ
+       と思わないようにするパッチ。
+       要するに、 "?" の後ろの "//" とかを
+       path_simplify() で整理されないようにする。
+       query で URL を送りつけたりする方はどうぞ。
+</p>
+  <li> <a href="wget-1.5.3.port80-patch.txt"><strong>wget 1.5.3 port80 patch </strong></a>
+<p>
+        ポート番号 80 のときにはリクエストヘッダ Host: に
+        :80 を入れないようにするパッチ。
+        wget は Host: にいつでもポート番号を入れるように実装されている。
+        この実装は RFC 的に何も問題がないはずだが、
+        これだとバーチャルドメインな場所で取れないことがあるので。
+</p>
+  <li> <a href="wget-1.5.3.url-unsafe-patch.txt"><strong>wget 1.5.3 URL_UNSAFE patch </strong></a>
+<p>
+        '@' や ':' や '~' をそのまま URL に使うようにするパッチ。
+        これらの文字は RFC1630 （これとRFC1738との関係って？）
+        では URL エンコーディングが必要だったが、
+        RFC2396 では必要ない。
+        もちろんエンコードしても RFC 的に正しいはずで、
+        実際、 wget はエンコードするように実装されているが、
+        それだと某サービスが使えないので。ちなみに、ソースに
+</p>
+<pre>------------------------------
+/* A list of unsafe characters for encoding, as per RFC1738.  '@' and
+   ':' (not listed in RFC) were added because of user/password
+   encoding, and \033 for safe printing.  */
+------------------------------</pre>
+<p>
+        などと書いてある。
+        user:passwordとURLに書く関係上、
+        user名またはpasswordに ':' が入ってたらエンコードしないといかん、
+        ということのようだ。'@'も同じ問題をかかえている
+        （本当にエンコードが必要か？自信ないけど…）。
+        というわけで、このパッチを使うと
+        user名/passwordつきのファイルを取る際に困るかもしれない。
+        ま、そのうちRFCでも眺めつつなんとかするつもり。
+        （obsoleteなRFC1738に基づいているようだし）
+</p>
+<p>
+       注：このパッチで -r をつけてgetすると、
+       http://geocities.com/~ginza5432/ のような URL に対して、
+       ~ から始まるディレクトリを作られることがあります。
+       これに対し、cd ~ginza5432 などとやると
+       ホームディレクトリを探しに行ってしまいますが、
+       cd ./~ginza5432 などとやれば普通にアクセスできます。
+</p>
+  <li> <a href="wget-1.5.3.referer-patch.txt"><strong>wget 1.5.3 referer patch</strong></a>
+<p>
+        --referer と --fake-referer を新設するパッチ。
+</p>
+  <li> <a href="wget-1.5.3.path-simplify-patch.txt"><strong>wget 1.5.3 path_simplify() patch</strong></a> &nbsp; <strong>[parse_dir() patch により obsolete になりました]</strong>
+<p>
+       path_simplify() で "://" という文字の並びの場合に限り
+        '/' を2つ残すようにするパッチ。
+        こうしないと某サービスがいまいちうまく動かないので。
+        しかし、.. とか . の整理ってしなくても動くよねえ。
+        クライアント側で「やってもいい」んだっけっか。
+</p>
+  <li> <a href="unrar-250.patch.txt"><strong>unrar 2.50</strong></a>
+<p>
+        標準的でないネーミングの分割アーカイブも
+        普通の分割アーカイブと同様に扱う。
+        UnrarSrc.rar に含まれるソースに対するパッチ。
+        このパッチの改行コードは全て CRLF なことに注意。
+</p>
+</ul>
+
+<hr>
+Mail to:
+<address>
+<strong>hanawa
+<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</strong>
+</address>
+
+<hr>
+<a href="../index.html">[home]</a>
+
+</body>
+</html>

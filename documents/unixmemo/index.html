@@ -1,0 +1,297 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>The daily life for UNIX users</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>UNIX野郎の日常生活（工事中）</h1>
+
+<p class="abstract">
+このページは、UNIX 使いである筆者の日常の愚痴などを書きためる場所です。
+まとまった記事は別ページになるので、このページはいつまでも工事中です。
+</p>
+
+<ul>
+  <li><a href="#ssh">SSH</a>
+  <li><a href="#wget">wget</a>
+  <li><a href="#perl">Perl</a>
+  <li><a href="#wu-ftpd">wu-ftpd</a>
+  <li><a href="#solaris">Solaris Tips</a>
+  <li><a href="#bookmarks">リンク集</a>
+</ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="ssh"      >SSH</a></h2>
+
+<p>
+	別ページに<a href="ssh.html">SSHの使い方</a>として切り出しました。
+	また、<a href="ssh-keepalive.html"
+        >NATな環境で放置したSSH接続が切断される問題について</a>をまとめました。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="wget"      >wget</a></h2>
+
+<p>
+	UNIXでネット見るなら必需品。
+        マウスでちまちまセーブなんかしてられん。
+</p>
+<p>
+        自分の便利のため、別ページに <a href="wget.html"
+        >wget の使い方</a>としてまとめてみました。
+        （節操のない構成だなあ…）
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="perl"      >Perl</a></h2>
+
+<p>
+	スクリプトを書いていて気づいたことなど。
+</p>
+  <ul>
+    <li>dup()
+<p>
+	UNIX でいうところの dup() が、Perl にはない。
+	代わりに、open でできる(cf. man perlfunc(1))。
+	たしかに、open() だろうと dup() だろうと、
+	新しいファイルディスクリプタを作るわけだから、
+	これを統一するのはスマートな手だよなあ。
+	Perl 的にだけど。
+</p>
+    <li>reference
+<p>
+	Perl4 の頃からの人間（自分）にはリファレンスは難しい。
+	同じキーにヒットする値が複数あるときに、
+	ハッシュの先が配列だったらいいなあと思うことがある。
+	これは、 @{$arrayref{$key}} でＯＫ。
+</p>
+    <li>コンテキスト
+<p>
+	 初心者が Perl を使ったときに、
+	 最も理解しづらいのはコンテキストの周りだろう。
+	 全体が見えないうちは理解しにくいのではないだろうか。
+	 しかし、一通り理解しているはずの中級者以上でも、
+	 コンテキストが原因のバグに何度もはまってしまう。
+</p>
+<p>
+	 筆者がたった今はまったこと：
+	 $rev = reverse($str) とかやると文字列を反転できるが、
+	 それを print reverse($str) 
+	 などとやると、反転しないままの文字列が出力される。
+</p>
+<p>
+	 理由：array context だと reverse() はリストの反転なのだ。
+	 この場合、文字列$strが1要素だけであるようなリストを逆順に並べ替える
+	 （よって、print の結果は reverse がないときと同じである）。
+
+</p>
+    <li>文字列を1文字づつばらして配列にしまう
+<p>
+	 マニュアルの split() の説明として、全ての字間をデリミタにする指定
+	 @array=split(//, $str) により、
+	 文字列を1文字づつに分割する例が書いてあるが、
+	 これよりも @array=($str =~ /./g); の方が
+	 （少なくとも筆者の環境では）速い。
+	 ただし、array context で評価するのを忘れずに。
+</p>
+    <li>Getopt::Long と GNU getopt_long の互換性
+<p>
+	 GNU 風なら -vax は --vax とは異なり、
+	 -v -a -x と等価になるのが当然だろうと筆者は思うが、
+	 Getopt::Long は getopt_long
+	 と似たような名前のくせに、デフォルト動作が全然違う。
+	 マニュアルを斜めに読んだだけだが、
+	 次のようにすれば getopt_long()
+	 と割と同じように動くのではないだろうか。
+</p>
+<p>
+	 Getopt::Long::Configure("bundling", "no_ignore_case");
+</p>
+  </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="wu-ftpd"      >wu-ftpd</a></h2>
+
+  <ul>
+    <li>ftpaccess
+<p>
+	wu-ftpd は、デフォルトで馬鹿正直に ftpd の名前とバージョンを喋るが、
+	これを抑制することができる。
+</p>
+<pre>
+greeting brief
+</pre>
+<p>
+	manpage にもこの設定が推奨されている。
+	（なぜデフォルトを直さないのかと思ってしまうが）
+</p>
+    <li>ftphosts
+<p>
+	このファイルで、各ユーザーについての指定ができる。
+	あやしいことに、anon ftp に関していえば、
+	ftpaccess の class と limit の指示に加え、
+	このファイルでもアクセス制限ができてしまう。
+	例えば、NASA からの anon ftp を禁止したければ
+	ftpaccess に
+</p>
+<pre>
+class anonftp anonymous !*.nasa.gov
+</pre>
+<p>
+	と書いても可能だが、
+</p>
+<pre>
+class anonftp anonymous *
+</pre>
+<p>
+	と書いておいて、 ftphosts に
+</p>
+<pre>
+deny ftp *.nasa.gov
+</pre>
+<p>
+	と書いてもできる。
+	また、localhost からしか anon ftp を許したくなければ
+</p>
+<pre>
+allow ftp localhost
+</pre>
+<p>
+	などとなる。
+	あまり使い道があるとも思えないが。
+</p>
+  </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="solaris"      >Solaris Tips</a></h2>
+
+  <ul>
+    <li>shutdown のやりかた
+<p>
+	 shutdown -h now っていう方が好きなんですけど、
+	 Solaris の shutdown はオプションが BSD 系とは違う。
+	 halt させたいときは、モード0にする。
+	 
+</p>
+<pre>
+$ shutdown -i 0 -g 0
+</pre>
+<p>
+	 どちらか一方がモード変更、
+	 もう一方はモード変更まで何秒待つかです。
+	 デフォルトは30秒なので、つけた方が幸せです。
+	 reboot はモード6です。
+</p>
+<pre>
+$ shutdown -i 6 -g 6
+</pre>
+<p>
+	 -i と -g はどっちがどっちだかわからないので、
+	 6秒くらい文句を言わずに待ってもいいんじゃないの。
+	 滅多にやることじゃないしね。
+	 不安なら manpage 見てくださいませ。
+</p>
+
+    <li>floppy の使い方(vold)
+<p>
+	vold って、CD-ROM 勝手にマウントしてくれてすげー便利なんだけど、
+	そのかわり floppy disk をどう使えばいいのかわからなかったりする。
+</p>
+<pre>
+$ volcheck
+$ dir /floppy/
+$ dd count=1 if=/vol/dev/aliases/floppy0 of=floppy.img
+$ eject floppy
+</pre>
+<p>
+	要するに、floppy だけは自動認識しないので、
+	volcheck しないと使えない。
+	Ultra5 などでは、ドライブにイジェクトボタンがついているので、
+	eject を打たずに floppy を取り出すことも物理的には可能だが、
+	eject してから取り出すのが約束事。
+</p>
+    <li>/dev/audio盗聴の恐怖
+<p>
+	最近初めて知ったのだが、
+	/etc/logindevperm により、
+	Solaris では console ログインすると
+	/dev/audio のオーナーがログインした人に変わる。
+	フレームバッファも同様。
+	これにより盗聴や screendump におびえなくてよいわけだ。
+	誰もおびえちゃいないとは思うが。
+	(cf. man logindevperm)
+</p>
+    <li>manpage の印刷
+<pre>    % tbl /usr/man/man1m/mpstat.1m | groff -man -Tps | lp</pre>
+<p>
+	 などとするとmanpageが格好良く印刷できる。
+	 しかし、troff(1)だといまいちうまくいかないのはなぜだろう。
+	 Solaris 付属の manpage でなければこんな細工は不要。
+</p>
+
+    <li>Solarisマシンの引越し
+
+<p>
+大学からマシンを引き上げて会社に置いた際のメモ。
+大学ではNISだったもんで動かすまで難儀した。
+</p>
+
+<ul>
+<li>single user modeに落ちて
+<li>/etc/resolv.confを編集
+<li>/etc/netmasksを編集
+<li>/etc/nsswitch.confからnisを除外
+<li>/etc/defaultrouterを新規作成。
+<li>rm /etc/defaultdomain
+<li>/etc/hostsでIPアドレスを編集
+<li>/etc/hostname.hme0は名前の変更をしないのでそのまま。
+</ul>
+  </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="bookmarks">リンク集</a></h2>
+
+<ul>
+<li><a href="http://solaris.sunfish.suginami.tokyo.jp/"
+    >いつも心に太陽を。</a>たぶんSolarisファンの個人がやってるサイト。超まとまってます。
+<li><a href="http://pc.2ch.net/unix/"
+    >UNIX@2ch</a> 煽り度は30%程度。2chにしてはまともな場所ですが、
+超高スキルな方はまず来ません。
+そういう人って普通は仲間うちのチャットで群れてるよな。
+</ul>
+
+<address>
+hanawa <a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2003-04-05 16:31:32 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+</body>
+</html>

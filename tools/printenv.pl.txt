@@ -1,0 +1,58 @@
+#!/usr/local/bin/perl
+
+$hdml=1 if ($ENV{HTTP_USER_AGENT} =~ /UP\.Browser/);
+
+print "Pragma: no-cache\n";
+print "cache-control: no-cache\n";
+
+if ($hdml) {
+    print "Content-type: text/x-hdml\n\n";
+    print "<HDML VERSION=3.0 TTL=0>\n<DISPLAY>\n";
+} else {
+    print "Content-type: text/html\n\n";
+    print "<PRE>\n";
+}
+
+foreach (sort(keys(%ENV))) {
+    $str = $ENV{$_};
+    $str =~ s/&/&amp;/g;
+    $str =~ s/</&lt;/g;
+    $str =~ s/>/&gt;/g;
+
+    print $_, " = ", $str;
+    print "<BR>" if ($hdml);
+    print "\n";
+}
+
+print "<BR>" if ($hdml);
+print "\n";
+
+foreach (@ARGV) {
+    print $_;
+    print "<BR>" if ($hdml);
+    print "\n";
+}
+
+print "<BR>" if ($hdml);
+print "\n";
+
+if ($ENV{REQUEST_METHOD} eq "GET") {
+    foreach (split('&', $ENV{QUERY_STRING})) {
+        print $_;
+        print "<BR>" if ($hdml);
+        print "\n";
+    }
+} elsif ($ENV{REQUEST_METHOD} eq "POST") {
+    read(STDIN, $str, $ENV{CONTENT_LENGTH});
+    foreach (split('&', $str)) {
+        print $_;
+        print "<BR>" if ($hdml);
+        print "\n";
+    }
+}
+
+if ($hdml) {
+    print "</DISPLAY>\n</HDML>\n";
+} else {
+    print "</PRE>\n";
+}

@@ -1,0 +1,1142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>Windows life for UNIX users</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>UNIX野郎の窓生活</h1>
+
+<p class="abstract">
+UNIX/Linux環境に慣れきっているとWindowsは使いにくく、
+ストレスがたまって仕方がない。
+が、愚痴っていてもはじまらないので、
+Windows上にUNIXな環境を作ろうと筆者は思い立った。
+このページはそういった作業の中での筆者の愚痴をメモっただけのものであるが、
+同じような境遇の人の助けになれば幸いである。
+</p>
+<p class="abstract">
+つまるところ、
+<strong>UNIXに毒された同志のためのオススメWindowsソフト紹介</strong>です。
+できるだけ無料で手に入るものだけで環境整備を試みています。
+自己分析すると、手の込んだものよりシンプルなものが好きみたいです。
+趣味のベクトルが同じ方向を向いてる方、お試しあれ。
+ちなみに筆者の環境はWindows2000がメインです。95/98/Me/XPじゃ話が違うかも。
+</p>
+
+<ul>
+  <li> <a href="#cygwin">cygwin</a> - UNIXコマンドが動きまくる
+  <li> <a href="#meadow">Meadow</a>
+  <li> <a href="#tex">TeX環境</a>
+  <li> <a href="#activeperl">Active Perl</a>
+  <li> <a href="#tcsh">tcsh</a>
+<br><br>
+  <li> <a href="#mayu">窓使いの憂鬱</a> - windowsがemacsになる
+  <li> <a href="#xyzzy">xyzzy</a> - emacsライクな軽量エディタ
+  <li> <a href="#lhaca">+Lhaca</a>
+<br><br>
+  <li> <a href="#mozilla">Mozilla</a>
+  <li> <a href="#firefox">Mozilla Firefox</a>
+  <li> <a href="#openjanedoe">OpenJaneDoe</a>
+<br><br>
+  <li> <a href="#proxomitron">Proxomitron</a> - ローカルプロクシ
+  <li> <a href="#bjd">Black Jumbo Dog</a>
+<br><br>
+  <li> <a href="#ttssh">TeraTerm + ttssh</a>
+  <li> <a href="#xserver">X server</a>
+  <li> <a href="#vnc">VNC</a>
+  <li> <a href="#ffftp">FFFTP</a>
+  <li> <a href="#edmax">EdMax フリー版</a>
+<br><br>
+  <li> <a href="#kpf">Kerio Personal Firewall</a>
+  <li> <a href="#outpost">Outpost</a>
+  <li> <a href="#avg">AVG Free Edition</a>
+  <li> <a href="#antivir">AntiVir Personal Edition</a>
+  <li> <a href="#madonote">窓の手</a>
+  <li> <a href="#upx">UPX</a>
+<br><br>
+  <li> <a href="#ooo">OpenOffice.org</a>
+<br><br>
+  <li> <a href="#irfanview">IrfanView32</a>
+  <li> <a href="#winshot">Winshot</a>
+  <li> <a href="#dynamo">Dynamo</a>
+<br><br>
+  <li> <a href="#raruty">RarUty</a>
+  <!--li> <a href="#resume">璃樹無</a>
+  <li> <a href="#bdbzm">BDBZM</a-->
+<br><br>
+  <li> <a href="#bookmarks">リンク集</a>
+</ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://sources.redhat.com/cygwin/"
+>cygwin</a><a name="cygwin"> </a></h2>
+
+<p>
+        <strong>UNIX野郎がwindowsマシンを渡されたら、
+        まず最初にインストールするものがこれ。</strong>
+</p>
+<p>
+        GNUの基本的なCUIツール群のWin32へのport。
+        といっても、普通のportと違い、
+        UNIXのシステムコールをwindowsで実現するDLLを作っている。
+</p>
+<p>
+        gcc,gdbがあり、cygwinに含まれていないUNIXなツールも
+        ソースを持ってくれば99%程度の確率でコンパイルが通る。
+        cygwin内で閉じた世界を作っているので、
+        その辺が不満な人もいるらしい。
+        （どういう意味かは使ってみればわかると思います）
+</p>
+<p>
+        筆者も不満がまったくないわけではないが、
+        bashの上でawkやlessやwgetなんかが動くのは、
+        多少の欠点を補って余りあると思う。
+</p>
+<p>
+        筆者が書いた投げやりな<a href="../cygwin/index.html"
+        >紹介ページ</a>も参照してください。（風化してる部分もあるけど…）
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="ftp://ftp.etl.go.jp/pub/mule/Windows/"
+>Meadow</a><a name="meadow"> </a></h2>
+
+<p>
+        win32で動くemacs20クローン。（当然だが）elispが動くので便利。
+        最近<a href="#xyzzy">xyzzy</a>使う方が多いけど、
+        TeXで文章書くならMeadowの方が上かな。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2>TeX 環境<a name="tex"> </a></h2>
+
+<p>
+        初めてdvioutを使ったときの感動は忘れられない。速ええええー。
+        ってまあ、Intel系に比べてUltraSPARCが遅いだけなんだが。
+        Solaris/SPARC上で文章を書いている人は一度試すべきだ。
+        PCにLinuxをインストールする動機が一つ減ってしまった。
+</p>
+<p>
+        大学にいないとまずTeXなんて使わないよね。
+        必要な人はどうぞってことで。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.activestate.com/ActivePerl/"
+>Active Perl</a><a name="activeperl"> </a></h2>
+
+<p>
+        PerlのWindowsへのport。
+        WindowsにもPerlがあると非常に便利だ。
+        一部制限もあるが、わりと色々なスクリプトが動く。
+        <a href="#cygwin">cygwin</a>じゃないので、ちょっといらいらすることもあるかも。
+</p>
+<p>
+        最近cygwinにPerlが付属するようになっているので、
+        そっちを使っている。
+        fork()とかの関係でまだまだ存在価値はあるのかもしれないが、
+        筆者には差がわからない。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www2.wbs.ne.jp/~znc/tcsh/index.htm"
+>tcsh</a><a name="tcsh"> </a></h2>
+
+<p>
+        tcshのWindowsへのport。
+        Windows版では怪しい拡張がされているが、
+        <a href="#cygwin">cygwin</a>でコンパイルするとその拡張は使えない。
+        なので、Windows版がおすすめなのだが、
+        Windows版tcshでcygwinのアプリ使っていると不満たらたら。
+        なんとかしてくれ。
+</p>
+<p>
+        と思っていたが、最近すっかりbash派になってしまった。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://mayu.sourceforge.net/ja/index.html"
+>窓使いの憂鬱</a><a name="mayu"> </a></h2>
+
+<p>
+        エディットコントロールをはじめとして、
+        あらゆるシチュエーションで
+        emacsライクなキーバインドを提供するツール。
+        デフォルトで提供されていないキーバインドについても、
+        ユーザーアンフレンドリーな設定ファイルをいじることで、
+        パラノイアなほどに柔軟に設定が可能。
+        以前はNT/2000専用だったが、
+        95/98/Me対応ドライバに続き、最近XP対応ドライバも出た。
+</p>
+<p>
+        思わず行頭にC-aで飛びたくなる人には最高に便利。
+        というか、ないと生きていけない。
+        出先でもインストールさせてくれ。
+</p>
+<pre>
+# デフォルト設定(デフォルト設定が嫌いならこれらを消す)
+include "109.mayu"              # 109 キーボード設定
+include "104on109.mayu"         # 109 キーボードを 104 キーボード風に
+include "default.mayu"          # さまざまな設定
+
+keymap2  Launcher-Menu
+ event prefixed =&gt; &amp;HelpMessage("Launcher Menu", \
+        "x\txyzzy\r\n"     \
+        "m\tMozilla\r\n"   \
+        "e\tEdMax\r\n"     \
+        "b\tbash\r\n"      \
+        "t\tTeraTerm\r\n"  \
+        "i\titalk\r\n"     \
+	"o\tOpenOffice\r\n" \
+)
+event before-key-down        =&gt; &amp;HelpMessage
+ key X =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\xyzzy\\xyzzy.exe",,"C:\\home\\hanawa", ShowNormal)
+ key M =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\mozilla.org\\Mozilla\\mozilla.exe",,, ShowNormal)
+ key E =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\EdMax\\EdMax.exe",,, ShowNormal)
+ key B =&gt; &amp;ShellExecute("open", \
+        "C:\\cygwin\\bin\\bash.exe","--login -i","c:\\cygwin\\bin", ShowNormal)
+ key T =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\TTERMPRO\\ttssh.exe",,, ShowNormal)
+ key I =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\xyzzy\\xyzzy.exe","-f italk",, ShowNormal)
+ key O =&gt; &amp;ShellExecute("open", \
+        "C:\\Program Files\\OpenOffice.org1.0.3\\program\\soffice.exe",,, ShowNormal)
+
+keymap Global
+
+key     C-I                     =&gt; Tab
+key     C-LeftSquareBracket     =&gt; ESC
+
+key     *M0-*IC-S-Space         =&gt; $ToggleIME                # kinput2風
+key     C-S-F3                  =&gt; Mute
+key     C-S-F4                  =&gt; Play/Pause
+
+key     C-S-M                   =&gt; &amp;Prefix(Launcher-Menu)
+
+# ダイアログボックス
+window dialog /#32770:Button$/ : Global
+key     C-G                     =&gt; Escape
+key     C-M                     =&gt; Enter
+key     C-B                     =&gt; Left      # ←
+key     C-F                     =&gt; Right     # →
+key     C-N                     =&gt; Down      # ↓
+key     C-P                     =&gt; Up        # ↑
+
+## IrfanView32 ................................................................
+## http://www.irfanview.com/english.htm
+
+window  IrfanView /I_VIEW32\.EXE:IrfanView/ : Global
+key     ←                      =&gt; BackSpace
+key     →                      =&gt; Space
+key     ↑                      =&gt; PageUp
+key     ↓                      =&gt; PageDown
+key     S-←                    =&gt; ←
+key     S-→                    =&gt; →
+key     S-↑                    =&gt; ↑
+key     S-↓                    =&gt; ↓
+key     C-q                     =&gt; ESC
+
+## OpenOffice/StarSuite........................................................
+## http://wings.raindrop.jp/openoffice/o3u2gj/
+
+window Soffice /soffice\.exe:/ : EmacsEdit
+</pre>
+
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.jsdlab.co.jp/~kamei/"
+>xyzzy</a><a name="xyzzy"> </a></h2>
+
+<p>
+        emacsライクな、軽い、ある意味独特なエディタ。
+        なんとcommon-Lispベース。これの便利なところは、
+        JIS,SJIS,EUC,UTF-8,UTF-16,KSCあたりに対応してることと、
+        <a href="http://www.yl.is.s.u-tokyo.ac.jp/~oiwa/pub/xyzzy/"
+        >italkクライアント</a>があること、とにかく軽いこと、
+        それでいて普段使うemacsの機能はそろっていることだ。
+</p>
+<p>
+        欠点は、各種modeの充実ぶりがやや劣っているかな、ということ。
+        プログラム書くとかTeXで文章書くとかだと、
+        やっぱりmeadowを使っちゃう気がする。
+</p>
+<p>
+        以下に、（筆者が気になった部分について）
+        よりemacsライクになるように書いた設定ファイルを紹介しときます。
+        xyzzy-MLに流れた記事を参考にしてます。
+        （筆者がemacsで使ったことがないものは
+          コメントアウトしてあります。C-oなんてcanna設定だし。）
+</p>
+<p>
+        Toyさんのページにも<a
+        href="http://www.carabiner-systems.com/xyzzy/config.html"
+        >Emacsちっくな設定</a>が紹介してあります。
+        僕は気にならないんですが、
+        C-x C-wの挙動の違いが気になる人は多いみたいです。
+</p>
+<p>
+        下の方は個人的なものですが、あまり気にしないでください。
+</p>
+<pre>
+(global-set-key '(#\Home)        'beginning-of-buffer )
+(global-set-key '(#\End)         'end-of-buffer )
+(global-set-key '(#\C-/)         'undo)
+(global-set-key '(#\C-_)         'undo)
+;(global-set-key '(#\M-_)         'redo)
+;(global-set-key #\C-. 'redo)
+;(global-set-key '(#\C-Right)     'forward-word)
+;(global-set-key '(#\C-Left)      'backward-word)
+(global-set-key '(#\C-x #\r #\k) 'kill-rectangle)
+(global-set-key '(#\C-x #\r #\d) 'delete-rectangle)
+(global-set-key '(#\C-x #\r #\y) 'yank-rectangle)
+(global-set-key '(#\C-x #\r #\r) 'copy-rectangle)
+(global-set-key '(#\C-x #\r #\t) 'string-rectangle)
+(global-set-key '(#\C-x #\3)     'split-window-vertically)
+;(global-set-key '(#\C-x #\d)     'buffer-menu)
+(global-set-key '(#\M-%)         'query-replace)
+;(global-set-key '(#\C-o)         'toggle-ime)
+;(global-set-key '(#\C-M-\\)      'indent-region)
+(global-set-key '(#\C-x #\C-w) 'emacs-write-file)
+
+; 文字コードしか変えられないけど(デフォルトではMule2.3風にC-x C-k f）
+(global-set-key '(#\C-x #\RET #\f) 'change-fileio-encoding) 
+; 改行コードの変更
+(global-set-key '(#\C-x #\RET #\n) 'change-eol-code)
+
+;; dabbrev
+(setq *dabbrevs-case-fold* t)
+(autoload 'dabbrev-expand "dabbrev" t)
+(global-set-key #\M-/ 'dabbrev-expand)
+
+(load-library "isearch")
+
+;(setq c-indent-level 4)
+;(setq c-brace-imaginary-offset 0)
+;(setq c-brace-offset -2)
+;(setq c-label-offset -2)
+;(setq c-argdecl-indent 0)
+;(setq c-label-offset -2)
+
+(autoload 'italk "italk" t)
+(setq italk-user-name "ginza5432")
+(setq italk-server "192.168.0.196")
+(setq italk-secondary-servers
+  '(  ; ("host [port [username]]")
+;    ("")  ; The first item is to be displayed at completion. (C-u M-x italk)
+    ("192.168.0.196 12345")
+    ("localhost 12345")
+   ))
+
+; へろへろめもの続きを書く
+
+(defun mkherohero()
+  (interactive)
+  (insert
+   (format-date-string
+    (concat "&lt;hr&gt;"
+            "&lt;!-- __________________________________________________ --&gt;\n\n"
+            "&lt;h2&gt;&lt;a name=\"%Y%m%d%H%M%S\"&gt;"
+            "%Y年%m月%d日 (%v) %H時%M分%S秒 JST"
+            "&lt;/a&gt;&lt;/h2&gt;\n"
+            "&lt;div class=\"indent\"&gt;\n&lt;p&gt;\n&lt;/p&gt;\n&lt;/div&gt;\n"))))
+</pre>
+
+<p>
+        （追記）xyzzyを使うなら、英和辞書を有効にしない手はない。
+        <a href="http://namazu.org/~tsuchiya/sdic/index.html#download"
+        >SDICのサイト</a>にGENE95とEDICTが落ちてるので、
+        ありがたく取ってきてetc/dict/に置いてgendicを実行。
+        「ツール」−「共通設定」−「ディレクトリ」の設定をして準備完了。
+        C-c C-eで英和、C-c C-jで和英が使える。
+        英語がネイティブじゃない人間には非常に便利。
+</p>
+
+<!-- ____________________________________________________________ -->
+
+<!-- IEを最近使わないので削除しようかな… -->
+
+<!--h2><a href="http://www.ganaware.jp/S/iesrcview/index.html"
+>iesrcview</a><a name="iesrcview"> </a></h2>
+
+<p>
+        IEの「ソースの表示」を好きなエディタで見るためのツール。
+        w2kではメモ帳トラッパーがうまく動かないらしいので乗り換えました。
+        notepad.exeを置き換える代わりに、
+        IEのそれっぽい部分を置き換えているらしい。
+        仕組み的に同様のツールは他にもたくさんある模様。
+</p>
+<p>
+        もちろん組み合わせるエディタは<a href="#xyzzy">xyzzy</a>。
+        どんな文字コードでも見えちゃう上に軽いのが素晴らしい。
+</p>
+<p>
+        「ソースの表示」用のエディタを設定をユーザー毎にできるのがメリットだと思います。
+        お父さんに「なんだこの亀のエディタは？」と言われずに済みます。
+        そうでなければ、窓の手で設定してxyzzyを直接起動した方がいいかも。
+</p-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://park8.wakwak.com/~app/Lhaca/"
+>+Lhaca</a><a name="lhaca"> </a></h2>
+
+<p>
+        解凍/圧縮ツール。これ単体でzipとlzhがほどける＆作れるもんで、
+        一瞬しか使わないマシンのセットアップ時にインストールして、
+        その後に他の解凍ツールをインストールするのが面倒だったりして
+        ずっと使い続けたりする。
+</p>
+<p>
+        同じディレクトリで圧縮・解凍する設定に慣れるとかなり便利だと思う。
+        アイコンが格好悪い気がしたが、慣れた。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.mozilla.org/"
+>Mozilla</a><a name="mozilla"> </a></h2>
+
+<p>
+オープンソースなタブ対応Webブラウザ。
+Netscape7の開発者向けバージョン、と言った方が一般には通りがいいかもしれない。
+筆者の場合、Linuxと同じインターフェースで使えるのが一番のメリット。
+</p>
+<p>
+インストール時に付属のメールクライアントも忘れずインストールすべき。
+どうせ普段のメールを送る用途には使わないけど、
+インストールしないとmailto:で立ち上がるメーラがWindowsの場合にOutlook Expressになるので余計怖い。
+インストール時にcustom installを選んで
+DOM Inspector と JavaScript Debugger を選ぶと、
+面白そうなツールがインストールされるのだが、
+残念ながら筆者にはイマイチ使い方がわからないが、
+それでも便利だったりする。
+</p>
+<p>
+インストール直後にいじる設定項目が結構あるけど、以下は個人的には必須。
+</p>
+
+<ul>
+<li>「Navigator」-「Tabbed Browsing」のチェックを全部つける
+<li>「Privacy &amp; Security」-「Images」の「Animated images should loop」を「once」に。
+<li>「Advanced」-「Scripts &amp; Plugins」の
+「Move or resize existing windows」「Change status bar text」
+のチェックを外す。
+</ul>
+<p>その他の設定について、以下をお好みでuser.jsに書くと吉。</p>
+<pre>
+// kinput2をover-the-spotで表示(Linux用)
+user_pref("xim.input_style", "over-the-spot");
+// 3ボタンマウスの真中でのURLジャンプ禁止
+user_pref("middlemouse.contentLoadURL", false);
+//
+user_pref("nglayout.initialpaint.delay", 100);
+// target属性を無視して全部同じ窓で開く
+user_pref("browser.block.target_new_window", true);
+</pre>
+<p>
+また、
+MozillaにはPluginが全く付属してこないので、
+普通に使うためにはPluginのインストールが必須になる。
+Java,FlashあたりのPluginを<a 
+href="http://www.mozilla.gr.jp/docs/beginmoz-1.0/navigator.html#navigator-plugin"
+>「はじめてのMozilla」7-7. Plugin</a>を参考に入れればOK。
+</p>
+<p>
+XULアプリとしては、<a href="http://home.no.net/trihand/mozilla/home/en/"
+>Homeボタン</a>と、<a href="http://prefbar.mozdev.org/"
+>prefbar</a>がオススメ。
+</p>
+<p>
+文句は、とにかく起動が遅いこと。レンダリングも速くはない。
+しかし、IEよりは穴が少なそうなので安心ではある。
+ブラクラなどもIE用のものはある程度かわせる。
+IEを置き換えられるようなレベルではないが、
+第2のブラウザとして補助的に使う分には非常にオススメだと思う。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.mozilla.org/products/firefox/"
+>Mozilla Firefox</a><a name="firefox"> </a></h2>
+
+<p>
+以前はPhoenixと呼ばれていたwebブラウザ。
+小さくて軽いブラウザを作ろうというコンセプトのもと、
+Mozillaから派生したプロジェクトだったが、
+いろいろあってPhoenix→Firebird→Firefoxと名前が変わった。
+起動スピードや操作感も本家Mozillaよりわかる程度に速い。
+</p>
+<p>
+Windows版以外にLinux版やMac OS X版もある。
+複数の環境を使うのであれば、環境を統一できることは
+他のブラウザに対するアドバンテージだろう。
+筆者はWindows版とLinux版(X11版と言うべきか)を併用しているが、
+異なる環境で同じ設定や拡張を使えるのは非常に便利だと感じる。
+</p>
+<p>
+このプロジェクトの成果でMozilla本体も高速になりつつあり、
+マシンも当時より十分高速になってきたが、
+まだわかる程度にMozillaとは速度差があるように思う。
+</p>
+<p>
+入れるべき拡張/試そうと思っている拡張を以下にリストアップする。
+元ネタは<a href="http://software.s48.xrea.com/mozilla/index.php?%CC%DC%C5%AA%CA%CC%B3%C8%C4%A5%C1%AA%A4%D3"
+>Firefoxまとめサイトの「拡張」</a>。
+</p>
+<ul>
+<li><a href="http://extensionroom.mozdev.org/more-info/keyconfig">keyconfig</a></li>
+<li><a href="http://prefbar.mozdev.org/">prefbar</a></li>
+<li><a href="http://www.chuonthis.com/extensions/#browser">OpenBook</a></li>
+<li><a href="http://www.pikey.me.uk/mozilla/#bb">Bookmark Backup</a></li>
+<li><a href="http://livehttpheaders.mozdev.org/">LiveHTTPHeaders</a></li>
+
+<li><a href="http://www33.ocn.ne.jp/~snip/mozilla/">JLP</a> もはや不要かも…?</li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/AiO/index.html">All-in-One Gestures(AiO)日本語版</a></li>
+<li><a href="http://www.chrispederick.com/work/firefox/webdeveloper/">Web Developer</a></li>
+<li><a href="http://chrispederick.myacen.com/work/firebird/useragentswitcher/">User Agent Switcher</a></li>
+<li><a href="http://white.sakura.ne.jp/~piro/xul/_tabextensions.html">Tabbrowser Extensions(TBE)</a></li>
+<li><a href="http://www.pikey.me.uk/mozilla/?extension=soe">Show Old Extensions(SOE)</a>しばらく必須</li>
+<li><a href="http://white.sakura.ne.jp/~piro/xul/_popupalt.html">Popup ALT Attributes</a></li>
+
+
+<li><a href="http://adblock.mozdev.org/">adblock</a></li>
+<li><a href="http://sage.mozdev.org/">sage</a></li>
+<li><a href="http://nazo.europe.webmatrixhosting.net/ex/translation.xml">Translation Panel</a></li>
+<li><a href="http://placenamehere.com/pnhtoolbar/">PNH Developer Toolbar</a></li>
+<li><a href="http://moz2ch.sourceforge.jp/">Moz2ch</a></li>
+<li><a href="http://tkm.s31.xrea.com/xul/xulmigemo.shtml">XUL/Migemo</a></li>
+<li><a href="http://needlesearch.mozdev.org/">Needle Search</a>(2.2.9でFirefox0.9対応しているが、SOE必須)</li>
+<li><a href="http://mozfbrh.mozdev.org/">mozFBRH</a></li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/JLP/preferential.html">Preferential日本語版</a>(0.6.1はSOE必須)</li>
+</ul>
+<p>user.jsの内容。</p>
+<pre>
+// kinput2をover-the-spotで表示(Linux用)
+user_pref("xim.input_style", "over-the-spot");
+// 3ボタンマウスの真中でのURLジャンプ禁止
+user_pref("middlemouse.contentLoadURL", false);
+// target属性を無視して全部同じ窓で開く
+user_pref("browser.block.target_new_window", true);
+// 文字をタイプしたらインクリメンタルサーチするのを禁止
+user_pref("accessibility.typeaheadfind", false);
+// 0.9のバグ(仕様?)対応
+user_pref( "docshell.frameloadcheck.disabled" , true );
+</pre>
+<p>
+あと、prefbarの設定メモ。
+</p>
+<ul>
+<li>DoCoMo   DoCoMo/1.0/N502it/c10
+<li>J-PHONE  J-PHONE/3.0/J-SA03_a
+<li>EZweb    KDDI-HI24 UP.Browser/6.0.8.3 (GUI) MMP/1.1
+</ul>
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://sakots.pekori.jp/OpenJane/"
+>OpenJaneDoe</a><a name="openjanedoe"> </a></h2>
+
+<p>
+オープンソースな2chブラウザの非IEコンポーネント版。軽いし便利。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://proxomitron.cjb.net/"
+>Proxomitron</a><a name="proxomitron"> </a></h2>
+
+<p>
+        書き換え型ローカルプロクシサーバソフト。
+        アニメーションGIFをループさせなくしたり、
+        JavaScriptをオフにしたり、いろいろできる。
+</p>
+<p>
+        妖しい雰囲気のアイコンがお気に入り。
+</p>
+<p>
+        <a href="proron.html">紹介ページ</a>なぞ書いてみました。
+</p>
+<p>
+        参考リンク：<a href="http://www.pluto.dti.ne.jp/~tengu/proxomitron/"
+        >Proxomitron-J</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://homepage2.nifty.com/spw/bjd/dl.html"
+>Black Jumbo Dog</a><a name="bjd"> </a></h2>
+
+<p>
+        おうち用プロクシ。
+        HTTPのプロクシにもなれますし、ポートフォワーディングも可能です。
+        「インターネット共有」がもっと高機能なら不要なんだけどなー。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://hp.vector.co.jp/authors/VA002416/"
+>TeraTerm</a> + <a
+ href="http://www.zip.com.au/~roca/ttssh.html"
+>ttssh</a><a name="ttssh"> </a></h2>
+
+<p>
+        端末エミュレータと、そのssh対応DLL。
+        ktermには劣るけど、
+        windows標準のtelnetと比べると雲泥の差。
+        sshはssh1だけど、
+        一般にssh2にする必要性ってあまりないよね？
+        ssh2じゃないと繋げない不幸な人もいるんでしょうけど。
+</p>
+<!--
+        学校とかだとssh入ってるけど、
+        企業はssh有料だからか、入ってないんだよね。
+        便利なだけになんとかしてほしいぜ。
+        （ライセンスが曖昧な気もするけど、
+        パッケージに含めるとかしなければ企業でも使っていいのかな？）
+-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2>X server<a name="xserver"> </a></h2>
+
+<p>
+        ASTEC-X（お試し版）を使ってます。
+        もう少し安ければ買えるんですが、ちょっと高すぎっす…。
+        VMwareとの組み合わせは最高。
+</p>
+<p>
+        cygwin-xfree86がそろそろ実用レベルに届きそうで、かなり期待。
+</p>
+<p>
+        VNCをXサーバとして使ったことはないが、ちょっと遅そう。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.realvnc.com/download.html"
+>VNC</a><a name="vnc"> </a></h2>
+
+<p>
+        マウスイベントやキーボードイベントを操る特殊なサーバを立てることで、
+        そのマシンをネットワーク越しのクライアントから操作するアプリです。
+</p>
+<p>
+        ディスプレイがついてないwindowsマシンをどうしても使いたい場合に、
+        Tweak UIかなんかで勝手にログインするようにしておいて、
+        スタートアップでVNCサーバを起動したりすると、
+        電源オンだけでディスプレイなしでリモートから使えるようになります。
+</p>
+<p>
+        サーバ/クライアントともにWindows/Mac/各種UNIXそれぞれで動くので、
+        人によってはとっても便利かも。
+        わざわざ別マシンをあやしく使うくらいならvmwareの方がいい気もしますが。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www2.biglobe.ne.jp/~sota/ffftp.html"
+>FFFTP</a><a name="ffftp"> </a></h2>
+
+<p>
+        ftpクライアント。GUIとしてはよくできている。
+        が、ncftpを<a href="#cygwin">cygwin</a>でコンパイルした方が
+        慣れいてる分だけいいかもしれない。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.edcom.jp/"
+>EdMax フリー版</a><a name="edmax"> </a></h2>
+
+<p>
+        メーラ。<a href="#mayu">窓使いの憂鬱</a>があればemacs風になるので、結構いい感じ。
+        みゅーとかわんだーらすとの人は<a href="#meadow">Meadow</a>使えていいっすね。
+        （筆者はMH-e野郎なのだった）
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.kerio.com/us/kpf_home.html"
+>Kerio Personal Firewall</a><a name="kpf"> </a></h2>
+
+<p>
+パーソナルファイヤーウォールソフト。
+Tiny Personal Firewall(TPF)の後継。
+事情はよくわからないが、
+Kerio Technology Inc.がTINY Softwareから
+TPFをソースコード込みで買い取って開発を継続しているようだ。
+</p>
+<p>
+相変わらずのUIが個人利用に限り無料なのは素晴らしい。
+</p>
+<p>
+しかし、最新版だとXPでスタンバイ／休止状態にできないようだ。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.agnitum.com/download/outpostfree.html"
+>Outpost Firewall FREE</a><a name="outpost"> </a></h2>
+
+<p>
+パーソナルファイヤーウォールソフト。
+ライセンスを熟読してからでないと判断できないが、
+調べた範囲では、
+会社でも入れられそうなフリーのPersonal Firewallってこれくらいしか見当たらない。
+</p>
+<p>
+ちょっと使ってみた感じでは、結構いいと思います。
+ただ、DHCPな環境では起動時の動作が変。固定IP環境で使うべし。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.grisoft.com/"
+>AVG Free Edition</a><a name="avg"> </a></h2>
+
+<p>
+海外のウィルスチェックソフトのフリー版。
+特に使用期限もなく、
+フリー版でもパターンファイルの更新をしてくれるので非常に嬉しい。
+</p>
+<p>
+ライセンスが少々風変わりで、
+個人利用でかつ各人について1マシンにしかインストールできない。
+個人で複数シリアル取得するのもライセンス的にはNGなようだ。
+共用マシンなら他の人の名義でシリアルを取ればいいと思うが、
+個人で複数台持っている場合は他のを探す必要がある。
+会社で使いたいけど金が出ない場合は
+<a href="http://housecall.antivirus.com/housecall/start_jp.asp"
+>トレンドマイクロ オンラインスキャン</a
+>あたりで定期的にチェックするくらいしかできないかな。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.free-av.com/"
+>AntiVir Personal Edition</a><a name="antivir"> </a></h2>
+
+<p>
+ウィルスチェックソフト。
+まだ使ったことはない。
+調べた範囲ではAVGとフリーでは双璧、なのだろうか。
+ライセンスは熟読していないが、個人利用で1台までなら全く問題ないようだ。
+会社で使うのは無理っぽい。
+個人で複数台にインストールしていいかどうかは不明。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.asahi-net.or.jp/~vr4m-ikw/"
+>窓の手</a><a name="madonote"> </a></h2>
+
+<p>
+
+Windows標準ではいじれないけど便利な設定項目を変更するツール。
+要するにレジストリをGUIからいじってるだけだと理解してます。
+</p>
+<p>
+滅多に使わないんですが、
+OSをインストールしたばかりのタイミングでは便利な気も。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://upx.sourceforge.net/"
+>UPX</a><a name="upx"> </a></h2>
+
+<p>
+バイナリを圧縮するソフト。EXEもDLLも圧縮可能。
+DOSの頃のDietみたいなものだと思う。
+最近のHDDは高速かつ容量も十分なのでそれほど価値はないと思う。
+ノートPCとかVMware環境のようにHDDが極端に遅い場合には、
+巨大ソフトの起動時間短縮を体感できる気がする。
+気のせいかもしれないが。
+特に、スタートアップに入ってるソフトなんかは効果絶大な気がする。
+これまた気のせいかもしれない。
+また、ディスクキャッシュに乗りやすくなるかもしれない。
+わからないけど。
+</p>
+<p>
+何にせよ趣味の世界。でも楽しいからOK。
+Linuxのバイナリも圧縮できるが、*.soを圧縮できないので効果は限定的。
+以下のように.bashrcに書くと便利。
+</p>
+<pre>
+    alias upx='"/Program Files/upx/upx" --best --compress-icons=0 --crp-ms=100000'
+</pre>
+<p>
+で、適当な場所で以下のように実行。
+find使ってんのに-exec使わないのは趣味というかエイリアスの関係というか。
+</p>
+<pre>
+    $ upx `find -name '*.exe' -o -name '*.dll'`
+</pre>
+
+<!--
+linuxでupx編
+
+Linuxのバイナリも圧縮できるが、*.soを圧縮できないので効果は限定的。
+
+とはいえ面白い。
+
+upxで/usr/bin/*を圧縮したら問題なかった。
+ただし、hard linkされているものが複数個になってしまうのが悲しい。
+圧縮前にリンク数チェックしておくべき。
+また、パーミッションが変なものについては、
+一旦普通のパーミッションにしてからでないとうまく扱えない。
+emacsとか。
+
+/bin/*を圧縮したらinitできなくてブート失敗した。
+理由は不明だが、bashを潰すと死ぬようだ。一番潰したいのに。
+rpm/vi/gawk/tar/grepを圧縮して満足することにした。
+
+vmlinuxも圧縮した。
+2.8Mが1.2Mになった。
+ブートも問題なし。
+
+X11ではktermとvmware-toolboxも圧縮。
+
+なんだかんだで30Mほど空いた。
+-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.openoffice.org/"
+>OpenOffice.org</a><a name="ooo"> </a></h2>
+
+<p>
+オープンソースなMS Officeクローン。
+まだまだ道のりは長そうだが、
+Word/Excel/PowerPointともそこそこ使えるレベルまで来ていると思う。
+マルチプラットフォームなので、Linux上では非常に重宝している。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.irfanview.com/"
+>IrfanView32</a><a name="irfanview"> </a></h2>
+
+<p>
+        画像ビューワ。多くのフォーマットに対応している。
+        アイコンが格好悪いが、これよりましなビューワみつからん。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.woodybells.com/winshot.html"
+>winshot</a><a name="winshot"> </a></h2>
+
+<p>
+        画面キャプチャソフト。
+        プレゼンなどで画面キャプチャしたいときに強力なツール。
+        マウスカーソルもキャプチャしたいとか、
+        Alt+PrintScreenだと細かい点が問題になってくるが、
+        このツールはそんなときも安心。
+        Photoshopがあれば問題ないかもしれないけど。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://geocities.com/nmnljamz/stuff.html"
+>Dynamo</a><a name="dynamo"> </a></h2>
+
+<p>
+        以前Wyvernと呼ばれていたmp3再生ソフトと同じ作者による後継ソフト。
+        以前よりも作者個人のために作っているとか何とか。
+        シンプルで好きです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a href="http://www.geocities.co.jp/SiliconValley-SanJose/1690/"
+>RarUty</a><a name="raruty"> </a></h2>
+
+<p>
+        読み方は「らるちー」。
+        本当は万能アーカイバなんだと思いますが、その用途では全く使っていません。
+        ダウンロードしてきたファイルのCRCチェックがしたい場合に超便利に使っています。
+        すでに開発終了しているようですが、当分これ使っときます。
+</p>
+<p>
+        アイコンがちとアレなのでデスクトップに置きたくないのだが、
+        便利なので置いておきたいという心の葛藤がある。
+</p>
+
+<!-- ____________________________________________________________ -->
+
+<!--h2><a href="http://luna.fc2.com/soft.html"
+>璃樹無</a><a name="resume"> </a></h2>
+
+<p>
+        砂嵐解除ソフト。基本的にあきらめ早いので、これでダメならあきらめます。
+</p>
+
+<h2><a href="http://www.clickjump.net/bdbzm"
+>BDBZM</a><a name="bdbzm"> </a></h2>
+
+<p>
+        怪しい画像からブツを取り出すソフト。通称あやや。これでもダメならあきらめます。
+</p-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2>その他<a name="other"> </a></h2>
+
+<p>
+        金払うものを書くつもりはなかったんですが、
+        やっぱVMwareは紹介しときたいかな…。
+</p>
+<p>
+        桜時計とCD2WAV32も書きたいところ。
+        Daemon Tools(DJBとは無関係な方）もいいなあ。
+        WinShotも便利なときは便利っすね。
+        最近burn4freeを試してみたんですが、かなりいい感じでした。
+</p>
+<p>
+        そうそう、書いてないジャンルのものは、
+        windows標準のブツか、
+        もしくはCUIなブツを使ってます。
+        wgetとかlameとか自作Perlスクリプトとか。
+</p>
+<p>
+        Moonlightは捨てて、mayuをランチャっぽく使うことにしました。
+</p>
+<p>
+</p>
+<!-- memo0: keychain -->
+<!-- memo1: 鍵言葉 -->
+<!-- memo2: WWWC ncw VD
+
+http://spinar.chat.ru/
+
+
+FFXIベンチ
+
+ゆめりあベンチ
+http://www.yumeria.com/download/mark.html
+
+3DMark
+
+superπ
+hdbench
+wcpuid
+sandra
+memtest86
+
+speedfan
+http://www.almico.com/speedfan.php
+
+HDD温度計
+http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
+
+ -->
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2>リンク集<a name="bookmarks"> </a></h2>
+
+<p>
+世の中、広く使われてるものがいいソフトとは限らないってことで、
+なかなか個性的な「お気に入りソフト紹介ページ」が結構あります。
+趣味の近い人のお薦めツールは試してみたくなりますね。
+でも、いまひとつ趣味の似通った人によるソフト紹介を見つけられない…。
+</p>
+<p>
+ソフトの紹介数で勝負しているようなページは内容が信用できないし、
+大半が現状使ってもいないソフトなんて状況じゃ
+情報が埋もれて全然使えないので無視してます。
+</p>
+
+    <ul>
+      <li><a href="http://kitaj.no-ip.com/Software/index.html"
+	  >このソフトを使え!!</a
+          > きたさんのソフト紹介。趣味は近い。もう少し増やしてください（笑<br>
+<!--
+      <li><a href="http://tj.pos.to/p-c/windows.html"
+	  >窓との格闘の結実</a
+          > TJさんのソフト紹介。趣味は近いかも。xyzzyにメロメロみたい（笑<br>
+      <li><a href="http://www.sakjp.net/~zaji/win/mytool.html"
+	  >個人的に利用しているフリーウェアの紹介</a
+          > zajiさん。趣味は近いかも。<br>
+      <li><a href="http://chiba.cool.ne.jp/goromaru/ateam/index.html"
+	  >フリーウェア野郎ゑぇち〜む</a
+          > 高岡さん。なかなかあやしい。趣味は近めかも<br>
+      <li><a href="http://www.geocities.co.jp/Playtown-Spade/6579/TOOL/ORE.html"
+	  >鎮魂歌使用ツール</a
+          > 鎮魂歌さん。これまたあやしい。趣味は近めかも<br>
+      <li><a href="http://www15.big.or.jp/~kit/desktop/"
+	  >モーレツデスクトッパーの理想と現実</a
+          > 3つしか紹介してないけど、マイルドなスタパ斎藤って感じの口調がいい<br>
+-->
+
+      <li><a href="http://www.mattun.net/software/"
+	  >お勧めソフトウェア</a
+          > Mattunさん。趣味は近そうなんだけどemacs使いではない模様。<br>
+
+      <li><a href="http://ikefree.tripod.co.jp/"
+	  >いけまっせ！フリーウェア</a
+          > あきぃさん。趣味は近くもないが遠くもないような<br>
+<!--
+      <li><a href="http://user1.allnet.ne.jp/seiya/works/tools/allcat.html"
+	  >雨やどり - Tools</a
+          > 水鏡さん。趣味はちと遠いというかマノレチメディア系が多め<br>
+-->
+      <li><a href="http://www.ekoda.gr.jp/tool/"
+	  >コレがないと死んじゃう！</a
+          > AZUKIさん。ないと死ぬって言い方が好き。趣味は遠め。Palm版はいい感じだが、多すぎる気が。<br>
+<br>
+      <li><a href="http://hp.vector.co.jp/authors/VA002416/"
+	  >Tera Term Pro</a><br>
+      <li><a href="http://www.zip.com.au/~roca/ttssh.html"
+	  >TTSSH</a><br>
+      <li><a href="http://www.bekkoame.ne.jp/~t.mzaki/"
+	  >EdMax</a><br>
+      <li><a href="http://www2.biglobe.ne.jp/~sota/product.html"
+	  >FFFTP</a><br>
+      <li><a href="http://www.venus.dti.ne.jp/~uno/software/index.html"
+	  >桜時計</a><br>
+      <li><a href="http://homepage2.nifty.com/spw/bjd/dl.html"
+	  >Black Jumbo Dog</a><br>
+<br>
+      <li><a href="http://www.jsdlab.co.jp/~kamei/"
+	  >xyzzy</a>
+          <a href="http://www.mars.dti.ne.jp/~t-kamei/xyzzy/"
+	  >[なのか？]</a><br>
+      <!--li><a href="http://village.infoweb.or.jp/~fwhv5283/"
+	  >explzh</a> (shareware, ￥1000)<br-->
+      <!--li><a href="http://www.csdinc.co.jp/archiver/"
+	  >統合アーカイバプロジェクト</a><br-->
+      <li><a href="http://www.digitalpad.co.jp/~takechin/"
+	  >Lhasa</a><br>
+      <li><a href="http://www1.sphere.ne.jp/app/Lhaca/"
+	  >+Lhaca</a><br>
+      <li><a href="http://www.aladdinsys.com/"
+	  >Aladdin Expander</a>
+          <a href="http://www.aladdinsys.com/expander/expander_win.html"
+	  >[download]</a>
+          <a href="http://www.act2.co.jp/x_act2main/x_PRD/x_AL/Expander/index.html"
+	  >[日本語]</a><br>
+      <li><a href="http://mayu.sourceforge.net/ja/index.html"
+	  >窓使いの憂鬱</a><br>
+
+<br>
+      <li><a href="http://www.fsci.fuk.kindai.ac.jp/~kakuto/win32-ptex/index.html"
+	  >TeX for Win32</a><br>
+      <li><a href="http://akagi.ms.u-tokyo.ac.jp/dviout-ftp.html"
+	  >dviout/divprt</a><br>
+      <li><a href="http://auemath.aichi-edu.ac.jp/~khotta/ghost/index.html"
+	  >Ghostscript 6.0 + GSview 2.8 の日本語版</a> 配布元ってどこ？<br>
+      <li><a href="http://www.adobe.co.jp/products/acrobat/readstep.html"
+	  >Adove Acrobat Reader 4.0</a><br>
+<br>
+      <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/office/word/viewer/winwdv97.htm"
+	  >Word Viewer 97</a> （日本語版）<br>
+      <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/office/excel/viewer/default.htm"
+	  >Microsoft(R) Excel Viewer 97</a> （日本語版）<br>
+      <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/2000/ppview97.htm"
+	  >PowerPoint 97-2000 Viewer for Windows</a> （日本語版）<br>
+      <li><a href="http://www.microsoft.com/Windows95/downloads/contents/WUToys/W95PwrToysSet/Default.asp"
+	  >Windows 95 Power Toys Set</a><br>
+      <li><a href="http://www.microsoft.com/NTWorkstation/downloads/PowerToys/Networking/NTTweakUI.asp"
+	  >Tweak UI 1.1</a> Power Toys に入ってるのと全く同じ<br>
+<br>
+      <li><a href="http://www.babylon.com/jap/"
+	  >瞬訳名人バビロン</a>
+          <a href="http://www.babylon.com/jap/download/index.html"
+	  >[download]</a><br>
+<br>
+      <li><a href="http://stud1.tuwien.ac.at/~e9227474/english.htm"
+	  >IrfanView32</a>
+          <a href="http://stud1.tuwien.ac.at/~e9227474/main3.html"
+	  >[download]</a>
+          <a href="http://www.platon.co.jp/~hide/iview/iview.html"
+	  >[日本語版]</a> 日本語版使ったことないけど（汗）<br>
+<!--
+       li  a href="http://www.mayura.com/"
+	   Mayura Draw /a  (shareware, $15) br 
+-->
+      <li><a href="http://www.winamp.com/"
+	  >Winamp</a>
+          <a href="http://www.winamp.com/getwinamp/"
+	  >[download]</a><br>
+      <li><a href="http://homepage1.nifty.com/herumi/soft.html"
+	  >午後のこ〜だ</a><br>
+      <li><a href="http://member.newsguy.com/~theprof/"
+	  >Camel's MPEGJoin</a><br>
+      <li><a href="http://www2s.biglobe.ne.jp/~elfin/delphi.html"
+	  >CD2WAV32</a><br>
+<br>
+      <li><a href="http://www.microsoft.com/japan/windows/mediaplayer/"
+	  >Windows Media Player</a><br>
+      <li><a href="http://www.jp.real.com/products/player/index.html"
+	  >RealPlayer G2</a><br>
+      <li><a href="http://www.apple.co.jp/quicktime/download/index.html"
+	  >QuickTime 4</a><br>
+<br>
+      <li><a href="http://www.borland.com/bcppbuilder/freecompiler/"
+	  >Borland C++ Compiler 5.5</a><br>
+<!--
+http://www.dokidoki.ne.jp/home2/ikemura/
+       li  a href="http://www3.tky.3web.ne.jp/~owahaha/Grapholic/"
+	   Grapholic /a  br 
+-->
+<br>
+      <li><a href="http://sourceware.cygnus.com/cygwin/"
+	  >cygwin</a>
+	  <a href="http://sourceware.cygnus.com/cygwin/download.html"
+	  >[download]</a>
+	  <a href="http://sourceware.cygnus.com/cygwin/snapshots/"
+	  >[snapshot]</a><br>
+      <li><a href="ftp://ftp.etl.go.jp/pub/mule/Windows/"
+	  >Meadow</a> (ftp)<br>
+      <li><a href="http://www.activestate.com/ActivePerl/"
+	  >ActivePerl</a><br>
+      <li><a href="http://www.cdrom.com/pub/infozip/"
+	  >zip &amp; unzip (Info-Zip)</a>
+          <a href="ftp://ftp.cdrom.com/pub/infozip/WIN32/"
+	  >[download]</a><br>
+          <a href="ftp://ftp.icce.rug.nl/infozip/WIN32/"
+	  >[European site]</a> (for zip binary with encryption)<br>
+      <li><a href="ftp://crab.it.osha.sut.ac.jp/pub/Win32/develope/senshu/"
+	  >wget (and other tools...) for win32</a><br>
+    </ul>
+
+<address>
+hanawa<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2005-10-04 03:17:43 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+</body>
+</html>

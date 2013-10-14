@@ -1,0 +1,27 @@
+*** wget-1.5.3/src/url.c~	Fri Sep 11 09:23:26 1998
+--- wget-1.5.3/src/url.c	Fri Sep 15 04:05:51 2000
+***************
+*** 514,521 ****
+  parse_dir (const char *path, char **dir, char **file)
+  {
+    int i, l;
+  
+!   for (i = l = strlen (path); i && path[i] != '/'; i--);
+    if (!i && *path != '/')   /* Just filename */
+      {
+        if (DOTP (path) || DDOTP (path))
+--- 514,527 ----
+  parse_dir (const char *path, char **dir, char **file)
+  {
+    int i, l;
++   int j;
+  
+!   i = l = strlen (path);
+!   for (j = 0; (j <= l) && path[j] != '?'; j++);
+!   if ((j <= l) && path[j] == '?') {
+!     i = j;
+!   }
+!   for (; i && path[i] != '/'; i--);
+    if (!i && *path != '/')   /* Just filename */
+      {
+        if (DOTP (path) || DDOTP (path))

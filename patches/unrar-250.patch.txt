@@ -1,0 +1,35 @@
+*** unrar.c~	Thu Nov 25 16:53:19 1999
+--- unrar.c	Thu Nov 25 16:53:34 1999
+***************
+*** 230,240 ****
+      strcat(ArcName,".rar");
+      ChPtr=strrchr(ArcName,'.');
+    }
+!   else
+      if (ChPtr[1]==0 || stricomp(ChPtr+1,"exe")==0)
+        strcpy(ChPtr+1,"rar");
+!   if (!isdigit(*(ChPtr+2)) || !isdigit(*(ChPtr+3)))
+!     strcpy(ChPtr+2,"00");
+    else
+    {
+      ChPtr+=3;
+--- 230,248 ----
+      strcat(ArcName,".rar");
+      ChPtr=strrchr(ArcName,'.');
+    }
+!   else {
+      if (ChPtr[1]==0 || stricomp(ChPtr+1,"exe")==0)
+        strcpy(ChPtr+1,"rar");
+!     if (stricomp(ChPtr+1, "rar")!=0 &&
+! 	ArcName < ChPtr-3 && strnicomp(ChPtr-3, "r",1)==0 &&
+! 	(strnicomp(ChPtr-3, "rar", 3)==0 ||
+! 	 (isdigit(*(ChPtr-2)) && isdigit(*(ChPtr-1))))) {
+! 	ChPtr -= 4;
+!     }
+!   }
+!   if (!isdigit(*(ChPtr+2)) || !isdigit(*(ChPtr+3))) {
+!       ChPtr[2] = ChPtr[3] = '0';
+!   }
+    else
+    {
+      ChPtr+=3;

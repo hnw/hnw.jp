@@ -1,0 +1,962 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>Win32 programming with bcc and gcc</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>コンパイラに1円も払わない窓プログラミング</h1>
+
+<p class="abstract">
+UNIXではgccがタダで使えるんだから、
+WindowsでだってVC++になんか金を出せるか、と思っていた筆者だが、<a
+
+href="http://www.inprise.com/bcppbuilder/freecompiler/"
+
+>Borland C++ Compiler 5.5</a>の無料配布をきっかけに、
+こいつで窓プログラミングをしてみよう、と思い立った。
+それに、Cygwinでだって窓プログラム書けるんでしょ？
+そうです書けます。
+</p>
+<p class="abstract">
+これは、そんな筆者によるメモです。
+残念なことに、
+このような情報は（特に日本語では）ほとんど存在しないようなので、
+同じような境遇の人の助けになることと思います。
+</p>
+<p class="abstract">
+念のため付け加えておくと、この道はいばらの道です。
+窓プログラミングを体験してみたいが金がないという場合にも、
+投入する時間を考えるとVC++を買った方が安上がりかもしれません。
+（とはいえ、筆者がかきわけた道を通るのは幾分楽なはずですが）
+</p>
+<p class="abstract">
+あ、UNIX触ったことがないとか、プログラム書いたこともないとか、
+そういう方には（そうでなくても？）死ぬほど不親切なページだと思います。
+ですが、自分用のメモ＋αですので、この程度が限界です。
+意見・質問等のメールは大歓迎ですが、
+時間的・能力的に期待に沿えるとは限りませんのであしからず。
+</p>
+
+<ul class="news">
+<li>2000/08/03 追記： inpriseで<a
+href="http://www.inprise.co.jp/cppbuilder/freecompiler/turbodebugger.html"
+>Turbo Debugger</a>を配ってます。かなりイマイチですが。
+英語版は日本語Windowsでは化け化けになるので、
+日本語版を使いましょう。
+</li>
+<li>
+2001/03/21 追記： 内容が風化しつつあるかも…。
+ま、あまり誰も見てくれてないっぽいからいいけど…。
+</li>
+</ul>
+
+<ul>
+  <li> <a href="#intro"      >はじめに</a>
+  <li> <a href="#requirement">必要なもの</a>
+  <li> <a href="#download"   >ダウンロード</a>
+  <li> <a href="#install"    >インストール</a>
+    <ul>
+      <li> <a href="#install.bcc">bcc</a>
+      <li> <a href="#install.gcc">gcc</a>
+      <li> <a href="#install.psdk">Platform SDK</a>
+    </ul>
+  <li> <a href="#programming">プログラミング</a>
+  <li> <a href="#compile"    >コンパイル</a>
+    <ul>
+      <li> <a href="#compile.bcc">bcc</a>
+        <ul>
+          <li><a href="#compile.bcc.con">コンソールアプリのコンパイル</a>
+          <li><a href="#compile.bcc.win">Windowsアプリのコンパイル</a>
+          <li><a href="#compile.bcc.mt" >マルチスレッドプログラムのコンパイル</a>
+          <li><a href="#compile.bcc.dll">DLLのコンパイル</a>
+          <li><a href="#compile.bcc.mkf">Makefileの例</a>
+        </ul>
+      <li> <a href="#compile.gcc">gcc</a>
+        <ul>
+          <li><a href="#compile.gcc.con">コンソールアプリのコンパイル</a>
+          <li><a href="#compile.gcc.win">Windowsアプリのコンパイル</a>
+          <li><a href="#compile.gcc.mt" >マルチスレッドプログラムのコンパイル</a>
+          <li><a href="#compile.gcc.dll">DLLのコンパイル</a>
+          <li><a href="#compile.gcc.mkf">Makefileの例</a>
+        </ul>
+    </ul>
+  <li> <a href="#debug"      >デバッグ</a>
+    <ul>
+      <li> <a href="#debug.bcc">bcc</a>
+      <li> <a href="#debug.gcc">gcc</a>
+    </ul>
+  <li> <a href="#benchmark"  >ベンチマーク</a>
+  <li> <a href="#misc"       >ほかに気づいたこと</a>
+  <li> <a href="#appendix"   >付録</a>
+    <ul>
+      <li> <a href="#appendix.bashrc">筆者の.bashrc</a>
+      <li> <a href="#appendix.bcccfg">bccのcfgファイル</a>
+    </ul>
+  <li> <a href="#bookmarks"  >リンク集</a>
+</ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="intro"      >はじめに</a></h2>
+
+<p>
+Borland C++ Compiler 5.5（以下bcc）というのは、
+Borland社が開発した
+Windows用開発環境Borland C++ Builder 5.5のうち、
+コマンドラインツール（の一部）を無料で配っているものです。
+これだけでWindowsのアプリケーションを作ることができます。
+</p>
+<p>
+Cygwinというのは、UNIXのシステムコールを実現するようなWindowsのDLLを提供し、
+UNIX用のソースを変更なしにコンパイルすることで
+Windowsで動くバイナリを作れるようにしよう、
+というプロジェクトです。
+gccやgdbが動いており、必要最低限のWindows用開発ツールも提供されています。
+</p>
+
+<p>
+最初に両者の欠点について述べておきます。
+耐えられそうになければ、VC++でも買ってください。
+</p>
+
+    <ul>
+      <li> 両者に共通する欠点
+        <ul>
+          <li> 統合環境がない
+          <li> リソースエディタがない
+<p>
+bccが無料で配られているといっても、統合環境は相変わらず売り物です。
+コマンドラインから使えるコンパイラ、リンカなど一式を配っているだけで、
+リソースエディタや見栄えのするデバッガなどはついてきません。
+そういう意味で、gcc環境と似たようなものです。
+過度の期待をしてはいけません。
+</p>
+          <li> 資料が少ない
+<p>
+ユーザーが少ないせいなのですが、
+bccもCygwinも資料がほとんどありません。
+web上にある資料はVC++かdelphiのものばかりです。
+</p>
+
+          <li> いかすクラスライブラリがない
+<p>
+SDKレベルのプログラミングしかできません。
+MFCが使いたければVC++が必要です。
+bccでも売り物を買わないとOWLやらVCLやらを使うのは無理のようです。
+</p>
+
+        </ul>
+
+      <li> bccの欠点
+        <ul>
+          <li> デバッガがイマイチ
+<p>
+あまり使っていないですが、見てくれが悪すぎます。
+</p>
+        </ul>
+
+      <li> Cygwinの欠点
+        <ul>
+          <li> SJISの日本語文字列に\が入っていると文字化けする
+<p>
+"表示"とかです。
+Windowsのプログラムだと文字列はSJISで書くしかないんですよね‥。
+"表\示"とかやればうまくいきます。同じソースはbccでも通ります。
+でもあまりやる気はしません。
+</p>
+
+          <li> 開発陣にVC++のソースを通そうという気がない<br>
+<p>
+VC++にはANSIにない関数がかなりあります。
+VC++の人は当然のように使っています。
+bccはかなり追随しているようですが、
+Cygwinにはない関数が多いです。
+</p>
+
+        </ul>
+    </ul>
+
+<p>
+こんな感じでしょうか。
+何か筆者の誤解している点がありましたら、ご連絡いただけると助かります。
+</p>
+<p>
+この記事ではCygwinのツールを使うことをかなり前提にしています。
+bccと、Windows標準のツールだけでも同じことができるはずですが、
+その際には適宜読み替えてください（rmをdelとするなど）。
+また、makeを使ったプログラム開発の経験も前提にしています。
+</p>
+<p>
+参考までに筆者の環境を書きます。
+Celeron466MHz/128M/Windows2000のマシンで、
+shellはbashを使い、
+コンパイルはGNU makeで行っています。
+今のところbccもgccも同程度使っています。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="requirement">必要なもの</a></h2>
+
+<p>
+これ以外のものを使っても構いませんけどね（例えば、Linux上でクロスコンパイラで開発とか‥）。
+</p>
+    <ul>
+      <li> Windowsマシン
+<p>
+OSはできるだけNT/2000を使うべきでしょう。
+95/98はただでさえ落ちやすいので、
+開発中にポインタ周りのバグがあったりするとひどい目に会うかもしれません。
+</p>
+
+      <li> コンパイラ
+<p>
+コンパイラは、
+Borland C++ Compiler 5.5に含まれるbccか、
+Cygwinに含まれるgccを使います。
+</p>
+
+      <li> Microsoft Platform SDK
+<p>
+Platform SDKというのは、
+Microsoftが配っている開発者用のツールやヘルプなどのパッケージです。
+これに含まれるヘルプが開発には欠かせません。
+このヘルプがないと思い通りのプログラムを書くのは困難と言っていいでしょう。
+</p>
+    </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="download"   >ダウンロード</a></h2>
+
+<p>
+
+    この文章の最後の<a href="#bookmarks"
+    >リンク集</a>を参考に、必要なものをダウンロードしましょう。
+    bccは8M程度、Cygwinはsnapshotを含めて25M程度です。
+    Platform SDKはフルパッケージで550M程あります。
+    必要な部分だけダウンロードしてくれるインストーラもありますが、
+    ヘルプだけでも130M程あります。
+    接続状況的にどうしても無理ならあきらめましょう。
+    コンパイラだけあればコンパイルはできます。
+</p>
+<p>
+bccのreadme.txtに書いてあるのですが、
+<a href="http://www.borland.com/techpubs/bcppbuilder/"
+>Borland C++Builder documentation site</a>
+からヘルプをいくつか取ってきた方がいいかもしれません。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="install"    >インストール</a></h2>
+
+    <ul>
+      <li> <a name="install.bcc">bcc</a>
+<p>
+まずは落としてきたfreecompiler.exeを実行します。
+インストールするディレクトリを聞いてくるので、
+適当に答えるとインストールされます。
+次に、readme.txtに書いてある通り、
+binディレクトリにbcc32.cfgとilink32.cfgを作ります。
+最後に、このディレクトリにパスを通すなり通さないなり適当にやります。
+筆者は、GNUのmakeを使うためにCygwinの方がパスの上位にくるようにしています。
+</p>
+<p>
+もう直っているかもしれませんが、筆者がダウンロードしたときには
+日本語版はヘッダファイルが足りないように思いました。
+そんなわけで筆者は英語版を使っていますが、
+日本語版のメリットはコンパイルエラーメッセージとヘルプが日本語になっていることです
+（でも日本語版ヘルプだとうまく見えないページがある‥）。
+</p>
+
+      <li> <a name="install.gcc">gcc</a>
+<p>
+CygwinでUNIXのツールをコンパイルできる状態になっていれば、
+Windowsのプログラムもコンパイルできる状態になっているはずです。
+</p>
+<p>
+インストールしていなければ、詳しいページを参照した方がいいでしょう。
+藤枝さんの<a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
+>『Cygwin情報』</a>からあちこちに飛んでみるといいかもしれません。
+</p>
+<!--
+基本的にはfull.exeでインストールして、
+snapshotのcygwin-inst-*.tar.gzを展開＆上書きコピーすればOKですが、
+snapshotの（おそらく）正しいインストール方法は
+あまり知られていないように思います。
+どこのページに書いてあったか忘れましたが、
+tarでほどいてできるi586-pc-cygwin32の下全部を、
+i586-cygwin32の下に上書きコピーしないと、
+gccがいまいちうまく動きません。
+と、思いましたが、それが正しいのかどうか自信を失いました。
+binの下以外は置き換えちゃだめなのかな？
+
+基本的にはfull.exeでインストールして、
+snapshotのcygwin-inst-*.tar.gzを展開し、
+必要なものを上書きコピーすればOKです。
+私は2000/04/15現在、2000/03/30のsnapshotのbin/以下と、
+2000/04/13のcygwin1.dllを使っています。
+最近のsnapshotのi686-pc-cygwin/include/には、
+winsock2.hなど新たに追加されたヘッダファイルがあるのですが、
+これを使うのは面倒になってあきらめました
+（i686-pc-cygwin/の下を
+i586-cygwin32/の下に上書きコピーすると一見動くものの、挙動が怪しい）。
+その辺はCygwin 1.1に期待ということで。
+-->
+<p>
+2000/04/27にCygwin 1.1いれてみたところ、どうもgdbが動かない‥。なんでだろ。
+それ以外はあれこれ改善されててウハウハなんですけど。
+と思ったらw2kでだけ動かなかったみたいですね。
+2000/08/03の時点では（それなりに）動いてます。
+</p>
+<p>
+Cygwin1.1に関しては日本語の資料がまだ少ない状況ですね。
+早田さんの<a
+href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/cygwin11.html"
+>『Cygwin 1.1 環境の構築』</a>と
+yzoneさんの<a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
+>『Cygwin 1.1 Information』</a>くらいでしょうか。
+筆者も不親切な記事を書いています（<a href="../cygwin/index.html">
+『Cygwin 1.xでUNIX気分の窓生活』</a>）。
+</p>
+
+      <li> <a name="install.psdk">Platform SDK</a>
+<p>
+必要なものを勝手にftpで取ってきてくれるexeをダウンロードした場合は、
+それを実行すれば必要なものだけインストールしてくれます。
+</p>
+<p>
+Microsoftのftpサーバから、
+最新のPlatform SDKのディレクトリ（例えば April2000/）
+の下を全てダウンロードしてきた場合や、
+MSDNのPlatform SDKを借りてきた場合（ライセンス的に問題はないはず）、
+msiファイルをダブルクリックすれば
+ローカルのファイルをインストールしてくれるはずです。
+</p>
+    </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="programming">プログラミング</a></h2>
+
+<p>
+初めてWindowsプログラミングをする方は、
+本やウェブページなどを参考に頑張ってください。
+MFCでへろへろ書いているものは参考になりません。
+SDKとかAPIとかいうキーワードをたよりに探してください。
+もしくは、Platform SDKのヘルプだけでも何とかなるかもしれません。
+</p>
+<p>
+実際にプログラムを書いてみて困るのは、
+ウインドウのデザインをどうやるかということです。
+こればっかりはGUIの方がいいに決まってますが、
+そんなものはbccにもCygwinにもついてきません。
+一応、Platform SDKのツールとしてダイアログエディタがついてきますが、
+これはWindows3.1時代の遺物で、動きはするものの使用に堪えません
+（置けるコントロールも限られていますし‥）。
+現在はあきらめてテキストエディタでリソースファイルを書いてます。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="compile"    >コンパイル</a></h2>
+
+<p>
+適当なソースを拾ってくるなり、自分で書くなりして、コンパイルしてみましょう。
+適当なものが見当たらなければ<a href="hogerara.zip">これ</a>でもどうぞ。
+</p>
+    <ul>
+      <li> <a name="compile.bcc">bcc</a>
+<p>
+コンパイラはbcc32、リソースコンパイラはbrc32かbrcc32、リンカはilink32という名前です。
+</p>
+<p>
+bcc32では、gccでの-o（オブジェクトファイルや実行ファイルの名前を指定）
+にあたるものが-o,-eと2つある上に、
+それぞれの後ろに空白を入れずにファイル名を書かなくてはならないことに注意が必要です。
+ライブラリは他のobjファイル同様に列挙すればリンクできます。
+リンカのオプションも癖がありすぎて悩みました (^^;
+</p>
+
+      <ul>
+        <li> <a name="compile.bcc.con">コンソールアプリのコンパイル</a>
+<p>
+下のように、ふつーにコンパイルするだけです。
+-eと-oは変わってますけど、
+普通は省略するので気にならないと思います。
+</p>
+<pre>
+$ bcc32 -c -otest.obj test.c
+$ bcc32 -etest.exe test.obj
+</pre>
+<pre>
+$ bcc32 -etest.exe test.c
+</pre>
+
+        <li> <a name="compile.bcc.win">Windowsアプリのコンパイル</a>
+<p>
+-WオプションをつけてコンパイルすればWindowsアプリができます。
+リソースコンパイラでresファイルも作れます。
+</p>
+<pre>
+$ bcc32 -W wtest.c
+$ brcc32 -r wtest.rc
+</pre>
+<p>
+ただ、リソースをexeにくっつける方法がわかりません。
+brc32でできるはずだと思うんですけど‥。
+現在はリンカを苦労して使っています。
+</p>
+<pre>
+$ ilink32 c0w32.obj wtest.obj,wtest.exe,,cw32.lib import32.lib,,wtest.res
+</pre>
+
+        <li> <a name="compile.bcc.mt" >マルチスレッドプログラムのコンパイル</a>
+<p>
+-WMをつけると、mt-safeなライブラリをリンクしてくれます。
+VC++同様、_beginthread()も使えます。
+Windowsアプリケーションの場合には
+</p>
+<pre>
+$ bcc32 -W -WM mttest-w.c
+</pre>
+<p>
+のように、-Wと両方つければOKです。
+</p>
+
+        <li> <a name="compile.bcc.dll">DLLのコンパイル</a>
+<p>
+次のように-WDオプションをつけてコンパイルすればDLLができます。
+</p>
+<pre>
+$ bcc32 -WD dlltest.c
+</pre>
+<p>
+DLLファイル名の指定は実行ファイル同様-eです。
+</p>
+<p>
+インポートライブラリは、implibコマンドで作ります。
+defファイルから作るか、またはdllからいきなり作ります。
+</p>
+<pre>
+$ implib dlltest.lib dlltest.dll
+</pre>
+<p>
+defファイルが必要なときには、
+impdefコマンドでdllからdefファイルを作ることができますが、
+普通はdefファイルを作る必要はないでしょう。
+</p>
+<p>
+シンボル名の変換ルールが違うので、
+Cygwinで作ったdefファイルが同じディレクトリにあったりすると
+「Attempt to export non-public symbol '***'」
+などと文句をいわれます（が、インポートライブラリは正しくできています）。
+</p>
+<p>
+そのインポートライブラリをリンクすればDLL内の関数が使えます。
+</p>
+<pre>
+$ bcc32 usedll.c dlltest.lib
+</pre>
+
+        <li> <a name="compile.bcc.mkf">Makefileの例</a>
+<p>
+以下はGNU make用のMakefileです。bccについてくるmakeではおそらく動きません。
+</p>
+<pre>
+### Makefile.bcc
+SRCS = hoegrara.c
+OBJS = hogerara.obj
+PROG = hogerara
+RES  = $(PROG).res
+EXE  = $(PROG).exe
+CC = /apps/Borland/bcc55/Bin/bcc32
+CFLAGS =
+LD = /apps/Borland/bcc55/Bin/ilink32
+LDFLAGS =
+RC = /apps/Borland/bcc55/Bin/brc32
+IPATH = /apps/Borland/bcc55/include
+
+.SUFFIXES : .obj .c
+.SUFFIXES : .res .rc
+
+ALL: $(EXE)
+
+clean:
+	rm -f $(RES) $(OBJS) $(EXE)
+
+.c.obj:
+	$(CC) $(CFLAGS) -o$@ -c $&lt;
+
+.rc.res:
+	$(RC) -r -i$(IPATH) -fo$@ $&lt;
+
+$(EXE): $(OBJS) $(RES)
+	$(LD) c0w32.obj $(OBJS),$(EXE),,cw32.lib import32.lib,,$(RES)
+</pre>
+      </ul>
+
+      <li> <a name="compile.gcc">gcc</a>
+<p>
+Cygwinのコンパイラはgcc（g++とかg77を使う方がいてもいいですが）、
+リソースコンパイラはwindresという名前です。
+リンカはldですけど、
+gccが勝手に呼び出してくれますので、明示的に使うことはないでしょう。
+</p>
+
+      <ul>
+        <li> <a name="compile.gcc.con">コンソールアプリのコンパイル</a>
+<p>
+ふつーのgccです。
+</p>
+<pre>
+$ gcc -o test.o -c test.c
+$ gcc -o test.exe test.o
+</pre>
+
+        <li> <a name="compile.gcc.win">Windowsアプリのコンパイル</a>
+<p>
+-mwindowsをつけてコンパイルするだけです。
+</p>
+<p>
+Cygwinで何も考えずに作ったバイナリはcygwin1.dllがない環境では動きません。
+それじゃ折角バイナリを作っても配りづらいなあ、と思われるでしょうが、
+最近のCygwinはmingw32というパッケージを含んでおり、
+-mwindowsに加えて-mno-cygwinをつけることで、
+cygwin1.dllなしで動くバイナリを作ることができます。
+少し動作が変わったりしますけど、普通は気にならないはずです。
+</p>
+<p>
+リソースコンパイラwindresのsyntaxは、
+MSのものと少々互換性がないので手を焼きます
+（ディレクティブによってはquoteするとエラーになるなど）。
+また、Cygwinではリソースをres形式にしてもリンカが解釈できませんので、
+coff形式にしてリンクしなくてはなりません。
+</p>
+<pre>
+$ gcc -c wtest.c
+$ windres -i wtest.rc -o wtest.coff
+$ gcc -mwindows -o wtest.exe wtest.o wtest.coff
+</pre>
+<p>
+printfデバッグをするなど（笑）の理由で、
+Windowsアプリでコンソールが欲しくなることもあるでしょう。
+-mwindowsに加えて-Wl,--subsystem,consoleオプションをつければコンソールができます。
+もちろん、さらに-mno-cygwinをつけることもできます。
+</p>
+
+        <li> <a name="compile.gcc.mt" >マルチスレッドプログラムのコンパイル</a>
+<p>
+全然わかってません。
+最近のCygwinのライブラリはmt-safeになったとかいう話を友人に聞いたので、
+pthreadのプログラムはさくっと動くのかもしれません。
+が、VC++の人達がよく使う_beginthread()は動かなさそうです。
+</p>
+
+        <li> <a name="compile.gcc.dll">DLLのコンパイル</a>
+
+<p>
+DLLは、dllwrapで作ります。
+これは名前の通りwrapperですが、
+gccとdlltoolを何度も呼んでいて理解しがたいです。
+まずは.defファイルを作ります。
+</p>
+<pre>
+$ gcc -c a.c b.c c.c dllinit.c
+$ dlltool --export-all --output-def app.def a.o b.o c.o dllinit.o
+</pre>
+
+<p>
+作った.defファイルを使って、dllを作ります。
+</p>
+
+<pre>
+$ dllwrap --driver-name gcc --def app.def -o foo.dll a.o b.o c.o dllinit.o
+</pre>
+
+<p>
+インポートライブラリも.defファイルから作ります。
+</p>
+<pre>
+$ dlltool --dllname foo.dll --def app.def --output-lib libapp.a
+</pre>
+
+
+<p>
+以上を一気にやるコマンドが
+</p>
+
+<pre>
+$ dllwrap --export-all --output-def app.def --implib libapp.a --driver-name gcc -o foo.dll a.o b.o c.o dllinit.o
+</pre>
+
+<p>
+ということみたいです（今ひとつわかってません）。
+mingw32なDLLは、dllwrapに'--target i386-mingw32'をつけて、
+'--driver-name=gcc -mno-cygwin'とすればできます。
+</p>
+<p>
+できたインポートライブラリを
+</p>
+
+<pre>
+$ gcc usedll.c -L. -lapp
+</pre>
+
+<p>
+というようにリンクすればDLL内の関数が使えます。
+</p>
+
+<p>
+ちなみに、参考にした資料はMumit Khanさんの
+<a href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/dllhelpers.html"
+>DLL Helpers</a>のREADMEです。
+この人はどうやらdllwrapの作者みたいです。
+mingw32の作者であるColin Petersさんによるチュートリアル
+<a href="http://www.geocities.com/Tokyo/Towers/6162/win32/index.html"
+>『Programming Win32 with GNU C and C++』</a>のDLLの章にもいろいろ書いてありますけど、
+よくわからないので (^^;、dllwrapを使った方がいいと思います。
+</p>
+
+        <li> <a name="compile.gcc.mkf">Makefileの例</a>
+<pre>
+### Makefile.gcc
+SRCS = hogarara.c
+OBJS = hogerara.o
+PROG = hogerara
+RES  = $(PROG).coff
+EXE  = $(PROG).exe
+CC = gcc
+CFLAGS = 
+LD = gcc
+LDFLAGS = -mwindows -mno-cygwin
+# win app:
+#	-mwindows
+# win app with console:
+#	-mwindows -Wl,--subsystem,console
+# win app (which can be executed without cygwin1.dll):
+#	-mwindows -mno-cygwin
+# win app with console (which can be executed without cygwin1.dll):
+#	-mwindows -mno-cygwin -Wl,--subsystem,console
+RC = windres
+
+.SUFFIXES : .o .c
+.SUFFIXES : .coff .rc
+
+ALL: $(EXE)
+
+clean:
+	rm -f $(RES) $(OBJS) $(EXE)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $&lt;
+
+.rc.coff:
+	$(RC) -i $&lt; -o $@
+
+$(EXE): $(OBJS) $(RES)
+	$(LD) $(LDFLAGS) -o $(EXE) $(OBJS) $(RES)
+</pre>
+      </ul>
+    </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="debug"      >デバッグ</a></h2>
+
+<p>
+Platform SDKに含まれるspyを使うと、飛んでいるメッセージを見ることができます。
+自分のプログラムが思い通りのメッセージを出しているかを調べたり、
+他のアプリケーションがどんなメッセージをやりとりしているのかを学べたりと、
+なかなか有用なツールです。
+しかし、VC++付属のspy++に比べると非常に使いにくく、
+もう少しなんとかならんかったのか、という気がします。
+</p>
+    <ul>
+      <li> <a name="debug.bcc">bcc</a>
+<p>
+	   <a href="http://www.inprise.co.jp/cppbuilder/freecompiler/turbodebugger.html"
+	   >Turbo Debugger</a>が一応使えるみたいです。
+	   確かにGUIではあるんですが、
+	   NTコンソールベースとでも言うのでしょうか、
+	   とにかくイマイチです。
+	   Platform SDKに含まれるデバッガも使えるのかもしれませんが、
+	   よくわかりません。
+</p>
+
+      <li> <a name="debug.gcc">gcc</a>
+<p>
+	   gdbが使えます。SEGVが飛んできたよ、
+	   などと言ってくれてUNIX気分を堪能できます。
+	   最近はGUIもできていい感じです。
+	   マルチスレッドプログラムのデバッグはできないのだろうか‥？
+</p>
+    </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="benchmark"  >ベンチマーク</a></h2>
+
+<p>
+コンパイラの性能はどうなのか、調べてみました。
+以下は、<a href="cctest.c.txt"
+>やる気のないプログラム</a>をコンパイルし、
+timeコマンドで実行時間を測定した結果です。
+測定はCeleron466MHz/128M/Windows2000なマシンで行いました。
+</p>
+<pre>
+gcc:         4m33.463s
+gcc -O2:     2m28.964s
+bcc -Od:     3m35.329s
+bcc:         2m34.252s
+bcc -O2:     2m21.093s
+bcc -O2 -4:  2m21.854s
+bcc -O2 -5:  2m36.225s
+bcc -O2 -6:  2m23.366s
+</pre>
+<p>
+bccは、デフォルトで色々な最適化がされてしまうので、
+最適化をさせないためには-Odオプションをつけなくてはなりません。
+bccの-4,-5,-6はそれぞれ486,pentium,pentium pro用のバイナリを吐くのですが、
+386用のバイナリよりかえって遅くなってしまっています。
+-O2同士でならbccの方が速いバイナリを作れるようです。
+</p>
+<p>
+次に、実際のアプリケーションについて見てみます。
+mp3エンコーダーのlame 3.67betaを両者でコンパイルして、
+手元にあった6分程度のwavファイルをエンコードしてみました。
+どちらもコンパイルオプションは-O2のみとしました。
+</p>
+<pre>
+LAME version 3.67 (www.sulaco.org/mp3)
+GPSYCHO: GPL psycho-acoustic and noise shaping model version 0.77.
+Using polyphase lowpass filter,  transition band:  15115 Hz - 15648 Hz
+Encoding ./hide/track_01.wav to ./hide/track_01.wav.mp3
+Encoding as 44.1 kHz 128 kbps stereo MPEG1 LayerIII (11.0x)  qval=5
+    Frame          |  CPU/estimated  |  time/estimated | play/CPU |   ETA
+ 13705/ 13705(100%)| 0:03:33/ 0:03:33| 0:03:34/ 0:03:34|    1.6801| 0:00:00
+</pre>
+<pre>
+LAME version 3.67 (www.sulaco.org/mp3)
+GPSYCHO: GPL psycho-acoustic and noise shaping model version 0.77.
+Using polyphase lowpass filter,  transition band:  15115 Hz - 15648 Hz
+Encoding ./hide/track_01.wav to ./hide/track_01.wav.mp3
+Encoding as 44.1 kHz 128 kbps stereo MPEG1 LayerIII (11.0x)  qval=5
+    Frame          |  CPU/estimated  |  time/estimated | play/CPU |   ETA
+ 13705/ 13705(100%)| 0:02:08/ 0:02:08| 0:02:09/ 0:02:09|    2.7866| 0:00:00
+</pre>
+<p>
+lameにはbcc用のアセンブリコードが含まれていませんので、
+上の結果はその分bccに不利です。
+gccでも、quantize-pvt.cで同じコードを使わせてみたところ、
+</p>
+<pre>
+LAME version 3.67 (www.sulaco.org/mp3)
+GPSYCHO: GPL psycho-acoustic and noise shaping model version 0.77.
+Using polyphase lowpass filter,  transition band:  15115 Hz - 15648 Hz
+Encoding ../../../hide/track_01.wav to ../../../hide/track_01.wav.mp3
+Encoding as 44.1 kHz 128 kbps stereo MPEG1 LayerIII (11.0x)  qval=5
+    Frame          |  CPU/estimated  |  time/estimated | play/CPU |   ETA
+ 13705/ 13705(100%)| 0:02:51/ 0:02:51| 0:03:00/ 0:03:00|    2.0980| 0:00:00
+</pre>
+<p>
+となって、やはりbccの方が遅いという結果になりました
+（ソースを把握しているわけではないので、
+他にもgccの方が有利な個所があるのかもしれません）。
+コンパイルオプションをいろいろ試してみましたが、
+あまり変わりませんでした。
+他のアプリケーションでも試してみたいところです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="misc"       >ほかに気づいたこと</a></h2>
+
+<p>
+gccでエディットコントロールを作るとゴミが出るような気が。
+どうやらwindresのバグ‥というかsyntaxが違うようだ。
+brc32でresファイルを作って、
+windresでresからcoffに変換するとうまくいった。なんじゃそりゃ。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="appendix"   >付録</a></h2>
+
+    <ul>
+      <li> <a name="appendix.bashrc">筆者の.bashrc</a>
+
+<pre>
+### .bashrc
+export TZ=JST-9
+export MAKE_MODE=UNIX
+export TMP=/tmp
+export TEMP=/tmp
+
+export PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/X11R6/bin:/usr/X11R6/bin:/apps/Borland/bcc55/Bin:$PATH
+export MANPATH=/usr/local/man:/usr/man:/usr/local/X11R6/man:/usr/X11R6/man
+
+export XAPPLRESDIR=$HOME/lib/X11/app-defaults
+
+
+if [ "$TERM" = "emacs" ] ; then
+    alias ls="ls -N"
+    alias dir='ls -laN'
+    PS1="\h:\w&gt; "
+else
+    alias ls="ls -N --color"
+    alias dir='ls -laN --color'
+    if [ -f $HOME/.dir_colors ] ; then
+        eval `dircolors -b $HOME/.dir_colors`
+    fi
+
+    PS1="\[\e[7m\]\h\[\e[m\]:\[\e[7m\]\w\[\e[m\] "
+fi
+
+if [ "$TERM" = "xterm" ] || [ "$TERM" = "kterm" ] ; then
+    xmodmap $HOME/.xmodmaprc.astec-x
+fi
+
+case `uname` in
+CYGWIN_95* )
+    alias cddesktop='cd /windows/ﾃﾞｽｸﾄｯﾌﾟ'
+    alias start='convexec -n/b,/d,/i,/min,/max,/separate,/shared,/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? start'
+    ;;
+CYGWIN_NT* )
+    alias cddesktop='cd /Documents\ and\ Settings/'$USERNAME'/デスクトップ'
+    alias start='convexec -v -n4 -i -n/b,/d,/i,/min,/max,/separate,/shared,/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? cmd /c start ""'
+    ;;
+* )
+    alias cddesktop='cd /windows/ﾃﾞｽｸﾄｯﾌﾟ'
+    ;;
+esac
+
+alias rehash='hash -r'
+
+alias bcc=bcc32
+alias brc=brc32
+alias brcc=brcc32
+alias ilink=ilink32
+#alias bcc='PATH=/apps/Borland/bcc55/Bin:$PATH bcc32'
+#alias bcc32='PATH=/apps/Borland/bcc55/Bin:$PATH bcc32'
+#alias brc='PATH=/apps/Borland/bcc55/Bin:$PATH INCLUDE="c:\apps\Borland\bcc55\include" brc32'
+#alias brc32='PATH=/apps/Borland/bcc55/Bin:$PATH INCLUDE="c:\apps\Borland\bcc55\include" brc32'
+#alias brcc='PATH=/apps/Borland/bcc55/Bin:$PATH INCLUDE="c:\apps\Borland\bcc55\include" brcc32'
+#alias brcc32='PATH=/apps/Borland/bcc55/Bin:$PATH INCLUDE="c:\apps\Borland\bcc55\include" brcc32'
+#alias ilink='PATH=/apps/Borland/bcc55/Bin:$PATH ilink32'
+#alias ilink32='PATH=/apps/Borland/bcc55/Bin:$PATH ilink32'
+</pre>
+
+      <li> <a name="appendix.bcccfg">bccのcfgファイル</a>
+<p>
+readme.txtに書いてある通りですけど。
+</p>
+
+<ul>
+<li>bcc32.cfg
+
+<pre>
+-I"c:\apps\Borland\bcc55\include"
+-L"c:\apps\Borland\bcc55\lib"
+</pre>
+
+<li>ilink32.cfg
+
+<pre>
+-L"c:\apps\Borland\bcc55\lib"
+</pre>
+</ul>
+
+    </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="bookmarks"  >リンク集</a></h2>
+
+  <ul>
+    <li><a href="http://www.inprise.co.jp/cppbuilder/freecompiler/index.html"
+	>Borland C++ Compiler 5.5</a>
+        <a href="http://www.inprise.com/bcppbuilder/freecompiler/"
+	>[英語版]</a><br>
+    <li><a href="http://sourceware.cygnus.com/cygwin/"
+	>Cygwin</a>
+	<a href="http://sourceware.cygnus.com/cygwin/download.html"
+	>[download]</a>
+	<a href="http://sourceware.cygnus.com/cygwin/snapshots/"
+	>[snapshot]</a><br>
+    <li><a href="http://msdn.microsoft.com/downloads/sdks/platform/platform.asp"
+	>Microsoft Platform SDK</a><br>
+    <li><a href="http://www.bloodshed.nu/devc.html"
+	>Dev-C++</a> Cygwinによる統合環境。まともなリソースエディタがあればな‥<br>
+<br>
+    <li><a href="http://www.geocities.com/Tokyo/Towers/6162/win32/index.html"
+	>Programming Win32 with GNU C and C++</a>
+        mingw32の作者によるチュートリアル（書きかけ）<br>
+    <li><a href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/"
+	>GNU Win32 Related Projects</a>
+        まだ全部見てはいませんが、cygwinでいろいろやってます。<br>
+    <li><a href="http://www.bekkoame.ne.jp/~bero/docj/mingw32/gcc.html"
+	>gcc for Win32</a>
+        <a href="http://www.geocities.com/Tokyo/Towers/6162/gcc.html"
+	>[原文]</a><br>
+    <li><a href="http://www.ohnolab.org/~kimoto/winprog.html"
+	>Windowsが嫌いな人のためのWin32プログラミング</a>
+        更新してください。マジで待ってます。<br>
+	 <!--http://ohnolab-www.is.titech.ac.jp/~kimoto/winprog.html-->
+<br>
+    <li><a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
+	>Cygwin情報</a> Snapshot News<br>
+    <li><a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/"
+	>Cygwin を使う。</a>
+	<a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/cygwin11.html"
+	>[Cygwin 1.1]</a><br>
+    <li><a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
+	>Cygwin 1.1 Information</a><br>
+    <li><a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/cygwin32.htm"
+	>WindowsでUNIX? Cygnusのページ</a>
+	<a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/junixwin32.htm"
+	>[bookmarks]</a><br>
+    <li><a href="http://www.matsusaka-u.ac.jp/~okumura/c/"
+	>C，C++</a><br>
+    <li><a href="http://www.math.s.chiba-u.ac.jp/~okada/cygwin/index.html"
+	>Cygwin</a>
+	<a href="http://www.math.s.chiba-u.ac.jp/~okada/mahojin/index.html"
+	>[魔方陣]</a> Cygwinによる窓アプリの数少ない例<br>
+    <li><a href="http://www.hm.aitai.ne.jp/~mtani/index.html"
+	>Binary Wiz</a><br>
+    <li><a href="http://www.netlaputa.ne.jp/%7Ekose/Software/compile/index.html"
+	>Compile ! (^.^)v</a><br>
+    <li><a href="http://www.kt.rim.or.jp/~ksk/gnu-win32/indexj.html"
+	>Cygwin のページ</a> Cygwin FAQ 日本語訳<br>
+  </ul>
+
+<address>
+hanawa<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2003-12-10 03:12:22 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="footer">
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+</p>
+
+</body>
+</html>

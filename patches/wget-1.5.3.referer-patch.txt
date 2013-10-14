@@ -1,0 +1,124 @@
+*** wget-1.5.3/src/http.c~	Thu Sep 10 22:14:44 1998
+--- wget-1.5.3/src/http.c	Fri Nov 26 14:57:29 1999
+***************
+*** 385,394 ****
+    command = (*dt & HEAD_ONLY) ? "HEAD" : "GET";
+    referer = NULL;
+    if (ou->referer)
+!     {
+!       referer = (char *)alloca (9 + strlen (ou->referer) + 3);
+!       sprintf (referer, "Referer: %s\r\n", ou->referer);
+!     }
+    if (*dt & SEND_NOCACHE)
+      pragma_h = "Pragma: no-cache\r\n";
+    else
+--- 385,412 ----
+    command = (*dt & HEAD_ONLY) ? "HEAD" : "GET";
+    referer = NULL;
+    if (ou->referer)
+!       referer = ou->referer;
+!   else if (opt.referer)
+!       referer = opt.referer;
+!   else if (opt.fake_referer) { /* fake-referer mode */
+!       if (u->proxy)
+! 	  referer = u->proxy->url;
+!       else
+! 	  referer = u->url;
+!       if (strrchr(referer, '/') == NULL)
+! 	  referer = NULL;
+!   }
+!   if (referer) {
+!       char *p;
+!       p = (char *)alloca (9 + strlen(referer) + 3);
+!       sprintf (p, "Referer: %s\r\n", referer);
+!       referer = p;
+!       if ((!ou->referer) && (!opt.referer) && opt.fake_referer) {
+! 	  p = strrchr(referer, '/');
+! 	  strcpy(p+1, "\r\n");
+!       }
+!   }
+! 
+    if (*dt & SEND_NOCACHE)
+      pragma_h = "Pragma: no-cache\r\n";
+    else
+*** wget-1.5.3/src/main.c~	Fri Sep 11 10:41:53 1998
+--- wget-1.5.3/src/main.c	Fri Nov 26 14:57:29 1999
+***************
+*** 205,210 ****
+--- 205,211 ----
+      { "debug", no_argument, NULL, 'd' },
+      { "dont-remove-listing", no_argument, NULL, 21 },
+      { "email-address", no_argument, NULL, 'E' }, /* undocumented (debug) */
++     { "fake-referer", no_argument, NULL, 1001 },
+      { "follow-ftp", no_argument, NULL, 14 },
+      { "force-directories", no_argument, NULL, 'x' },
+      { "force-hier", no_argument, NULL, 'x' }, /* obsolete */
+***************
+*** 259,264 ****
+--- 260,266 ----
+      { "proxy-passwd", required_argument, NULL, 16 },
+      { "proxy-user", required_argument, NULL, 15 },
+      { "quota", required_argument, NULL, 'Q' },
++     { "referer", required_argument, NULL, 1002 },
+      { "reject", required_argument, NULL, 'R' },
+      { "timeout", required_argument, NULL, 'T' },
+      { "tries", required_argument, NULL, 't' },
+***************
+*** 334,339 ****
+--- 336,344 ----
+  	case 22:
+  	  setval ("simplehostcheck", "on");
+  	  break;
++ 	case 1001:
++ 	  setval ("fakereferer", "on");
++ 	  break;
+  	case 'b':
+  	  setval ("background", "on");
+  	  break;
+***************
+*** 435,440 ****
+--- 440,448 ----
+  	  break;
+  	case 23:
+  	  setval ("backups", optarg);
++ 	  break;
++ 	case 1002:
++ 	  setval ("referer", optarg);
+  	  break;
+  	case 'A':
+  	  setval ("accept", optarg);
+*** wget-1.5.3/src/init.c~	Fri Sep 11 09:20:23 1998
+--- wget-1.5.3/src/init.c	Fri Nov 26 14:57:29 1999
+***************
+*** 103,108 ****
+--- 103,109 ----
+    { "dotstyle",		NULL,			cmd_spec_dotstyle },
+    { "excludedirectories", &opt.excludes,	cmd_directory_vector },
+    { "excludedomains",	&opt.exclude_domains,	cmd_vector },
++   { "fakereferer",	&opt.fake_referer,	cmd_boolean },
+    { "followftp",	&opt.follow_ftp,	cmd_boolean },
+    { "forcehtml",	&opt.force_html,	cmd_boolean },
+    { "ftpproxy",		&opt.ftp_proxy,		cmd_string },
+***************
+*** 133,138 ****
+--- 134,140 ----
+    { "quota",		&opt.quota,		cmd_bytes },
+    { "reclevel",		&opt.reclevel,		cmd_number_inf },
+    { "recursive",	NULL,			cmd_spec_recursive },
++   { "referer",		&opt.referer,		cmd_string },
+    { "reject",		&opt.rejects,		cmd_vector },
+    { "relativeonly",	&opt.relative_only,	cmd_boolean },
+    { "removelisting",	&opt.remove_listing,	cmd_boolean },
+*** wget-1.5.3/src/options.h~	Wed Apr 29 06:29:40 1998
+--- wget-1.5.3/src/options.h	Fri Nov 26 14:57:29 1999
+***************
+*** 83,88 ****
+--- 83,90 ----
+    char *http_user;		/* HTTP user. */
+    char *http_passwd;		/* HTTP password. */
+    char *user_header;		/* User-defined header(s). */
++   char *referer;		/* referer for unrefered URL */
++   int fake_referer;		/* Do we use fake referer? */
+  
+    int use_proxy;		/* Do we use proxy? */
+    int proxy_cache;		/* Do we load from proxy cache? */

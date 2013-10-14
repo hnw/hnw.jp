@@ -1,0 +1,32 @@
+*** wget-1.5.3/src/http.c.1~	Thu Sep 10 22:14:44 1998
+--- wget-1.5.3/src/http.c	Wed Apr 26 17:10:42 2000
+***************
+*** 68,74 ****
+--- 68,78 ----
+  extern int errno;
+  #endif
+  #ifndef h_errno
++ #ifdef __CYGWIN__
++ extern __declspec(dllimport) int h_errno;
++ #else
+  extern int h_errno;
++ #endif
+  #endif
+  
+  
+*** wget-1.5.3/src/ftp.c.1~	Thu Sep 10 21:21:36 1998
+--- wget-1.5.3/src/ftp.c	Wed Apr 26 17:12:02 2000
+***************
+*** 50,56 ****
+--- 50,60 ----
+  extern int errno;
+  #endif
+  #ifndef h_errno
++ #ifdef __CYGWIN__
++ extern __declspec(dllimport) int h_errno;
++ #else
+  extern int h_errno;
++ #endif
+  #endif
+  
+  /* File where the "ls -al" listing will be saved.  */

@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<link rel="stylesheet" href="../../css/default.css" type="text/css">
+<title>HTTP-tunneling with VMware</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+<p class="header">
+<a href="../../index.html">[home]</a>
+<a href="./index.html">[back]</a>
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h1>HTTP-tunneling と VMware</h1>
+
+<p class="abstract">
+筆者はVMware2.0で、
+ホストOS（本来のマシンで動いているOS)をWindows2000、
+ゲストOS（vmwareが作りだした仮想マシンで動くOS）をLinuxにして使っている。
+この仮想ネットワークをhost-onlyで使っているのだが、
+ゲストOSから見えるマシンがホストOSしかないので、
+外のマシンとのデータ交換が非常に不便だった。
+</p>
+<p class="abstract">
+これに対し、HTTP-tunnelingと呼ばれるテクニックで、
+ゲストOSから外部ネットワークに接続することができたので、
+記事にまとめることにした。
+</p>
+<p class="abstract">
+社内ネットワークなどでインターネットへの出口がproxyしかない、
+などという状況でも同様のテクニックでsshで外に出られる。
+というか、筆者のような状況よりは、
+むしろそういう状況で利用するパターンの方が多いだろう。
+</p>
+<p class="abstract">
+VMwareを知らないと意味不明かもしれないが、
+VMwareが無い場合でも何かの助けになればと思っているので、
+やや丁寧に書いているつもり。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="intro">はじめに</a></h2>
+
+<p>
+要は、VMware2.0 on Windows + host-only network の環境で、
+HTTP-tunnelingとwindowsのローカルプロクシを使って
+ゲストOSからsshで外に出よう、という記事です。
+</p>
+<p>
+筆者の場合、VMwareのインストール時にbridgedの設定をしくじって
+さっぱりうまくいかなかったので、host-onlyで我慢することにしました。
+同様の環境であってもVMware3.0ではNATが使えるだろうし、
+VMware2.0でもインターネット共有で使っている人の方が多いかと思いますが、
+こんな方法もあるよ、ということで。
+</p>
+<p>
+Vmwareユーザーじゃない人のためにhost-only networkについて説明しておきます。
+VMwareをhost-onlyでインストールすると、
+ホストOS（ネイティブOS。今回の場合はWindows）と
+ゲストOS（vmware上のOS。今回の場合はLinux）にそれぞれ
+仮想的なNICが一つ作られ、
+この2マシンのみを繋ぐプライベートネットワークが組まれます。
+これがhost-onlyと呼ばれる仮想ネットワークです。
+名前の通り、この2マシン間の通信にしか使うことができません。
+</p>
+<p>
+今回の場合、Windowsには172.22.0.1を、
+Linuxには172.22.0.101を、それぞれ割り振りました。
+Windows側で特に何も設定をしていませんので、
+Linuxからは直接インターネットは見ることができません。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+
+<h2><a name="install">準備</a></h2>
+
+<p>
+筆者の環境は以下のとおりです。
+</p>
+<ul>
+  <li> ノートパソコン (OS: Windows 2000)
+  <li> 10/100M LANカード
+  <li> 無線LANカード
+  <li> VMware 2.0 on windows (ゲストOS: Linux)
+  <li> Proxomitron (タスクトレイに常駐するローカルプロクシ)
+</ul>
+
+<p>
+Proxomitronは<a href="../win4unix/proron.html"
+>別ページ</a>で説明してあるので見てもらうとして、
+さらにVMwareからアクセスできるようにする必要があります。
+今回の例であれば、設定ウインドウの「Config」-「Access」で
+172.22.0.2から172.22.0.254まで許可、
+もしくは172.22.0.101からのみ許可などとしておきます。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="abstract">仕組み(概略)</a></h2>
+
+<p>
+要するに、外のネットワークが見えて、かつSSLも通せるようなproxyを使うと、
+sshが通せる、って話です。
+SSLが通るproxyでは、実は全てのプロトコルが通せるのです。
+もちろん制限があったりもするが、どうってことはありません。
+（これに関しては後述）
+</p>
+<p>
+どういうことかというと、
+proxyに対して普段はGETとかHEADとかPOSTとかのメソッドを使うわけだが、
+CONNECTというメソッドがあって、
+SSLやsshなどの面倒なプロトコルを通す場合にはこれを使う。
+例えば、172.22.0.1:8080にproxyが立っている場合、
+</p>
+<pre>
+$ telnet 172.22.0.1 8080
+Trying 172.22.0.1...
+Connected to 172.22.0.1.
+Escape character is '^]'.
+CONNECT 172.22.0.101:22 HTTP/1.0
+
+HTTP/1.0 200 Connection established
+
+SSH-1.5-OpenSSH-1.2.3
+</pre>
+<p>
+となって、別のサーバのsshdにつなぐことができる。
+つまり、proxyにアクセスできるマシンならば
+proxyがアクセスできるネットワークどこにでもアクセスできちゃう。
+（この仕組みをHTTP-tunnelingとか言うらしい）
+もう一ひねりすればsshで接続できそうでしょ？
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="proxycommand">ProxyCommandとconnect.c</a></h2>
+
+<p>
+で、その一ひねりの準備がOpenSSHには用意されている。
+ProxyCommandというのがそれで、
+ssh_configに書くことで、接続のためのfilter（外部コマンド）を書ける。
+つまり、proxyに対してCONNECTをして、
+残りの入出力を素通しするようなコマンドがあれば、
+proxy越しのsshが使えちゃうというわけ。
+</p>
+<p>
+で、そのfilterを作ればいいわけだが、
+自作せずとも用意してくれている方がいるので、
+ありがたく使うことにする。
+<a href="http://www.taiyo.co.jp/~gotoh/ssh/connect.html
+">
+SSH Proxy Command -- connect.c
+</a>
+がそれ。英語のみですが詳細な説明があります。
+</p>
+<p>
+何やらsocksに対応してたりして、こだわりの品って感じ。
+まあ、筆者はhttp-proxy使うだけなのでオーバースペックなのだが。
+</p>
+<pre>
+$ gcc -o ~/bin/proxy-connect connect.c
+</pre>
+<p>
+などとして、~/.ssh/configの先頭に
+</p>
+<pre>
+ProxyCommand  /home/hanawa/bin/proxy-connect -H 172.22.0.1:8080 %h %p
+</pre>
+<p>
+とやってできあがり。
+</p>
+<p>
+しかし、Proxomitronはこんな使い方でも全く問題ない。
+SSLを通すんだから正常に動作して当然なのかもしれないが、
+作者も想定外の使い方なんじゃないだろうか。
+</p>
+<p>
+VMware内からホスト名を解決するのは不可能でも、
+この枠組だとProxyで名前解決してくれるので、
+いちいちIPとホスト名の対応を書く必要もなくて幸せ。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="appendix">おまけ</a></h2>
+
+<p>
+以上で筆者の使い方ではバッチリなのですが、
+世間一般ではCONNECTで443番(SSL)にしかつなげない設定になっているproxyの方が普通です。
+CONNECTメソッドをSSL以外に使うな、ってことなんでしょうが、
+世の中443番以外にSSLが立っていることはありえないんですかねえ？
+そんなことだからいつまでもベリサイン丸儲けなんだよなあ、などと愚痴りつつ、
+対策を考えてみます。
+</p>
+<p>
+まず思いつく対策は、接続したいサーバの443番にsshdを立ててしまうことです。
+または、対象のproxyがsquidのデフォルト設定のままで運用している場合には、
+563番も利用できるかもしれません。
+</p>
+<p>
+もしくは、問題のproxyから443番を叩きに来たときのみ、
+22番にREDIRECTするようipchainsの設定をする、
+などというのもアリかと思います。
+</p>
+<p>
+残念ながら、どちらも無理という場合には打つ手なしかな…。
+proxy管理者を丸め込んで、22番も開けさせましょう。
+squidの場合の設定はそれほど難しくありませんが、
+公開proxyでこれをやると踏み台にされる可能性もあります。ご注意を。
+社内pxoryの場合には、
+各個人が変な経路で穴を空けるのに比べれば経路を一元化できるので、
+悪くない設定だろうと思います。
+まあ、そんな意見が通るとは限らないですけど。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="bookmarks">リンク集</a></h2>
+
+<p>
+こんな記事より素晴らしい文章がいっぱいあります。
+この記事のような妙な環境でやった例は見たことないですが、
+目先が変わっているだけで技術的には他の環境と同じことをしていますので、
+下記リンクが参考になると思います。
+</p>
+    <ul>
+      <li>「一歩進んだサーバ構築・運用術」
+         <a href="http://www.gcd.org/sengoku/docs/NikkeiLinux00-12/config.ja.html"
+	  >[ssh(前編)]</a>
+         <a href="http://www.gcd.org/sengoku/docs/NikkeiLinux01-01/telnet.ja.html"
+	  >[ssh(中編)]</a> 仙石さん。自身の連載記事の転載だそうだが、内容が濃い。<br>
+      <li><a href="http://marimo.sakura.ne.jp/~buchio/Tech/Windows.html"
+	  >Windowsと暮らす</a> windowsのsshでイントラから外に出てます。<br>
+      <li><a href="http://www.hmc.gr.jp/rio/ssh_socks/"
+	  >OpenSSH thru SOCKS5</a> なにやらSOCKSでがんばってます。<br>
+<br>
+      <li><a href="http://www.taiyo.co.jp/~gotoh/ssh/connect.html"
+	  >connect.c</a>
+<br>
+      <li><a href="http://www.vmware.com/"
+	  >VMware</a><br>
+      <li><a href="http://proxomitron.cjb.net/"
+	  >Proxomitron</a> <br>
+
+    </ul>
+<p>
+あ、どっかで聞いた名前だと思ったらstoneの作者だ＞仙石さん
+</p>
+
+<address>
+hanawa<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</address>
+<p class="date">
+$Date: 2004-10-06 04:58:03 $
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<p class="nomargin">
+<a href="../../index.html">[home]</a>
+<a href="./index.html">[back]</a>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,446 @@
+#!/usr/bin/perl -w
+#
+# jpginfo.pl version 0.22 - describe JPEG infomation (just experimental)
+# copyright (c) hanawa <y@hnw.jp>
+#
+#
+# The Adobe Photoshop format which begins with '8BPS' is not supported
+# (I don't know the details of the format...)
+
+# verbose level
+#  0: print incorrect JPEG only
+#  1: print information with 1 line
+#  2: print information including all marker or other info
+
+# sample usage:
+#
+# 1. You can move all regular JPEG files to ../jpeg. Such as:
+#   $ mkdir ../jpeg
+#   $ jpginfo * |perl -ne 'if (/^(.*): *\d+ x \d+$/){rename($1,"../jpeg/$1")}'
+
+
+
+my ($vernum) = ("0.24");
+my ($my_name);
+my ($arcfile, $action, @files, $buf, $field_len);
+my (%symbol);
+
+my ($verbose, $debug);
+
+$verbose = 1;
+$debug = 0;
+
+$/ = "\xff";
+
+$my_name = $0;
+$my_name =~ s|^.*/||;
+
+$action = "info";
+
+%symbol =
+    (
+     0xc0, "SOF0",		# Baseline DCT
+     0xc1, "SOF1",		# Extended sequential DCT, Huffman coding
+     0xc2, "SOF2",		# Progressive DCT, Huffman coding
+     0xc3, "SOF3",		# Lossless (sequential), Huffman coding
+     0xc5, "SOF5",
+     0xc6, "SOF6",
+     0xc7, "SOF7",
+     0xc8, "JPG",
+     0xc9, "SOF9",		# Extended sequential DCT, arithmetic coding
+     0xca, "SOF10",		# Progressive DCT, arithmetic coding
+     0xcb, "SOF11",		# Lossless (sequential), arithmetic coding
+     0xcd, "SOF13",
+     0xce, "SOF14",
+     0xcf, "SOF15",
+     0xc4, "DHT",
+     0xcc, "DAC",
+     0xd8, "SOI*",
+     0xd9, "EOI*",
+     0xda, "SOS",
+     0xdb, "DQT",
+     0xdc, "DNL",
+     0xdd, "DRI",
+     0xde, "DHP",
+     0xdf, "EXP",
+
+     0xe0, "APP0",
+     0xe1, "APP1",
+     0xe2, "APP2",
+     0xe3, "APP3",
+     0xe4, "APP4",
+     0xe5, "APP5",
+     0xe6, "APP6",
+     0xe7, "APP7",
+     0xe8, "APP8",
+     0xe9, "APP9",
+     0xea, "APP10",
+     0xeb, "APP11",
+     0xec, "APP12",
+     0xed, "APP13",
+     0xee, "APP14",
+     0xef, "APP15",
+
+     0xf0, "JPG0",
+     0xf1, "JPG1",
+     0xf2, "JPG2",
+     0xf3, "JPG3",
+     0xf4, "JPG4",
+     0xf5, "JPG5",
+     0xf6, "JPG6",
+     0xf7, "JPG7",
+     0xf8, "JPG8",
+     0xf9, "JPG9",
+     0xfa, "JPG10",
+     0xfb, "JPG11",
+     0xfc, "JPG12",
+     0xfd, "JPG13",
+
+     0xfe, "COM",
+     );
+
+
+while (@ARGV) {
+    $_ = shift(@ARGV);
+    if (/^--$/) {
+	push(@files, @ARGV);
+	last;
+    } elsif ($_ eq "-l") {
+        $action = "list";
+    } elsif ($_ eq "-x") {
+        $action = "extract";
+    } elsif ($_ eq "-e") {
+        $action = "extract";
+    } elsif ($_ eq "-p") {
+        $action = "print";
+    } elsif ($_ eq "-c" || $_ eq "--check") {
+        $action = "check";
+        $verbose = 0;
+    } elsif ($_ eq "-h" || $_ eq "--help") {
+        $action = "help";
+    } elsif ($_ eq "-q" || $_ eq "--quiet") {
+        $verbose = 1;
+    } elsif ($_ eq "-v" || $_ eq "--verbose") {
+        $verbose = 2;
+    } elsif ($_ eq "--version") {
+        $action = "version";
+    } elsif ($_ eq "-d" || $_ eq "--debug") {
+        $debug = 1;
+    } elsif (/^-/) {
+
+    } else {
+	push(@files, $_, @ARGV);
+	last;
+    }
+}
+
+if (@files) {
+} elsif ($action ne "version") {
+    $action = "help";
+}
+
+if ($action eq "version") {
+    print STDERR "jpginfo.pl version $vernum\n";
+    exit;
+}
+
+if ($action eq "help") {
+    print STDERR <<"EOM";
+jpginfo.pl version $vernum - describe JPEG infomation
+copyright (c) hanawa <y\@hnw.jp>
+usage: $0 [JPEGfiles ...]
+EOM
+
+	exit;
+}
+
+my($max_length) = (0);
+foreach (@files) {
+    $max_length = length($_) if ($max_length < length($_));
+}
+
+if (@files >= 2 || $verbose <= 1) {
+    $print_filename = 1;
+}
+
+my (@printbuf, $is_no_problem);
+
+FILE: while (@files) {
+  $filename = shift(@files);
+  @printbuf = ();
+
+  if (-d $filename) {
+    push(@printbuf, "directory");
+    push(@printbuf, "\n") if ($verbose >= 2);
+    next;
+  }
+
+  open(FH, $filename) || die "file not found: $filename\n";
+  binmode(FH);
+
+    $is_no_problem = 0;
+    $error_occured = 0;
+    $error_msg = "";
+    $is_jpg = 0;
+    $jpg_ended = 0;
+
+    read(FH, $_, 32);
+    if (/^\xff\xd8\xff/) {
+      $usojpeg = 0;
+      if (/^\xff\xd8\xff\xe0\x00\x10JFIF.{10}2\.reVGEPJOSU/) {
+        $usojpeg = 1;
+        seek(FH, -32, 2); # end of the file -32
+        read(FH, $_, 32);
+        $_ = reverse($_);
+      } elsif (/^\xff\xd8\xff\xe0\x00\x10JFIF.{10}USOJPEGVer\.2/) {
+        push(@printbuf, "(not reversed)"); ### will be commented out
+        $usojpeg = 1;
+        seek(FH, 32, 0); # beginning of the file +32
+        read(FH, $_, 32);
+      }
+      if ($usojpeg) {
+        push(@printbuf, "usojpeg");
+        if (/^Rar!/) {
+          push(@printbuf, " ", "rar?");
+        } elsif (/^PK/) {
+          push(@printbuf, " ", "zip?");
+        } elsif (/^.RMF/) {
+          push(@printbuf, " ", "rm?");
+        }
+	push(@printbuf, "\n") if ($verbose >= 2);
+        next;
+      } 
+      # SOI
+      push(@printbuf, "SOI\n") if ($verbose >= 2);
+    } elsif (/^MZ/) {
+	push(@printbuf, "EXE?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^GIF8[79]a/) {
+	push(@printbuf, "GIF?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^\x89PNG\x0d\x0a\x1a\x0a/) {
+	push(@printbuf, "PNG?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^BM/) {
+	push(@printbuf, "BMP?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^..-lh[d0-9]-/) {
+	push(@printbuf, "lzh");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^PK/) {
+	push(@printbuf, "zip");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^Rar!/) {
+	push(@printbuf, "rar");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^MSCF/) {
+	push(@printbuf, "cab");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^Pokonya/) {
+	push(@printbuf, "Pokonyan?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^%PDF/) {
+	push(@printbuf, "PDF?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } elsif (/^.RMF/) {
+	push(@printbuf, "rm?");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    } else {
+	push(@printbuf, "not JPEG");
+	push(@printbuf, "\n") if ($verbose >= 2);
+	next;
+    }
+
+    seek(FH, 3, 0); # beginning of the file +3
+    $is_jpg = 1; # hmm...
+
+    while (<FH>) {
+	if (/^\x00/) {
+	    next;
+	} elsif (/^\xda/) {
+	    # SOS
+	    push(@printbuf, "SOS\n") if ($verbose >= 2);
+	    next;
+#	    last;
+	} elsif (/^([\xd0-\xd7])/) {
+	    # RST (d0-d7???)
+	    push(@printbuf, "RST", ord($1)-0xd0, "\n") if ($verbose >= 2);
+	    next;
+	} elsif (/^\xd9/) {
+	    # EOI
+	    push(@printbuf, "EOI\n") if ($verbose >= 2);
+	    $length = length($_);
+	    $jpg_ended = 1;
+	    if ($length == 1) {
+		# this file is correct JPEG.
+		$is_no_problem = 1;
+	    } elsif ($length > 1) {
+		seek(FH, 1-length($_), 1);
+		$length = read(FH, $buf, 18) || die;
+
+		$fake_jpeg = "";
+		if ($buf =~ /^....ImplantArchive/s) {
+		    $fake_jpeg = "implant";
+		} elsif ($buf =~ /^Pokonya/) {
+		    $fake_jpeg = "pokonyan";
+#			print " ", unpack("H2", substr($buf, 7, 1)), " ";
+#			print " ", unpack("H2", substr($buf, 8, 1)), " ";
+#			print " ", unpack("H2", substr($buf, 9, 1)), " ";
+#			print " ", unpack("H2", substr($buf, 10, 1)), " ";
+		}
+		while ($read_len = read(FH, $buf, 1024)) {
+		    $length += $read_len;
+		}
+		if ($action eq "info" || $action eq "check") {
+		    push(@printbuf, " / ") if ($verbose == 1);
+		    push(@printbuf, "  ", $length);
+		    if ($length >= 2) {
+			push(@printbuf, "bytes");
+		    } else {
+			push(@printbuf, "byte");
+		    }
+
+		    if (!$fake_jpeg) {
+			push(@printbuf, " ignored after EOI.");
+		    } elsif ($fake_jpeg eq "implant") {
+			push(@printbuf, " implant data found.");
+		    } elsif ($fake_jpeg eq "pokonyan") {
+			push(@printbuf, " pokonyan data found.");
+		    }
+		    push(@printbuf, "\n") if ($verbose >= 2);
+		}
+	    }
+	    last;
+	}
+
+
+	# exclude EOI & RSTn,
+	# field length is placed right after marker.
+	# (which occupies 2bytes)
+	# After SOS field, there is scan data with no marker.
+	# '0xff' is escaped to '0xff 0x00' in the scan data.
+
+	if (!(s/^(.)(..)//s)) {
+	    $error_occured = 1;
+	    $error_msg = "Premature end.";
+	    next FILE;
+	}
+	$symbol = $symbol{ord($1)};
+	$length = unpack("n", $2);
+	if (!(defined $symbol)) {
+	    # unknown symbol
+	    $error_occured = 1;
+	    $error_msg = "Unsupported marker type 0x";
+	    $error_msg .= unpack("H2", $1);
+	    $error_msg .= " with length ";
+	    $error_msg .= unpack("H4", $2);
+	    next FILE;
+	}
+
+	push(@printbuf, $symbol, "\t: ", $length, "\n") if ($verbose >= 2);
+
+	# exclude field length part and line separater 0xff (-2+1)
+	$length -= 1;
+	while (length($_) < $length) {
+	    if ($tmp = <FH>) {
+		$_ .= $tmp;
+	    } else {
+		last;
+	    }
+	}
+
+	if (length($_) != $length) {
+	    $error_occured = 1;
+	    if (length($_) > $length) {
+		$error_msg = "Illegal block size";
+	    } else {
+		$error_msg = "Premature end."
+	    }
+
+	    # Dealing with bug for "Arles Image Web Page Creator",
+	    # which creates JPEG files with illegal COM block.
+	    if ($symbol eq "COM" &&
+		length($_) == 70 &&
+		$length == 68) {
+		
+		$length = 70;
+		# continues analysis.
+	    } else {
+		next FILE;
+	    }
+	}
+	$length += 1;
+
+	# show additional infomation
+	if ($symbol eq "APP0") {
+	    if (s/^JFIF\x00(..)(.)(..)(..)(.)(.)//s) {
+		for $i (0,16,32) {
+		    $mask = "kIUCHIuCHINO"x4;
+		    if (length($_) >= $i+16) {
+			$cp = substr($_, $i, 16) ^ substr($mask, $i, 16);
+			$cp =~ s/[\x00-\x1f\x80-\xff].*$//s;
+			push(@printbuf, "  ", $cp) if ($verbose >= 1);
+			push(@printbuf, "\n") if ($verbose >= 2);
+		    }
+		}
+#		print "APP0 ok\n";
+	    }
+	} elsif ($symbol =~ /^SOF/) {
+	    if (length($_) >= 5) {
+#		$p = unpack("C", substr($_, 0, 1));
+		$x = unpack("n", substr($_, 1, 2));
+		$y = unpack("n", substr($_, 3, 2));
+
+		if ($verbose >= 2) {
+                    push(@printbuf, " ", $y, " x ", $x, "\n");
+		} elsif ($verbose >= 1) {
+                    unshift(@printbuf, " ", $y, " x ", $x);
+		}
+	    }
+	} elsif ($symbol =~ /^COM/) {
+	    # remove 0xff
+	    chop;
+	    # ?
+	    s/\x00$//;
+	    push(@printbuf, $_, "\n") if ($verbose >= 2);
+	}
+    }
+} continue {
+    close(FH);
+
+    if ($is_jpg && !$jpg_ended && !$error_occured) {
+	$error_occured = 1;
+	$error_msg = "Premature end."
+    }
+    if ($error_occured) {
+	push(@printbuf, " / ") if ($verbose <= 1 && @printbuf >= 1);
+	push(@printbuf, $error_msg);
+	push(@printbuf, "\n") if ($verbose >= 2);
+    }
+
+    if ($action ne "check" ||
+	$action eq "check" && !$is_no_problem) {
+
+	if ($print_filename) {
+	    if ($verbose >= 2) {
+		print "\n==> ", $filename, " <==\n";
+	    } else {
+                print $filename, ":", " " x ($max_length-length($filename)+1);
+	    }
+	}
+	print @printbuf, "\n";
+    }
+
+#	print "\n" if ($action eq "info");
+}

@@ -1,0 +1,63 @@
+#!/usr/bin/perl
+#
+#
+
+%expr =
+    (
+     'l2u' => 'tr/a-z/A-Z/',
+     'u' => 'tr/a-z/A-Z/',
+     'u2l' => 'tr/A-Z/a-z/',
+     'l' => 'tr/A-Z/a-z/',
+     'rot13' => 'tr/A-Za-z/N-ZA-Mn-za-m/',
+     'sh-1' => 'tr/B-ZAb-za/A-Za-z/',
+     'sh+1' => 'tr/A-Za-z/B-ZAb-za/',
+     );
+
+while (@ARGV) {
+    $_ = shift(@ARGV);
+    if (/^--/) {
+	if (/^--$/) {
+	    push(@files, @ARGV);
+	    last;
+	} elsif (/^--(.*)$/ && $expr{$1}) {
+	    push(@expr, $expr{$1});
+	}
+    } elsif (/^-/) {
+	$test  = 1 if (/t/);
+	$force = 1 if (/f/);
+	$help  = 1 if (/h/);
+    } else {
+	push(@files, $_);
+    }
+}
+
+if (@expr == 0) {
+    $op = shift(@files);
+    push(@expr, $op);
+}
+
+if ($help || @files == 0) {
+    die "Usage: $0 [-t|-f|-h] perlexpr [filenames]\n" ;
+}
+
+#if (!@ARGV) {
+#    @ARGV = <STDIN>;
+#    chop(@ARGV);
+#}
+
+foreach (@files) {
+    next unless (-e $_);
+    $was = $_;
+    foreach $op (@expr) {
+	eval $op;
+    }
+    die $@ if $@;
+    unless ($was eq $_) {
+	if ($force || !(-e $_)) {
+	    rename($was, $_) unless ($test);
+	    print "$was --> $_\n";
+	} else {
+	    print "$was --> $_ : not renamed, since file exists\n";
+	}
+    }
+}

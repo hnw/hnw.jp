@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+
+$sleep_period = 3;     # 何秒に1回様子を見るか
+$hoge_period = 200;    # 何秒に1回ほげを出すか
+$hoge_str = "\a"; # ほげの内容
+
+$| = 1; # buffering禁止
+
+my ($i);
+while (1) {
+    if ((! -t STDOUT) || (getppid() == 1)) {
+	# 親プロセスがいないのに死なない設定のマシンに対処
+	exit;
+    }
+
+    sleep($sleep_period);
+    $i += $sleep_period;
+
+    if ($i >= $hoge_period) {
+	print STDOUT $hoge_str;
+	$i -= $hoge_period;
+    }
+}

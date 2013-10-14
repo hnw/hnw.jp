@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<title>comment test</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<font size=6><strong>test page of handling &lt;!-- --&gt; for your browser</strong></font>
+
+<hr>
+<p>
+ &lt;!--&gt; your browser handles HTML comment incorrectly ! --&gt;
+</p>
+<p>
+<!--> your browser handles HTML comment incorrectly ! -->
+</p>
+<hr>
+<p>
+ &lt;!---&gt; your browser handles HTML comment incorrectly ! --&gt;
+</p>
+<p>
+<!---> your browser handles HTML comment incorrectly ! -->
+</p>
+<hr>
+<p>
+ &lt;!----&gt; your browser handles HTML comment correctly ! --&gt;
+</p>
+<p>
+<!----> your browser handles HTML comment correctly ! -->
+</p>
+<hr>
+<p>
+ &lt;! --&gt; your browser handles SGML mark declaration correctly (I think) --&gt;
+</p>
+<p>
+<! --> your browser handles SGML mark declaration correctly (I think) -->
+</p>
+<hr>
+<p>
+ &lt;! -&gt; your browser handles SGML mark declaration correctly (I think) --&gt;
+</p>
+<p>
+<! -> your browser handles SGML mark declaration correctly (I think) -->
+</p>
+<hr>
+
+Mail to:
+<address>
+<strong>hanawa
+<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</strong>
+</address>
+
+<hr>
+</body>
+</html>

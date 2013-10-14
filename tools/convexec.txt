@@ -1,0 +1,215 @@
+  convexec: convert cygwin-path to win32-path and execute command
+                     Copyright (c) 2000 hanawa <ginza5432@geocities.com>
+
+  歴史
+
+    2000/05/07 ver 0.01  作ってみた
+    2000/05/18 ver 0.02  -s をつけてみた
+    2001/02/07           このドキュメントに追記
+
+
+  概要
+
+    convexecは、CygwinのパスをWin32のパスに変換することで、
+    CygwinのシェルからWin32のツールを使いやすくするプログラムです。
+    シェルのエイリアス機能を使うことを想定しています。
+
+    たとえば、bash から start /usr/local/src/ なんてやっても、
+    思った通りにエクスプローラが開いたりはしません。
+    なぜなら、(1)パスの区切り記号が違う、(2)cygwinの/はwindowsから
+    見ると妙なところにある、などの理由からです。
+
+    このように、windowsのプログラムをcygwinから使おうと思うと
+    多少トラブルが起きます。
+    これをなんとかするのがconvexecの目的です。
+
+    ただし、このプログラムは大げさすぎるのも確かで、
+    実は簡単なシェルスクリプトで十分な状況がほとんどです。
+    藤枝さんにcygwin-MLで教わったスクリプトをこのドキュメントの
+    付録で紹介してありますので、そちらもご覧下さい。
+
+
+  しくみ
+
+    cygwin1.dll には cygwin_conv_to_win32_path() という、
+    パスの変換ができそうな関数があります。これを呼んでいるだけです。
+    一見うまく動いていますが、DLLを覗いていて見つけただけなので、
+    使い方が合っているかどうかは知りません。
+
+
+  使用環境
+
+    Windows2000+Cygwin1.1でしか動作確認していませんが、
+    基本的にCygwinが動いている環境ならどこでも動くと思います。
+    添付のバイナリはCygwin1.1でコンパイルしたものですので、
+    もし動かなかった場合はコンパイルしなおしてください。
+
+
+  使用方法
+
+    usage: convexec.exe [options]... command [...]
+
+    command以降の引数をつけて、commandを実行します。
+    この際、引数がURLであればそのまま保存され、
+    URLでない引数はwindowsのパスに変換されます。
+    （変換されても'/'を含んでいない引数はそのままです）
+
+    オプション一覧:
+      -h, --help                     ヘルプを表示します
+      -V, --version                  バージョンを表示します
+      -c, --change-opt-char          引数が'-'で始まっていたら'/'に変換します
+      -n, --noconv=NUMBER            NUMBER 番目までの引数は変換しません
+                                     (コマンド名を含みます; デフォルト値1)
+      -n, --noconv=WORD[,WORD,...]   WORDと一致する引数は変換しません
+      -s, --separator=STR            STRの全文字を区切り文字として変換します
+      -i, --ignore-case              --noconv=WORDの大小文字を同一視します
+      -q, --quiet                    黙って実行します（デフォルト）
+      -v, --verbose                  実行するコマンドを表示します
+      -d, --debug                    コマンドを実行せずに変換結果を表示します
+
+
+  使用例
+
+    次のようにマウントしている環境で、
+    ----------
+    $ mount
+    Device              Directory           Type         Flags
+    c:                  /                   system       binmode
+    c:\cygwin\bin       /bin                system       binmode
+    c:\cygwin\etc       /etc                system       binmode
+    c:\cygwin\usr       /usr                system       binmode
+    c:\local            /usr/local          system       binmode
+    d:                  /cdrom              system       binmode
+    ----------
+    お好みのエディター(仮に/WINNT/system32/notepad.exeだとします）について、
+    エイリアスを作ってみることにします。
+    ----------
+    $ alias notepad='convexec /WINNT/system32/notepad.exe'
+    ----------
+    または（tcshの場合）
+    ----------
+    % alias notepad convexec /WINNT/system32/notepad.exe
+    ----------
+    とすれば、'notepad /usr/local/src/readme.txt'で
+    c:\local\src\readme.txtを編集することができます。
+
+    次に、convexecをBorland C++ Compiler のリンカilink32に使ってみます。
+    ilink32では、
+    ----------
+    $ ilink32 c0w32.obj tes.obj,tes.exe,,cw32.lib import32.lib,,tes.res
+    ----------
+    のように、意味的なセパレータとして','を使っています。
+    このため、このままでは引数に含まれるパスをうまく変換できません。
+    ----------
+    $ alias ilink32='convexec -s, /apps/Borland/bcc55/bin/ilink32'
+    ----------
+    とすれば、セパレータで区切られたトークンごとにパスの変換を行います。
+
+    さらにconvexecをstartコマンドに使ってみます。WindowsNTならば、
+    ----------
+    $ alias start='convexec -n3 cmd /c start'
+    ----------
+    Windows9xならば
+    ----------
+    $ alias start='convexec start'
+    ----------
+    とすることで、それっぽく動くstartコマンドができます。
+    （URLならば変換を行わないので、URLを開くこともできます）
+    ただし、このままでは'start /wait /readme.html'などとすると、'/wait'が
+    'c:\wait'などと変換されてしまいます。
+
+    このような場合のために、convexecには2種類のオプションが用意されています。
+    第一は-c/--change-opt-charオプションで、これを指定すると'-'で始まる引数は
+    '/'で始まるように変換されます。
+    ----------
+    $ alias start='convexec -c start'
+    ----------
+    として、'start -wait /readme.html'と打てば'start /wait c:\readme.html'
+    と変換されて実行されます。
+
+    第二は-n/--noconv=WORDオプションです。これは、WORDで指定された文字列を
+    変換対象から外します。
+    ----------
+    $ alias start='convexec -i -n/b,/d,/i,/min,/max,/separate,/shared \
+    > -n/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? \
+    > start'
+    ----------
+    として、'start /wait /readme.html'と打てば'start /wait c:\readme.html'
+    と変換されて実行されます。
+
+
+  仕様（バグに非ず）
+
+    上のstartの2つ目の例（--noconv=WORDのもの）は、NT上で問題があります。
+    ----------
+    $ alias start='convexec -i -n3 -n/b,/d,/i,/min,/max,/separate,/shared \
+    > -n/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? \
+    > cmd /c start'
+    ----------
+    として'start /Program\ Files/'と打つと、
+    エクスプローラで'c:\Program Files\'が開かれると思いきや、
+    'c:\Program Files\'というタイトルのNTコンソールが現れます。
+    これはcmd.exeが空白の入った文字列を'"c:\Program Files\"'というように
+    ""でクォーテーションしてしまい、startコマンドにウインドウのタイトルと
+    解釈されてしまうためです。
+
+    何とかしたいのですが、cmd.exe上でこのようなディレクトリをstartさせるときも
+    途方に暮れるわけですから(*1)、仕様ということにします。
+    何とかするためにはもう少しましなstartが必要です。
+
+    *1: cmd.exe上で'start "" "c:\Program Files\"'などと、
+        タイトルを明示的に指定すれば目的が達成できます。
+        すなわち、bash/tcshならば'start \"\" /Program\ Files/'とやればOKです。
+
+    解決と言えるかどうかわかりませんが、
+    ----------
+    $ alias start='convexec -i -n4 -n/b,/d,/i,/min,/max,/separate,/shared \
+    > -n/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? \
+    > cmd /c start ""'
+    ----------
+    としてもよいでしょう。
+    タイトルを""から他に変える方法がなくなりますが、
+    作者はこれで満足しています。
+
+
+  ライセンス
+
+    GPLにする必要があるらしいのでGPL。
+
+
+  免責
+
+    何かあっても何も責任は取れません。
+    各自の責任で使ってください。
+
+
+  謝辞
+
+    TAGA Nayuta <nayuta@i.am> さん: is_URL() を頂きました。感謝。
+
+
+  付録
+
+    以下は、藤枝さんにcygwin-MLで教わったスクリプトを
+    自分用に簡単にしたものです。
+    /usr/local/bin/startに置いて、便利に使っています。
+
+    ----------
+    #!/bin/sh
+    
+    if [ -f "$1" ]
+    then
+    	arg=`cygpath -w "$1"`
+    else
+    	arg="$1"
+    fi
+    
+    case `uname` in
+    *NT*)
+    	cmd /c start "$arg"
+    	;;
+    *)
+    	/windows/comand/start start "$arg"
+    	;;
+    esac
+    ----------

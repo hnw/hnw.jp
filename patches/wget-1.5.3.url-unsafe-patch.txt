@@ -1,0 +1,19 @@
+*** wget-1.5.3/src/url.c~	Fri Sep 11 09:23:26 1998
+--- wget-1.5.3/src/url.c	Fri Dec 10 17:50:13 1999
+***************
+*** 56,62 ****
+     encoding, and \033 for safe printing.  */
+  
+  #ifndef WINDOWS
+! # define URL_UNSAFE " <>\"#%{}|\\^~[]`@:\033"
+  #else  /* WINDOWS */
+  # define URL_UNSAFE " <>\"%{}|\\^[]`\033"
+  #endif /* WINDOWS */
+--- 56,62 ----
+     encoding, and \033 for safe printing.  */
+  
+  #ifndef WINDOWS
+! # define URL_UNSAFE " <>\"#%{}|\\^[]`\033"
+  #else  /* WINDOWS */
+  # define URL_UNSAFE " <>\"%{}|\\^[]`\033"
+  #endif /* WINDOWS */

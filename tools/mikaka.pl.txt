@@ -1,0 +1,243 @@
+#!/usr/local/bin/perl
+#
+# mikaka.pl - mikaka-encryption/decryption program
+#   by hanawa <ginza5432@geocities.com>
+#
+#  version 0.01: initial version
+#
+
+# !"#$%&'()*+,-./0123456789:;<=>?@
+# ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`
+# abcdefghijklmnopqrstuvwxyz{|}~
+
+$ntt  = '!"#$%&\'()*+,-./0123456789:;<=>?@';
+$ntt .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`';
+$ntt .= 'abcdefghijklmnopqrstuvwxyz{|}~';
+@ntt = ($ntt =~ /./g);
+
+# $mkk   = 'ÅIÅhÇüÇ£Ç•ÇßÇ·Ç„ÇÂÅñÅ{ÇÀÇŸÇÈÇﬂÇÌÇ Ç”Ç†Ç§Ç¶Ç®Ç‚Ç‰ÇÊÇØÇÍÅAÅÅÅBÅEÅJ';
+# $mkk  .= 'É`ÉRÉ\ÉVÉCÉnÉLÉNÉjÉ}ÉmÉäÉÇÉ~ÉâÉZÉ^ÉXÉgÉJÉiÉqÉeÉTÉìÉcÅKÅ[ÇﬁÇ÷ÇÎÅe';
+# $mkk  .= 'ÇøÇ±ÇªÇµÇ¢ÇÕÇ´Ç≠Ç…Ç‹ÇÃÇËÇ‡Ç›ÇÁÇπÇΩÇ∑Ç∆Ç©Ç»Ç–ÇƒÇ≥ÇÒÇ¬ÅuÅbÅvÇ';
+
+$mkks  = "\x81\x49\x81\x68\x82\x9f\x82\xa3\x82\xa5\x82\xa7\x82\xe1\x82\xe3";
+$mkks .= "\x82\xe5\x81\x96\x81\x7b\x82\xcb\x82\xd9\x82\xe9\x82\xdf\x82\xed";
+$mkks .= "\x82\xca\x82\xd3\x82\xa0\x82\xa4\x82\xa6\x82\xa8\x82\xe2\x82\xe4";
+$mkks .= "\x82\xe6\x82\xaf\x82\xea\x81\x41\x81\x81\x81\x42\x81\x45\x81\x4a";
+
+$mkks .= "\x83\x60\x83\x52\x83\x5c\x83\x56\x83\x43\x83\x6e\x83\x4c\x83\x4e";
+$mkks .= "\x83\x6a\x83\x7d\x83\x6d\x83\x8a\x83\x82\x83\x7e\x83\x89\x83\x5a";
+$mkks .= "\x83\x5e\x83\x58\x83\x67\x83\x4a\x83\x69\x83\x71\x83\x65\x83\x54";
+$mkks .= "\x83\x93\x83\x63\x81\x4b\x81\x5b\x82\xde\x82\xd6\x82\xeb\x81\x65";
+
+$mkks .= "\x82\xbf\x82\xb1\x82\xbb\x82\xb5\x82\xa2\x82\xcd\x82\xab\x82\xad";
+$mkks .= "\x82\xc9\x82\xdc\x82\xcc\x82\xe8\x82\xe0\x82\xdd\x82\xe7\x82\xb9";
+$mkks .= "\x82\xbd\x82\xb7\x82\xc6\x82\xa9\x82\xc8\x82\xd0\x82\xc4\x82\xb3";
+$mkks .= "\x82\xf1\x82\xc2\x81\x75\x81\x62\x81\x76\x82\xf0";
+
+
+$mkke  = "\xa1\xaa\xa1\xc9\xa4\xa1\xa4\xa5\xa4\xa7\xa4\xa9\xa4\xe3\xa4\xe5";
+$mkke .= "\xa4\xe7\xa1\xf6\xa1\xdc\xa4\xcd\xa4\xdb\xa4\xeb\xa4\xe1\xa4\xef";
+$mkke .= "\xa4\xcc\xa4\xd5\xa4\xa2\xa4\xa6\xa4\xa8\xa4\xaa\xa4\xe4\xa4\xe6";
+$mkke .= "\xa4\xe8\xa4\xb1\xa4\xec\xa1\xa2\xa1\xe1\xa1\xa3\xa1\xa6\xa1\xab";
+
+$mkke .= "\xa5\xc1\xa5\xb3\xa5\xbd\xa5\xb7\xa5\xa4\xa5\xcf\xa5\xad\xa5\xaf";
+$mkke .= "\xa5\xcb\xa5\xde\xa5\xce\xa5\xea\xa5\xe2\xa5\xdf\xa5\xe9\xa5\xbb";
+$mkke .= "\xa5\xbf\xa5\xb9\xa5\xc8\xa5\xab\xa5\xca\xa5\xd2\xa5\xc6\xa5\xb5";
+$mkke .= "\xa5\xf3\xa5\xc4\xa1\xac\xa1\xbc\xa4\xe0\xa4\xd8\xa4\xed\xa1\xc6";
+
+$mkke .= "\xa4\xc1\xa4\xb3\xa4\xbd\xa4\xb7\xa4\xa4\xa4\xcf\xa4\xad\xa4\xaf";
+$mkke .= "\xa4\xcb\xa4\xde\xa4\xce\xa4\xea\xa4\xe2\xa4\xdf\xa4\xe9\xa4\xbb";
+$mkke .= "\xa4\xbf\xa4\xb9\xa4\xc8\xa4\xab\xa4\xca\xa4\xd2\xa4\xc6\xa4\xb5";
+$mkke .= "\xa4\xf3\xa4\xc4\xa1\xd6\xa1\xc3\xa1\xd7\xa4\xf2";
+
+
+# !!""##$$%%&&''(())**++nehorumewanufuaauueeooyayuyokere<<==>>??@@
+# TiKoSoSiIiHaKiKuNiMaNoRiMoMiRaSeTaSuToKaNaHiTeSaNNTu[]--muhero``
+# tikososiiihakikunimanorimomirasetasutokanahitesanntu{{||}}wo
+
+$ido  = '!!""##$$%%&&\'\'(())**++nehorumewanufuaauueeooyayuyokere<<==>>??@@';
+$ido .= 'TiKoSoSiIiHaKiKuNiMaNoRiMoMiRaSeTaSuToKaNaHiTeSaNNTu[]--muhero``';
+$ido .= 'tikososiiihakikunimanorimomirasetasutokanahitesanntu{{||}}wo';
+
+# $den  = 'ã¡ÅhÅîÅêÅìÅïÅfÅiÅjÅñÅ{ç™îøóØèóó÷îGïsàüâFäGâòñÁìíó\åUòAÅAìØÅBì‰íP';
+# $den .= 'ímå≈ëaéçà…î™óàãÂìÛînîTóòñŒñ§óÖê¢ëΩëÉåÀâ¡ìﬂî‰éËçºâ_íƒä€ñ_ñ≥õõòFÅe';
+# $den .= 'ípå√ëeéÄàÕîhäÈãÊéóñÇî]óùñÕñ°óáê£ëºëfìhâ¬ìﬁî€í‚ç∑â^í«ÅuÅbÅvîˆ';
+
+$dens  = "\x8b\xc1\x81\x7e\x81\x7e\x81\x7e\x81\x7e\x81\x7e\x81\x7e\x81\x7e";
+$dens .= "\x81\x7e\x81\x7e\x81\x7e\x8d\xaa\x94\xbf\x97\xaf\x8f\x97\x97\xd6";
+$dens .= "\x94\x47\x95\x73\x88\x9f\x89\x46\x8a\x47\x89\x98\x96\xe7\x93\x92";
+$dens .= "\x97\x5c\x8c\x55\x98\x41\x81\x7e\x93\xaf\x81\x7e\x93\xe4\x92\x50";
+
+$dens .= "\x92\x6d\x8c\xc5\x91\x61\x8e\x8d\x88\xc9\x94\xaa\x97\x88\x8b\xe5";
+$dens .= "\x93\xf3\x94\x6e\x94\x54\x97\x98\x96\xce\x96\xa4\x97\x85\x90\xa2";
+$dens .= "\x91\xbd\x91\x83\x8c\xcb\x89\xc1\x93\xdf\x94\xe4\x8e\xe8\x8d\xbc";
+$dens .= "\x89\x5f\x92\xc4\x8a\xdb\x96\x5f\x96\xb3\x9b\x9b\x98\x46\x81\x7e";
+
+$dens .= "\x92\x70\x8c\xc3\x91\x65\x8e\x80\x88\xcd\x94\x68\x8a\xe9\x8b\xe6";
+$dens .= "\x8e\x97\x96\x82\x94\x5d\x97\x9d\x96\xcd\x96\xa1\x97\x87\x90\xa3";
+$dens .= "\x91\xbc\x91\x66\x93\x68\x89\xc2\x93\xde\x94\xdb\x92\xe2\x8d\xb7";
+$dens .= "\x89\x5e\x92\xc7\x81\x7e\x81\x7e\x81\x7e\x94\xf6";
+
+$dene  = "\xb6\xc3\xa1\xdf\xa1\xdf\xa1\xdf\xa1\xdf\xa1\xdf\xa1\xdf\xa1\xdf";
+$dene .= "\xa1\xdf\xa1\xdf\xa1\xdf\xba\xac\xc8\xc1\xce\xb1\xbd\xf7\xce\xd8";
+$dene .= "\xc7\xa8\xc9\xd4\xb0\xa1\xb1\xa7\xb3\xa8\xb1\xf8\xcc\xe9\xc5\xf2";
+$dene .= "\xcd\xbd\xb7\xb6\xcf\xa2\xa1\xdf\xc6\xb1\xa1\xdf\xc6\xe6\xc3\xb1";
+			
+$dene .= "\xc3\xce\xb8\xc7\xc1\xc2\xbb\xed\xb0\xcb\xc8\xac\xcd\xe8\xb6\xe7";
+$dene .= "\xc6\xf5\xc7\xcf\xc7\xb5\xcd\xf8\xcc\xd0\xcc\xa6\xcd\xe5\xc0\xa4";
+$dene .= "\xc2\xbf\xc1\xe3\xb8\xcd\xb2\xc3\xc6\xe1\xc8\xe6\xbc\xea\xba\xbe";
+$dene .= "\xb1\xc0\xc4\xc6\xb4\xdd\xcb\xc0\xcc\xb5\xd5\xfb\xcf\xa7\xa1\xdf";
+			
+$dene .= "\xc3\xd1\xb8\xc5\xc1\xc6\xbb\xe0\xb0\xcf\xc7\xc9\xb4\xeb\xb6\xe8";
+$dene .= "\xbb\xf7\xcb\xe2\xc7\xbe\xcd\xfd\xcc\xcf\xcc\xa3\xcd\xe7\xc0\xa5";
+$dene .= "\xc2\xbe\xc1\xc7\xc5\xc9\xb2\xc4\xc6\xe0\xc8\xdd\xc4\xe4\xba\xb9";
+$dene .= "\xb1\xbf\xc4\xc9\xa1\xdf\xa1\xdf\xa1\xdf\xc8\xf8";
+
+foreach (@ntt) {
+    $mkks =~ /(..)/g;
+    $mkk2ntt{$1} = $_;
+    $ntt2mkk{$_} = $1;
+    push(@mkk, $1);
+
+    $mkke =~ /(..)/g;
+    $mkke2ntt{$1} = $_;
+    $ntt2mkke{$_} = $1;
+    push(@mkke, $1);
+
+    $ido =~ /(..)/g;
+    $rev = reverse($1);
+    $ido2ntt{$1} = $_;
+    $ntt2ido{$_} = $1;
+    $revido2ntt{$rev} = $_;
+    $ntt2revido{$_} = $rev;
+    push(@ido, $1);
+    push(@revido, $rev);
+
+    $dens =~ /(..)/g;
+    $den2ntt{$1} = $_;
+    $ntt2den{$_} = $1;
+    push(@den, $1);
+
+    $dene =~ /(..)/g;
+    $dene2ntt{$1} = $_;
+    $ntt2dene{$_} = $1;
+    push(@dene, $1);
+}
+
+sub match_all_str {
+    my ($hash, $str) = @_;
+    while ($str =~ /(..)/g) {
+        if (!defined($hash->{$1})) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+sub convert2 {
+    my ($hash, $str) = @_;
+    my (@array);
+    while ($str =~ /(..)/g) {
+        push(@array, $hash->{$1});
+    }
+    return join('', @array);
+}
+
+sub convert1 {
+    my ($hash, $str) = @_;
+    my (@array);
+    while ($str =~ /(.)/g) {
+        push(@array, $hash->{$1});
+    }
+    return join('', @array);
+}
+
+sub split_dakuten {
+    ($str) = @_;
+    # SJIS
+    $str =~ s/\x82([\xaa\xac\xae\xb0\xb2\xb4\xb6\xb8\xba\xbc\xbe\xc0\xc3\xc5\xc7\xce\xd1\xd4\xd7\xda])/pack("C4", 0x82, ord($1)-1, 0x81, 0x4a)/eg;
+    $str =~ s/\x82([\xcf\xd2\xd5\xd8\xdb])/pack("C4", 0x82, ord($1)-2, 0x81, 0x4b)/eg;
+
+    # EUC
+    $str =~ s/\xa4([\xac\xae\xb0\xb2\xb4\xb6\xb8\xba\xbc\xbe\xc0\xc2\xc5\xc7\xc9\xd0\xd3\xd6\xd9\xdc])/pack("C4", 0xa4, ord($1)-1, 0xa1, 0xab)/eg;
+    $str =~ s/\xa4([\xd1\xd4\xd7\xda\xdd])/pack("C4", 0xa4, ord($1)-2, 0xa1, 0xac)/eg;
+    
+    return $str;
+}
+
+sub join_dakuten {
+    ($str) = @_;
+    # SJIS
+    $str =~ s/\x82([\xa9\xab\xad\xaf\xb1\xb3\xb5\xb7\xb9\xbb\xbd\xbf\xc2\xc4\xc6\xcd\xd0\xd3\xd6\xd9])\x81\x4a/pack("C2", 0x82, ord($1)+1)/eg;
+    $str =~ s/\x82([\xcd\xd0\xd3\xd6\xd9])\x81\x4b/pack("C2", 0x82, ord($1)+2)/eg;
+
+    # EUC
+    $str =~ s/\xa4([\xa9\xab\xad\xaf\xb1\xb3\xb5\xb7\xb9\xbb\xbd\xbf\xc2\xc4\xc6\xcd\xd0\xd3\xd6\xd9])\xa1\xab/pack("C2", 0xa4, ord($1)+1)/eg;
+    $str =~ s/\xa4([\xcf\xd2\xd5\xd7\xdb])\xa1\xac/pack("C2", 0xa4, ord($1)+2)/eg;
+
+    return $str;
+}
+
+use Getopt::Long;
+
+%opt =
+    (
+     'dakuten'            => \$opt_dakuten,
+     'help|h'             => \$opt_help,
+     'version|v'          => \$opt_version,
+
+     'euc'                => \$opt_euc,
+     'sjis'               => \$opt_sjis,
+
+     'ntt'                => \$opt_help,
+     'mkk|mikaka'         => \$opt_help,
+     'ido'                => \$opt_help,
+     'revido|reverse-ido' => \$opt_help,
+     'den|denden'         => \$opt_help,
+     
+    );
+
+Getopt::Long::Configure("bundling", "no_ignore_case");
+
+&GetOptions(%opt);
+
+if (@ARGV) {
+    foreach (@ARGV) {
+        print &convert($_), "\n";
+    }
+} else {
+    while (<>) {
+        print &convert($_), "\n";
+    }
+}
+
+sub convert {
+    my($str) = @_;
+    if ($str =~ /[\x80-\xff]/ && $opt_dakuten) {
+        $str = &split_dakuten($str);
+    }
+
+    if (&match_all_str(\%mkk2ntt, $str)) {
+        return &convert2(\%mkk2ntt, $str);
+    } elsif (&match_all_str(\%mkke2ntt, $str)) {
+        return &convert2(\%mkke2ntt, $str);
+    } elsif (&match_all_str(\%ido2ntt, $str)) {
+        return &convert2(\%ido2ntt, $str);
+    } elsif (&match_all_str(\%revido2ntt, $str)) {
+        return scalar(reverse(&convert2(\%revido2ntt, $str)));
+    } elsif (&match_all_str(\%den2ntt, $str)) {
+        return &convert2(\%den2ntt, $str);
+    } elsif (&match_all_str(\%dene2ntt, $str)) {
+        return &convert2(\%dene2ntt, $str);
+    } elsif ($str !~ /[\x80-\xff]/) {
+	if ($opt_euc) {
+	    $ret = &convert1(\%ntt2mkke, $str);
+	} else {
+	    $ret = &convert1(\%ntt2mkk, $str);
+	}
+        if ($opt_dakuten) {
+	    $ret = &join_dakuten($ret);
+        }
+	return $ret;
+    }
+}

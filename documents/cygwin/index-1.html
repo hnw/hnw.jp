@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<link rev="MADE" href="mailto:y@hnw.jp">
+<title>Unix-taste Windows life with Cygwin 1.1</title>
+</head>
+<body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
+      vlink="#000000" alink="#ffffff">
+
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+<hr>
+
+<font size=6><strong>Cygwin 1.1でUNIX気分の窓生活</strong></font>
+
+<p>
+Windowsを使っているUNIX野郎なら名前くらいは聞いたことがあるであろうCygwin。
+筆者もb20.1を長らく使っていたが、
+Cygwin 1.1を使ってみて、
+以前よりは期待できるものに仕上がりつつあると感じた。
+まだまだ不満は残るが、そろそろ他人に薦めてもいい頃合かもしれない。
+</p>
+<p>
+これは、そんな筆者によるメモです。
+かなり不親切な部類だと思いますので、
+今までCygwinを使ったこともないという方は、
+基本的にはよそのページを参考にするのがいいと思います。
+申し訳ありませんが、自分用のメモ＋αですので、この程度が限界です。
+よそと違った視点から役に立つページができればと考えています。
+</p>
+<p>
+意見・質問等のメールは大歓迎ですが、
+時間的・能力的に期待に沿えるとは限りませんのであしからず。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="intro"      >はじめに</a></strong></font>
+
+<p>
+Cygwinというのは、UNIXのシステムコールを実現するようなWindowsのDLLを提供し、
+UNIXのソースを変更なしにコンパイルして、
+Windows上で動くバイナリを作れるようにしよう、
+というプロジェクトです。
+gccはもちろんbashやtcshやlessなど、多くのツールがWindows上で動きます。
+</p>
+<p>
+インストールする前にまず検討すべきことは、
+自分にとって本当にCygwinが必要なのかどうか、ということです。
+VMware+Linux+sambaとか、
+WindowsのX Server+別のUNIXマシン+sambaなど、
+Windowsから（本物の）UNIXを使える環境の方が
+Cygwin環境より優れた点は少なからずあります。
+実現したいことによっては、
+むしろそちらの方が目的に合っている場合もあるでしょう。
+また、tcshなどはWin32にportされていますので、
+そういったツールを使うという選択肢もあります。
+私なりにこれら3つを比較してみますと、
+</p>
+    <ul>
+      <li> <strong>UNIXをWindowsから使う</strong>
+        <ul>
+          <li> 大抵のツールが使える
+          <li> メンテナンスのコストは低い（のではないか）
+
+          <li> VMWareや、多くのX serverは有料である
+          <li> マシン環境が充実している必要がある
+          <li> UNIXからWindowsのファイルを扱う気はしない<br>
+               （rumba/Sharityを使えば快適なのかもしれないが、
+               筆者の周りでは例がないのでわからない）
+
+        </ul>
+          <strong>ターゲット：Windows上の仕事とUNIX上の仕事がかなり独立な人</strong><br>
+          （基本的にUNIXメインで、IE&OfficeのためだけにWindowsを使う、など）
+    </ul>
+    <ul>
+      <li> <strong>WindowsにportされたUNIXツールを使う</strong>
+        <ul>
+          <li> おそらくWin32ツールとの親和性が考えられたものが多い
+          <li> おそらくバイナリで提供されるので、インストールが簡単
+
+          <li> 必要なものがportされているとは限らない
+          <li> pathや端末の扱いなどが統一的にportされているとは限らない
+          <li> hackしようと思ったらおそらくCygwin環境より面倒
+        </ul>
+          <strong>ターゲット：Windowsでの仕事にUNIXのコマンドが必要な人</strong><br>
+    </ul>
+    <ul>
+      <li> <strong>Cygwinを使う</strong>
+        <ul>
+          <li> 多くのツールが使える
+          <li> gccがある
+
+          <li> インストールが面倒
+          <li> POSIX風pathのせいで、Cygwin以外のツールとの親和性に難がある
+          <li> まだまだ開発中（普段使う気になる程度に安定しているが）
+          <li> 情報が少ない（ユーザーが少ない）
+        </ul>
+          <strong>ターゲット：Windowsでの仕事にUNIXのコマンドが必要な人</strong><br>
+          （かつ、Win32へポートされたUNIXツールでは駄目だ、という理由のある人）<br>
+    </ul>
+<p>
+といったことが言えるでしょう。
+理想としては、UNIXをWindowsから使いつつ、
+Windows上での仕事のためにWin32にportされたUNIXツールを併用する、
+という環境が素晴らしいと思います。
+たとえどちらもCygwinだけでできたとしても、
+UNIX上で完結させられることはUNIXでやる方が安心ですし、
+UNIXソースをCygwinでコンパイルしたものより、
+portされたツールの方が水準が高いものであるのが普通だと思いますから。
+そういう意味でCygwinは妥協の産物であり、
+どっちつかずな代物だと思います。
+</p>
+<p>
+しかし、自分のお気に入り全てがWin32にportされるわけはないですし、
+独立にportされて統一性のないツールを使うのは苦痛ですので、
+その意味ではUNIX+(X server || VMWare)+Cygwinが
+現実的には最も素晴らしい環境なのではないでしょうか。
+また、UNIXが手近にないという場合には、
+CygwinによるUNIXもどきの環境が便利なこともあるでしょう。
+</p>
+<p>
+もっとも、導入のコストと得られるメリットとの間にはトレードオフがありますから、
+たとえCygwinに魅力を感じたとしても、
+Cygwinをインストールするのがreasonableだとは限りません。
+Cygwin 1.1になって非常に出来が良くなってきており、
+導入することは全ての人にとってメリットがあるとは思いますが、
+正直なところ、
+もう少し簡単に使えるようにならないと
+Cygwinが市民権を勝ち取るのは難しい気がします。
+</p>
+<p>
+ちなみに筆者は上の3分類全てを併用している状態です。
+コンソールアプリはCygwinで統一できたら幸せだと思うんですが、
+TeXってCygwinで作れるんですかね？
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="install">ダウンロード</a></strong></font>
+
+<p>
+不親切なことに、必要なブツは
+ftp://sourceware.cygnus.com/pub/cygwin/latest/
+の下のサブディレクトリに小分けにtar.gzで固まっています。
+ここはいつも混んでいるので、ミラーサイトから落とした方がいいでしょう。
+</p>
+<p>
+setup.exeだけを落とせばネットワークインストールできるようですけど、
+私はCD-Rに焼くために、latestの下全部をUNIXマシンで落としました。
+</p>
+<pre>----------
+$ wget -Yoff -r -R\*-src.tar.gz ftp://sourceware.cygnus.com/pub/cygwin/latest/
+----------</pre>
+<p>
+などと打って放っておいただけです（*-src.tar.gzというのはソースです）。
+<!--
+ソース込みで落としたところ、80Mほどでした。
+せっかくmd5がついてきてるので、各ディレクトリで md5sum -c md5.sum を実行してみたり。
+ -->
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="install">インストール</a></strong></font>
+
+<p>
+インストールする前に、どういうポリシーでインストールするか、
+どうすれば使いやすいかを考えるべきでしょう。
+Cygwinをc:\cygwinにインストールして、それを/にマウントする、
+などという人もいるようですが、
+Cygwin以外のツールを使うときに混乱の元になると思います。
+やはり、c:\（または一番よく使うドライブのルート）を/にするべきでしょう。
+</p>
+<p>
+で、私の取ったポリシーを説明します。
+</p>
+    <ul>
+      <li> c:\ を / にする。
+      <li> c:\cygwinにCygwin1.1をインストールして、
+           その下のc:\cygwin\{bin,etc,usr}をそれぞれ/{bin,etc,usr}にマウント。
+      <li> c:\localを作り、/usr/localにマウント。
+      <li> d:\を/cdromにマウント。
+    </ul>
+<p>
+以上、
+</p>
+<pre>----------
+$ mount -b -s c:/ /
+$ mount -b -s c:/cygwin/usr /usr
+$ mount -b -s c:/cygwin/bin /bin
+$ mount -b -s c:/cygwin/etc /etc
+$ mount -b -s c:/local /usr/local
+$ mount -b -s d:/ /cdrom
+----------</pre>
+<p>
+最初にwarningが出るのを気にしなければ、
+必ずしもマウントポイントを作る必要はありませんが、
+シェルのファイル名補完などで混乱しかねないので、
+マウントポイントは実際にあった方がいいと思います。
+</p>
+<p>
+/usr/localとしてc:\cygwin\usr\localを作らなかったのは、
+c:\cygwinの下にはcygnusから配られるものしか入れないようにして、
+自分でコンパイルしたものと混ざらないようにしよう、という意図です。
+Cygwin自体のインストール場所については、
+c:\{bin,usr,etc}にインストールした方がすっきりしたかもしれません。
+</p>
+
+<!--
+ふと気付くとtermcap-2.tar.gzができている。
+実はtermcap-1.tar.gzと同じ内容なのだが、
+termcap.tar.gzで文句を言っていた人には多少うれしいかもしれない。
+しかし、依然としてtermcapはいかれている。
+b20.1のときよりはましかもしれないが。
+-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="install">ツールのコンパイル</a></strong></font>
+
+    <ul>
+      <li> less-332+iso242
+
+<pre>----------
+$ tar xvzf less-332.tar.gz
+$ cd less-332
+$ patch &lt; ../less-332-iso242.patch
+$ ./configure
+(edit define.h)
+----------
+#define	DEFCHARSET	"japanese-sjis"
+#define HAVE_LOCALE 0
+----------
+$ make 2&gt;&amp;1 | tee make.log
+$ make install 2&gt;&amp;1 | tee install.log
+----------</pre>
+
+    </ul>
+ 
+<!--
+(01:48:58)[GANA] ./configure してから、
+(01:49:04)[GANA] config.h のおしりに
+(01:49:07)[GANA] #undef WINNT
+(01:49:07)[GANA] #define NEEDgethostname
+(01:49:20)[GANA] をつける。
+(01:49:55)[GANA] あと、tc.os.h の 85 行目に
+(01:49:59)[GANA]  || defined(__CYGWIN__)
+(01:50:02)[GANA] を追加だ。
+-->
+
+<!--
+BOOL is_url(const char *cmd) {
+  char *protocol;
+  const char *c;
+  HKEY hkey;
+  char buf[2];
+  DWORD type;
+  DWORD size;
+  c = strchr(cmd, ':');
+  size = c - cmd;
+  if (!c || size <= 1)
+	return FALSE;
+  protocol = (char *)heap_alloc(size + 2);
+  lstrcpyn(protocol, cmd, size+1);
+  protocol[size] = '\0';
+  
+  if (RegOpenKeyEx(HKEY_CLASSES_ROOT, protocol, 0, KEY_READ, &hkey)
+		  != ERROR_SUCCESS ) {
+	  heap_free(protocol);
+	  return FALSE;
+  }
+  heap_free(protocol);
+  
+  type = REG_SZ;
+  size = sizeof(buf);
+  if ( RegQueryValueEx(hkey, "URL Protocol", NULL, &type, (BYTE*)buf, &size)
+		  != ERROR_SUCCESS) {
+	  RegCloseKey(hkey);
+	  return FALSE;
+  }
+  RegCloseKey(hkey);
+  return TRUE;
+}
+-->
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="bookmarks"  >リンク集</a></strong></font>
+
+  <li> 
+  <ul>
+    <li><a href="http://sourceware.cygnus.com/cygwin/"
+	>Cygwin</a>
+	<a href="http://sourceware.cygnus.com/cygwin/download.html"
+	>[download]</a>
+	<a href="http://sourceware.cygnus.com/cygwin/snapshots/"
+	>[snapshot]</a><br>
+<br>
+    <li><a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
+	>Cygwin情報</a> Snapshot News<br>
+    <li><a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
+	>Cygwin 1.1 Information</a> 私に比べれば親切に書いていると思います（笑）<br>
+    <li><a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/"
+	>Using Cygwin.</a>
+	<a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/pre11.html"
+	>[Cygwin 1.1]</a><br>
+    <li><a href="http://www.netlaputa.ne.jp/%7Ekose/Software/compile/index.html"
+	>Compile ! (^.^)v</a><br>
+    <li><a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/cygwin32.htm"
+	>WindowsでUNIX? Cygnusのページ</a>
+	<a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/junixwin32.htm"
+	>[bookmarks]</a><br>
+    <li><a href="http://www.hm.aitai.ne.jp/~mtani/index.html"
+	>Binary Wiz</a><br>
+    <li><a href="http://www.kt.rim.or.jp/~ksk/gnu-win32/indexj.html"
+	>Cygwin のページ</a> Cygwin FAQ 日本語訳<br>
+    <li><a href="http://www.matsusaka-u.ac.jp/~okumura/c/"
+	>C，C++</a><br>
+    <li><a href="http://euler.math.s.chiba-u.ac.jp/~okada/gnu-win32/index.html"
+	>cygwin</a>
+	<a href="http://euler.math.s.chiba-u.ac.jp/~okada/mahojin/index.html"
+	>[魔方陣]</a> cygwinによる窓アプリの数少ない例<br>
+    <li><a href="http://www.ozawa.ics.keio.ac.jp/~kimura/"
+	>Kimura's Welcome Page</a> 割とまとまったメモ。行末LF。<br>
+  </ul>
+
+<hr><!-- ____________________________________________________________ -->
+
+Mail to:
+<address>
+<strong>hanawa
+<a href="mailto:y@hnw.jp">&lt;y@hnw.jp&gt;</a>
+</strong>
+</address>
+
+<hr>
+<a href="../../index.html">[home]</a>
+<a href="../index.html">[back]</a>
+
+</body>
+</html>
