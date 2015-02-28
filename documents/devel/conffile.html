@@ -1,11 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
-<title>$B@_Dj%U%!%$%k%U%)!<%^%C%H$NHf3S(B</title>
+<title>設定ファイルフォーマットの比較</title>
 </head>
 <body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
       vlink="#000000" alink="#ffffff">
@@ -16,49 +16,49 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>$B@_Dj%U%!%$%k%U%)!<%^%C%H$NHf3S(B</h1>
+<h1>設定ファイルフォーマットの比較</h1>
 
 <p>
-$B$^$:$O@_Dj%U%!%$%k$NJ,N`$r;n$_$k!#(B
+まずは設定ファイルの分類を試みる。
 </p>
 
 <ul>
-  <li>$B!VJQ?tL>!aCM!W$rMeNs!#(B2$B2s0J>eF1$8JQ?t$r=q$$$?>l9g!">e=q$-$^$?$OG[Ns$H$7$FDI5-!#(B
+  <li>「変数名＝値」を羅列。2回以上同じ変数を書いた場合、上書きまたは配列として追記。
     <ul>
       <li>.wgetrc</li>
       <li>php.ini</li>
     </ul>
   </li>
-  <li>1$B9T$4$H$KJ#?t8D$N@_Dj9`L\$r7h$^$C$?%U%)!<%^%C%H$G5-=R!#(B
+  <li>1行ごとに複数個の設定項目を決まったフォーマットで記述。
     <ul>
-      <li>inetd.conf$B!J%9%Z!<%96h@Z$j!K(B
-      <li>cron$B!J%9%Z!<%96h@Z$j!K(B
-      <li>/etc/fstab$B!J%9%Z!<%96h@Z$j!K(B
-      <li>/etc/passwd$B!J!V(B:$B!W6h@Z$j!K(B
+      <li>inetd.conf（スペース区切り）
+      <li>cron（スペース区切り）
+      <li>/etc/fstab（スペース区切り）
+      <li>/etc/passwd（「:」区切り）
     </ul>
   </li>
-  <li>$B4pK\E*$K!VJQ?tL>!aCM!W$@$,!"(B1$B!A(Bn$BCJ$^$G3,AX9=B$$,07$($k!#(B
+  <li>基本的に「変数名＝値」だが、1〜n段まで階層構造が扱える。
     <ul>
-      <li>Windows$B$N(Bini$B%U%!%$%k!J(B[abc]$B$N$h$&$K=q$/$3$H$G%V%m%C%/$,(B1$B$D:n$l$k!K(B
-      <li>xinetd.conf$B!J!V(B{$B!W$G%V%m%C%/$,:n$l$k!#(B1$BCJ!#!K(B
-      <li>ssh_config$B!J(BHost$B$G%V%m%C%/$r:n$l$k!#(B1$BCJ!#!K(B
-      <li>termcap$B!J(B1$BCJ!K(B
-      <li>XF86Config$B!J!V(BSection$B!W!V(BSubsection$B!W$J$I$G(B2$BCJ!K(B
+      <li>Windowsのiniファイル（[abc]のように書くことでブロックが1つ作れる）
+      <li>xinetd.conf（「{」でブロックが作れる。1段。）
+      <li>ssh_config（Hostでブロックを作れる。1段。）
+      <li>termcap（1段）
+      <li>XF86Config（「Section」「Subsection」などで2段）
     </ul>
   </li>
-  <li>XML($B$^$?$O(BXML$BIw(B)
+  <li>XML(またはXML風)
     <ul>
       <li>web.xml(Tomcat)</li>
-      <li>httpd.conf$B!J%G%#%l%/%F%#%V$K$h$C$F$O%F%-%9%HMWAG$K9T;V8~$GNs5s$7$?$j$9$k!#$$$$$H$3<h$j!)!K(B
+      <li>httpd.conf（ディレクティブによってはテキスト要素に行志向で列挙したりする。いいとこ取り？）
     </ul>
   </li>
-  <li>$B%W%m%0%i%_%s%08@8l(B
+  <li>プログラミング言語
     <ul>
       <li>.emacs</li>
       <li>.cshrc</li>
     </ul>
   </li>
-  <li>$B2?$@$+$h$/$o$+$i$J$$$b$N(B
+  <li>何だかよくわからないもの
     <ul>
       <li>sendmail.cf</li>
     </ul>

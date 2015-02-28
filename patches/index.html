@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <title>hanawa's patches</title>
 </head>
@@ -11,45 +11,45 @@
 <a href="../index.html">[home]</a>
 <hr>
 
-<font size=6><strong>10$BIC%Q%C%A(B</strong></font>
+<font size=6><strong>10秒パッチ</strong></font>
 
 <p>
-$B$F$-$H!<$K:n$i$l$?%Q%C%AC#!#>\:Y$O%Q%C%A;2>H!#(B
+てきとーに作られたパッチ達。詳細はパッチ参照。
 </p>
 
 <ul>
   <li> <a href="wget-1.5.3.cygwin11-patch.txt"><strong>wget 1.5.3 cygwin 1.1 patch </strong></a>
 <p>
-        cygwin1.1$B$d!"(Bb20.1$B$G$"$C$F$b3d$H:G?7HG$rDI$$$+$1$F$$$k>l9g$O(B
-        wget$B$,$&$^$/%3%s%Q%$%k$G$-$J$$$O$:$@$,!"$=$l$KBP$9$k%Q%C%A!#(B
-        h_errno$B$O(BDLL$B$NCf$K$"$k$h$&$J$N$G!"(B
-        $B$=$N$h$&$K@k8@$rJQ99$7$?$H$3$m!"$&$^$/F0$$$F$$$k$h$&$@!#(B
+        cygwin1.1や、b20.1であっても割と最新版を追いかけている場合は
+        wgetがうまくコンパイルできないはずだが、それに対するパッチ。
+        h_errnoはDLLの中にあるようなので、
+        そのように宣言を変更したところ、うまく動いているようだ。
 </p>
   <li> <a href="wget-1.5.3.parse-dir-patch.txt"><strong>wget 1.5.3 parse_dir() patch</strong></a>
 <p>
-       parse_dir() $B$G(B "?" $B0J9_$N(B "/" $B$r%U%!%$%k%Q%9$N6h@Z$j$@(B
-       $B$H;W$o$J$$$h$&$K$9$k%Q%C%A!#(B
-       $BMW$9$k$K!"(B "?" $B$N8e$m$N(B "//" $B$H$+$r(B
-       path_simplify() $B$G@0M}$5$l$J$$$h$&$K$9$k!#(B
-       query $B$G(B URL $B$rAw$j$D$1$?$j$9$kJ}$O$I$&$>!#(B
+       parse_dir() で "?" 以降の "/" をファイルパスの区切りだ
+       と思わないようにするパッチ。
+       要するに、 "?" の後ろの "//" とかを
+       path_simplify() で整理されないようにする。
+       query で URL を送りつけたりする方はどうぞ。
 </p>
   <li> <a href="wget-1.5.3.port80-patch.txt"><strong>wget 1.5.3 port80 patch </strong></a>
 <p>
-        $B%]!<%HHV9f(B 80 $B$N$H$-$K$O%j%/%(%9%H%X%C%@(B Host: $B$K(B
-        :80 $B$rF~$l$J$$$h$&$K$9$k%Q%C%A!#(B
-        wget $B$O(B Host: $B$K$$$D$G$b%]!<%HHV9f$rF~$l$k$h$&$K<BAu$5$l$F$$$k!#(B
-        $B$3$N<BAu$O(B RFC $BE*$K2?$bLdBj$,$J$$$O$:$@$,!"(B
-        $B$3$l$@$H%P!<%A%c%k%I%a%$%s$J>l=j$G<h$l$J$$$3$H$,$"$k$N$G!#(B
+        ポート番号 80 のときにはリクエストヘッダ Host: に
+        :80 を入れないようにするパッチ。
+        wget は Host: にいつでもポート番号を入れるように実装されている。
+        この実装は RFC 的に何も問題がないはずだが、
+        これだとバーチャルドメインな場所で取れないことがあるので。
 </p>
   <li> <a href="wget-1.5.3.url-unsafe-patch.txt"><strong>wget 1.5.3 URL_UNSAFE patch </strong></a>
 <p>
-        '@' $B$d(B ':' $B$d(B '~' $B$r$=$N$^$^(B URL $B$K;H$&$h$&$K$9$k%Q%C%A!#(B
-        $B$3$l$i$NJ8;z$O(B RFC1630 $B!J$3$l$H(BRFC1738$B$H$N4X78$C$F!)!K(B
-        $B$G$O(B URL $B%(%s%3!<%G%#%s%0$,I,MW$@$C$?$,!"(B
-        RFC2396 $B$G$OI,MW$J$$!#(B
-        $B$b$A$m$s%(%s%3!<%I$7$F$b(B RFC $BE*$K@5$7$$$O$:$G!"(B
-        $B<B:]!"(B wget $B$O%(%s%3!<%I$9$k$h$&$K<BAu$5$l$F$$$k$,!"(B
-        $B$=$l$@$HK?%5!<%S%9$,;H$($J$$$N$G!#$A$J$_$K!"%=!<%9$K(B
+        '@' や ':' や '~' をそのまま URL に使うようにするパッチ。
+        これらの文字は RFC1630 （これとRFC1738との関係って？）
+        では URL エンコーディングが必要だったが、
+        RFC2396 では必要ない。
+        もちろんエンコードしても RFC 的に正しいはずで、
+        実際、 wget はエンコードするように実装されているが、
+        それだと某サービスが使えないので。ちなみに、ソースに
 </p>
 <pre>------------------------------
 /* A list of unsafe characters for encoding, as per RFC1738.  '@' and
@@ -57,42 +57,42 @@
    encoding, and \033 for safe printing.  */
 ------------------------------</pre>
 <p>
-        $B$J$I$H=q$$$F$"$k!#(B
-        user:password$B$H(BURL$B$K=q$/4X78>e!"(B
-        user$BL>$^$?$O(Bpassword$B$K(B ':' $B$,F~$C$F$?$i%(%s%3!<%I$7$J$$$H$$$+$s!"(B
-        $B$H$$$&$3$H$N$h$&$@!#(B'@'$B$bF1$8LdBj$r$+$+$($F$$$k(B
-        $B!JK\Ev$K%(%s%3!<%I$,I,MW$+!)<+?.$J$$$1$I!D!K!#(B
-        $B$H$$$&$o$1$G!"$3$N%Q%C%A$r;H$&$H(B
-        user$BL>(B/password$B$D$-$N%U%!%$%k$r<h$k:]$K:$$k$+$b$7$l$J$$!#(B
-        $B$^!"$=$N$&$A(BRFC$B$G$bD/$a$D$D$J$s$H$+$9$k$D$b$j!#(B
-        $B!J(Bobsolete$B$J(BRFC1738$B$K4p$E$$$F$$$k$h$&$@$7!K(B
+        などと書いてある。
+        user:passwordとURLに書く関係上、
+        user名またはpasswordに ':' が入ってたらエンコードしないといかん、
+        ということのようだ。'@'も同じ問題をかかえている
+        （本当にエンコードが必要か？自信ないけど…）。
+        というわけで、このパッチを使うと
+        user名/passwordつきのファイルを取る際に困るかもしれない。
+        ま、そのうちRFCでも眺めつつなんとかするつもり。
+        （obsoleteなRFC1738に基づいているようだし）
 </p>
 <p>
-       $BCm!'$3$N%Q%C%A$G(B -r $B$r$D$1$F(Bget$B$9$k$H!"(B
-       http://geocities.com/~ginza5432/ $B$N$h$&$J(B URL $B$KBP$7$F!"(B
-       ~ $B$+$i;O$^$k%G%#%l%/%H%j$r:n$i$l$k$3$H$,$"$j$^$9!#(B
-       $B$3$l$KBP$7!"(Bcd ~ginza5432 $B$J$I$H$d$k$H(B
-       $B%[!<%`%G%#%l%/%H%j$rC5$7$K9T$C$F$7$^$$$^$9$,!"(B
-       cd ./~ginza5432 $B$J$I$H$d$l$PIaDL$K%"%/%;%9$G$-$^$9!#(B
+       注：このパッチで -r をつけてgetすると、
+       http://geocities.com/~ginza5432/ のような URL に対して、
+       ~ から始まるディレクトリを作られることがあります。
+       これに対し、cd ~ginza5432 などとやると
+       ホームディレクトリを探しに行ってしまいますが、
+       cd ./~ginza5432 などとやれば普通にアクセスできます。
 </p>
   <li> <a href="wget-1.5.3.referer-patch.txt"><strong>wget 1.5.3 referer patch</strong></a>
 <p>
-        --referer $B$H(B --fake-referer $B$r?7@_$9$k%Q%C%A!#(B
+        --referer と --fake-referer を新設するパッチ。
 </p>
-  <li> <a href="wget-1.5.3.path-simplify-patch.txt"><strong>wget 1.5.3 path_simplify() patch</strong></a> &nbsp; <strong>[parse_dir() patch $B$K$h$j(B obsolete $B$K$J$j$^$7$?(B]</strong>
+  <li> <a href="wget-1.5.3.path-simplify-patch.txt"><strong>wget 1.5.3 path_simplify() patch</strong></a> &nbsp; <strong>[parse_dir() patch により obsolete になりました]</strong>
 <p>
-       path_simplify() $B$G(B "://" $B$H$$$&J8;z$NJB$S$N>l9g$K8B$j(B
-        '/' $B$r(B2$B$D;D$9$h$&$K$9$k%Q%C%A!#(B
-        $B$3$&$7$J$$$HK?%5!<%S%9$,$$$^$$$A$&$^$/F0$+$J$$$N$G!#(B
-        $B$7$+$7!"(B.. $B$H$+(B . $B$N@0M}$C$F$7$J$/$F$bF0$/$h$M$(!#(B
-        $B%/%i%$%"%s%HB&$G!V$d$C$F$b$$$$!W$s$@$C$1$C$+!#(B
+       path_simplify() で "://" という文字の並びの場合に限り
+        '/' を2つ残すようにするパッチ。
+        こうしないと某サービスがいまいちうまく動かないので。
+        しかし、.. とか . の整理ってしなくても動くよねえ。
+        クライアント側で「やってもいい」んだっけっか。
 </p>
   <li> <a href="unrar-250.patch.txt"><strong>unrar 2.50</strong></a>
 <p>
-        $BI8=`E*$G$J$$%M!<%_%s%0$NJ,3d%"!<%+%$%V$b(B
-        $BIaDL$NJ,3d%"!<%+%$%V$HF1MM$K07$&!#(B
-        UnrarSrc.rar $B$K4^$^$l$k%=!<%9$KBP$9$k%Q%C%A!#(B
-        $B$3$N%Q%C%A$N2~9T%3!<%I$OA4$F(B CRLF $B$J$3$H$KCm0U!#(B
+        標準的でないネーミングの分割アーカイブも
+        普通の分割アーカイブと同様に扱う。
+        UnrarSrc.rar に含まれるソースに対するパッチ。
+        このパッチの改行コードは全て CRLF なことに注意。
 </p>
 </ul>
 

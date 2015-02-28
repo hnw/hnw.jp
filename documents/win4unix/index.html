@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -17,54 +17,54 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>UNIX$BLnO:$NAk@83h(B</h1>
+<h1>UNIX野郎の窓生活</h1>
 
 <p class="abstract">
-UNIX/Linux$B4D6-$K47$l$-$C$F$$$k$H(BWindows$B$O;H$$$K$/$/!"(B
-$B%9%H%l%9$,$?$^$C$F;EJ}$,$J$$!#(B
-$B$,!"6rCT$C$F$$$F$b$O$8$^$i$J$$$N$G!"(B
-Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
-$B$3$N%Z!<%8$O$=$&$$$C$?:n6H$NCf$G$NI.<T$N6rCT$r%a%b$C$?$@$1$N$b$N$G$"$k$,!"(B
-$BF1$8$h$&$J6-6x$N?M$N=u$1$K$J$l$P9,$$$G$"$k!#(B
+UNIX/Linux環境に慣れきっているとWindowsは使いにくく、
+ストレスがたまって仕方がない。
+が、愚痴っていてもはじまらないので、
+Windows上にUNIXな環境を作ろうと筆者は思い立った。
+このページはそういった作業の中での筆者の愚痴をメモっただけのものであるが、
+同じような境遇の人の助けになれば幸いである。
 </p>
 <p class="abstract">
-$B$D$^$k$H$3$m!"(B
-<strong>UNIX$B$KFG$5$l$?F1;V$N$?$a$N%*%9%9%a(BWindows$B%=%U%H>R2p(B</strong>$B$G$9!#(B
-$B$G$-$k$@$1L5NA$G<j$KF~$k$b$N$@$1$G4D6-@0Hw$r;n$_$F$$$^$9!#(B
-$B<+8JJ,@O$9$k$H!"<j$N9~$s$@$b$N$h$j%7%s%W%k$J$b$N$,9%$-$_$?$$$G$9!#(B
-$B<qL#$N%Y%/%H%k$,F1$8J}8~$r8~$$$F$kJ}!"$*;n$7$"$l!#(B
-$B$A$J$_$KI.<T$N4D6-$O(BWindows2000$B$,%a%$%s$G$9!#(B95/98/Me/XP$B$8$cOC$,0c$&$+$b!#(B
+つまるところ、
+<strong>UNIXに毒された同志のためのオススメWindowsソフト紹介</strong>です。
+できるだけ無料で手に入るものだけで環境整備を試みています。
+自己分析すると、手の込んだものよりシンプルなものが好きみたいです。
+趣味のベクトルが同じ方向を向いてる方、お試しあれ。
+ちなみに筆者の環境はWindows2000がメインです。95/98/Me/XPじゃ話が違うかも。
 </p>
 
 <ul>
-  <li> <a href="#cygwin">cygwin</a> - UNIX$B%3%^%s%I$,F0$-$^$/$k(B
+  <li> <a href="#cygwin">cygwin</a> - UNIXコマンドが動きまくる
   <li> <a href="#meadow">Meadow</a>
-  <li> <a href="#tex">TeX$B4D6-(B</a>
+  <li> <a href="#tex">TeX環境</a>
   <li> <a href="#activeperl">Active Perl</a>
   <li> <a href="#tcsh">tcsh</a>
 <br><br>
-  <li> <a href="#mayu">$BAk;H$$$NM+]5(B</a> - windows$B$,(Bemacs$B$K$J$k(B
-  <li> <a href="#xyzzy">xyzzy</a> - emacs$B%i%$%/$J7ZNL%(%G%#%?(B
+  <li> <a href="#mayu">窓使いの憂鬱</a> - windowsがemacsになる
+  <li> <a href="#xyzzy">xyzzy</a> - emacsライクな軽量エディタ
   <li> <a href="#lhaca">+Lhaca</a>
 <br><br>
   <li> <a href="#mozilla">Mozilla</a>
   <li> <a href="#firefox">Mozilla Firefox</a>
   <li> <a href="#openjanedoe">OpenJaneDoe</a>
 <br><br>
-  <li> <a href="#proxomitron">Proxomitron</a> - $B%m!<%+%k%W%m%/%7(B
+  <li> <a href="#proxomitron">Proxomitron</a> - ローカルプロクシ
   <li> <a href="#bjd">Black Jumbo Dog</a>
 <br><br>
   <li> <a href="#ttssh">TeraTerm + ttssh</a>
   <li> <a href="#xserver">X server</a>
   <li> <a href="#vnc">VNC</a>
   <li> <a href="#ffftp">FFFTP</a>
-  <li> <a href="#edmax">EdMax $B%U%j!<HG(B</a>
+  <li> <a href="#edmax">EdMax フリー版</a>
 <br><br>
   <li> <a href="#kpf">Kerio Personal Firewall</a>
   <li> <a href="#outpost">Outpost</a>
   <li> <a href="#avg">AVG Free Edition</a>
   <li> <a href="#antivir">AntiVir Personal Edition</a>
-  <li> <a href="#madonote">$BAk$N<j(B</a>
+  <li> <a href="#madonote">窓の手</a>
   <li> <a href="#upx">UPX</a>
 <br><br>
   <li> <a href="#ooo">OpenOffice.org</a>
@@ -74,10 +74,10 @@ Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
   <li> <a href="#dynamo">Dynamo</a>
 <br><br>
   <li> <a href="#raruty">RarUty</a>
-  <!--li> <a href="#resume">$BM~<yL5(B</a>
+  <!--li> <a href="#resume">璃樹無</a>
   <li> <a href="#bdbzm">BDBZM</a-->
 <br><br>
-  <li> <a href="#bookmarks">$B%j%s%/=8(B</a>
+  <li> <a href="#bookmarks">リンク集</a>
 </ul>
 
 <hr><!-- ____________________________________________________________ -->
@@ -86,29 +86,29 @@ Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
 >cygwin</a><a name="cygwin"> </a></h2>
 
 <p>
-        <strong>UNIX$BLnO:$,(Bwindows$B%^%7%s$rEO$5$l$?$i!"(B
-        $B$^$::G=i$K%$%s%9%H!<%k$9$k$b$N$,$3$l!#(B</strong>
+        <strong>UNIX野郎がwindowsマシンを渡されたら、
+        まず最初にインストールするものがこれ。</strong>
 </p>
 <p>
-        GNU$B$N4pK\E*$J(BCUI$B%D!<%k72$N(BWin32$B$X$N(Bport$B!#(B
-        $B$H$$$C$F$b!"IaDL$N(Bport$B$H0c$$!"(B
-        UNIX$B$N%7%9%F%`%3!<%k$r(Bwindows$B$G<B8=$9$k(BDLL$B$r:n$C$F$$$k!#(B
+        GNUの基本的なCUIツール群のWin32へのport。
+        といっても、普通のportと違い、
+        UNIXのシステムコールをwindowsで実現するDLLを作っている。
 </p>
 <p>
-        gcc,gdb$B$,$"$j!"(Bcygwin$B$K4^$^$l$F$$$J$$(BUNIX$B$J%D!<%k$b(B
-        $B%=!<%9$r;}$C$F$/$l$P(B99%$BDxEY$N3NN($G%3%s%Q%$%k$,DL$k!#(B
-        cygwin$BFb$GJD$8$?@$3&$r:n$C$F$$$k$N$G!"(B
-        $B$=$NJU$,ITK~$J?M$b$$$k$i$7$$!#(B
-        $B!J$I$&$$$&0UL#$+$O;H$C$F$_$l$P$o$+$k$H;W$$$^$9!K(B
+        gcc,gdbがあり、cygwinに含まれていないUNIXなツールも
+        ソースを持ってくれば99%程度の確率でコンパイルが通る。
+        cygwin内で閉じた世界を作っているので、
+        その辺が不満な人もいるらしい。
+        （どういう意味かは使ってみればわかると思います）
 </p>
 <p>
-        $BI.<T$bITK~$,$^$C$?$/$J$$$o$1$G$O$J$$$,!"(B
-        bash$B$N>e$G(Bawk$B$d(Bless$B$d(Bwget$B$J$s$+$,F0$/$N$O!"(B
-        $BB?>/$N7gE@$rJd$C$FM>$j$"$k$H;W$&!#(B
+        筆者も不満がまったくないわけではないが、
+        bashの上でawkやlessやwgetなんかが動くのは、
+        多少の欠点を補って余りあると思う。
 </p>
 <p>
-        $BI.<T$,=q$$$?Ej$2$d$j$J(B<a href="../cygwin/index.html"
-        >$B>R2p%Z!<%8(B</a>$B$b;2>H$7$F$/$@$5$$!#!JIw2=$7$F$kItJ,$b$"$k$1$I!D!K(B
+        筆者が書いた投げやりな<a href="../cygwin/index.html"
+        >紹介ページ</a>も参照してください。（風化してる部分もあるけど…）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -117,24 +117,24 @@ Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
 >Meadow</a><a name="meadow"> </a></h2>
 
 <p>
-        win32$B$GF0$/(Bemacs20$B%/%m!<%s!#!JEvA3$@$,!K(Belisp$B$,F0$/$N$GJXMx!#(B
-        $B:G6a(B<a href="#xyzzy">xyzzy</a>$B;H$&J}$,B?$$$1$I!"(B
-        TeX$B$GJ8>O=q$/$J$i(BMeadow$B$NJ}$,>e$+$J!#(B
+        win32で動くemacs20クローン。（当然だが）elispが動くので便利。
+        最近<a href="#xyzzy">xyzzy</a>使う方が多いけど、
+        TeXで文章書くならMeadowの方が上かな。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2>TeX $B4D6-(B<a name="tex"> </a></h2>
+<h2>TeX 環境<a name="tex"> </a></h2>
 
 <p>
-        $B=i$a$F(Bdviout$B$r;H$C$?$H$-$N46F0$OK:$l$i$l$J$$!#B.$($($($(!<!#(B
-        $B$C$F$^$"!"(BIntel$B7O$KHf$Y$F(BUltraSPARC$B$,CY$$$@$1$J$s$@$,!#(B
-        Solaris/SPARC$B>e$GJ8>O$r=q$$$F$$$k?M$O0lEY;n$9$Y$-$@!#(B
-        PC$B$K(BLinux$B$r%$%s%9%H!<%k$9$kF05!$,0l$D8:$C$F$7$^$C$?!#(B
+        初めてdvioutを使ったときの感動は忘れられない。速ええええー。
+        ってまあ、Intel系に比べてUltraSPARCが遅いだけなんだが。
+        Solaris/SPARC上で文章を書いている人は一度試すべきだ。
+        PCにLinuxをインストールする動機が一つ減ってしまった。
 </p>
 <p>
-        $BBg3X$K$$$J$$$H$^$:(BTeX$B$J$s$F;H$o$J$$$h$M!#(B
-        $BI,MW$J?M$O$I$&$>$C$F$3$H$G!#(B
+        大学にいないとまずTeXなんて使わないよね。
+        必要な人はどうぞってことで。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -143,16 +143,16 @@ Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
 >Active Perl</a><a name="activeperl"> </a></h2>
 
 <p>
-        Perl$B$N(BWindows$B$X$N(Bport$B!#(B
-        Windows$B$K$b(BPerl$B$,$"$k$HHs>o$KJXMx$@!#(B
-        $B0lIt@)8B$b$"$k$,!"$o$j$H?'!9$J%9%/%j%W%H$,F0$/!#(B
-        <a href="#cygwin">cygwin</a>$B$8$c$J$$$N$G!"$A$g$C$H$$$i$$$i$9$k$3$H$b$"$k$+$b!#(B
+        PerlのWindowsへのport。
+        WindowsにもPerlがあると非常に便利だ。
+        一部制限もあるが、わりと色々なスクリプトが動く。
+        <a href="#cygwin">cygwin</a>じゃないので、ちょっといらいらすることもあるかも。
 </p>
 <p>
-        $B:G6a(Bcygwin$B$K(BPerl$B$,IUB0$9$k$h$&$K$J$C$F$$$k$N$G!"(B
-        $B$=$C$A$r;H$C$F$$$k!#(B
-        fork()$B$H$+$N4X78$G$^$@$^$@B8:_2ACM$O$"$k$N$+$b$7$l$J$$$,!"(B
-        $BI.<T$K$O:9$,$o$+$i$J$$!#(B
+        最近cygwinにPerlが付属するようになっているので、
+        そっちを使っている。
+        fork()とかの関係でまだまだ存在価値はあるのかもしれないが、
+        筆者には差がわからない。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -161,42 +161,42 @@ Windows$B>e$K(BUNIX$B$J4D6-$r:n$m$&$HI.<T$O;W$$N)$C$?!#(B
 >tcsh</a><a name="tcsh"> </a></h2>
 
 <p>
-        tcsh$B$N(BWindows$B$X$N(Bport$B!#(B
-        Windows$BHG$G$O2x$7$$3HD%$,$5$l$F$$$k$,!"(B
-        <a href="#cygwin">cygwin</a>$B$G%3%s%Q%$%k$9$k$H$=$N3HD%$O;H$($J$$!#(B
-        $B$J$N$G!"(BWindows$BHG$,$*$9$9$a$J$N$@$,!"(B
-        Windows$BHG(Btcsh$B$G(Bcygwin$B$N%"%W%j;H$C$F$$$k$HITK~$?$i$?$i!#(B
-        $B$J$s$H$+$7$F$/$l!#(B
+        tcshのWindowsへのport。
+        Windows版では怪しい拡張がされているが、
+        <a href="#cygwin">cygwin</a>でコンパイルするとその拡張は使えない。
+        なので、Windows版がおすすめなのだが、
+        Windows版tcshでcygwinのアプリ使っていると不満たらたら。
+        なんとかしてくれ。
 </p>
 <p>
-        $B$H;W$C$F$$$?$,!":G6a$9$C$+$j(Bbash$BGI$K$J$C$F$7$^$C$?!#(B
+        と思っていたが、最近すっかりbash派になってしまった。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
 <h2><a href="http://mayu.sourceforge.net/ja/index.html"
->$BAk;H$$$NM+]5(B</a><a name="mayu"> </a></h2>
+>窓使いの憂鬱</a><a name="mayu"> </a></h2>
 
 <p>
-        $B%(%G%#%C%H%3%s%H%m!<%k$r$O$8$a$H$7$F!"(B
-        $B$"$i$f$k%7%A%e%(!<%7%g%s$G(B
-        emacs$B%i%$%/$J%-!<%P%$%s%I$rDs6!$9$k%D!<%k!#(B
-        $B%G%U%)%k%H$GDs6!$5$l$F$$$J$$%-!<%P%$%s%I$K$D$$$F$b!"(B
-        $B%f!<%6!<%"%s%U%l%s%I%j!<$J@_Dj%U%!%$%k$r$$$8$k$3$H$G!"(B
-        $B%Q%i%N%$%"$J$[$I$K=@Fp$K@_Dj$,2DG=!#(B
-        $B0JA0$O(BNT/2000$B@lMQ$@$C$?$,!"(B
-        95/98/Me$BBP1~%I%i%$%P$KB3$-!":G6a(BXP$BBP1~%I%i%$%P$b=P$?!#(B
+        エディットコントロールをはじめとして、
+        あらゆるシチュエーションで
+        emacsライクなキーバインドを提供するツール。
+        デフォルトで提供されていないキーバインドについても、
+        ユーザーアンフレンドリーな設定ファイルをいじることで、
+        パラノイアなほどに柔軟に設定が可能。
+        以前はNT/2000専用だったが、
+        95/98/Me対応ドライバに続き、最近XP対応ドライバも出た。
 </p>
 <p>
-        $B;W$o$:9TF,$K(BC-a$B$GHt$S$?$/$J$k?M$K$O:G9b$KJXMx!#(B
-        $B$H$$$&$+!"$J$$$H@8$-$F$$$1$J$$!#(B
-        $B=P@h$G$b%$%s%9%H!<%k$5$;$F$/$l!#(B
+        思わず行頭にC-aで飛びたくなる人には最高に便利。
+        というか、ないと生きていけない。
+        出先でもインストールさせてくれ。
 </p>
 <pre>
-# $B%G%U%)%k%H@_Dj(B($B%G%U%)%k%H@_Dj$,7y$$$J$i$3$l$i$r>C$9(B)
-include "109.mayu"              # 109 $B%-!<%\!<%I@_Dj(B
-include "104on109.mayu"         # 109 $B%-!<%\!<%I$r(B 104 $B%-!<%\!<%IIw$K(B
-include "default.mayu"          # $B$5$^$6$^$J@_Dj(B
+# デフォルト設定(デフォルト設定が嫌いならこれらを消す)
+include "109.mayu"              # 109 キーボード設定
+include "104on109.mayu"         # 109 キーボードを 104 キーボード風に
+include "default.mayu"          # さまざまな設定
 
 keymap2  Launcher-Menu
  event prefixed =&gt; &amp;HelpMessage("Launcher Menu", \
@@ -229,33 +229,33 @@ keymap Global
 key     C-I                     =&gt; Tab
 key     C-LeftSquareBracket     =&gt; ESC
 
-key     *M0-*IC-S-Space         =&gt; $ToggleIME                # kinput2$BIw(B
+key     *M0-*IC-S-Space         =&gt; $ToggleIME                # kinput2風
 key     C-S-F3                  =&gt; Mute
 key     C-S-F4                  =&gt; Play/Pause
 
 key     C-S-M                   =&gt; &amp;Prefix(Launcher-Menu)
 
-# $B%@%$%"%m%0%\%C%/%9(B
+# ダイアログボックス
 window dialog /#32770:Button$/ : Global
 key     C-G                     =&gt; Escape
 key     C-M                     =&gt; Enter
-key     C-B                     =&gt; Left      # $B"+(B
-key     C-F                     =&gt; Right     # $B"*(B
-key     C-N                     =&gt; Down      # $B"-(B
-key     C-P                     =&gt; Up        # $B",(B
+key     C-B                     =&gt; Left      # ←
+key     C-F                     =&gt; Right     # →
+key     C-N                     =&gt; Down      # ↓
+key     C-P                     =&gt; Up        # ↑
 
 ## IrfanView32 ................................................................
 ## http://www.irfanview.com/english.htm
 
 window  IrfanView /I_VIEW32\.EXE:IrfanView/ : Global
-key     $B"+(B                      =&gt; BackSpace
-key     $B"*(B                      =&gt; Space
-key     $B",(B                      =&gt; PageUp
-key     $B"-(B                      =&gt; PageDown
-key     S-$B"+(B                    =&gt; $B"+(B
-key     S-$B"*(B                    =&gt; $B"*(B
-key     S-$B",(B                    =&gt; $B",(B
-key     S-$B"-(B                    =&gt; $B"-(B
+key     ←                      =&gt; BackSpace
+key     →                      =&gt; Space
+key     ↑                      =&gt; PageUp
+key     ↓                      =&gt; PageDown
+key     S-←                    =&gt; ←
+key     S-→                    =&gt; →
+key     S-↑                    =&gt; ↑
+key     S-↓                    =&gt; ↓
 key     C-q                     =&gt; ESC
 
 ## OpenOffice/StarSuite........................................................
@@ -271,34 +271,34 @@ window Soffice /soffice\.exe:/ : EmacsEdit
 >xyzzy</a><a name="xyzzy"> </a></h2>
 
 <p>
-        emacs$B%i%$%/$J!"7Z$$!"$"$k0UL#FHFC$J%(%G%#%?!#(B
-        $B$J$s$H(Bcommon-Lisp$B%Y!<%9!#$3$l$NJXMx$J$H$3$m$O!"(B
-        JIS,SJIS,EUC,UTF-8,UTF-16,KSC$B$"$?$j$KBP1~$7$F$k$3$H$H!"(B
+        emacsライクな、軽い、ある意味独特なエディタ。
+        なんとcommon-Lispベース。これの便利なところは、
+        JIS,SJIS,EUC,UTF-8,UTF-16,KSCあたりに対応してることと、
         <a href="http://www.yl.is.s.u-tokyo.ac.jp/~oiwa/pub/xyzzy/"
-        >italk$B%/%i%$%"%s%H(B</a>$B$,$"$k$3$H!"$H$K$+$/7Z$$$3$H!"(B
-        $B$=$l$G$$$FIaCJ;H$&(Bemacs$B$N5!G=$O$=$m$C$F$$$k$3$H$@!#(B
+        >italkクライアント</a>があること、とにかく軽いこと、
+        それでいて普段使うemacsの機能はそろっていることだ。
 </p>
 <p>
-        $B7gE@$O!"3F<o(Bmode$B$N=<<B$V$j$,$d$dNt$C$F$$$k$+$J!"$H$$$&$3$H!#(B
-        $B%W%m%0%i%`=q$/$H$+(BTeX$B$GJ8>O=q$/$H$+$@$H!"(B
-        $B$d$C$Q$j(Bmeadow$B$r;H$C$A$c$&5$$,$9$k!#(B
+        欠点は、各種modeの充実ぶりがやや劣っているかな、ということ。
+        プログラム書くとかTeXで文章書くとかだと、
+        やっぱりmeadowを使っちゃう気がする。
 </p>
 <p>
-        $B0J2<$K!"!JI.<T$,5$$K$J$C$?ItJ,$K$D$$$F!K(B
-        $B$h$j(Bemacs$B%i%$%/$K$J$k$h$&$K=q$$$?@_Dj%U%!%$%k$r>R2p$7$H$-$^$9!#(B
-        xyzzy-ML$B$KN.$l$?5-;v$r;29M$K$7$F$^$9!#(B
-        $B!JI.<T$,(Bemacs$B$G;H$C$?$3$H$,$J$$$b$N$O(B
-          $B%3%a%s%H%"%&%H$7$F$"$j$^$9!#(BC-o$B$J$s$F(Bcanna$B@_Dj$@$7!#!K(B
+        以下に、（筆者が気になった部分について）
+        よりemacsライクになるように書いた設定ファイルを紹介しときます。
+        xyzzy-MLに流れた記事を参考にしてます。
+        （筆者がemacsで使ったことがないものは
+          コメントアウトしてあります。C-oなんてcanna設定だし。）
 </p>
 <p>
-        Toy$B$5$s$N%Z!<%8$K$b(B<a
+        Toyさんのページにも<a
         href="http://www.carabiner-systems.com/xyzzy/config.html"
-        >Emacs$B$A$C$/$J@_Dj(B</a>$B$,>R2p$7$F$"$j$^$9!#(B
-        $BKM$O5$$K$J$i$J$$$s$G$9$,!"(B
-        C-x C-w$B$N5sF0$N0c$$$,5$$K$J$k?M$OB?$$$_$?$$$G$9!#(B
+        >Emacsちっくな設定</a>が紹介してあります。
+        僕は気にならないんですが、
+        C-x C-wの挙動の違いが気になる人は多いみたいです。
 </p>
 <p>
-        $B2<$NJ}$O8D?ME*$J$b$N$G$9$,!"$"$^$j5$$K$7$J$$$G$/$@$5$$!#(B
+        下の方は個人的なものですが、あまり気にしないでください。
 </p>
 <pre>
 (global-set-key '(#\Home)        'beginning-of-buffer )
@@ -321,9 +321,9 @@ window Soffice /soffice\.exe:/ : EmacsEdit
 ;(global-set-key '(#\C-M-\\)      'indent-region)
 (global-set-key '(#\C-x #\C-w) 'emacs-write-file)
 
-; $BJ8;z%3!<%I$7$+JQ$($i$l$J$$$1$I(B($B%G%U%)%k%H$G$O(BMule2.3$BIw$K(BC-x C-k f$B!K(B
+; 文字コードしか変えられないけど(デフォルトではMule2.3風にC-x C-k f）
 (global-set-key '(#\C-x #\RET #\f) 'change-fileio-encoding) 
-; $B2~9T%3!<%I$NJQ99(B
+; 改行コードの変更
 (global-set-key '(#\C-x #\RET #\n) 'change-eol-code)
 
 ;; dabbrev
@@ -350,7 +350,7 @@ window Soffice /soffice\.exe:/ : EmacsEdit
     ("localhost 12345")
    ))
 
-; $B$X$m$X$m$a$b$NB3$-$r=q$/(B
+; へろへろめもの続きを書く
 
 (defun mkherohero()
   (interactive)
@@ -359,43 +359,43 @@ window Soffice /soffice\.exe:/ : EmacsEdit
     (concat "&lt;hr&gt;"
             "&lt;!-- __________________________________________________ --&gt;\n\n"
             "&lt;h2&gt;&lt;a name=\"%Y%m%d%H%M%S\"&gt;"
-            "%Y$BG/(B%m$B7n(B%d$BF|(B (%v) %H$B;~(B%M$BJ,(B%S$BIC(B JST"
+            "%Y年%m月%d日 (%v) %H時%M分%S秒 JST"
             "&lt;/a&gt;&lt;/h2&gt;\n"
             "&lt;div class=\"indent\"&gt;\n&lt;p&gt;\n&lt;/p&gt;\n&lt;/div&gt;\n"))))
 </pre>
 
 <p>
-        $B!JDI5-!K(Bxyzzy$B$r;H$&$J$i!"1QOB<-=q$rM-8z$K$7$J$$<j$O$J$$!#(B
+        （追記）xyzzyを使うなら、英和辞書を有効にしない手はない。
         <a href="http://namazu.org/~tsuchiya/sdic/index.html#download"
-        >SDIC$B$N%5%$%H(B</a>$B$K(BGENE95$B$H(BEDICT$B$,Mn$A$F$k$N$G!"(B
-        $B$"$j$,$?$/<h$C$F$-$F(Betc/dict/$B$KCV$$$F(Bgendic$B$r<B9T!#(B
-        $B!V%D!<%k!W!]!V6&DL@_Dj!W!]!V%G%#%l%/%H%j!W$N@_Dj$r$7$F=`Hw40N;!#(B
-        C-c C-e$B$G1QOB!"(BC-c C-j$B$GOB1Q$,;H$($k!#(B
-        $B1Q8l$,%M%$%F%#%V$8$c$J$$?M4V$K$OHs>o$KJXMx!#(B
+        >SDICのサイト</a>にGENE95とEDICTが落ちてるので、
+        ありがたく取ってきてetc/dict/に置いてgendicを実行。
+        「ツール」−「共通設定」−「ディレクトリ」の設定をして準備完了。
+        C-c C-eで英和、C-c C-jで和英が使える。
+        英語がネイティブじゃない人間には非常に便利。
 </p>
 
 <!-- ____________________________________________________________ -->
 
-<!-- IE$B$r:G6a;H$o$J$$$N$G:o=|$7$h$&$+$J!D(B -->
+<!-- IEを最近使わないので削除しようかな… -->
 
 <!--h2><a href="http://www.ganaware.jp/S/iesrcview/index.html"
 >iesrcview</a><a name="iesrcview"> </a></h2>
 
 <p>
-        IE$B$N!V%=!<%9$NI=<(!W$r9%$-$J%(%G%#%?$G8+$k$?$a$N%D!<%k!#(B
-        w2k$B$G$O%a%bD"%H%i%C%Q!<$,$&$^$/F0$+$J$$$i$7$$$N$G>h$j49$($^$7$?!#(B
-        notepad.exe$B$rCV$-49$($kBe$o$j$K!"(B
-        IE$B$N$=$l$C$]$$ItJ,$rCV$-49$($F$$$k$i$7$$!#(B
-        $B;EAH$_E*$KF1MM$N%D!<%k$OB>$K$b$?$/$5$s$"$kLOMM!#(B
+        IEの「ソースの表示」を好きなエディタで見るためのツール。
+        w2kではメモ帳トラッパーがうまく動かないらしいので乗り換えました。
+        notepad.exeを置き換える代わりに、
+        IEのそれっぽい部分を置き換えているらしい。
+        仕組み的に同様のツールは他にもたくさんある模様。
 </p>
 <p>
-        $B$b$A$m$sAH$_9g$o$;$k%(%G%#%?$O(B<a href="#xyzzy">xyzzy</a>$B!#(B
-        $B$I$s$JJ8;z%3!<%I$G$b8+$($A$c$&>e$K7Z$$$N$,AG@2$i$7$$!#(B
+        もちろん組み合わせるエディタは<a href="#xyzzy">xyzzy</a>。
+        どんな文字コードでも見えちゃう上に軽いのが素晴らしい。
 </p>
 <p>
-        $B!V%=!<%9$NI=<(!WMQ$N%(%G%#%?$r@_Dj$r%f!<%6!<Kh$K$G$-$k$N$,%a%j%C%H$@$H;W$$$^$9!#(B
-        $B$*Ic$5$s$K!V$J$s$@$3$N55$N%(%G%#%?$O!)!W$H8@$o$l$:$K:Q$_$^$9!#(B
-        $B$=$&$G$J$1$l$P!"Ak$N<j$G@_Dj$7$F(Bxyzzy$B$rD>@\5/F0$7$?J}$,$$$$$+$b!#(B
+        「ソースの表示」用のエディタを設定をユーザー毎にできるのがメリットだと思います。
+        お父さんに「なんだこの亀のエディタは？」と言われずに済みます。
+        そうでなければ、窓の手で設定してxyzzyを直接起動した方がいいかも。
 </p-->
 
 <hr><!-- ____________________________________________________________ -->
@@ -404,14 +404,14 @@ window Soffice /soffice\.exe:/ : EmacsEdit
 >+Lhaca</a><a name="lhaca"> </a></h2>
 
 <p>
-        $B2rE`(B/$B05=L%D!<%k!#$3$lC1BN$G(Bzip$B$H(Blzh$B$,$[$I$1$k!u:n$l$k$b$s$G!"(B
-        $B0l=V$7$+;H$o$J$$%^%7%s$N%;%C%H%"%C%W;~$K%$%s%9%H!<%k$7$F!"(B
-        $B$=$N8e$KB>$N2rE`%D!<%k$r%$%s%9%H!<%k$9$k$N$,LLE]$@$C$?$j$7$F(B
-        $B$:$C$H;H$$B3$1$?$j$9$k!#(B
+        解凍/圧縮ツール。これ単体でzipとlzhがほどける＆作れるもんで、
+        一瞬しか使わないマシンのセットアップ時にインストールして、
+        その後に他の解凍ツールをインストールするのが面倒だったりして
+        ずっと使い続けたりする。
 </p>
 <p>
-        $BF1$8%G%#%l%/%H%j$G05=L!&2rE`$9$k@_Dj$K47$l$k$H$+$J$jJXMx$@$H;W$&!#(B
-        $B%"%$%3%s$,3J9%0-$$5$$,$7$?$,!"47$l$?!#(B
+        同じディレクトリで圧縮・解凍する設定に慣れるとかなり便利だと思う。
+        アイコンが格好悪い気がしたが、慣れた。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -420,61 +420,61 @@ window Soffice /soffice\.exe:/ : EmacsEdit
 >Mozilla</a><a name="mozilla"> </a></h2>
 
 <p>
-$B%*!<%W%s%=!<%9$J%?%VBP1~(BWeb$B%V%i%&%6!#(B
-Netscape7$B$N3+H/<T8~$1%P!<%8%g%s!"$H8@$C$?J}$,0lHL$K$ODL$j$,$$$$$+$b$7$l$J$$!#(B
-$BI.<T$N>l9g!"(BLinux$B$HF1$8%$%s%?!<%U%'!<%9$G;H$($k$N$,0lHV$N%a%j%C%H!#(B
+オープンソースなタブ対応Webブラウザ。
+Netscape7の開発者向けバージョン、と言った方が一般には通りがいいかもしれない。
+筆者の場合、Linuxと同じインターフェースで使えるのが一番のメリット。
 </p>
 <p>
-$B%$%s%9%H!<%k;~$KIUB0$N%a!<%k%/%i%$%"%s%H$bK:$l$:%$%s%9%H!<%k$9$Y$-!#(B
-$B$I$&$;IaCJ$N%a!<%k$rAw$kMQES$K$O;H$o$J$$$1$I!"(B
-$B%$%s%9%H!<%k$7$J$$$H(Bmailto:$B$GN)$A>e$,$k%a!<%i$,(BWindows$B$N>l9g$K(BOutlook Express$B$K$J$k$N$GM>7WI]$$!#(B
-$B%$%s%9%H!<%k;~$K(Bcustom install$B$rA*$s$G(B
-DOM Inspector $B$H(B JavaScript Debugger $B$rA*$V$H!"(B
-$BLLGr$=$&$J%D!<%k$,%$%s%9%H!<%k$5$l$k$N$@$,!"(B
-$B;DG0$J$,$iI.<T$K$O%$%^%$%A;H$$J}$,$o$+$i$J$$$,!"(B
-$B$=$l$G$bJXMx$@$C$?$j$9$k!#(B
+インストール時に付属のメールクライアントも忘れずインストールすべき。
+どうせ普段のメールを送る用途には使わないけど、
+インストールしないとmailto:で立ち上がるメーラがWindowsの場合にOutlook Expressになるので余計怖い。
+インストール時にcustom installを選んで
+DOM Inspector と JavaScript Debugger を選ぶと、
+面白そうなツールがインストールされるのだが、
+残念ながら筆者にはイマイチ使い方がわからないが、
+それでも便利だったりする。
 </p>
 <p>
-$B%$%s%9%H!<%kD>8e$K$$$8$k@_Dj9`L\$,7k9=$"$k$1$I!"0J2<$O8D?ME*$K$OI,?\!#(B
+インストール直後にいじる設定項目が結構あるけど、以下は個人的には必須。
 </p>
 
 <ul>
-<li>$B!V(BNavigator$B!W(B-$B!V(BTabbed Browsing$B!W$N%A%'%C%/$rA4It$D$1$k(B
-<li>$B!V(BPrivacy &amp; Security$B!W(B-$B!V(BImages$B!W$N!V(BAnimated images should loop$B!W$r!V(Bonce$B!W$K!#(B
-<li>$B!V(BAdvanced$B!W(B-$B!V(BScripts &amp; Plugins$B!W$N(B
-$B!V(BMove or resize existing windows$B!W!V(BChange status bar text$B!W(B
-$B$N%A%'%C%/$r30$9!#(B
+<li>「Navigator」-「Tabbed Browsing」のチェックを全部つける
+<li>「Privacy &amp; Security」-「Images」の「Animated images should loop」を「once」に。
+<li>「Advanced」-「Scripts &amp; Plugins」の
+「Move or resize existing windows」「Change status bar text」
+のチェックを外す。
 </ul>
-<p>$B$=$NB>$N@_Dj$K$D$$$F!"0J2<$r$*9%$_$G(Buser.js$B$K=q$/$H5H!#(B</p>
+<p>その他の設定について、以下をお好みでuser.jsに書くと吉。</p>
 <pre>
-// kinput2$B$r(Bover-the-spot$B$GI=<((B(Linux$BMQ(B)
+// kinput2をover-the-spotで表示(Linux用)
 user_pref("xim.input_style", "over-the-spot");
-// 3$B%\%?%s%^%&%9$N??Cf$G$N(BURL$B%8%c%s%W6X;_(B
+// 3ボタンマウスの真中でのURLジャンプ禁止
 user_pref("middlemouse.contentLoadURL", false);
 //
 user_pref("nglayout.initialpaint.delay", 100);
-// target$BB0@-$rL5;k$7$FA4ItF1$8Ak$G3+$/(B
+// target属性を無視して全部同じ窓で開く
 user_pref("browser.block.target_new_window", true);
 </pre>
 <p>
-$B$^$?!"(B
-Mozilla$B$K$O(BPlugin$B$,A4$/IUB0$7$F$3$J$$$N$G!"(B
-$BIaDL$K;H$&$?$a$K$O(BPlugin$B$N%$%s%9%H!<%k$,I,?\$K$J$k!#(B
-Java,Flash$B$"$?$j$N(BPlugin$B$r(B<a 
+また、
+MozillaにはPluginが全く付属してこないので、
+普通に使うためにはPluginのインストールが必須になる。
+Java,FlashあたりのPluginを<a 
 href="http://www.mozilla.gr.jp/docs/beginmoz-1.0/navigator.html#navigator-plugin"
->$B!V$O$8$a$F$N(BMozilla$B!W(B7-7. Plugin</a>$B$r;29M$KF~$l$l$P(BOK$B!#(B
+>「はじめてのMozilla」7-7. Plugin</a>を参考に入れればOK。
 </p>
 <p>
-XUL$B%"%W%j$H$7$F$O!"(B<a href="http://home.no.net/trihand/mozilla/home/en/"
->Home$B%\%?%s(B</a>$B$H!"(B<a href="http://prefbar.mozdev.org/"
->prefbar</a>$B$,%*%9%9%a!#(B
+XULアプリとしては、<a href="http://home.no.net/trihand/mozilla/home/en/"
+>Homeボタン</a>と、<a href="http://prefbar.mozdev.org/"
+>prefbar</a>がオススメ。
 </p>
 <p>
-$BJ86g$O!"$H$K$+$/5/F0$,CY$$$3$H!#%l%s%@%j%s%0$bB.$/$O$J$$!#(B
-$B$7$+$7!"(BIE$B$h$j$O7j$,>/$J$=$&$J$N$G0B?4$G$O$"$k!#(B
-$B%V%i%/%i$J$I$b(BIE$BMQ$N$b$N$O$"$kDxEY$+$o$;$k!#(B
-IE$B$rCV$-49$($i$l$k$h$&$J%l%Y%k$G$O$J$$$,!"(B
-$BBh(B2$B$N%V%i%&%6$H$7$FJd=uE*$K;H$&J,$K$OHs>o$K%*%9%9%a$@$H;W$&!#(B
+文句は、とにかく起動が遅いこと。レンダリングも速くはない。
+しかし、IEよりは穴が少なそうなので安心ではある。
+ブラクラなどもIE用のものはある程度かわせる。
+IEを置き換えられるようなレベルではないが、
+第2のブラウザとして補助的に使う分には非常にオススメだと思う。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -483,28 +483,28 @@ IE$B$rCV$-49$($i$l$k$h$&$J%l%Y%k$G$O$J$$$,!"(B
 >Mozilla Firefox</a><a name="firefox"> </a></h2>
 
 <p>
-$B0JA0$O(BPhoenix$B$H8F$P$l$F$$$?(Bweb$B%V%i%&%6!#(B
-$B>.$5$/$F7Z$$%V%i%&%6$r:n$m$&$H$$$&%3%s%;%W%H$N$b$H!"(B
-Mozilla$B$+$iGI@8$7$?%W%m%8%'%/%H$@$C$?$,!"(B
-$B$$$m$$$m$"$C$F(BPhoenix$B"*(BFirebird$B"*(BFirefox$B$HL>A0$,JQ$o$C$?!#(B
-$B5/F0%9%T!<%I$dA`:n46$bK\2H(BMozilla$B$h$j$o$+$kDxEY$KB.$$!#(B
+以前はPhoenixと呼ばれていたwebブラウザ。
+小さくて軽いブラウザを作ろうというコンセプトのもと、
+Mozillaから派生したプロジェクトだったが、
+いろいろあってPhoenix→Firebird→Firefoxと名前が変わった。
+起動スピードや操作感も本家Mozillaよりわかる程度に速い。
 </p>
 <p>
-Windows$BHG0J30$K(BLinux$BHG$d(BMac OS X$BHG$b$"$k!#(B
-$BJ#?t$N4D6-$r;H$&$N$G$"$l$P!"4D6-$rE}0l$G$-$k$3$H$O(B
-$BB>$N%V%i%&%6$KBP$9$k%"%I%P%s%F!<%8$@$m$&!#(B
-$BI.<T$O(BWindows$BHG$H(BLinux$BHG(B(X11$BHG$H8@$&$Y$-$+(B)$B$rJ;MQ$7$F$$$k$,!"(B
-$B0[$J$k4D6-$GF1$8@_Dj$d3HD%$r;H$($k$N$OHs>o$KJXMx$@$H46$8$k!#(B
+Windows版以外にLinux版やMac OS X版もある。
+複数の環境を使うのであれば、環境を統一できることは
+他のブラウザに対するアドバンテージだろう。
+筆者はWindows版とLinux版(X11版と言うべきか)を併用しているが、
+異なる環境で同じ設定や拡張を使えるのは非常に便利だと感じる。
 </p>
 <p>
-$B$3$N%W%m%8%'%/%H$N@.2L$G(BMozilla$BK\BN$b9bB.$K$J$j$D$D$"$j!"(B
-$B%^%7%s$bEv;~$h$j==J,9bB.$K$J$C$F$-$?$,!"(B
-$B$^$@$o$+$kDxEY$K(BMozilla$B$H$OB.EY:9$,$"$k$h$&$K;W$&!#(B
+このプロジェクトの成果でMozilla本体も高速になりつつあり、
+マシンも当時より十分高速になってきたが、
+まだわかる程度にMozillaとは速度差があるように思う。
 </p>
 <p>
-$BF~$l$k$Y$-3HD%(B/$B;n$=$&$H;W$C$F$$$k3HD%$r0J2<$K%j%9%H%"%C%W$9$k!#(B
-$B85%M%?$O(B<a href="http://software.s48.xrea.com/mozilla/index.php?%CC%DC%C5%AA%CA%CC%B3%C8%C4%A5%C1%AA%A4%D3"
->Firefox$B$^$H$a%5%$%H$N!V3HD%!W(B</a>$B!#(B
+入れるべき拡張/試そうと思っている拡張を以下にリストアップする。
+元ネタは<a href="http://software.s48.xrea.com/mozilla/index.php?%CC%DC%C5%AA%CA%CC%B3%C8%C4%A5%C1%AA%A4%D3"
+>Firefoxまとめサイトの「拡張」</a>。
 </p>
 <ul>
 <li><a href="http://extensionroom.mozdev.org/more-info/keyconfig">keyconfig</a></li>
@@ -513,12 +513,12 @@ Windows$BHG0J30$K(BLinux$BHG$d(BMac OS X$BHG$b$"$k!#(B
 <li><a href="http://www.pikey.me.uk/mozilla/#bb">Bookmark Backup</a></li>
 <li><a href="http://livehttpheaders.mozdev.org/">LiveHTTPHeaders</a></li>
 
-<li><a href="http://www33.ocn.ne.jp/~snip/mozilla/">JLP</a> $B$b$O$dITMW$+$b!D(B?</li>
-<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/AiO/index.html">All-in-One Gestures(AiO)$BF|K\8lHG(B</a></li>
+<li><a href="http://www33.ocn.ne.jp/~snip/mozilla/">JLP</a> もはや不要かも…?</li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/AiO/index.html">All-in-One Gestures(AiO)日本語版</a></li>
 <li><a href="http://www.chrispederick.com/work/firefox/webdeveloper/">Web Developer</a></li>
 <li><a href="http://chrispederick.myacen.com/work/firebird/useragentswitcher/">User Agent Switcher</a></li>
 <li><a href="http://white.sakura.ne.jp/~piro/xul/_tabextensions.html">Tabbrowser Extensions(TBE)</a></li>
-<li><a href="http://www.pikey.me.uk/mozilla/?extension=soe">Show Old Extensions(SOE)</a>$B$7$P$i$/I,?\(B</li>
+<li><a href="http://www.pikey.me.uk/mozilla/?extension=soe">Show Old Extensions(SOE)</a>しばらく必須</li>
 <li><a href="http://white.sakura.ne.jp/~piro/xul/_popupalt.html">Popup ALT Attributes</a></li>
 
 
@@ -528,25 +528,25 @@ Windows$BHG0J30$K(BLinux$BHG$d(BMac OS X$BHG$b$"$k!#(B
 <li><a href="http://placenamehere.com/pnhtoolbar/">PNH Developer Toolbar</a></li>
 <li><a href="http://moz2ch.sourceforge.jp/">Moz2ch</a></li>
 <li><a href="http://tkm.s31.xrea.com/xul/xulmigemo.shtml">XUL/Migemo</a></li>
-<li><a href="http://needlesearch.mozdev.org/">Needle Search</a>(2.2.9$B$G(BFirefox0.9$BBP1~$7$F$$$k$,!"(BSOE$BI,?\(B)</li>
+<li><a href="http://needlesearch.mozdev.org/">Needle Search</a>(2.2.9でFirefox0.9対応しているが、SOE必須)</li>
 <li><a href="http://mozfbrh.mozdev.org/">mozFBRH</a></li>
-<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/JLP/preferential.html">Preferential$BF|K\8lHG(B</a>(0.6.1$B$O(BSOE$BI,?\(B)</li>
+<li><a href="http://www.geocities.co.jp/SiliconValley-SanJose/9076/JLP/preferential.html">Preferential日本語版</a>(0.6.1はSOE必須)</li>
 </ul>
-<p>user.js$B$NFbMF!#(B</p>
+<p>user.jsの内容。</p>
 <pre>
-// kinput2$B$r(Bover-the-spot$B$GI=<((B(Linux$BMQ(B)
+// kinput2をover-the-spotで表示(Linux用)
 user_pref("xim.input_style", "over-the-spot");
-// 3$B%\%?%s%^%&%9$N??Cf$G$N(BURL$B%8%c%s%W6X;_(B
+// 3ボタンマウスの真中でのURLジャンプ禁止
 user_pref("middlemouse.contentLoadURL", false);
-// target$BB0@-$rL5;k$7$FA4ItF1$8Ak$G3+$/(B
+// target属性を無視して全部同じ窓で開く
 user_pref("browser.block.target_new_window", true);
-// $BJ8;z$r%?%$%W$7$?$i%$%s%/%j%a%s%?%k%5!<%A$9$k$N$r6X;_(B
+// 文字をタイプしたらインクリメンタルサーチするのを禁止
 user_pref("accessibility.typeaheadfind", false);
-// 0.9$B$N%P%0(B($B;EMM(B?)$BBP1~(B
+// 0.9のバグ(仕様?)対応
 user_pref( "docshell.frameloadcheck.disabled" , true );
 </pre>
 <p>
-$B$"$H!"(Bprefbar$B$N@_Dj%a%b!#(B
+あと、prefbarの設定メモ。
 </p>
 <ul>
 <li>DoCoMo   DoCoMo/1.0/N502it/c10
@@ -559,7 +559,7 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >OpenJaneDoe</a><a name="openjanedoe"> </a></h2>
 
 <p>
-$B%*!<%W%s%=!<%9$J(B2ch$B%V%i%&%6$NHs(BIE$B%3%s%]!<%M%s%HHG!#7Z$$$7JXMx!#(B
+オープンソースな2chブラウザの非IEコンポーネント版。軽いし便利。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -568,18 +568,18 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >Proxomitron</a><a name="proxomitron"> </a></h2>
 
 <p>
-        $B=q$-49$(7?%m!<%+%k%W%m%/%7%5!<%P%=%U%H!#(B
-        $B%"%K%a!<%7%g%s(BGIF$B$r%k!<%W$5$;$J$/$7$?$j!"(B
-        JavaScript$B$r%*%U$K$7$?$j!"$$$m$$$m$G$-$k!#(B
+        書き換え型ローカルプロクシサーバソフト。
+        アニメーションGIFをループさせなくしたり、
+        JavaScriptをオフにしたり、いろいろできる。
 </p>
 <p>
-        $BME$7$$J70O5$$N%"%$%3%s$,$*5$$KF~$j!#(B
+        妖しい雰囲気のアイコンがお気に入り。
 </p>
 <p>
-        <a href="proron.html">$B>R2p%Z!<%8(B</a>$B$J$>=q$$$F$_$^$7$?!#(B
+        <a href="proron.html">紹介ページ</a>なぞ書いてみました。
 </p>
 <p>
-        $B;29M%j%s%/!'(B<a href="http://www.pluto.dti.ne.jp/~tengu/proxomitron/"
+        参考リンク：<a href="http://www.pluto.dti.ne.jp/~tengu/proxomitron/"
         >Proxomitron-J</a>
 </p>
 
@@ -589,9 +589,9 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >Black Jumbo Dog</a><a name="bjd"> </a></h2>
 
 <p>
-        $B$*$&$AMQ%W%m%/%7!#(B
-        HTTP$B$N%W%m%/%7$K$b$J$l$^$9$7!"%]!<%H%U%)%o!<%G%#%s%0$b2DG=$G$9!#(B
-        $B!V%$%s%?!<%M%C%H6&M-!W$,$b$C$H9b5!G=$J$iITMW$J$s$@$1$I$J!<!#(B
+        おうち用プロクシ。
+        HTTPのプロクシにもなれますし、ポートフォワーディングも可能です。
+        「インターネット共有」がもっと高機能なら不要なんだけどなー。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -602,19 +602,19 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >ttssh</a><a name="ttssh"> </a></h2>
 
 <p>
-        $BC<Kv%(%_%e%l!<%?$H!"$=$N(Bssh$BBP1~(BDLL$B!#(B
-        kterm$B$K$ONt$k$1$I!"(B
-        windows$BI8=`$N(Btelnet$B$HHf$Y$k$H1@E%$N:9!#(B
-        ssh$B$O(Bssh1$B$@$1$I!"(B
-        $B0lHL$K(Bssh2$B$K$9$kI,MW@-$C$F$"$^$j$J$$$h$M!)(B
-        ssh2$B$8$c$J$$$H7R$2$J$$IT9,$J?M$b$$$k$s$G$7$g$&$1$I!#(B
+        端末エミュレータと、そのssh対応DLL。
+        ktermには劣るけど、
+        windows標準のtelnetと比べると雲泥の差。
+        sshはssh1だけど、
+        一般にssh2にする必要性ってあまりないよね？
+        ssh2じゃないと繋げない不幸な人もいるんでしょうけど。
 </p>
 <!--
-        $B3X9;$H$+$@$H(Bssh$BF~$C$F$k$1$I!"(B
-        $B4k6H$O(Bssh$BM-NA$@$+$i$+!"F~$C$F$J$$$s$@$h$M!#(B
-        $BJXMx$J$@$1$K$J$s$H$+$7$F$[$7$$$<!#(B
-        $B!J%i%$%;%s%9$,[#Kf$J5$$b$9$k$1$I!"(B
-        $B%Q%C%1!<%8$K4^$a$k$H$+$7$J$1$l$P4k6H$G$b;H$C$F$$$$$N$+$J!)!K(B
+        学校とかだとssh入ってるけど、
+        企業はssh有料だからか、入ってないんだよね。
+        便利なだけになんとかしてほしいぜ。
+        （ライセンスが曖昧な気もするけど、
+        パッケージに含めるとかしなければ企業でも使っていいのかな？）
 -->
 
 <hr><!-- ____________________________________________________________ -->
@@ -622,15 +622,15 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 <h2>X server<a name="xserver"> </a></h2>
 
 <p>
-        ASTEC-X$B!J$*;n$7HG!K$r;H$C$F$^$9!#(B
-        $B$b$&>/$70B$1$l$PGc$($k$s$G$9$,!"$A$g$C$H9b$9$.$C$9!D!#(B
-        VMware$B$H$NAH$_9g$o$;$O:G9b!#(B
+        ASTEC-X（お試し版）を使ってます。
+        もう少し安ければ買えるんですが、ちょっと高すぎっす…。
+        VMwareとの組み合わせは最高。
 </p>
 <p>
-        cygwin-xfree86$B$,$=$m$=$m<BMQ%l%Y%k$KFO$-$=$&$G!"$+$J$j4|BT!#(B
+        cygwin-xfree86がそろそろ実用レベルに届きそうで、かなり期待。
 </p>
 <p>
-        VNC$B$r(BX$B%5!<%P$H$7$F;H$C$?$3$H$O$J$$$,!"$A$g$C$HCY$=$&!#(B
+        VNCをXサーバとして使ったことはないが、ちょっと遅そう。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -639,19 +639,19 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >VNC</a><a name="vnc"> </a></h2>
 
 <p>
-        $B%^%&%9%$%Y%s%H$d%-!<%\!<%I%$%Y%s%H$rA`$kFC<l$J%5!<%P$rN)$F$k$3$H$G!"(B
-        $B$=$N%^%7%s$r%M%C%H%o!<%/1[$7$N%/%i%$%"%s%H$+$iA`:n$9$k%"%W%j$G$9!#(B
+        マウスイベントやキーボードイベントを操る特殊なサーバを立てることで、
+        そのマシンをネットワーク越しのクライアントから操作するアプリです。
 </p>
 <p>
-        $B%G%#%9%W%l%$$,$D$$$F$J$$(Bwindows$B%^%7%s$r$I$&$7$F$b;H$$$?$$>l9g$K!"(B
-        Tweak UI$B$+$J$s$+$G>!<j$K%m%0%$%s$9$k$h$&$K$7$F$*$$$F!"(B
-        $B%9%?!<%H%"%C%W$G(BVNC$B%5!<%P$r5/F0$7$?$j$9$k$H!"(B
-        $BEE8;%*%s$@$1$G%G%#%9%W%l%$$J$7$G%j%b!<%H$+$i;H$($k$h$&$K$J$j$^$9!#(B
+        ディスプレイがついてないwindowsマシンをどうしても使いたい場合に、
+        Tweak UIかなんかで勝手にログインするようにしておいて、
+        スタートアップでVNCサーバを起動したりすると、
+        電源オンだけでディスプレイなしでリモートから使えるようになります。
 </p>
 <p>
-        $B%5!<%P(B/$B%/%i%$%"%s%H$H$b$K(BWindows/Mac/$B3F<o(BUNIX$B$=$l$>$l$GF0$/$N$G!"(B
-        $B?M$K$h$C$F$O$H$C$F$bJXMx$+$b!#(B
-        $B$o$6$o$6JL%^%7%s$r$"$d$7$/;H$&$/$i$$$J$i(Bvmware$B$NJ}$,$$$$5$$b$7$^$9$,!#(B
+        サーバ/クライアントともにWindows/Mac/各種UNIXそれぞれで動くので、
+        人によってはとっても便利かも。
+        わざわざ別マシンをあやしく使うくらいならvmwareの方がいい気もしますが。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -660,20 +660,20 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >FFFTP</a><a name="ffftp"> </a></h2>
 
 <p>
-        ftp$B%/%i%$%"%s%H!#(BGUI$B$H$7$F$O$h$/$G$-$F$$$k!#(B
-        $B$,!"(Bncftp$B$r(B<a href="#cygwin">cygwin</a>$B$G%3%s%Q%$%k$7$?J}$,(B
-        $B47$l$$$F$kJ,$@$1$$$$$+$b$7$l$J$$!#(B
+        ftpクライアント。GUIとしてはよくできている。
+        が、ncftpを<a href="#cygwin">cygwin</a>でコンパイルした方が
+        慣れいてる分だけいいかもしれない。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
 <h2><a href="http://www.edcom.jp/"
->EdMax $B%U%j!<HG(B</a><a name="edmax"> </a></h2>
+>EdMax フリー版</a><a name="edmax"> </a></h2>
 
 <p>
-        $B%a!<%i!#(B<a href="#mayu">$BAk;H$$$NM+]5(B</a>$B$,$"$l$P(Bemacs$BIw$K$J$k$N$G!"7k9=$$$$46$8!#(B
-        $B$_$e!<$H$+$o$s$@!<$i$9$H$N?M$O(B<a href="#meadow">Meadow</a>$B;H$($F$$$$$C$9$M!#(B
-        $B!JI.<T$O(BMH-e$BLnO:$J$N$@$C$?!K(B
+        メーラ。<a href="#mayu">窓使いの憂鬱</a>があればemacs風になるので、結構いい感じ。
+        みゅーとかわんだーらすとの人は<a href="#meadow">Meadow</a>使えていいっすね。
+        （筆者はMH-e野郎なのだった）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -682,17 +682,17 @@ user_pref( "docshell.frameloadcheck.disabled" , true );
 >Kerio Personal Firewall</a><a name="kpf"> </a></h2>
 
 <p>
-$B%Q!<%=%J%k%U%!%$%d!<%&%)!<%k%=%U%H!#(B
-Tiny Personal Firewall(TPF)$B$N8e7Q!#(B
-$B;v>p$O$h$/$o$+$i$J$$$,!"(B
-Kerio Technology Inc.$B$,(BTINY Software$B$+$i(B
-TPF$B$r%=!<%9%3!<%I9~$_$GGc$$<h$C$F3+H/$r7QB3$7$F$$$k$h$&$@!#(B
+パーソナルファイヤーウォールソフト。
+Tiny Personal Firewall(TPF)の後継。
+事情はよくわからないが、
+Kerio Technology Inc.がTINY Softwareから
+TPFをソースコード込みで買い取って開発を継続しているようだ。
 </p>
 <p>
-$BAjJQ$o$i$:$N(BUI$B$,8D?MMxMQ$K8B$jL5NA$J$N$OAG@2$i$7$$!#(B
+相変わらずのUIが個人利用に限り無料なのは素晴らしい。
 </p>
 <p>
-$B$7$+$7!":G?7HG$@$H(BXP$B$G%9%?%s%P%$!?5Y;_>uBV$K$G$-$J$$$h$&$@!#(B
+しかし、最新版だとXPでスタンバイ／休止状態にできないようだ。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -701,14 +701,14 @@ TPF$B$r%=!<%9%3!<%I9~$_$GGc$$<h$C$F3+H/$r7QB3$7$F$$$k$h$&$@!#(B
 >Outpost Firewall FREE</a><a name="outpost"> </a></h2>
 
 <p>
-$B%Q!<%=%J%k%U%!%$%d!<%&%)!<%k%=%U%H!#(B
-$B%i%$%;%s%9$r=OFI$7$F$+$i$G$J$$$HH=CG$G$-$J$$$,!"(B
-$BD4$Y$?HO0O$G$O!"(B
-$B2q<R$G$bF~$l$i$l$=$&$J%U%j!<$N(BPersonal Firewall$B$C$F$3$l$/$i$$$7$+8+Ev$?$i$J$$!#(B
+パーソナルファイヤーウォールソフト。
+ライセンスを熟読してからでないと判断できないが、
+調べた範囲では、
+会社でも入れられそうなフリーのPersonal Firewallってこれくらいしか見当たらない。
 </p>
 <p>
-$B$A$g$C$H;H$C$F$_$?46$8$G$O!"7k9=$$$$$H;W$$$^$9!#(B
-$B$?$@!"(BDHCP$B$J4D6-$G$O5/F0;~$NF0:n$,JQ!#8GDj(BIP$B4D6-$G;H$&$Y$7!#(B
+ちょっと使ってみた感じでは、結構いいと思います。
+ただ、DHCPな環境では起動時の動作が変。固定IP環境で使うべし。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -717,20 +717,20 @@ TPF$B$r%=!<%9%3!<%I9~$_$GGc$$<h$C$F3+H/$r7QB3$7$F$$$k$h$&$@!#(B
 >AVG Free Edition</a><a name="avg"> </a></h2>
 
 <p>
-$B3$30$N%&%#%k%9%A%'%C%/%=%U%H$N%U%j!<HG!#(B
-$BFC$K;HMQ4|8B$b$J$/!"(B
-$B%U%j!<HG$G$b%Q%?!<%s%U%!%$%k$N99?7$r$7$F$/$l$k$N$GHs>o$K4r$7$$!#(B
+海外のウィルスチェックソフトのフリー版。
+特に使用期限もなく、
+フリー版でもパターンファイルの更新をしてくれるので非常に嬉しい。
 </p>
 <p>
-$B%i%$%;%s%9$,>/!9IwJQ$o$j$G!"(B
-$B8D?MMxMQ$G$+$D3F?M$K$D$$$F(B1$B%^%7%s$K$7$+%$%s%9%H!<%k$G$-$J$$!#(B
-$B8D?M$GJ#?t%7%j%"%k<hF@$9$k$N$b%i%$%;%s%9E*$K$O(BNG$B$J$h$&$@!#(B
-$B6&MQ%^%7%s$J$iB>$N?M$NL>5A$G%7%j%"%k$r<h$l$P$$$$$H;W$&$,!"(B
-$B8D?M$GJ#?tBf;}$C$F$$$k>l9g$OB>$N$rC5$9I,MW$,$"$k!#(B
-$B2q<R$G;H$$$?$$$1$I6b$,=P$J$$>l9g$O(B
+ライセンスが少々風変わりで、
+個人利用でかつ各人について1マシンにしかインストールできない。
+個人で複数シリアル取得するのもライセンス的にはNGなようだ。
+共用マシンなら他の人の名義でシリアルを取ればいいと思うが、
+個人で複数台持っている場合は他のを探す必要がある。
+会社で使いたいけど金が出ない場合は
 <a href="http://housecall.antivirus.com/housecall/start_jp.asp"
->$B%H%l%s%I%^%$%/%m(B $B%*%s%i%$%s%9%-%c%s(B</a
->$B$"$?$j$GDj4|E*$K%A%'%C%/$9$k$/$i$$$7$+$G$-$J$$$+$J!#(B
+>トレンドマイクロ オンラインスキャン</a
+>あたりで定期的にチェックするくらいしかできないかな。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -739,27 +739,27 @@ TPF$B$r%=!<%9%3!<%I9~$_$GGc$$<h$C$F3+H/$r7QB3$7$F$$$k$h$&$@!#(B
 >AntiVir Personal Edition</a><a name="antivir"> </a></h2>
 
 <p>
-$B%&%#%k%9%A%'%C%/%=%U%H!#(B
-$B$^$@;H$C$?$3$H$O$J$$!#(B
-$BD4$Y$?HO0O$G$O(BAVG$B$H%U%j!<$G$OAP`z!"$J$N$@$m$&$+!#(B
-$B%i%$%;%s%9$O=OFI$7$F$$$J$$$,!"8D?MMxMQ$G(B1$BBf$^$G$J$iA4$/LdBj$J$$$h$&$@!#(B
-$B2q<R$G;H$&$N$OL5M}$C$]$$!#(B
-$B8D?M$GJ#?tBf$K%$%s%9%H!<%k$7$F$$$$$+$I$&$+$OITL@!#(B
+ウィルスチェックソフト。
+まだ使ったことはない。
+調べた範囲ではAVGとフリーでは双璧、なのだろうか。
+ライセンスは熟読していないが、個人利用で1台までなら全く問題ないようだ。
+会社で使うのは無理っぽい。
+個人で複数台にインストールしていいかどうかは不明。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
 <h2><a href="http://www.asahi-net.or.jp/~vr4m-ikw/"
->$BAk$N<j(B</a><a name="madonote"> </a></h2>
+>窓の手</a><a name="madonote"> </a></h2>
 
 <p>
 
-Windows$BI8=`$G$O$$$8$l$J$$$1$IJXMx$J@_Dj9`L\$rJQ99$9$k%D!<%k!#(B
-$BMW$9$k$K%l%8%9%H%j$r(BGUI$B$+$i$$$8$C$F$k$@$1$@$HM}2r$7$F$^$9!#(B
+Windows標準ではいじれないけど便利な設定項目を変更するツール。
+要するにレジストリをGUIからいじってるだけだと理解してます。
 </p>
 <p>
-$BLGB?$K;H$o$J$$$s$G$9$,!"(B
-OS$B$r%$%s%9%H!<%k$7$?$P$+$j$N%?%$%_%s%0$G$OJXMx$J5$$b!#(B
+滅多に使わないんですが、
+OSをインストールしたばかりのタイミングでは便利な気も。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -768,58 +768,58 @@ OS$B$r%$%s%9%H!<%k$7$?$P$+$j$N%?%$%_%s%0$G$OJXMx$J5$$b!#(B
 >UPX</a><a name="upx"> </a></h2>
 
 <p>
-$B%P%$%J%j$r05=L$9$k%=%U%H!#(BEXE$B$b(BDLL$B$b05=L2DG=!#(B
-DOS$B$N:"$N(BDiet$B$_$?$$$J$b$N$@$H;W$&!#(B
-$B:G6a$N(BHDD$B$O9bB.$+$DMFNL$b==J,$J$N$G$=$l$[$I2ACM$O$J$$$H;W$&!#(B
-$B%N!<%H(BPC$B$H$+(BVMware$B4D6-$N$h$&$K(BHDD$B$,6KC<$KCY$$>l9g$K$O!"(B
-$B5pBg%=%U%H$N5/F0;~4VC;=L$rBN46$G$-$k5$$,$9$k!#(B
-$B5$$N$;$$$+$b$7$l$J$$$,!#(B
-$BFC$K!"%9%?!<%H%"%C%W$KF~$C$F$k%=%U%H$J$s$+$O8z2L@dBg$J5$$,$9$k!#(B
-$B$3$l$^$?5$$N$;$$$+$b$7$l$J$$!#(B
-$B$^$?!"%G%#%9%/%-%c%C%7%e$K>h$j$d$9$/$J$k$+$b$7$l$J$$!#(B
-$B$o$+$i$J$$$1$I!#(B
+バイナリを圧縮するソフト。EXEもDLLも圧縮可能。
+DOSの頃のDietみたいなものだと思う。
+最近のHDDは高速かつ容量も十分なのでそれほど価値はないと思う。
+ノートPCとかVMware環境のようにHDDが極端に遅い場合には、
+巨大ソフトの起動時間短縮を体感できる気がする。
+気のせいかもしれないが。
+特に、スタートアップに入ってるソフトなんかは効果絶大な気がする。
+これまた気のせいかもしれない。
+また、ディスクキャッシュに乗りやすくなるかもしれない。
+わからないけど。
 </p>
 <p>
-$B2?$K$;$h<qL#$N@$3&!#$G$b3Z$7$$$+$i(BOK$B!#(B
-Linux$B$N%P%$%J%j$b05=L$G$-$k$,!"(B*.so$B$r05=L$G$-$J$$$N$G8z2L$O8BDjE*!#(B
-$B0J2<$N$h$&$K(B.bashrc$B$K=q$/$HJXMx!#(B
+何にせよ趣味の世界。でも楽しいからOK。
+Linuxのバイナリも圧縮できるが、*.soを圧縮できないので効果は限定的。
+以下のように.bashrcに書くと便利。
 </p>
 <pre>
     alias upx='"/Program Files/upx/upx" --best --compress-icons=0 --crp-ms=100000'
 </pre>
 <p>
-$B$G!"E,Ev$J>l=j$G0J2<$N$h$&$K<B9T!#(B
-find$B;H$C$F$s$N$K(B-exec$B;H$o$J$$$N$O<qL#$H$$$&$+%(%$%j%"%9$N4X78$H$$$&$+!#(B
+で、適当な場所で以下のように実行。
+find使ってんのに-exec使わないのは趣味というかエイリアスの関係というか。
 </p>
 <pre>
     $ upx `find -name '*.exe' -o -name '*.dll'`
 </pre>
 
 <!--
-linux$B$G(Bupx$BJT(B
+linuxでupx編
 
-Linux$B$N%P%$%J%j$b05=L$G$-$k$,!"(B*.so$B$r05=L$G$-$J$$$N$G8z2L$O8BDjE*!#(B
+Linuxのバイナリも圧縮できるが、*.soを圧縮できないので効果は限定的。
 
-$B$H$O$$$(LLGr$$!#(B
+とはいえ面白い。
 
-upx$B$G(B/usr/bin/*$B$r05=L$7$?$iLdBj$J$+$C$?!#(B
-$B$?$@$7!"(Bhard link$B$5$l$F$$$k$b$N$,J#?t8D$K$J$C$F$7$^$&$N$,Ha$7$$!#(B
-$B05=LA0$K%j%s%/?t%A%'%C%/$7$F$*$/$Y$-!#(B
-$B$^$?!"%Q!<%_%C%7%g%s$,JQ$J$b$N$K$D$$$F$O!"(B
-$B0lC6IaDL$N%Q!<%_%C%7%g%s$K$7$F$+$i$G$J$$$H$&$^$/07$($J$$!#(B
-emacs$B$H$+!#(B
+upxで/usr/bin/*を圧縮したら問題なかった。
+ただし、hard linkされているものが複数個になってしまうのが悲しい。
+圧縮前にリンク数チェックしておくべき。
+また、パーミッションが変なものについては、
+一旦普通のパーミッションにしてからでないとうまく扱えない。
+emacsとか。
 
-/bin/*$B$r05=L$7$?$i(Binit$B$G$-$J$/$F%V!<%H<:GT$7$?!#(B
-$BM}M3$OITL@$@$,!"(Bbash$B$rDY$9$H;`$L$h$&$@!#0lHVDY$7$?$$$N$K!#(B
-rpm/vi/gawk/tar/grep$B$r05=L$7$FK~B-$9$k$3$H$K$7$?!#(B
+/bin/*を圧縮したらinitできなくてブート失敗した。
+理由は不明だが、bashを潰すと死ぬようだ。一番潰したいのに。
+rpm/vi/gawk/tar/grepを圧縮して満足することにした。
 
-vmlinux$B$b05=L$7$?!#(B
-2.8M$B$,(B1.2M$B$K$J$C$?!#(B
-$B%V!<%H$bLdBj$J$7!#(B
+vmlinuxも圧縮した。
+2.8Mが1.2Mになった。
+ブートも問題なし。
 
-X11$B$G$O(Bkterm$B$H(Bvmware-toolbox$B$b05=L!#(B
+X11ではktermとvmware-toolboxも圧縮。
 
-$B$J$s$@$+$s$@$G(B30M$B$[$I6u$$$?!#(B
+なんだかんだで30Mほど空いた。
 -->
 
 <hr><!-- ____________________________________________________________ -->
@@ -828,10 +828,10 @@ X11$B$G$O(Bkterm$B$H(Bvmware-toolbox$B$b05=L!#(B
 >OpenOffice.org</a><a name="ooo"> </a></h2>
 
 <p>
-$B%*!<%W%s%=!<%9$J(BMS Office$B%/%m!<%s!#(B
-$B$^$@$^$@F;$N$j$OD9$=$&$@$,!"(B
-Word/Excel/PowerPoint$B$H$b$=$3$=$3;H$($k%l%Y%k$^$GMh$F$$$k$H;W$&!#(B
-$B%^%k%A%W%i%C%H%U%)!<%`$J$N$G!"(BLinux$B>e$G$OHs>o$K=EJu$7$F$$$k!#(B
+オープンソースなMS Officeクローン。
+まだまだ道のりは長そうだが、
+Word/Excel/PowerPointともそこそこ使えるレベルまで来ていると思う。
+マルチプラットフォームなので、Linux上では非常に重宝している。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -840,8 +840,8 @@ Word/Excel/PowerPoint$B$H$b$=$3$=$3;H$($k%l%Y%k$^$GMh$F$$$k$H;W$&!#(B
 >IrfanView32</a><a name="irfanview"> </a></h2>
 
 <p>
-        $B2hA|%S%e!<%o!#B?$/$N%U%)!<%^%C%H$KBP1~$7$F$$$k!#(B
-        $B%"%$%3%s$,3J9%0-$$$,!"$3$l$h$j$^$7$J%S%e!<%o$_$D$+$i$s!#(B
+        画像ビューワ。多くのフォーマットに対応している。
+        アイコンが格好悪いが、これよりましなビューワみつからん。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -850,12 +850,12 @@ Word/Excel/PowerPoint$B$H$b$=$3$=$3;H$($k%l%Y%k$^$GMh$F$$$k$H;W$&!#(B
 >winshot</a><a name="winshot"> </a></h2>
 
 <p>
-        $B2hLL%-%c%W%A%c%=%U%H!#(B
-        $B%W%l%<%s$J$I$G2hLL%-%c%W%A%c$7$?$$$H$-$K6/NO$J%D!<%k!#(B
-        $B%^%&%9%+!<%=%k$b%-%c%W%A%c$7$?$$$H$+!"(B
-        Alt+PrintScreen$B$@$H:Y$+$$E@$,LdBj$K$J$C$F$/$k$,!"(B
-        $B$3$N%D!<%k$O$=$s$J$H$-$b0B?4!#(B
-        Photoshop$B$,$"$l$PLdBj$J$$$+$b$7$l$J$$$1$I!#(B
+        画面キャプチャソフト。
+        プレゼンなどで画面キャプチャしたいときに強力なツール。
+        マウスカーソルもキャプチャしたいとか、
+        Alt+PrintScreenだと細かい点が問題になってくるが、
+        このツールはそんなときも安心。
+        Photoshopがあれば問題ないかもしれないけど。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -864,9 +864,9 @@ Word/Excel/PowerPoint$B$H$b$=$3$=$3;H$($k%l%Y%k$^$GMh$F$$$k$H;W$&!#(B
 >Dynamo</a><a name="dynamo"> </a></h2>
 
 <p>
-        $B0JA0(BWyvern$B$H8F$P$l$F$$$?(Bmp3$B:F@8%=%U%H$HF1$8:n<T$K$h$k8e7Q%=%U%H!#(B
-        $B0JA0$h$j$b:n<T8D?M$N$?$a$K:n$C$F$$$k$H$+2?$H$+!#(B
-        $B%7%s%W%k$G9%$-$G$9!#(B
+        以前Wyvernと呼ばれていたmp3再生ソフトと同じ作者による後継ソフト。
+        以前よりも作者個人のために作っているとか何とか。
+        シンプルで好きです。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -875,72 +875,72 @@ Word/Excel/PowerPoint$B$H$b$=$3$=$3;H$($k%l%Y%k$^$GMh$F$$$k$H;W$&!#(B
 >RarUty</a><a name="raruty"> </a></h2>
 
 <p>
-        $BFI$_J}$O!V$i$k$A!<!W!#(B
-        $BK\Ev$OK|G=%"!<%+%$%P$J$s$@$H;W$$$^$9$,!"$=$NMQES$G$OA4$/;H$C$F$$$^$;$s!#(B
-        $B%@%&%s%m!<%I$7$F$-$?%U%!%$%k$N(BCRC$B%A%'%C%/$,$7$?$$>l9g$KD6JXMx$K;H$C$F$$$^$9!#(B
-        $B$9$G$K3+H/=*N;$7$F$$$k$h$&$G$9$,!"EvJ,$3$l;H$C$H$-$^$9!#(B
+        読み方は「らるちー」。
+        本当は万能アーカイバなんだと思いますが、その用途では全く使っていません。
+        ダウンロードしてきたファイルのCRCチェックがしたい場合に超便利に使っています。
+        すでに開発終了しているようですが、当分これ使っときます。
 </p>
 <p>
-        $B%"%$%3%s$,$A$H%"%l$J$N$G%G%9%/%H%C%W$KCV$-$?$/$J$$$N$@$,!"(B
-        $BJXMx$J$N$GCV$$$F$*$-$?$$$H$$$&?4$N3kF#$,$"$k!#(B
+        アイコンがちとアレなのでデスクトップに置きたくないのだが、
+        便利なので置いておきたいという心の葛藤がある。
 </p>
 
 <!-- ____________________________________________________________ -->
 
 <!--h2><a href="http://luna.fc2.com/soft.html"
->$BM~<yL5(B</a><a name="resume"> </a></h2>
+>璃樹無</a><a name="resume"> </a></h2>
 
 <p>
-        $B:=Mr2r=|%=%U%H!#4pK\E*$K$"$-$i$aAa$$$N$G!"$3$l$G%@%a$J$i$"$-$i$a$^$9!#(B
+        砂嵐解除ソフト。基本的にあきらめ早いので、これでダメならあきらめます。
 </p>
 
 <h2><a href="http://www.clickjump.net/bdbzm"
 >BDBZM</a><a name="bdbzm"> </a></h2>
 
 <p>
-        $B2x$7$$2hA|$+$i%V%D$r<h$j=P$9%=%U%H!#DL>N$"$d$d!#$3$l$G$b%@%a$J$i$"$-$i$a$^$9!#(B
+        怪しい画像からブツを取り出すソフト。通称あやや。これでもダメならあきらめます。
 </p-->
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2>$B$=$NB>(B<a name="other"> </a></h2>
+<h2>その他<a name="other"> </a></h2>
 
 <p>
-        $B6bJ'$&$b$N$r=q$/$D$b$j$O$J$+$C$?$s$G$9$,!"(B
-        $B$d$C$Q(BVMware$B$O>R2p$7$H$-$?$$$+$J!D!#(B
+        金払うものを書くつもりはなかったんですが、
+        やっぱVMwareは紹介しときたいかな…。
 </p>
 <p>
-        $B:y;~7W$H(BCD2WAV32$B$b=q$-$?$$$H$3$m!#(B
-        Daemon Tools(DJB$B$H$OL54X78$JJ}!K$b$$$$$J$"!#(B
-        WinShot$B$bJXMx$J$H$-$OJXMx$C$9$M!#(B
-        $B:G6a(Bburn4free$B$r;n$7$F$_$?$s$G$9$,!"$+$J$j$$$$46$8$G$7$?!#(B
+        桜時計とCD2WAV32も書きたいところ。
+        Daemon Tools(DJBとは無関係な方）もいいなあ。
+        WinShotも便利なときは便利っすね。
+        最近burn4freeを試してみたんですが、かなりいい感じでした。
 </p>
 <p>
-        $B$=$&$=$&!"=q$$$F$J$$%8%c%s%k$N$b$N$O!"(B
-        windows$BI8=`$N%V%D$+!"(B
-        $B$b$7$/$O(BCUI$B$J%V%D$r;H$C$F$^$9!#(B
-        wget$B$H$+(Blame$B$H$+<+:n(BPerl$B%9%/%j%W%H$H$+!#(B
+        そうそう、書いてないジャンルのものは、
+        windows標準のブツか、
+        もしくはCUIなブツを使ってます。
+        wgetとかlameとか自作Perlスクリプトとか。
 </p>
 <p>
-        Moonlight$B$O<N$F$F!"(Bmayu$B$r%i%s%A%c$C$]$/;H$&$3$H$K$7$^$7$?!#(B
+        Moonlightは捨てて、mayuをランチャっぽく使うことにしました。
 </p>
 <p>
 </p>
 <!-- memo0: keychain -->
-<!-- memo1: $B808@MU(B -->
+<!-- memo1: 鍵言葉 -->
 <!-- memo2: WWWC ncw VD
 
 http://spinar.chat.ru/
 
 
-FFXI$B%Y%s%A(B
+FFXIベンチ
 
-$B$f$a$j$"%Y%s%A(B
+ゆめりあベンチ
 http://www.yumeria.com/download/mark.html
 
 3DMark
 
-super$B&P(B
+superπ
 hdbench
 wcpuid
 sandra
@@ -949,64 +949,64 @@ memtest86
 speedfan
 http://www.almico.com/speedfan.php
 
-HDD$B29EY7W(B
+HDD温度計
 http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
 
  -->
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2>$B%j%s%/=8(B<a name="bookmarks"> </a></h2>
+<h2>リンク集<a name="bookmarks"> </a></h2>
 
 <p>
-$B@$$NCf!"9-$/;H$o$l$F$k$b$N$,$$$$%=%U%H$H$O8B$i$J$$$C$F$3$H$G!"(B
-$B$J$+$J$+8D@-E*$J!V$*5$$KF~$j%=%U%H>R2p%Z!<%8!W$,7k9=$"$j$^$9!#(B
-$B<qL#$N6a$$?M$N$*A&$a%D!<%k$O;n$7$F$_$?$/$J$j$^$9$M!#(B
-$B$G$b!"$$$^$R$H$D<qL#$N;wDL$C$??M$K$h$k%=%U%H>R2p$r8+$D$1$i$l$J$$!D!#(B
+世の中、広く使われてるものがいいソフトとは限らないってことで、
+なかなか個性的な「お気に入りソフト紹介ページ」が結構あります。
+趣味の近い人のお薦めツールは試してみたくなりますね。
+でも、いまひとつ趣味の似通った人によるソフト紹介を見つけられない…。
 </p>
 <p>
-$B%=%U%H$N>R2p?t$G>!Ii$7$F$$$k$h$&$J%Z!<%8$OFbMF$,?.MQ$G$-$J$$$7!"(B
-$BBgH>$,8=>u;H$C$F$b$$$J$$%=%U%H$J$s$F>u67$8$c(B
-$B>pJs$,Kd$b$l$FA4A3;H$($J$$$N$GL5;k$7$F$^$9!#(B
+ソフトの紹介数で勝負しているようなページは内容が信用できないし、
+大半が現状使ってもいないソフトなんて状況じゃ
+情報が埋もれて全然使えないので無視してます。
 </p>
 
     <ul>
       <li><a href="http://kitaj.no-ip.com/Software/index.html"
-	  >$B$3$N%=%U%H$r;H$((B!!</a
-          > $B$-$?$5$s$N%=%U%H>R2p!#<qL#$O6a$$!#$b$&>/$7A}$d$7$F$/$@$5$$!J>P(B<br>
+	  >このソフトを使え!!</a
+          > きたさんのソフト紹介。趣味は近い。もう少し増やしてください（笑<br>
 <!--
       <li><a href="http://tj.pos.to/p-c/windows.html"
-	  >$BAk$H$N3JF.$N7k<B(B</a
-          > TJ$B$5$s$N%=%U%H>R2p!#<qL#$O6a$$$+$b!#(Bxyzzy$B$K%a%m%a%m$_$?$$!J>P(B<br>
+	  >窓との格闘の結実</a
+          > TJさんのソフト紹介。趣味は近いかも。xyzzyにメロメロみたい（笑<br>
       <li><a href="http://www.sakjp.net/~zaji/win/mytool.html"
-	  >$B8D?ME*$KMxMQ$7$F$$$k%U%j!<%&%'%"$N>R2p(B</a
-          > zaji$B$5$s!#<qL#$O6a$$$+$b!#(B<br>
+	  >個人的に利用しているフリーウェアの紹介</a
+          > zajiさん。趣味は近いかも。<br>
       <li><a href="http://chiba.cool.ne.jp/goromaru/ateam/index.html"
-	  >$B%U%j!<%&%'%"LnO:$q$'$A!A$`(B</a
-          > $B9b2,$5$s!#$J$+$J$+$"$d$7$$!#<qL#$O6a$a$+$b(B<br>
+	  >フリーウェア野郎ゑぇち〜む</a
+          > 高岡さん。なかなかあやしい。趣味は近めかも<br>
       <li><a href="http://www.geocities.co.jp/Playtown-Spade/6579/TOOL/ORE.html"
-	  >$BDC:22N;HMQ%D!<%k(B</a
-          > $BDC:22N$5$s!#$3$l$^$?$"$d$7$$!#<qL#$O6a$a$+$b(B<br>
+	  >鎮魂歌使用ツール</a
+          > 鎮魂歌さん。これまたあやしい。趣味は近めかも<br>
       <li><a href="http://www15.big.or.jp/~kit/desktop/"
-	  >$B%b!<%l%D%G%9%/%H%C%Q!<$NM}A[$H8=<B(B</a
-          > 3$B$D$7$+>R2p$7$F$J$$$1$I!"%^%$%k%I$J%9%?%Q:XF#$C$F46$8$N8}D4$,$$$$(B<br>
+	  >モーレツデスクトッパーの理想と現実</a
+          > 3つしか紹介してないけど、マイルドなスタパ斎藤って感じの口調がいい<br>
 -->
 
       <li><a href="http://www.mattun.net/software/"
-	  >$B$*4+$a%=%U%H%&%'%"(B</a
-          > Mattun$B$5$s!#<qL#$O6a$=$&$J$s$@$1$I(Bemacs$B;H$$$G$O$J$$LOMM!#(B<br>
+	  >お勧めソフトウェア</a
+          > Mattunさん。趣味は近そうなんだけどemacs使いではない模様。<br>
 
       <li><a href="http://ikefree.tripod.co.jp/"
-	  >$B$$$1$^$C$;!*%U%j!<%&%'%"(B</a
-          > $B$"$-$#$5$s!#<qL#$O6a$/$b$J$$$,1s$/$b$J$$$h$&$J(B<br>
+	  >いけまっせ！フリーウェア</a
+          > あきぃさん。趣味は近くもないが遠くもないような<br>
 <!--
       <li><a href="http://user1.allnet.ne.jp/seiya/works/tools/allcat.html"
-	  >$B1+$d$I$j(B - Tools</a
-          > $B?e6@$5$s!#<qL#$O$A$H1s$$$H$$$&$+%^%N%l%A%a%G%#%"7O$,B?$a(B<br>
+	  >雨やどり - Tools</a
+          > 水鏡さん。趣味はちと遠いというかマノレチメディア系が多め<br>
 -->
       <li><a href="http://www.ekoda.gr.jp/tool/"
-	  >$B%3%l$,$J$$$H;`$s$8$c$&!*(B</a
-          > AZUKI$B$5$s!#$J$$$H;`$L$C$F8@$$J}$,9%$-!#<qL#$O1s$a!#(BPalm$BHG$O$$$$46$8$@$,!"B?$9$.$k5$$,!#(B<br>
+	  >コレがないと死んじゃう！</a
+          > AZUKIさん。ないと死ぬって言い方が好き。趣味は遠め。Palm版はいい感じだが、多すぎる気が。<br>
 <br>
       <li><a href="http://hp.vector.co.jp/authors/VA002416/"
 	  >Tera Term Pro</a><br>
@@ -1017,18 +1017,18 @@ http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
       <li><a href="http://www2.biglobe.ne.jp/~sota/product.html"
 	  >FFFTP</a><br>
       <li><a href="http://www.venus.dti.ne.jp/~uno/software/index.html"
-	  >$B:y;~7W(B</a><br>
+	  >桜時計</a><br>
       <li><a href="http://homepage2.nifty.com/spw/bjd/dl.html"
 	  >Black Jumbo Dog</a><br>
 <br>
       <li><a href="http://www.jsdlab.co.jp/~kamei/"
 	  >xyzzy</a>
           <a href="http://www.mars.dti.ne.jp/~t-kamei/xyzzy/"
-	  >[$B$J$N$+!)(B]</a><br>
+	  >[なのか？]</a><br>
       <!--li><a href="http://village.infoweb.or.jp/~fwhv5283/"
-	  >explzh</a> (shareware, $B!o(B1000)<br-->
+	  >explzh</a> (shareware, ¥1000)<br-->
       <!--li><a href="http://www.csdinc.co.jp/archiver/"
-	  >$BE}9g%"!<%+%$%P%W%m%8%'%/%H(B</a><br-->
+	  >統合アーカイバプロジェクト</a><br-->
       <li><a href="http://www.digitalpad.co.jp/~takechin/"
 	  >Lhasa</a><br>
       <li><a href="http://www1.sphere.ne.jp/app/Lhaca/"
@@ -1038,9 +1038,9 @@ http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
           <a href="http://www.aladdinsys.com/expander/expander_win.html"
 	  >[download]</a>
           <a href="http://www.act2.co.jp/x_act2main/x_PRD/x_AL/Expander/index.html"
-	  >[$BF|K\8l(B]</a><br>
+	  >[日本語]</a><br>
       <li><a href="http://mayu.sourceforge.net/ja/index.html"
-	  >$BAk;H$$$NM+]5(B</a><br>
+	  >窓使いの憂鬱</a><br>
 
 <br>
       <li><a href="http://www.fsci.fuk.kindai.ac.jp/~kakuto/win32-ptex/index.html"
@@ -1048,23 +1048,23 @@ http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
       <li><a href="http://akagi.ms.u-tokyo.ac.jp/dviout-ftp.html"
 	  >dviout/divprt</a><br>
       <li><a href="http://auemath.aichi-edu.ac.jp/~khotta/ghost/index.html"
-	  >Ghostscript 6.0 + GSview 2.8 $B$NF|K\8lHG(B</a> $BG[I[85$C$F$I$3!)(B<br>
+	  >Ghostscript 6.0 + GSview 2.8 の日本語版</a> 配布元ってどこ？<br>
       <li><a href="http://www.adobe.co.jp/products/acrobat/readstep.html"
 	  >Adove Acrobat Reader 4.0</a><br>
 <br>
       <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/office/word/viewer/winwdv97.htm"
-	  >Word Viewer 97</a> $B!JF|K\8lHG!K(B<br>
+	  >Word Viewer 97</a> （日本語版）<br>
       <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/office/excel/viewer/default.htm"
-	  >Microsoft(R) Excel Viewer 97</a> $B!JF|K\8lHG!K(B<br>
+	  >Microsoft(R) Excel Viewer 97</a> （日本語版）<br>
       <li><a href="http://officeupdate.microsoft.com/japan/downloaddetails/2000/ppview97.htm"
-	  >PowerPoint 97-2000 Viewer for Windows</a> $B!JF|K\8lHG!K(B<br>
+	  >PowerPoint 97-2000 Viewer for Windows</a> （日本語版）<br>
       <li><a href="http://www.microsoft.com/Windows95/downloads/contents/WUToys/W95PwrToysSet/Default.asp"
 	  >Windows 95 Power Toys Set</a><br>
       <li><a href="http://www.microsoft.com/NTWorkstation/downloads/PowerToys/Networking/NTTweakUI.asp"
-	  >Tweak UI 1.1</a> Power Toys $B$KF~$C$F$k$N$HA4$/F1$8(B<br>
+	  >Tweak UI 1.1</a> Power Toys に入ってるのと全く同じ<br>
 <br>
       <li><a href="http://www.babylon.com/jap/"
-	  >$B=VLuL>?M%P%S%m%s(B</a>
+	  >瞬訳名人バビロン</a>
           <a href="http://www.babylon.com/jap/download/index.html"
 	  >[download]</a><br>
 <br>
@@ -1073,7 +1073,7 @@ http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
           <a href="http://stud1.tuwien.ac.at/~e9227474/main3.html"
 	  >[download]</a>
           <a href="http://www.platon.co.jp/~hide/iview/iview.html"
-	  >[$BF|K\8lHG(B]</a> $BF|K\8lHG;H$C$?$3$H$J$$$1$I!J4@!K(B<br>
+	  >[日本語版]</a> 日本語版使ったことないけど（汗）<br>
 <!--
        li  a href="http://www.mayura.com/"
 	   Mayura Draw /a  (shareware, $15) br 
@@ -1083,7 +1083,7 @@ http://members.jcom.home.ne.jp/big.bird/soft_hddtemp.html
           <a href="http://www.winamp.com/getwinamp/"
 	  >[download]</a><br>
       <li><a href="http://homepage1.nifty.com/herumi/soft.html"
-	  >$B8a8e$N$3!A$@(B</a><br>
+	  >午後のこ〜だ</a><br>
       <li><a href="http://member.newsguy.com/~theprof/"
 	  >Camel's MPEGJoin</a><br>
       <li><a href="http://www2s.biglobe.ne.jp/~elfin/delphi.html"

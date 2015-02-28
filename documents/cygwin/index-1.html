@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <title>Unix-taste Windows life with Cygwin 1.1</title>
 </head>
@@ -12,179 +12,179 @@
 <a href="../index.html">[back]</a>
 <hr>
 
-<font size=6><strong>Cygwin 1.1$B$G(BUNIX$B5$J,$NAk@83h(B</strong></font>
+<font size=6><strong>Cygwin 1.1でUNIX気分の窓生活</strong></font>
 
 <p>
-Windows$B$r;H$C$F$$$k(BUNIX$BLnO:$J$iL>A0$/$i$$$OJ9$$$?$3$H$,$"$k$G$"$m$&(BCygwin$B!#(B
-$BI.<T$b(Bb20.1$B$rD9$i$/;H$C$F$$$?$,!"(B
-Cygwin 1.1$B$r;H$C$F$_$F!"(B
-$B0JA0$h$j$O4|BT$G$-$k$b$N$K;E>e$,$j$D$D$"$k$H46$8$?!#(B
-$B$^$@$^$@ITK~$O;D$k$,!"$=$m$=$mB>?M$KA&$a$F$b$$$$:"9g$+$b$7$l$J$$!#(B
+Windowsを使っているUNIX野郎なら名前くらいは聞いたことがあるであろうCygwin。
+筆者もb20.1を長らく使っていたが、
+Cygwin 1.1を使ってみて、
+以前よりは期待できるものに仕上がりつつあると感じた。
+まだまだ不満は残るが、そろそろ他人に薦めてもいい頃合かもしれない。
 </p>
 <p>
-$B$3$l$O!"$=$s$JI.<T$K$h$k%a%b$G$9!#(B
-$B$+$J$jIT?F@Z$JItN`$@$H;W$$$^$9$N$G!"(B
-$B:#$^$G(BCygwin$B$r;H$C$?$3$H$b$J$$$H$$$&J}$O!"(B
-$B4pK\E*$K$O$h$=$N%Z!<%8$r;29M$K$9$k$N$,$$$$$H;W$$$^$9!#(B
-$B?=$7Lu$"$j$^$;$s$,!"<+J,MQ$N%a%b!\&A$G$9$N$G!"$3$NDxEY$,8B3&$G$9!#(B
-$B$h$=$H0c$C$?;kE@$+$iLr$KN)$D%Z!<%8$,$G$-$l$P$H9M$($F$$$^$9!#(B
+これは、そんな筆者によるメモです。
+かなり不親切な部類だと思いますので、
+今までCygwinを使ったこともないという方は、
+基本的にはよそのページを参考にするのがいいと思います。
+申し訳ありませんが、自分用のメモ＋αですので、この程度が限界です。
+よそと違った視点から役に立つページができればと考えています。
 </p>
 <p>
-$B0U8+!&<ALdEy$N%a!<%k$OBg4?7^$G$9$,!"(B
-$B;~4VE*!&G=NOE*$K4|BT$K1h$($k$H$O8B$j$^$;$s$N$G$"$7$+$i$:!#(B
-</p>
-
-<hr><!-- ____________________________________________________________ -->
-
-<font size=5><strong><a name="intro"      >$B$O$8$a$K(B</a></strong></font>
-
-<p>
-Cygwin$B$H$$$&$N$O!"(BUNIX$B$N%7%9%F%`%3!<%k$r<B8=$9$k$h$&$J(BWindows$B$N(BDLL$B$rDs6!$7!"(B
-UNIX$B$N%=!<%9$rJQ99$J$7$K%3%s%Q%$%k$7$F!"(B
-Windows$B>e$GF0$/%P%$%J%j$r:n$l$k$h$&$K$7$h$&!"(B
-$B$H$$$&%W%m%8%'%/%H$G$9!#(B
-gcc$B$O$b$A$m$s(Bbash$B$d(Btcsh$B$d(Bless$B$J$I!"B?$/$N%D!<%k$,(BWindows$B>e$GF0$-$^$9!#(B
-</p>
-<p>
-$B%$%s%9%H!<%k$9$kA0$K$^$:8!F$$9$Y$-$3$H$O!"(B
-$B<+J,$K$H$C$FK\Ev$K(BCygwin$B$,I,MW$J$N$+$I$&$+!"$H$$$&$3$H$G$9!#(B
-VMware+Linux+samba$B$H$+!"(B
-Windows$B$N(BX Server+$BJL$N(BUNIX$B%^%7%s(B+samba$B$J$I!"(B
-Windows$B$+$i!JK\J*$N!K(BUNIX$B$r;H$($k4D6-$NJ}$,(B
-Cygwin$B4D6-$h$jM%$l$?E@$O>/$J$+$i$:$"$j$^$9!#(B
-$B<B8=$7$?$$$3$H$K$h$C$F$O!"(B
-$B$`$7$m$=$A$i$NJ}$,L\E*$K9g$C$F$$$k>l9g$b$"$k$G$7$g$&!#(B
-$B$^$?!"(Btcsh$B$J$I$O(BWin32$B$K(Bport$B$5$l$F$$$^$9$N$G!"(B
-$B$=$&$$$C$?%D!<%k$r;H$&$H$$$&A*Br;h$b$"$j$^$9!#(B
-$B;d$J$j$K$3$l$i(B3$B$D$rHf3S$7$F$_$^$9$H!"(B
-</p>
-    <ul>
-      <li> <strong>UNIX$B$r(BWindows$B$+$i;H$&(B</strong>
-        <ul>
-          <li> $BBgDq$N%D!<%k$,;H$($k(B
-          <li> $B%a%s%F%J%s%9$N%3%9%H$ODc$$!J$N$G$O$J$$$+!K(B
-
-          <li> VMWare$B$d!"B?$/$N(BX server$B$OM-NA$G$"$k(B
-          <li> $B%^%7%s4D6-$,=<<B$7$F$$$kI,MW$,$"$k(B
-          <li> UNIX$B$+$i(BWindows$B$N%U%!%$%k$r07$&5$$O$7$J$$(B<br>
-               $B!J(Brumba/Sharity$B$r;H$($P2wE,$J$N$+$b$7$l$J$$$,!"(B
-               $BI.<T$N<~$j$G$ONc$,$J$$$N$G$o$+$i$J$$!K(B
-
-        </ul>
-          <strong>$B%?!<%2%C%H!'(BWindows$B>e$N;E;v$H(BUNIX$B>e$N;E;v$,$+$J$jFHN)$J?M(B</strong><br>
-          $B!J4pK\E*$K(BUNIX$B%a%$%s$G!"(BIE&Office$B$N$?$a$@$1$K(BWindows$B$r;H$&!"$J$I!K(B
-    </ul>
-    <ul>
-      <li> <strong>Windows$B$K(Bport$B$5$l$?(BUNIX$B%D!<%k$r;H$&(B</strong>
-        <ul>
-          <li> $B$*$=$i$/(BWin32$B%D!<%k$H$N?FOB@-$,9M$($i$l$?$b$N$,B?$$(B
-          <li> $B$*$=$i$/%P%$%J%j$GDs6!$5$l$k$N$G!"%$%s%9%H!<%k$,4JC1(B
-
-          <li> $BI,MW$J$b$N$,(Bport$B$5$l$F$$$k$H$O8B$i$J$$(B
-          <li> path$B$dC<Kv$N07$$$J$I$,E}0lE*$K(Bport$B$5$l$F$$$k$H$O8B$i$J$$(B
-          <li> hack$B$7$h$&$H;W$C$?$i$*$=$i$/(BCygwin$B4D6-$h$jLLE](B
-        </ul>
-          <strong>$B%?!<%2%C%H!'(BWindows$B$G$N;E;v$K(BUNIX$B$N%3%^%s%I$,I,MW$J?M(B</strong><br>
-    </ul>
-    <ul>
-      <li> <strong>Cygwin$B$r;H$&(B</strong>
-        <ul>
-          <li> $BB?$/$N%D!<%k$,;H$($k(B
-          <li> gcc$B$,$"$k(B
-
-          <li> $B%$%s%9%H!<%k$,LLE](B
-          <li> POSIX$BIw(Bpath$B$N$;$$$G!"(BCygwin$B0J30$N%D!<%k$H$N?FOB@-$KFq$,$"$k(B
-          <li> $B$^$@$^$@3+H/Cf!JIaCJ;H$&5$$K$J$kDxEY$K0BDj$7$F$$$k$,!K(B
-          <li> $B>pJs$,>/$J$$!J%f!<%6!<$,>/$J$$!K(B
-        </ul>
-          <strong>$B%?!<%2%C%H!'(BWindows$B$G$N;E;v$K(BUNIX$B$N%3%^%s%I$,I,MW$J?M(B</strong><br>
-          $B!J$+$D!"(BWin32$B$X%]!<%H$5$l$?(BUNIX$B%D!<%k$G$OBLL\$@!"$H$$$&M}M3$N$"$k?M!K(B<br>
-    </ul>
-<p>
-$B$H$$$C$?$3$H$,8@$($k$G$7$g$&!#(B
-$BM}A[$H$7$F$O!"(BUNIX$B$r(BWindows$B$+$i;H$$$D$D!"(B
-Windows$B>e$G$N;E;v$N$?$a$K(BWin32$B$K(Bport$B$5$l$?(BUNIX$B%D!<%k$rJ;MQ$9$k!"(B
-$B$H$$$&4D6-$,AG@2$i$7$$$H;W$$$^$9!#(B
-$B$?$H$($I$A$i$b(BCygwin$B$@$1$G$G$-$?$H$7$F$b!"(B
-UNIX$B>e$G407k$5$;$i$l$k$3$H$O(BUNIX$B$G$d$kJ}$,0B?4$G$9$7!"(B
-UNIX$B%=!<%9$r(BCygwin$B$G%3%s%Q%$%k$7$?$b$N$h$j!"(B
-port$B$5$l$?%D!<%k$NJ}$,?e=`$,9b$$$b$N$G$"$k$N$,IaDL$@$H;W$$$^$9$+$i!#(B
-$B$=$&$$$&0UL#$G(BCygwin$B$OBE6($N;:J*$G$"$j!"(B
-$B$I$C$A$D$+$:$JBeJ*$@$H;W$$$^$9!#(B
-</p>
-<p>
-$B$7$+$7!"<+J,$N$*5$$KF~$jA4$F$,(BWin32$B$K(Bport$B$5$l$k$o$1$O$J$$$G$9$7!"(B
-$BFHN)$K(Bport$B$5$l$FE}0l@-$N$J$$%D!<%k$r;H$&$N$O6lDK$G$9$N$G!"(B
-$B$=$N0UL#$G$O(BUNIX+(X server || VMWare)+Cygwin$B$,(B
-$B8=<BE*$K$O:G$bAG@2$i$7$$4D6-$J$N$G$O$J$$$G$7$g$&$+!#(B
-$B$^$?!"(BUNIX$B$,<j6a$K$J$$$H$$$&>l9g$K$O!"(B
-Cygwin$B$K$h$k(BUNIX$B$b$I$-$N4D6-$,JXMx$J$3$H$b$"$k$G$7$g$&!#(B
-</p>
-<p>
-$B$b$C$H$b!"F3F~$N%3%9%H$HF@$i$l$k%a%j%C%H$H$N4V$K$O%H%l!<%I%*%U$,$"$j$^$9$+$i!"(B
-$B$?$H$((BCygwin$B$KL%NO$r46$8$?$H$7$F$b!"(B
-Cygwin$B$r%$%s%9%H!<%k$9$k$N$,(Breasonable$B$@$H$O8B$j$^$;$s!#(B
-Cygwin 1.1$B$K$J$C$FHs>o$K=PMh$,NI$/$J$C$F$-$F$*$j!"(B
-$BF3F~$9$k$3$H$OA4$F$N?M$K$H$C$F%a%j%C%H$,$"$k$H$O;W$$$^$9$,!"(B
-$B@5D>$J$H$3$m!"(B
-$B$b$&>/$74JC1$K;H$($k$h$&$K$J$i$J$$$H(B
-Cygwin$B$,;TL18"$r>!$A<h$k$N$OFq$7$$5$$,$7$^$9!#(B
-</p>
-<p>
-$B$A$J$_$KI.<T$O>e$N(B3$BJ,N`A4$F$rJ;MQ$7$F$$$k>uBV$G$9!#(B
-$B%3%s%=!<%k%"%W%j$O(BCygwin$B$GE}0l$G$-$?$i9,$;$@$H;W$&$s$G$9$,!"(B
-TeX$B$C$F(BCygwin$B$G:n$l$k$s$G$9$+$M!)(B
+意見・質問等のメールは大歓迎ですが、
+時間的・能力的に期待に沿えるとは限りませんのであしからず。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<font size=5><strong><a name="install">$B%@%&%s%m!<%I(B</a></strong></font>
+<font size=5><strong><a name="intro"      >はじめに</a></strong></font>
 
 <p>
-$BIT?F@Z$J$3$H$K!"I,MW$J%V%D$O(B
+Cygwinというのは、UNIXのシステムコールを実現するようなWindowsのDLLを提供し、
+UNIXのソースを変更なしにコンパイルして、
+Windows上で動くバイナリを作れるようにしよう、
+というプロジェクトです。
+gccはもちろんbashやtcshやlessなど、多くのツールがWindows上で動きます。
+</p>
+<p>
+インストールする前にまず検討すべきことは、
+自分にとって本当にCygwinが必要なのかどうか、ということです。
+VMware+Linux+sambaとか、
+WindowsのX Server+別のUNIXマシン+sambaなど、
+Windowsから（本物の）UNIXを使える環境の方が
+Cygwin環境より優れた点は少なからずあります。
+実現したいことによっては、
+むしろそちらの方が目的に合っている場合もあるでしょう。
+また、tcshなどはWin32にportされていますので、
+そういったツールを使うという選択肢もあります。
+私なりにこれら3つを比較してみますと、
+</p>
+    <ul>
+      <li> <strong>UNIXをWindowsから使う</strong>
+        <ul>
+          <li> 大抵のツールが使える
+          <li> メンテナンスのコストは低い（のではないか）
+
+          <li> VMWareや、多くのX serverは有料である
+          <li> マシン環境が充実している必要がある
+          <li> UNIXからWindowsのファイルを扱う気はしない<br>
+               （rumba/Sharityを使えば快適なのかもしれないが、
+               筆者の周りでは例がないのでわからない）
+
+        </ul>
+          <strong>ターゲット：Windows上の仕事とUNIX上の仕事がかなり独立な人</strong><br>
+          （基本的にUNIXメインで、IE&OfficeのためだけにWindowsを使う、など）
+    </ul>
+    <ul>
+      <li> <strong>WindowsにportされたUNIXツールを使う</strong>
+        <ul>
+          <li> おそらくWin32ツールとの親和性が考えられたものが多い
+          <li> おそらくバイナリで提供されるので、インストールが簡単
+
+          <li> 必要なものがportされているとは限らない
+          <li> pathや端末の扱いなどが統一的にportされているとは限らない
+          <li> hackしようと思ったらおそらくCygwin環境より面倒
+        </ul>
+          <strong>ターゲット：Windowsでの仕事にUNIXのコマンドが必要な人</strong><br>
+    </ul>
+    <ul>
+      <li> <strong>Cygwinを使う</strong>
+        <ul>
+          <li> 多くのツールが使える
+          <li> gccがある
+
+          <li> インストールが面倒
+          <li> POSIX風pathのせいで、Cygwin以外のツールとの親和性に難がある
+          <li> まだまだ開発中（普段使う気になる程度に安定しているが）
+          <li> 情報が少ない（ユーザーが少ない）
+        </ul>
+          <strong>ターゲット：Windowsでの仕事にUNIXのコマンドが必要な人</strong><br>
+          （かつ、Win32へポートされたUNIXツールでは駄目だ、という理由のある人）<br>
+    </ul>
+<p>
+といったことが言えるでしょう。
+理想としては、UNIXをWindowsから使いつつ、
+Windows上での仕事のためにWin32にportされたUNIXツールを併用する、
+という環境が素晴らしいと思います。
+たとえどちらもCygwinだけでできたとしても、
+UNIX上で完結させられることはUNIXでやる方が安心ですし、
+UNIXソースをCygwinでコンパイルしたものより、
+portされたツールの方が水準が高いものであるのが普通だと思いますから。
+そういう意味でCygwinは妥協の産物であり、
+どっちつかずな代物だと思います。
+</p>
+<p>
+しかし、自分のお気に入り全てがWin32にportされるわけはないですし、
+独立にportされて統一性のないツールを使うのは苦痛ですので、
+その意味ではUNIX+(X server || VMWare)+Cygwinが
+現実的には最も素晴らしい環境なのではないでしょうか。
+また、UNIXが手近にないという場合には、
+CygwinによるUNIXもどきの環境が便利なこともあるでしょう。
+</p>
+<p>
+もっとも、導入のコストと得られるメリットとの間にはトレードオフがありますから、
+たとえCygwinに魅力を感じたとしても、
+Cygwinをインストールするのがreasonableだとは限りません。
+Cygwin 1.1になって非常に出来が良くなってきており、
+導入することは全ての人にとってメリットがあるとは思いますが、
+正直なところ、
+もう少し簡単に使えるようにならないと
+Cygwinが市民権を勝ち取るのは難しい気がします。
+</p>
+<p>
+ちなみに筆者は上の3分類全てを併用している状態です。
+コンソールアプリはCygwinで統一できたら幸せだと思うんですが、
+TeXってCygwinで作れるんですかね？
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<font size=5><strong><a name="install">ダウンロード</a></strong></font>
+
+<p>
+不親切なことに、必要なブツは
 ftp://sourceware.cygnus.com/pub/cygwin/latest/
-$B$N2<$N%5%V%G%#%l%/%H%j$K>.J,$1$K(Btar.gz$B$G8G$^$C$F$$$^$9!#(B
-$B$3$3$O$$$D$b:.$s$G$$$k$N$G!"%_%i!<%5%$%H$+$iMn$H$7$?J}$,$$$$$G$7$g$&!#(B
+の下のサブディレクトリに小分けにtar.gzで固まっています。
+ここはいつも混んでいるので、ミラーサイトから落とした方がいいでしょう。
 </p>
 <p>
-setup.exe$B$@$1$rMn$H$;$P%M%C%H%o!<%/%$%s%9%H!<%k$G$-$k$h$&$G$9$1$I!"(B
-$B;d$O(BCD-R$B$K>F$/$?$a$K!"(Blatest$B$N2<A4It$r(BUNIX$B%^%7%s$GMn$H$7$^$7$?!#(B
+setup.exeだけを落とせばネットワークインストールできるようですけど、
+私はCD-Rに焼くために、latestの下全部をUNIXマシンで落としました。
 </p>
 <pre>----------
 $ wget -Yoff -r -R\*-src.tar.gz ftp://sourceware.cygnus.com/pub/cygwin/latest/
 ----------</pre>
 <p>
-$B$J$I$HBG$C$FJ|$C$F$*$$$?$@$1$G$9!J(B*-src.tar.gz$B$H$$$&$N$O%=!<%9$G$9!K!#(B
+などと打って放っておいただけです（*-src.tar.gzというのはソースです）。
 <!--
-$B%=!<%99~$_$GMn$H$7$?$H$3$m!"(B80M$B$[$I$G$7$?!#(B
-$B$;$C$+$/(Bmd5$B$,$D$$$F$-$F$k$N$G!"3F%G%#%l%/%H%j$G(B md5sum -c md5.sum $B$r<B9T$7$F$_$?$j!#(B
+ソース込みで落としたところ、80Mほどでした。
+せっかくmd5がついてきてるので、各ディレクトリで md5sum -c md5.sum を実行してみたり。
  -->
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<font size=5><strong><a name="install">$B%$%s%9%H!<%k(B</a></strong></font>
+<font size=5><strong><a name="install">インストール</a></strong></font>
 
 <p>
-$B%$%s%9%H!<%k$9$kA0$K!"$I$&$$$&%]%j%7!<$G%$%s%9%H!<%k$9$k$+!"(B
-$B$I$&$9$l$P;H$$$d$9$$$+$r9M$($k$Y$-$G$7$g$&!#(B
-Cygwin$B$r(Bc:\cygwin$B$K%$%s%9%H!<%k$7$F!"$=$l$r(B/$B$K%^%&%s%H$9$k!"(B
-$B$J$I$H$$$&?M$b$$$k$h$&$G$9$,!"(B
-Cygwin$B0J30$N%D!<%k$r;H$&$H$-$K:.Mp$N85$K$J$k$H;W$$$^$9!#(B
-$B$d$O$j!"(Bc:\$B!J$^$?$O0lHV$h$/;H$&%I%i%$%V$N%k!<%H!K$r(B/$B$K$9$k$Y$-$G$7$g$&!#(B
+インストールする前に、どういうポリシーでインストールするか、
+どうすれば使いやすいかを考えるべきでしょう。
+Cygwinをc:\cygwinにインストールして、それを/にマウントする、
+などという人もいるようですが、
+Cygwin以外のツールを使うときに混乱の元になると思います。
+やはり、c:\（または一番よく使うドライブのルート）を/にするべきでしょう。
 </p>
 <p>
-$B$G!";d$N<h$C$?%]%j%7!<$r@bL@$7$^$9!#(B
+で、私の取ったポリシーを説明します。
 </p>
     <ul>
-      <li> c:\ $B$r(B / $B$K$9$k!#(B
-      <li> c:\cygwin$B$K(BCygwin1.1$B$r%$%s%9%H!<%k$7$F!"(B
-           $B$=$N2<$N(Bc:\cygwin\{bin,etc,usr}$B$r$=$l$>$l(B/{bin,etc,usr}$B$K%^%&%s%H!#(B
-      <li> c:\local$B$r:n$j!"(B/usr/local$B$K%^%&%s%H!#(B
-      <li> d:\$B$r(B/cdrom$B$K%^%&%s%H!#(B
+      <li> c:\ を / にする。
+      <li> c:\cygwinにCygwin1.1をインストールして、
+           その下のc:\cygwin\{bin,etc,usr}をそれぞれ/{bin,etc,usr}にマウント。
+      <li> c:\localを作り、/usr/localにマウント。
+      <li> d:\を/cdromにマウント。
     </ul>
 <p>
-$B0J>e!"(B
+以上、
 </p>
 <pre>----------
 $ mount -b -s c:/ /
@@ -195,30 +195,30 @@ $ mount -b -s c:/local /usr/local
 $ mount -b -s d:/ /cdrom
 ----------</pre>
 <p>
-$B:G=i$K(Bwarning$B$,=P$k$N$r5$$K$7$J$1$l$P!"(B
-$BI,$:$7$b%^%&%s%H%]%$%s%H$r:n$kI,MW$O$"$j$^$;$s$,!"(B
-$B%7%'%k$N%U%!%$%kL>Jd40$J$I$G:.Mp$7$+$M$J$$$N$G!"(B
-$B%^%&%s%H%]%$%s%H$O<B:]$K$"$C$?J}$,$$$$$H;W$$$^$9!#(B
+最初にwarningが出るのを気にしなければ、
+必ずしもマウントポイントを作る必要はありませんが、
+シェルのファイル名補完などで混乱しかねないので、
+マウントポイントは実際にあった方がいいと思います。
 </p>
 <p>
-/usr/local$B$H$7$F(Bc:\cygwin\usr\local$B$r:n$i$J$+$C$?$N$O!"(B
-c:\cygwin$B$N2<$K$O(Bcygnus$B$+$iG[$i$l$k$b$N$7$+F~$l$J$$$h$&$K$7$F!"(B
-$B<+J,$G%3%s%Q%$%k$7$?$b$N$H:.$6$i$J$$$h$&$K$7$h$&!"$H$$$&0U?^$G$9!#(B
-Cygwin$B<+BN$N%$%s%9%H!<%k>l=j$K$D$$$F$O!"(B
-c:\{bin,usr,etc}$B$K%$%s%9%H!<%k$7$?J}$,$9$C$-$j$7$?$+$b$7$l$^$;$s!#(B
+/usr/localとしてc:\cygwin\usr\localを作らなかったのは、
+c:\cygwinの下にはcygnusから配られるものしか入れないようにして、
+自分でコンパイルしたものと混ざらないようにしよう、という意図です。
+Cygwin自体のインストール場所については、
+c:\{bin,usr,etc}にインストールした方がすっきりしたかもしれません。
 </p>
 
 <!--
-$B$U$H5$IU$/$H(Btermcap-2.tar.gz$B$,$G$-$F$$$k!#(B
-$B<B$O(Btermcap-1.tar.gz$B$HF1$8FbMF$J$N$@$,!"(B
-termcap.tar.gz$B$GJ86g$r8@$C$F$$$??M$K$OB?>/$&$l$7$$$+$b$7$l$J$$!#(B
-$B$7$+$7!"0MA3$H$7$F(Btermcap$B$O$$$+$l$F$$$k!#(B
-b20.1$B$N$H$-$h$j$O$^$7$+$b$7$l$J$$$,!#(B
+ふと気付くとtermcap-2.tar.gzができている。
+実はtermcap-1.tar.gzと同じ内容なのだが、
+termcap.tar.gzで文句を言っていた人には多少うれしいかもしれない。
+しかし、依然としてtermcapはいかれている。
+b20.1のときよりはましかもしれないが。
 -->
 
 <hr><!-- ____________________________________________________________ -->
 
-<font size=5><strong><a name="install">$B%D!<%k$N%3%s%Q%$%k(B</a></strong></font>
+<font size=5><strong><a name="install">ツールのコンパイル</a></strong></font>
 
     <ul>
       <li> less-332+iso242
@@ -240,14 +240,14 @@ $ make install 2&gt;&amp;1 | tee install.log
     </ul>
  
 <!--
-(01:48:58)[GANA] ./configure $B$7$F$+$i!"(B
-(01:49:04)[GANA] config.h $B$N$*$7$j$K(B
+(01:48:58)[GANA] ./configure してから、
+(01:49:04)[GANA] config.h のおしりに
 (01:49:07)[GANA] #undef WINNT
 (01:49:07)[GANA] #define NEEDgethostname
-(01:49:20)[GANA] $B$r$D$1$k!#(B
-(01:49:55)[GANA] $B$"$H!"(Btc.os.h $B$N(B 85 $B9TL\$K(B
+(01:49:20)[GANA] をつける。
+(01:49:55)[GANA] あと、tc.os.h の 85 行目に
 (01:49:59)[GANA]  || defined(__CYGWIN__)
-(01:50:02)[GANA] $B$rDI2C$@!#(B
+(01:50:02)[GANA] を追加だ。
 -->
 
 <!--
@@ -287,7 +287,7 @@ BOOL is_url(const char *cmd) {
 
 <hr><!-- ____________________________________________________________ -->
 
-<font size=5><strong><a name="bookmarks"  >$B%j%s%/=8(B</a></strong></font>
+<font size=5><strong><a name="bookmarks"  >リンク集</a></strong></font>
 
   <li> 
   <ul>
@@ -299,9 +299,9 @@ BOOL is_url(const char *cmd) {
 	>[snapshot]</a><br>
 <br>
     <li><a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
-	>Cygwin$B>pJs(B</a> Snapshot News<br>
+	>Cygwin情報</a> Snapshot News<br>
     <li><a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
-	>Cygwin 1.1 Information</a> $B;d$KHf$Y$l$P?F@Z$K=q$$$F$$$k$H;W$$$^$9!J>P!K(B<br>
+	>Cygwin 1.1 Information</a> 私に比べれば親切に書いていると思います（笑）<br>
     <li><a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/"
 	>Using Cygwin.</a>
 	<a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/pre11.html"
@@ -309,21 +309,21 @@ BOOL is_url(const char *cmd) {
     <li><a href="http://www.netlaputa.ne.jp/%7Ekose/Software/compile/index.html"
 	>Compile ! (^.^)v</a><br>
     <li><a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/cygwin32.htm"
-	>Windows$B$G(BUNIX? Cygnus$B$N%Z!<%8(B</a>
+	>WindowsでUNIX? Cygnusのページ</a>
 	<a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/junixwin32.htm"
 	>[bookmarks]</a><br>
     <li><a href="http://www.hm.aitai.ne.jp/~mtani/index.html"
 	>Binary Wiz</a><br>
     <li><a href="http://www.kt.rim.or.jp/~ksk/gnu-win32/indexj.html"
-	>Cygwin $B$N%Z!<%8(B</a> Cygwin FAQ $BF|K\8lLu(B<br>
+	>Cygwin のページ</a> Cygwin FAQ 日本語訳<br>
     <li><a href="http://www.matsusaka-u.ac.jp/~okumura/c/"
-	>C$B!$(BC++</a><br>
+	>C，C++</a><br>
     <li><a href="http://euler.math.s.chiba-u.ac.jp/~okada/gnu-win32/index.html"
 	>cygwin</a>
 	<a href="http://euler.math.s.chiba-u.ac.jp/~okada/mahojin/index.html"
-	>[$BKbJ}?X(B]</a> cygwin$B$K$h$kAk%"%W%j$N?t>/$J$$Nc(B<br>
+	>[魔方陣]</a> cygwinによる窓アプリの数少ない例<br>
     <li><a href="http://www.ozawa.ics.keio.ac.jp/~kimura/"
-	>Kimura's Welcome Page</a> $B3d$H$^$H$^$C$?%a%b!#9TKv(BLF$B!#(B<br>
+	>Kimura's Welcome Page</a> 割とまとまったメモ。行末LF。<br>
   </ul>
 
 <hr><!-- ____________________________________________________________ -->

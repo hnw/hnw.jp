@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -17,65 +17,65 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-    <h1>rpm$B$N$D$+$$$+$?(B($B$J$2$d$j(B)</h1>
+    <h1>rpmのつかいかた(なげやり)</h1>
 
 <p class="abstract">
-$B<RFbMQ$N%a%b$r8x3+$7$F$_$^$9!#(B
+社内用のメモを公開してみます。
 </p>
 
 <ul>
-  <li>$B%$%s%9%H!<%k(B
+  <li>インストール
 <pre>
     $ rpm -ihv samba-2.0.7-ja_1.3
 </pre>
 
-  <li>$B>e=q$-%"%C%W%G!<%H(B
+  <li>上書きアップデート
 <pre>
     $ rpm -Uhv samba-2.0.7-ja_1.3
 </pre>
 
-  <li>$B%Q%C%1!<%8$NCf?H%A%'%C%/(B
+  <li>パッケージの中身チェック
 <pre>
     $ rpm -qlp uudeview-0.5.13-5vl1.i386.rpm 
 </pre>
 
 
-  <li>$B$$$^F~$C$F$k%Q%C%1!<%8$N%P!<%8%g%sCN$j$?$$(B
+  <li>いま入ってるパッケージのバージョン知りたい
 <pre>
     $ rpm -q uudeview
     uudeview-0.5.13-5vl1
 </pre>
 
-  <li>$B$"$N%Q%C%1!<%8F~$C$F$k!)(B
+  <li>あのパッケージ入ってる？
 <pre>
     $ rpm -qa | grep uudeview
     uudeview-0.5.13-5vl1
 </pre>
 
-  <li>$B%Q%C%1!<%8L>$O$o$+$k$s$@$1$I!"%U%!%$%k$I$3$KCV$$$?(B?
+  <li>パッケージ名はわかるんだけど、ファイルどこに置いた?
 <pre>
     $ rpm -ql uudeview
     /usr/bin/uudeview
     /usr/bin/....
 </pre>
 
-  <li>$B$3$N%U%!%$%k!"2?$N%Q%C%1!<%8$+$iM/$$$?(B?
+  <li>このファイル、何のパッケージから湧いた?
 <pre>
     $ rpm -qf /usr/bin/uudeview
     uudeview-0.5.13-5vl1
 </pre>
 
-  <li>$B%Q%C%1!<%8>C$9(B
+  <li>パッケージ消す
 <pre>
     $ rpm -e uudeview
 </pre>
 
-  <li>$B%j%S%k%I(B
+  <li>リビルド
 <pre>
     $ rpm --rebuild hoge.src.rpm
 </pre>
 
-  <li>$B%j%S%k%I(B($BJL$N$d$j$+$?(B)
+  <li>リビルド(別のやりかた)
 <pre>
     $ rpm -ihv hoge.src.rpm
     $ cd ~/RPM/SPECS

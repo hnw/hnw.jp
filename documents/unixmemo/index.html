@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -17,11 +17,11 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>UNIX$BLnO:$NF|>o@83h!J9);vCf!K(B</h1>
+<h1>UNIX野郎の日常生活（工事中）</h1>
 
 <p class="abstract">
-$B$3$N%Z!<%8$O!"(BUNIX $B;H$$$G$"$kI.<T$NF|>o$N6rCT$J$I$r=q$-$?$a$k>l=j$G$9!#(B
-$B$^$H$^$C$?5-;v$OJL%Z!<%8$K$J$k$N$G!"$3$N%Z!<%8$O$$$D$^$G$b9);vCf$G$9!#(B
+このページは、UNIX 使いである筆者の日常の愚痴などを書きためる場所です。
+まとまった記事は別ページになるので、このページはいつまでも工事中です。
 </p>
 
 <ul>
@@ -30,7 +30,7 @@
   <li><a href="#perl">Perl</a>
   <li><a href="#wu-ftpd">wu-ftpd</a>
   <li><a href="#solaris">Solaris Tips</a>
-  <li><a href="#bookmarks">$B%j%s%/=8(B</a>
+  <li><a href="#bookmarks">リンク集</a>
 </ul>
 
 <hr><!-- ____________________________________________________________ -->
@@ -38,9 +38,9 @@
 <h2><a name="ssh"      >SSH</a></h2>
 
 <p>
-	$BJL%Z!<%8$K(B<a href="ssh.html">SSH$B$N;H$$J}(B</a>$B$H$7$F@Z$j=P$7$^$7$?!#(B
-	$B$^$?!"(B<a href="ssh-keepalive.html"
-        >NAT$B$J4D6-$GJ|CV$7$?(BSSH$B@\B3$,@ZCG$5$l$kLdBj$K$D$$$F(B</a>$B$r$^$H$a$^$7$?!#(B
+	別ページに<a href="ssh.html">SSHの使い方</a>として切り出しました。
+	また、<a href="ssh-keepalive.html"
+        >NATな環境で放置したSSH接続が切断される問題について</a>をまとめました。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -48,13 +48,13 @@
 <h2><a name="wget"      >wget</a></h2>
 
 <p>
-	UNIX$B$G%M%C%H8+$k$J$iI,<{IJ!#(B
-        $B%^%&%9$G$A$^$A$^%;!<%V$J$s$+$7$F$i$l$s!#(B
+	UNIXでネット見るなら必需品。
+        マウスでちまちまセーブなんかしてられん。
 </p>
 <p>
-        $B<+J,$NJXMx$N$?$a!"JL%Z!<%8$K(B <a href="wget.html"
-        >wget $B$N;H$$J}(B</a>$B$H$7$F$^$H$a$F$_$^$7$?!#(B
-        $B!J@aA`$N$J$$9=@.$@$J$"!D!K(B
+        自分の便利のため、別ページに <a href="wget.html"
+        >wget の使い方</a>としてまとめてみました。
+        （節操のない構成だなあ…）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -62,63 +62,63 @@
 <h2><a name="perl"      >Perl</a></h2>
 
 <p>
-	$B%9%/%j%W%H$r=q$$$F$$$F5$$E$$$?$3$H$J$I!#(B
+	スクリプトを書いていて気づいたことなど。
 </p>
   <ul>
     <li>dup()
 <p>
-	UNIX $B$G$$$&$H$3$m$N(B dup() $B$,!"(BPerl $B$K$O$J$$!#(B
-	$BBe$o$j$K!"(Bopen $B$G$G$-$k(B(cf. man perlfunc(1))$B!#(B
-	$B$?$7$+$K!"(Bopen() $B$@$m$&$H(B dup() $B$@$m$&$H!"(B
-	$B?7$7$$%U%!%$%k%G%#%9%/%j%W%?$r:n$k$o$1$@$+$i!"(B
-	$B$3$l$rE}0l$9$k$N$O%9%^!<%H$J<j$@$h$J$"!#(B
-	Perl $BE*$K$@$1$I!#(B
+	UNIX でいうところの dup() が、Perl にはない。
+	代わりに、open でできる(cf. man perlfunc(1))。
+	たしかに、open() だろうと dup() だろうと、
+	新しいファイルディスクリプタを作るわけだから、
+	これを統一するのはスマートな手だよなあ。
+	Perl 的にだけど。
 </p>
     <li>reference
 <p>
-	Perl4 $B$N:"$+$i$N?M4V!J<+J,!K$K$O%j%U%!%l%s%9$OFq$7$$!#(B
-	$BF1$8%-!<$K%R%C%H$9$kCM$,J#?t$"$k$H$-$K!"(B
-	$B%O%C%7%e$N@h$,G[Ns$@$C$?$i$$$$$J$"$H;W$&$3$H$,$"$k!#(B
-	$B$3$l$O!"(B @{$arrayref{$key}} $B$G#O#K!#(B
+	Perl4 の頃からの人間（自分）にはリファレンスは難しい。
+	同じキーにヒットする値が複数あるときに、
+	ハッシュの先が配列だったらいいなあと思うことがある。
+	これは、 @{$arrayref{$key}} でＯＫ。
 </p>
-    <li>$B%3%s%F%-%9%H(B
+    <li>コンテキスト
 <p>
-	 $B=i?4<T$,(B Perl $B$r;H$C$?$H$-$K!"(B
-	 $B:G$bM}2r$7$E$i$$$N$O%3%s%F%-%9%H$N<~$j$@$m$&!#(B
-	 $BA4BN$,8+$($J$$$&$A$OM}2r$7$K$/$$$N$G$O$J$$$@$m$&$+!#(B
-	 $B$7$+$7!"0lDL$jM}2r$7$F$$$k$O$:$NCf5i<T0J>e$G$b!"(B
-	 $B%3%s%F%-%9%H$,860x$N%P%0$K2?EY$b$O$^$C$F$7$^$&!#(B
-</p>
-<p>
-	 $BI.<T$,$?$C$?:#$O$^$C$?$3$H!'(B
-	 $rev = reverse($str) $B$H$+$d$k$HJ8;zNs$rH?E>$G$-$k$,!"(B
-	 $B$=$l$r(B print reverse($str) 
-	 $B$J$I$H$d$k$H!"H?E>$7$J$$$^$^$NJ8;zNs$,=PNO$5$l$k!#(B
+	 初心者が Perl を使ったときに、
+	 最も理解しづらいのはコンテキストの周りだろう。
+	 全体が見えないうちは理解しにくいのではないだろうか。
+	 しかし、一通り理解しているはずの中級者以上でも、
+	 コンテキストが原因のバグに何度もはまってしまう。
 </p>
 <p>
-	 $BM}M3!'(Barray context $B$@$H(B reverse() $B$O%j%9%H$NH?E>$J$N$@!#(B
-	 $B$3$N>l9g!"J8;zNs(B$str$B$,(B1$BMWAG$@$1$G$"$k$h$&$J%j%9%H$r5U=g$KJB$YBX$($k(B
-	 $B!J$h$C$F!"(Bprint $B$N7k2L$O(B reverse $B$,$J$$$H$-$HF1$8$G$"$k!K!#(B
+	 筆者がたった今はまったこと：
+	 $rev = reverse($str) とかやると文字列を反転できるが、
+	 それを print reverse($str) 
+	 などとやると、反転しないままの文字列が出力される。
+</p>
+<p>
+	 理由：array context だと reverse() はリストの反転なのだ。
+	 この場合、文字列$strが1要素だけであるようなリストを逆順に並べ替える
+	 （よって、print の結果は reverse がないときと同じである）。
 
 </p>
-    <li>$BJ8;zNs$r(B1$BJ8;z$E$D$P$i$7$FG[Ns$K$7$^$&(B
+    <li>文字列を1文字づつばらして配列にしまう
 <p>
-	 $B%^%K%e%"%k$N(B split() $B$N@bL@$H$7$F!"A4$F$N;z4V$r%G%j%_%?$K$9$k;XDj(B
-	 @array=split(//, $str) $B$K$h$j!"(B
-	 $BJ8;zNs$r(B1$BJ8;z$E$D$KJ,3d$9$kNc$,=q$$$F$"$k$,!"(B
-	 $B$3$l$h$j$b(B @array=($str =~ /./g); $B$NJ}$,(B
-	 $B!J>/$J$/$H$bI.<T$N4D6-$G$O!KB.$$!#(B
-	 $B$?$@$7!"(Barray context $B$GI>2A$9$k$N$rK:$l$:$K!#(B
+	 マニュアルの split() の説明として、全ての字間をデリミタにする指定
+	 @array=split(//, $str) により、
+	 文字列を1文字づつに分割する例が書いてあるが、
+	 これよりも @array=($str =~ /./g); の方が
+	 （少なくとも筆者の環境では）速い。
+	 ただし、array context で評価するのを忘れずに。
 </p>
-    <li>Getopt::Long $B$H(B GNU getopt_long $B$N8_49@-(B
+    <li>Getopt::Long と GNU getopt_long の互換性
 <p>
-	 GNU $BIw$J$i(B -vax $B$O(B --vax $B$H$O0[$J$j!"(B
-	 -v -a -x $B$HEy2A$K$J$k$N$,EvA3$@$m$&$HI.<T$O;W$&$,!"(B
-	 Getopt::Long $B$O(B getopt_long
-	 $B$H;w$?$h$&$JL>A0$N$/$;$K!"%G%U%)%k%HF0:n$,A4A30c$&!#(B
-	 $B%^%K%e%"%k$r<P$a$KFI$s$@$@$1$@$,!"(B
-	 $B<!$N$h$&$K$9$l$P(B getopt_long()
-	 $B$H3d$HF1$8$h$&$KF0$/$N$G$O$J$$$@$m$&$+!#(B
+	 GNU 風なら -vax は --vax とは異なり、
+	 -v -a -x と等価になるのが当然だろうと筆者は思うが、
+	 Getopt::Long は getopt_long
+	 と似たような名前のくせに、デフォルト動作が全然違う。
+	 マニュアルを斜めに読んだだけだが、
+	 次のようにすれば getopt_long()
+	 と割と同じように動くのではないだろうか。
 </p>
 <p>
 	 Getopt::Long::Configure("bundling", "no_ignore_case");
@@ -132,50 +132,50 @@
   <ul>
     <li>ftpaccess
 <p>
-	wu-ftpd $B$O!"%G%U%)%k%H$GGO</@5D>$K(B ftpd $B$NL>A0$H%P!<%8%g%s$rC}$k$,!"(B
-	$B$3$l$rM^@)$9$k$3$H$,$G$-$k!#(B
+	wu-ftpd は、デフォルトで馬鹿正直に ftpd の名前とバージョンを喋るが、
+	これを抑制することができる。
 </p>
 <pre>
 greeting brief
 </pre>
 <p>
-	manpage $B$K$b$3$N@_Dj$,?d>)$5$l$F$$$k!#(B
-	$B!J$J$<%G%U%)%k%H$rD>$5$J$$$N$+$H;W$C$F$7$^$&$,!K(B
+	manpage にもこの設定が推奨されている。
+	（なぜデフォルトを直さないのかと思ってしまうが）
 </p>
     <li>ftphosts
 <p>
-	$B$3$N%U%!%$%k$G!"3F%f!<%6!<$K$D$$$F$N;XDj$,$G$-$k!#(B
-	$B$"$d$7$$$3$H$K!"(Banon ftp $B$K4X$7$F$$$($P!"(B
-	ftpaccess $B$N(B class $B$H(B limit $B$N;X<($K2C$(!"(B
-	$B$3$N%U%!%$%k$G$b%"%/%;%9@)8B$,$G$-$F$7$^$&!#(B
-	$BNc$($P!"(BNASA $B$+$i$N(B anon ftp $B$r6X;_$7$?$1$l$P(B
-	ftpaccess $B$K(B
+	このファイルで、各ユーザーについての指定ができる。
+	あやしいことに、anon ftp に関していえば、
+	ftpaccess の class と limit の指示に加え、
+	このファイルでもアクセス制限ができてしまう。
+	例えば、NASA からの anon ftp を禁止したければ
+	ftpaccess に
 </p>
 <pre>
 class anonftp anonymous !*.nasa.gov
 </pre>
 <p>
-	$B$H=q$$$F$b2DG=$@$,!"(B
+	と書いても可能だが、
 </p>
 <pre>
 class anonftp anonymous *
 </pre>
 <p>
-	$B$H=q$$$F$*$$$F!"(B ftphosts $B$K(B
+	と書いておいて、 ftphosts に
 </p>
 <pre>
 deny ftp *.nasa.gov
 </pre>
 <p>
-	$B$H=q$$$F$b$G$-$k!#(B
-	$B$^$?!"(Blocalhost $B$+$i$7$+(B anon ftp $B$r5v$7$?$/$J$1$l$P(B
+	と書いてもできる。
+	また、localhost からしか anon ftp を許したくなければ
 </p>
 <pre>
 allow ftp localhost
 </pre>
 <p>
-	$B$J$I$H$J$k!#(B
-	$B$"$^$j;H$$F;$,$"$k$H$b;W$($J$$$,!#(B
+	などとなる。
+	あまり使い道があるとも思えないが。
 </p>
   </ul>
 
@@ -184,36 +184,36 @@ allow ftp localhost
 <h2><a name="solaris"      >Solaris Tips</a></h2>
 
   <ul>
-    <li>shutdown $B$N$d$j$+$?(B
+    <li>shutdown のやりかた
 <p>
-	 shutdown -h now $B$C$F$$$&J}$,9%$-$J$s$G$9$1$I!"(B
-	 Solaris $B$N(B shutdown $B$O%*%W%7%g%s$,(B BSD $B7O$H$O0c$&!#(B
-	 halt $B$5$;$?$$$H$-$O!"%b!<%I(B0$B$K$9$k!#(B
+	 shutdown -h now っていう方が好きなんですけど、
+	 Solaris の shutdown はオプションが BSD 系とは違う。
+	 halt させたいときは、モード0にする。
 	 
 </p>
 <pre>
 $ shutdown -i 0 -g 0
 </pre>
 <p>
-	 $B$I$A$i$+0lJ}$,%b!<%IJQ99!"(B
-	 $B$b$&0lJ}$O%b!<%IJQ99$^$G2?ICBT$D$+$G$9!#(B
-	 $B%G%U%)%k%H$O(B30$BIC$J$N$G!"$D$1$?J}$,9,$;$G$9!#(B
-	 reboot $B$O%b!<%I(B6$B$G$9!#(B
+	 どちらか一方がモード変更、
+	 もう一方はモード変更まで何秒待つかです。
+	 デフォルトは30秒なので、つけた方が幸せです。
+	 reboot はモード6です。
 </p>
 <pre>
 $ shutdown -i 6 -g 6
 </pre>
 <p>
-	 -i $B$H(B -g $B$O$I$C$A$,$I$C$A$@$+$o$+$i$J$$$N$G!"(B
-	 6$BIC$/$i$$J86g$r8@$o$:$KBT$C$F$b$$$$$s$8$c$J$$$N!#(B
-	 $BLGB?$K$d$k$3$H$8$c$J$$$7$M!#(B
-	 $BIT0B$J$i(B manpage $B8+$F$/$@$5$$$^$;!#(B
+	 -i と -g はどっちがどっちだかわからないので、
+	 6秒くらい文句を言わずに待ってもいいんじゃないの。
+	 滅多にやることじゃないしね。
+	 不安なら manpage 見てくださいませ。
 </p>
 
-    <li>floppy $B$N;H$$J}(B(vold)
+    <li>floppy の使い方(vold)
 <p>
-	vold $B$C$F!"(BCD-ROM $B>!<j$K%^%&%s%H$7$F$/$l$F$9$2!<JXMx$J$s$@$1$I!"(B
-	$B$=$N$+$o$j(B floppy disk $B$r$I$&;H$($P$$$$$N$+$o$+$i$J$+$C$?$j$9$k!#(B
+	vold って、CD-ROM 勝手にマウントしてくれてすげー便利なんだけど、
+	そのかわり floppy disk をどう使えばいいのかわからなかったりする。
 </p>
 <pre>
 $ volcheck
@@ -222,61 +222,61 @@ $ dd count=1 if=/vol/dev/aliases/floppy0 of=floppy.img
 $ eject floppy
 </pre>
 <p>
-	$BMW$9$k$K!"(Bfloppy $B$@$1$O<+F0G'<1$7$J$$$N$G!"(B
-	volcheck $B$7$J$$$H;H$($J$$!#(B
-	Ultra5 $B$J$I$G$O!"%I%i%$%V$K%$%8%'%/%H%\%?%s$,$D$$$F$$$k$N$G!"(B
-	eject $B$rBG$?$:$K(B floppy $B$r<h$j=P$9$3$H$bJ*M}E*$K$O2DG=$@$,!"(B
-	eject $B$7$F$+$i<h$j=P$9$N$,LsB+;v!#(B
+	要するに、floppy だけは自動認識しないので、
+	volcheck しないと使えない。
+	Ultra5 などでは、ドライブにイジェクトボタンがついているので、
+	eject を打たずに floppy を取り出すことも物理的には可能だが、
+	eject してから取り出すのが約束事。
 </p>
-    <li>/dev/audio$BEpD0$N62I](B
+    <li>/dev/audio盗聴の恐怖
 <p>
-	$B:G6a=i$a$FCN$C$?$N$@$,!"(B
-	/etc/logindevperm $B$K$h$j!"(B
-	Solaris $B$G$O(B console $B%m%0%$%s$9$k$H(B
-	/dev/audio $B$N%*!<%J!<$,%m%0%$%s$7$??M$KJQ$o$k!#(B
-	$B%U%l!<%`%P%C%U%!$bF1MM!#(B
-	$B$3$l$K$h$jEpD0$d(B screendump $B$K$*$S$($J$/$F$h$$$o$1$@!#(B
-	$BC/$b$*$S$($A$c$$$J$$$H$O;W$&$,!#(B
+	最近初めて知ったのだが、
+	/etc/logindevperm により、
+	Solaris では console ログインすると
+	/dev/audio のオーナーがログインした人に変わる。
+	フレームバッファも同様。
+	これにより盗聴や screendump におびえなくてよいわけだ。
+	誰もおびえちゃいないとは思うが。
 	(cf. man logindevperm)
 </p>
-    <li>manpage $B$N0u:~(B
+    <li>manpage の印刷
 <pre>    % tbl /usr/man/man1m/mpstat.1m | groff -man -Tps | lp</pre>
 <p>
-	 $B$J$I$H$9$k$H(Bmanpage$B$,3J9%NI$/0u:~$G$-$k!#(B
-	 $B$7$+$7!"(Btroff(1)$B$@$H$$$^$$$A$&$^$/$$$+$J$$$N$O$J$<$@$m$&!#(B
-	 Solaris $BIUB0$N(B manpage $B$G$J$1$l$P$3$s$J:Y9)$OITMW!#(B
+	 などとするとmanpageが格好良く印刷できる。
+	 しかし、troff(1)だといまいちうまくいかないのはなぜだろう。
+	 Solaris 付属の manpage でなければこんな細工は不要。
 </p>
 
-    <li>Solaris$B%^%7%s$N0z1[$7(B
+    <li>Solarisマシンの引越し
 
 <p>
-$BBg3X$+$i%^%7%s$r0z$->e$2$F2q<R$KCV$$$?:]$N%a%b!#(B
-$BBg3X$G$O(BNIS$B$@$C$?$b$s$GF0$+$9$^$GFq57$7$?!#(B
+大学からマシンを引き上げて会社に置いた際のメモ。
+大学ではNISだったもんで動かすまで難儀した。
 </p>
 
 <ul>
-<li>single user mode$B$KMn$A$F(B
-<li>/etc/resolv.conf$B$rJT=8(B
-<li>/etc/netmasks$B$rJT=8(B
-<li>/etc/nsswitch.conf$B$+$i(Bnis$B$r=|30(B
-<li>/etc/defaultrouter$B$r?75,:n@.!#(B
+<li>single user modeに落ちて
+<li>/etc/resolv.confを編集
+<li>/etc/netmasksを編集
+<li>/etc/nsswitch.confからnisを除外
+<li>/etc/defaultrouterを新規作成。
 <li>rm /etc/defaultdomain
-<li>/etc/hosts$B$G(BIP$B%"%I%l%9$rJT=8(B
-<li>/etc/hostname.hme0$B$OL>A0$NJQ99$r$7$J$$$N$G$=$N$^$^!#(B
+<li>/etc/hostsでIPアドレスを編集
+<li>/etc/hostname.hme0は名前の変更をしないのでそのまま。
 </ul>
   </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="bookmarks">$B%j%s%/=8(B</a></h2>
+<h2><a name="bookmarks">リンク集</a></h2>
 
 <ul>
 <li><a href="http://solaris.sunfish.suginami.tokyo.jp/"
-    >$B$$$D$b?4$KB@M[$r!#(B</a>$B$?$V$s(BSolaris$B%U%!%s$N8D?M$,$d$C$F$k%5%$%H!#D6$^$H$^$C$F$^$9!#(B
+    >いつも心に太陽を。</a>たぶんSolarisファンの個人がやってるサイト。超まとまってます。
 <li><a href="http://pc.2ch.net/unix/"
-    >UNIX@2ch</a> $B@z$jEY$O(B30%$BDxEY!#(B2ch$B$K$7$F$O$^$H$b$J>l=j$G$9$,!"(B
-$BD69b%9%-%k$JJ}$O$^$:Mh$^$;$s!#(B
-$B$=$&$$$&?M$C$FIaDL$OCg4V$&$A$N%A%c%C%H$G72$l$F$k$h$J!#(B
+    >UNIX@2ch</a> 煽り度は30%程度。2chにしてはまともな場所ですが、
+超高スキルな方はまず来ません。
+そういう人って普通は仲間うちのチャットで群れてるよな。
 </ul>
 
 <address>

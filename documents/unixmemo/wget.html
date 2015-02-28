@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -17,12 +17,12 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>wget $B$N;H$$J}(B</h1>
+<h1>wget の使い方</h1>
 
 <p class="abstract">
-$B<+J,$,$?$^$K;H$&$1$I!"$h$/K:$l$k5!G=$K$D$$$F!#(B
-$BA4A3;H$C$?$3$H$J$$?M$O(Binfo$B8+$F$/$@$5$$!#(B
-$B!J$3$3$K=q$$$F$"$kFbMF$b!"B?$/$O(B 'Guru Usage' $B$"$?$j$K:\$C$F$^$9!K(B
+自分がたまに使うけど、よく忘れる機能について。
+全然使ったことない人はinfo見てください。
+（ここに書いてある内容も、多くは 'Guru Usage' あたりに載ってます）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -31,23 +31,23 @@
 <h2><a name="wget191">wget 1.9.1 released</a></h2>
 
 <p>
-[2004/04/05$BDI5-(B]
+[2004/04/05追記]
 </p>
 
 <p>
-$B5W!9$N99?7$G$9$,!"(B
-$B5$$E$$$?$i(B2003$BG/(B9$B7n:"$K(Bwget 1.9.1$B$,(B<a href="http://wget.sunsite.dk/"
->$B=P$F$^$7$?(B</a>$B!#(B
+久々の更新ですが、
+気づいたら2003年9月頃にwget 1.9.1が<a href="http://wget.sunsite.dk/"
+>出てました</a>。
 </p>
 <ul>
-  <li> POST$B%*%W%7%g%sDI2C(B(--post-data)
-  <li> -w$B$J$I$K>.?t$,;H$($k$h$&$K$J$C$?(B
+  <li> POSTオプション追加(--post-data)
+  <li> -wなどに小数が使えるようになった
 </ul>
 
 <p>
-POST$B$,=PMh$k$h$&$K$J$C$F!"$D$$$K(Bcurl$B$KDI$$IU$$$?$_$?$$$G$9!#(B
-wget$B$NJ}$,(Bcookie$B$r07$&$N$,>/$7LLE]$@$1$I!"(B
-$B$d$j$?$$$3$H$OA4It$G$-$k$s$8$c$J$$$G$7$g$&$+!#(B
+POSTが出来るようになって、ついにcurlに追い付いたみたいです。
+wgetの方がcookieを扱うのが少し面倒だけど、
+やりたいことは全部できるんじゃないでしょうか。
 </p>
 
 
@@ -57,25 +57,25 @@ wget$B$NJ}$,(Bcookie$B$r07$&$N$,>/$7LLE]$@$1$I!"(B
 <h2><a name="wget181">wget 1.8.1 released</a></h2>
 
 <p>
-[2001/12/28$BDI5-(B]
+[2001/12/28追記]
 </p>
 
 <p>
-$B5$$E$$$?$i(Bwget 1.8.1$B$,(B<a href="http://wget.sunsite.dk/"
->$B=P$F$^$9(B</a>$B!#(B
-$B$3$s$J8O$l$?%=%U%H$r$h$/(Bhack$B$9$k5$$K$J$k$b$s$@$o!#46<U!#(B
+気づいたらwget 1.8.1が<a href="http://wget.sunsite.dk/"
+>出てます</a>。
+こんな枯れたソフトをよくhackする気になるもんだわ。感謝。
 
 </p>
 <ul>
-  <li> $BBS0h@)8B%*%W%7%g%sDI2C(B(--limit-rate)
-  <li> $BJ#?t$N(BIP$B$r;}$D%[%9%H$K$D$$$F!"(B1$B8D=3$i$l$?$i<!$b;n$9(B
+  <li> 帯域制限オプション追加(--limit-rate)
+  <li> 複数のIPを持つホストについて、1個蹴られたら次も試す
 </ul>
 
 <p>
-$B:G=i$N$O$G$+$$JQ99$G$9$N$G!"=EJu$9$k?M$bB?$$$N$G$O!#(B
-$B$$$^$N$H$3$mLdBj$J$/F0$$$F$$$^$9!#(B
-$B$3$l0J30$O!"%3!<%I$N(Brefine$B$,<g$J$h$&$G$9!#(B
-1.8$B$O7k9=5$$K$J$k%P%0$,$"$C$?$N$G!"<N$F$^$7$g$&!#(B
+最初のはでかい変更ですので、重宝する人も多いのでは。
+いまのところ問題なく動いています。
+これ以外は、コードのrefineが主なようです。
+1.8は結構気になるバグがあったので、捨てましょう。
 </p>
 
 
@@ -85,18 +85,18 @@ wget$B$NJ}$,(Bcookie$B$r07$&$N$,>/$7LLE]$@$1$I!"(B
 <h2><a name="wget17">wget 1.7 released</a></h2>
 
 <p>
-[2001/09/23$BDI5-(B]
+[2001/09/23追記]
 </p>
 
 <p>
-$B5$$E$$$?$i(Bwget 1.7$B$,(B<a href="http://sunsite.dk/wget/"
->$B=P$F$^$9(B</a>$B!#$b$O$d;`3Q$OKX$I$J$$$H$$$($^$9!#(B
-POST$B$,$G$-$J$$$3$H$/$i$$$+!#(B
+気づいたらwget 1.7が<a href="http://sunsite.dk/wget/"
+>出てます</a>。もはや死角は殆どないといえます。
+POSTができないことくらいか。
 </p>
 <ul>
-  <li> HTTPS$BBP1~(B
-  <li> $B%/%C%-!<BP1~(B
-  <li> HTTP/1.1$B$N(Bkeep-alive$B$KBP1~(B
+  <li> HTTPS対応
+  <li> クッキー対応
+  <li> HTTP/1.1のkeep-aliveに対応
 </ul>
 
 
@@ -107,19 +107,19 @@ POST$B$,$G$-$J$$$3$H$/$i$$$+!#(B
 <h2><a name="wget16">wget 1.6 released</a></h2>
 
 <p>
-[2001/03/31$BDI5-(B]
+[2001/03/31追記]
 </p>
 
 <p>
-$B$J$s$+!"(Bwget 1.6$B$,(B<a href="http://sunsite.dk/wget/"
->$B=P$F$^$7$F(B</a>$B!"(B<a href="../../patches/index.html"
->10$BIC%Q%C%A(B</a>$B$NFbMF$O!"BgH>$,<B8=$5$l$F$$$^$9!#(B
-$B6qBNE*$K8@$&$H!"(B
+なんか、wget 1.6が<a href="http://sunsite.dk/wget/"
+>出てまして</a>、<a href="../../patches/index.html"
+>10秒パッチ</a>の内容は、大半が実現されています。
+具体的に言うと、
 </p>
 <ul>
-  <li> ?$B$N8e$m$N(B//$B$J$I$r(B/$B$K$7$J$/$J$C$?!#(Btest.pl?http://hoge/ $B$H$+$b#O#K!#(B
-  <li> port$BHV9f$,(B80$B$N$H$-$O!"(BHost:$B$K%]!<%HHV9f$r=q$+$J$/$J$C$?!#(B
-  <li> --referer= $B$,?7@_$5$l$?!#(B
+  <li> ?の後ろの//などを/にしなくなった。test.pl?http://hoge/ とかもＯＫ。
+  <li> port番号が80のときは、Host:にポート番号を書かなくなった。
+  <li> --referer= が新設された。
 </ul>
 
 
@@ -130,29 +130,29 @@ POST$B$,$G$-$J$$$3$H$/$i$$$+!#(B
 <h2><a name="wgetrc">.wgetrc</a></h2>
 
 <p>
-	wget$B$N%G%U%)%k%H$NF0:n$OITJX$J$3$H$bB?$$$N$G!"(B
-	.wgetrc$B$K$"$l$3$l=q$$$F!"%G%U%)%k%H$N5sF0$rJQ$($k$3$H$,$G$-$^$9!#(B
+	wgetのデフォルトの動作は不便なことも多いので、
+	.wgetrcにあれこれ書いて、デフォルトの挙動を変えることができます。
 </p>
 <ul>
-  <li> undocumented $B$@$,!"%3%^%s%I%i%$%s%*%W%7%g%s$@$1$G$J$/!"(B
-       .wgetrc $B$G$b(B user_agent= $B$G(B user-agent $BJ8;zNs$rJQ$($i$l$k!#(B
-       $B$H$j$"$($:%M%9%1$K$J$j$9$^$9!#(B
-       $B!J5)$K(BIE/$B%M%9%1$N$_FCJL07$$$9$k%5!<%P$,$$$k$?$a!K(B
-  <li> -r $B$G:F5"E*$KC)$k$H$-!"(Bwget $B$O%G%U%)%k%H$G(B /robots.txt $B$N8!::$r$9$k!#(B
-       $BBgDq$N%5%$%H$K$O$3$s$J%U%!%$%k$rCV$$$F$$$J$$$7!"(B
-       $BBh0l$3$$$D$O%V%i%&%6$J$N$G!J>P!K!"(B
-       $B$3$N%A%'%C%/$r$d$a$5$;$k!#(B</li>
-  <li> $B%G%U%)%k%H$N%?%$%`%"%&%H;~4V$O(B 900 $BIC$HD9$$$N$G!"(B
-       100 $BIC$/$i$$$K$9$k!#(B
-       $B!JE,Ev$J?t;z$K@_Dj$9$l$P!"=E$$%5!<%P!<$+$i%V%D$rMn$H$7$-$k$^$G$N;~4V$,(B
-       $BC;$/$J$j$^$9!#>.$5$/$7$9$.$k$H!"(B
-       $B%5!<%P!<$KIi2Y$r$+$1$k>e$K5Q$C$F;~4V$,$+$+$C$?$j$7$^$9!K(B</li>
-  <li> $BJI$NFbB&$K$$$k>l9g$O!"(Bftp$B$r(Bpassive$B$K$9$k!#(B
-       $B!J(BProxy$BDL$5$J$$$H=P$i$l$J$$$H$+!"(Bproxy$B$r;H$*$&$,(Bftp$B$ODL$i$J$$$H$+!"(B
-       $BJI$b$$$m$$$m$"$k$+$b$7$l$^$;$s$,!K(B</li>
+  <li> undocumented だが、コマンドラインオプションだけでなく、
+       .wgetrc でも user_agent= で user-agent 文字列を変えられる。
+       とりあえずネスケになりすます。
+       （稀にIE/ネスケのみ特別扱いするサーバがいるため）
+  <li> -r で再帰的に辿るとき、wget はデフォルトで /robots.txt の検査をする。
+       大抵のサイトにはこんなファイルを置いていないし、
+       第一こいつはブラウザなので（笑）、
+       このチェックをやめさせる。</li>
+  <li> デフォルトのタイムアウト時間は 900 秒と長いので、
+       100 秒くらいにする。
+       （適当な数字に設定すれば、重いサーバーからブツを落としきるまでの時間が
+       短くなります。小さくしすぎると、
+       サーバーに負荷をかける上に却って時間がかかったりします）</li>
+  <li> 壁の内側にいる場合は、ftpをpassiveにする。
+       （Proxy通さないと出られないとか、proxyを使おうがftpは通らないとか、
+       壁もいろいろあるかもしれませんが）</li>
 </ul>
 <p>
-	$B0J>e!"(B
+	以上、
 </p>
 <pre>
 user_agent = Mozilla/4.06 [en] (Win95; I)
@@ -169,18 +169,18 @@ passive_ftp = on
 <h2><a name="rl0">-r -l0 -np</a></h2>
 
 <p>
-        $B$=$N(BURL$B$h$j2<AX$r:F5"E*$KA4It<h$C$F$/$k;XDj!#(B
-        ./www.geocities.com/Tokyo/Ginza/5432/index.html $B$N$h$&$J(B
-        $B%G%#%l%/%H%j9=B$$GJ]B8$r$7$F$/$l$^$9!#(B
-        $B2<$K5s$2$?%*%W%7%g%s$HAH$_9g$o$;$k$H9,$;$+$b$7$l$^$;$s!#(B
+        そのURLより下層を再帰的に全部取ってくる指定。
+        ./www.geocities.com/Tokyo/Ginza/5432/index.html のような
+        ディレクトリ構造で保存をしてくれます。
+        下に挙げたオプションと組み合わせると幸せかもしれません。
 </p>
 <dl>
   <dt> -nH
-  <dd> $B%[%9%HL>$N%G%#%l%/%H%j$r7!$i$J$$$h$&$K$9$k(B
+  <dd> ホスト名のディレクトリを掘らないようにする
 
-  <dt> --cut-dirs=$B?t;z(B
-  <dd> $B%G%#%l%/%H%j$r(Bn$BCJ7!$i$J$/$9$k!#(B
-       $B$^$:;H$o$J$$$1$I!D(B
+  <dt> --cut-dirs=数字
+  <dd> ディレクトリをn段掘らなくする。
+       まず使わないけど…
 
 </dl>
 
@@ -190,15 +190,15 @@ passive_ftp = on
 <h2><a name="nc">-nc</a></h2>
 
 <p>
-        -r$B$GA0$K<h$C$?$H$-$HF1$8>l=j$G;H$C$F!"(B
-        $BA0$H$jB;$M$?$b$N$@$1<h$C$F$/$k;XDj!#(B
-        $B2s@~>uBV$,Nt0-$@$C$?$H$+!"(B
-        $B5$$,68$C$F(BC-c$B$r2!$7$?$H$+$$$&$H$-$K!"(B
-        $BA0$N%*%W%7%g%s$=$N$^$^$G(B-nc$B$r$D$1$l$P(BOK$B!#(B
+        -rで前に取ったときと同じ場所で使って、
+        前とり損ねたものだけ取ってくる指定。
+        回線状態が劣悪だったとか、
+        気が狂ってC-cを押したとかいうときに、
+        前のオプションそのままで-ncをつければOK。
 </p>
 <p>
-        $BA02s<h$C$?%U%!%$%k$,99?7$5$l$F$$$F$b(B
-        $B?7$?$K<h$j$K$O$$$+$J$$$N$GCm0U$,I,MW!#(B
+        前回取ったファイルが更新されていても
+        新たに取りにはいかないので注意が必要。
 </p>
 
 
@@ -207,10 +207,10 @@ passive_ftp = on
 <h2><a name="k">-k</a></h2>
 
 <p>
-        HTML$B$K4^$^$l$k@dBP%Q%9$rAjBP%Q%9$K$9$k;XDj!#(B
-        -r $B$H$NAH$_9g$o$;$G;H$&$H!"(B
-        $B%j%s%/@h$,%m!<%+%k$KJ]B8$7$F$"$l$P$=$N%U%!%$%k$X$N%j%s%/$K$J$k$N$G!"(B
-        $B%m!<%+%k$G8+$k$H$-$KJXMx$G$9!#(B
+        HTMLに含まれる絶対パスを相対パスにする指定。
+        -r との組み合わせで使うと、
+        リンク先がローカルに保存してあればそのファイルへのリンクになるので、
+        ローカルで見るときに便利です。
 </p>
 
 
@@ -219,21 +219,21 @@ passive_ftp = on
 <h2><a name="H">-H</a></h2>
 
 <p>
-        -r $B;HMQ;~$K!"$h$=$N%[%9%H$X$N%j%s%/$rC)$k$+$I$&$+$N;XDj(B
-        $B!J%G%U%)%k%H$G$OC)$j$^$;$s!K!#(B
-        $B$3$l$r;H$&$H$-$O!"(B
-        $B@$3&Cf$N%U%!%$%k$rMn$H$5$J$$$h$&!":Y?4$NCm0U$rJ'$$$^$7$g$&!#(B
-        $BNc$($P!"<!$N%*%W%7%g%s$HAH$_9g$o$;$k$J$I!#(B
+        -r 使用時に、よそのホストへのリンクを辿るかどうかの指定
+        （デフォルトでは辿りません）。
+        これを使うときは、
+        世界中のファイルを落とさないよう、細心の注意を払いましょう。
+        例えば、次のオプションと組み合わせるなど。
 </p>
 <dl>
   <dt> -l
-  <dd> $B%j%s%/$r:F5"E*$KC)$kCJ?t!J(B0$B$r;XDj$9$k$HL5@)8B!?%G%U%)%k%H$O(B5$B!K(B
+  <dd> リンクを再帰的に辿る段数（0を指定すると無制限／デフォルトは5）
 
   <dt> -Q
-  <dd> $BMn$H$9:GBgNL$r;XDj(B
+  <dd> 落とす最大量を指定
        
   <dt> -D
-  <dd> $B%j%s%/$rC)$k%[%9%H$r@)8B(B
+  <dd> リンクを辿るホストを制限
 </dl>
 
 
@@ -243,10 +243,10 @@ passive_ftp = on
 <h2><a name="G">-G</a></h2>
 
 <p>
-        $B:F5"E*$K%U%!%$%k<hF@$9$k:]!";XDj$5$l$?%?%0$K$D$$$FC)$i$J$$$h$&$K$9$k;XDj!#(B
-        -G img,body $B$H=q$$$F!"(BHTML$BCf$N(Bsrc=$B$G;XDj$5$l$?3($r<h$i$J$$!"$H$$$&5;$,$J$+$J$+M-8z!#(B
-        $B5U$K!"(B-rl1 -k -G a,area $B$G!"$=$N%Z!<%8$N3($@$1<h$C$F%m!<%+%k$G8+$k!"$J$s$F5;$b$"$k!#(B
-        $B!J(Ba$B$H(Barea$B$r=|30$9$k$@$1$@$HITB-$7$F$k$s$@$1$I!"<BMQ>e$O==J,!K(B
+        再帰的にファイル取得する際、指定されたタグについて辿らないようにする指定。
+        -G img,body と書いて、HTML中のsrc=で指定された絵を取らない、という技がなかなか有効。
+        逆に、-rl1 -k -G a,area で、そのページの絵だけ取ってローカルで見る、なんて技もある。
+        （aとareaを除外するだけだと不足してるんだけど、実用上は十分）
 </p>
 
 
@@ -255,10 +255,10 @@ passive_ftp = on
 <h2><a name="R">-R</a></h2>
 
 <p>
-        $B:F5"E*$K%U%!%$%k<hF@$9$k:]!"(B
-        *.cgi?...$B$rC)$C$F$k$HL58B$KF1$8%U%!%$%k$r%@%&%s%m!<%I$7$?$j$9$k$3$H$,$"$k!#(B
-        $B$3$s$J$H$-$K(B -R '*.cgi' $B$J$I$H$9$l$PC)$i$J$/$J$k!#(B
-        $B;H$$$I$3$m$K$h$C$F$OHs>o$KJXMx!#(B
+        再帰的にファイル取得する際、
+        *.cgi?...を辿ってると無限に同じファイルをダウンロードしたりすることがある。
+        こんなときに -R '*.cgi' などとすれば辿らなくなる。
+        使いどころによっては非常に便利。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -266,9 +266,9 @@ passive_ftp = on
 <h2><a name="N">-N</a></h2>
 
 <p>
-        $BA0$K<h$C$?$H$-$HF1$8>l=j$G;H$&!#(B
-        $B?7$7$$$b$N$@$1<h$C$F$/$k!#(B
-        ftp$B$G$H$k:]!"(B-r $B$H$NAH$_9g$o$;$G;H$&$H8z2LBg$G$7$g$&!#(B
+        前に取ったときと同じ場所で使う。
+        新しいものだけ取ってくる。
+        ftpでとる際、-r との組み合わせで使うと効果大でしょう。
 </p>
 
 
@@ -277,11 +277,11 @@ passive_ftp = on
 <h2><a name="c">-c</a></h2>
 
 <p>
-        $BESCf$^$GMn$H$7$F$"$k$b$N$KBP$7$F!"0J9_$r(Bpartial get$B$9$k;XDj!#(B
+        途中まで落としてあるものに対して、以降をpartial getする指定。
 </p>
 <p>
-        $B$h$[$I$X$m$X$m$J%5!<%P!<$8$c$J$$8B$j;H$($^$9!#(B
-        $B$b$A$m$s(Bftp$B$G$b;H$($^$9!#(B
+        よほどへろへろなサーバーじゃない限り使えます。
+        もちろんftpでも使えます。
 </p>
 
 
@@ -290,10 +290,10 @@ passive_ftp = on
 <h2><a name="O">-O-</a></h2>
 
 <p>
-        GET$B$7$?%V%D$rI8=`=PNO$K=P$9;XDj!#(B
+        GETしたブツを標準出力に出す指定。
 </p>
 <p>
-        $BB>$K$b!"%l%9%]%s%9%X%C%@$@$1$,8+$?$$$H$-$K(B -O/dev/null -S $B$H$+$M!#(B
+        他にも、レスポンスヘッダだけが見たいときに -O/dev/null -S とかね。
 </p>
 
 
@@ -303,11 +303,11 @@ passive_ftp = on
 <h2><a name="user_agent">--user-agent=DoCoMo/1.0/F502i</a></h2>
 
 <p>
-        $B%f!<%6!<%(!<%8%'%s%H$N;XDj!#(B
+        ユーザーエージェントの指定。
 </p>
 <p>
-        $B>e$NNc$J$i(B i-mode $B$N$U$j!#(B
-        $B$^$?$O!"(B--user-agent='Mozilla/4.06 [en] (Win95; I)' $B$H$+!#(B
+        上の例なら i-mode のふり。
+        または、--user-agent='Mozilla/4.06 [en] (Win95; I)' とか。
 </p>
 
 
@@ -316,28 +316,28 @@ passive_ftp = on
 <h2><a name="http_user">--http-user=ginza5432 --http-passwd=xxxx</a></h2>
 
 <p>
-        $B%f!<%6!<L>!?%Q%9%o!<%I$r;XDj!#(B
+        ユーザー名／パスワードを指定。
 </p>
 <p>
-        http://user:passwd@host/ $B$_$?$$$J(BURL$B$r(B GET $B$9$k$h$j!"(B
-        $B$3$N%*%W%7%g%s$r;H$C$?J}$,$$$$$H;W$&!#(B
-        $B%5!<%P$H$7$c$Y$k;~$K$O%j%/%(%9%H%X%C%@$K=q$+$l$k>pJs$J$s$@$7!"(B
-        $BL/$J(BURL$B$r=q$/$H(BURL$B%(%s%3!<%G%#%s%0$N4X78$GLLE]$+$b$7$l$J$$$+$i!#(B
+        http://user:passwd@host/ みたいなURLを GET するより、
+        このオプションを使った方がいいと思う。
+        サーバとしゃべる時にはリクエストヘッダに書かれる情報なんだし、
+        妙なURLを書くとURLエンコーディングの関係で面倒かもしれないから。
 </p>
 
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="FAQ">FAQ$B!J$=$NB>!K(B</a></h2>
+<h2><a name="FAQ">FAQ（その他）</a></h2>
 
 <p>
-        Q: $B%l%9%]%s%9$X%C%@$,(B-S$B$G8+$i$l$k$N$O$$$$$N$G$9$,!"(B
-        $B%j%/%(%9%H$X%C%@$r8+$k%*%W%7%g%s$O$J$$$N$G$9$+!)(B
+        Q: レスポンスへッダが-Sで見られるのはいいのですが、
+        リクエストへッダを見るオプションはないのですか？
 </p>
 <p>
-        A: $B$J$$$G$9!#(B
-        $B$I$&$7$F$b8+$F$_$?$+$C$?$i!"(B
-        -d$B$G%G%P%C%0%m%0$r=P$;$P!"$J$s$H$+8+$i$l$^$9!#(B
+        A: ないです。
+        どうしても見てみたかったら、
+        -dでデバッグログを出せば、なんとか見られます。
 </p>
 
 <address>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -17,387 +17,387 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>$B%3%s%Q%$%i$K(B1$B1_$bJ'$o$J$$Ak%W%m%0%i%_%s%0(B</h1>
+<h1>コンパイラに1円も払わない窓プログラミング</h1>
 
 <p class="abstract">
-UNIX$B$G$O(Bgcc$B$,%?%@$G;H$($k$s$@$+$i!"(B
-Windows$B$G$@$C$F(BVC++$B$K$J$s$+6b$r=P$;$k$+!"$H;W$C$F$$$?I.<T$@$,!"(B<a
+UNIXではgccがタダで使えるんだから、
+WindowsでだってVC++になんか金を出せるか、と思っていた筆者だが、<a
 
 href="http://www.inprise.com/bcppbuilder/freecompiler/"
 
->Borland C++ Compiler 5.5</a>$B$NL5NAG[I[$r$-$C$+$1$K!"(B
-$B$3$$$D$GAk%W%m%0%i%_%s%0$r$7$F$_$h$&!"$H;W$$N)$C$?!#(B
-$B$=$l$K!"(BCygwin$B$G$@$C$FAk%W%m%0%i%`=q$1$k$s$G$7$g!)(B
-$B$=$&$G$9=q$1$^$9!#(B
+>Borland C++ Compiler 5.5</a>の無料配布をきっかけに、
+こいつで窓プログラミングをしてみよう、と思い立った。
+それに、Cygwinでだって窓プログラム書けるんでしょ？
+そうです書けます。
 </p>
 <p class="abstract">
-$B$3$l$O!"$=$s$JI.<T$K$h$k%a%b$G$9!#(B
-$B;DG0$J$3$H$K!"(B
-$B$3$N$h$&$J>pJs$O!JFC$KF|K\8l$G$O!K$[$H$s$IB8:_$7$J$$$h$&$J$N$G!"(B
-$BF1$8$h$&$J6-6x$N?M$N=u$1$K$J$k$3$H$H;W$$$^$9!#(B
+これは、そんな筆者によるメモです。
+残念なことに、
+このような情報は（特に日本語では）ほとんど存在しないようなので、
+同じような境遇の人の助けになることと思います。
 </p>
 <p class="abstract">
-$BG0$N$?$aIU$12C$($F$*$/$H!"$3$NF;$O$$$P$i$NF;$G$9!#(B
-$BAk%W%m%0%i%_%s%0$rBN83$7$F$_$?$$$,6b$,$J$$$H$$$&>l9g$K$b!"(B
-$BEjF~$9$k;~4V$r9M$($k$H(BVC++$B$rGc$C$?J}$,0B>e$,$j$+$b$7$l$^$;$s!#(B
-$B!J$H$O$$$(!"I.<T$,$+$-$o$1$?F;$rDL$k$N$O4vJ,3Z$J$O$:$G$9$,!K(B
+念のため付け加えておくと、この道はいばらの道です。
+窓プログラミングを体験してみたいが金がないという場合にも、
+投入する時間を考えるとVC++を買った方が安上がりかもしれません。
+（とはいえ、筆者がかきわけた道を通るのは幾分楽なはずですが）
 </p>
 <p class="abstract">
-$B$"!"(BUNIX$B?($C$?$3$H$,$J$$$H$+!"%W%m%0%i%`=q$$$?$3$H$b$J$$$H$+!"(B
-$B$=$&$$$&J}$K$O!J$=$&$G$J$/$F$b!)!K;`$L$[$IIT?F@Z$J%Z!<%8$@$H;W$$$^$9!#(B
-$B$G$9$,!"<+J,MQ$N%a%b!\&A$G$9$N$G!"$3$NDxEY$,8B3&$G$9!#(B
-$B0U8+!&<ALdEy$N%a!<%k$OBg4?7^$G$9$,!"(B
-$B;~4VE*!&G=NOE*$K4|BT$K1h$($k$H$O8B$j$^$;$s$N$G$"$7$+$i$:!#(B
+あ、UNIX触ったことがないとか、プログラム書いたこともないとか、
+そういう方には（そうでなくても？）死ぬほど不親切なページだと思います。
+ですが、自分用のメモ＋αですので、この程度が限界です。
+意見・質問等のメールは大歓迎ですが、
+時間的・能力的に期待に沿えるとは限りませんのであしからず。
 </p>
 
 <ul class="news">
-<li>2000/08/03 $BDI5-!'(B inprise$B$G(B<a
+<li>2000/08/03 追記： inpriseで<a
 href="http://www.inprise.co.jp/cppbuilder/freecompiler/turbodebugger.html"
->Turbo Debugger</a>$B$rG[$C$F$^$9!#$+$J$j%$%^%$%A$G$9$,!#(B
-$B1Q8lHG$OF|K\8l(BWindows$B$G$O2=$12=$1$K$J$k$N$G!"(B
-$BF|K\8lHG$r;H$$$^$7$g$&!#(B
+>Turbo Debugger</a>を配ってます。かなりイマイチですが。
+英語版は日本語Windowsでは化け化けになるので、
+日本語版を使いましょう。
 </li>
 <li>
-2001/03/21 $BDI5-!'(B $BFbMF$,Iw2=$7$D$D$"$k$+$b!D!#(B
-$B$^!"$"$^$jC/$b8+$F$/$l$F$J$$$C$]$$$+$i$$$$$1$I!D!#(B
+2001/03/21 追記： 内容が風化しつつあるかも…。
+ま、あまり誰も見てくれてないっぽいからいいけど…。
 </li>
 </ul>
 
 <ul>
-  <li> <a href="#intro"      >$B$O$8$a$K(B</a>
-  <li> <a href="#requirement">$BI,MW$J$b$N(B</a>
-  <li> <a href="#download"   >$B%@%&%s%m!<%I(B</a>
-  <li> <a href="#install"    >$B%$%s%9%H!<%k(B</a>
+  <li> <a href="#intro"      >はじめに</a>
+  <li> <a href="#requirement">必要なもの</a>
+  <li> <a href="#download"   >ダウンロード</a>
+  <li> <a href="#install"    >インストール</a>
     <ul>
       <li> <a href="#install.bcc">bcc</a>
       <li> <a href="#install.gcc">gcc</a>
       <li> <a href="#install.psdk">Platform SDK</a>
     </ul>
-  <li> <a href="#programming">$B%W%m%0%i%_%s%0(B</a>
-  <li> <a href="#compile"    >$B%3%s%Q%$%k(B</a>
+  <li> <a href="#programming">プログラミング</a>
+  <li> <a href="#compile"    >コンパイル</a>
     <ul>
       <li> <a href="#compile.bcc">bcc</a>
         <ul>
-          <li><a href="#compile.bcc.con">$B%3%s%=!<%k%"%W%j$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.bcc.win">Windows$B%"%W%j$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.bcc.mt" >$B%^%k%A%9%l%C%I%W%m%0%i%`$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.bcc.dll">DLL$B$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.bcc.mkf">Makefile$B$NNc(B</a>
+          <li><a href="#compile.bcc.con">コンソールアプリのコンパイル</a>
+          <li><a href="#compile.bcc.win">Windowsアプリのコンパイル</a>
+          <li><a href="#compile.bcc.mt" >マルチスレッドプログラムのコンパイル</a>
+          <li><a href="#compile.bcc.dll">DLLのコンパイル</a>
+          <li><a href="#compile.bcc.mkf">Makefileの例</a>
         </ul>
       <li> <a href="#compile.gcc">gcc</a>
         <ul>
-          <li><a href="#compile.gcc.con">$B%3%s%=!<%k%"%W%j$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.gcc.win">Windows$B%"%W%j$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.gcc.mt" >$B%^%k%A%9%l%C%I%W%m%0%i%`$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.gcc.dll">DLL$B$N%3%s%Q%$%k(B</a>
-          <li><a href="#compile.gcc.mkf">Makefile$B$NNc(B</a>
+          <li><a href="#compile.gcc.con">コンソールアプリのコンパイル</a>
+          <li><a href="#compile.gcc.win">Windowsアプリのコンパイル</a>
+          <li><a href="#compile.gcc.mt" >マルチスレッドプログラムのコンパイル</a>
+          <li><a href="#compile.gcc.dll">DLLのコンパイル</a>
+          <li><a href="#compile.gcc.mkf">Makefileの例</a>
         </ul>
     </ul>
-  <li> <a href="#debug"      >$B%G%P%C%0(B</a>
+  <li> <a href="#debug"      >デバッグ</a>
     <ul>
       <li> <a href="#debug.bcc">bcc</a>
       <li> <a href="#debug.gcc">gcc</a>
     </ul>
-  <li> <a href="#benchmark"  >$B%Y%s%A%^!<%/(B</a>
-  <li> <a href="#misc"       >$B$[$+$K5$$E$$$?$3$H(B</a>
-  <li> <a href="#appendix"   >$BIUO?(B</a>
+  <li> <a href="#benchmark"  >ベンチマーク</a>
+  <li> <a href="#misc"       >ほかに気づいたこと</a>
+  <li> <a href="#appendix"   >付録</a>
     <ul>
-      <li> <a href="#appendix.bashrc">$BI.<T$N(B.bashrc</a>
-      <li> <a href="#appendix.bcccfg">bcc$B$N(Bcfg$B%U%!%$%k(B</a>
+      <li> <a href="#appendix.bashrc">筆者の.bashrc</a>
+      <li> <a href="#appendix.bcccfg">bccのcfgファイル</a>
     </ul>
-  <li> <a href="#bookmarks"  >$B%j%s%/=8(B</a>
+  <li> <a href="#bookmarks"  >リンク集</a>
 </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="intro"      >$B$O$8$a$K(B</a></h2>
+<h2><a name="intro"      >はじめに</a></h2>
 
 <p>
-Borland C++ Compiler 5.5$B!J0J2<(Bbcc$B!K$H$$$&$N$O!"(B
-Borland$B<R$,3+H/$7$?(B
-Windows$BMQ3+H/4D6-(BBorland C++ Builder 5.5$B$N$&$A!"(B
-$B%3%^%s%I%i%$%s%D!<%k!J$N0lIt!K$rL5NA$GG[$C$F$$$k$b$N$G$9!#(B
-$B$3$l$@$1$G(BWindows$B$N%"%W%j%1!<%7%g%s$r:n$k$3$H$,$G$-$^$9!#(B
+Borland C++ Compiler 5.5（以下bcc）というのは、
+Borland社が開発した
+Windows用開発環境Borland C++ Builder 5.5のうち、
+コマンドラインツール（の一部）を無料で配っているものです。
+これだけでWindowsのアプリケーションを作ることができます。
 </p>
 <p>
-Cygwin$B$H$$$&$N$O!"(BUNIX$B$N%7%9%F%`%3!<%k$r<B8=$9$k$h$&$J(BWindows$B$N(BDLL$B$rDs6!$7!"(B
-UNIX$BMQ$N%=!<%9$rJQ99$J$7$K%3%s%Q%$%k$9$k$3$H$G(B
-Windows$B$GF0$/%P%$%J%j$r:n$l$k$h$&$K$7$h$&!"(B
-$B$H$$$&%W%m%8%'%/%H$G$9!#(B
-gcc$B$d(Bgdb$B$,F0$$$F$*$j!"I,MW:GDc8B$N(BWindows$BMQ3+H/%D!<%k$bDs6!$5$l$F$$$^$9!#(B
+Cygwinというのは、UNIXのシステムコールを実現するようなWindowsのDLLを提供し、
+UNIX用のソースを変更なしにコンパイルすることで
+Windowsで動くバイナリを作れるようにしよう、
+というプロジェクトです。
+gccやgdbが動いており、必要最低限のWindows用開発ツールも提供されています。
 </p>
 
 <p>
-$B:G=i$KN><T$N7gE@$K$D$$$F=R$Y$F$*$-$^$9!#(B
-$BBQ$($i$l$=$&$K$J$1$l$P!"(BVC++$B$G$bGc$C$F$/$@$5$$!#(B
+最初に両者の欠点について述べておきます。
+耐えられそうになければ、VC++でも買ってください。
 </p>
 
     <ul>
-      <li> $BN><T$K6&DL$9$k7gE@(B
+      <li> 両者に共通する欠点
         <ul>
-          <li> $BE}9g4D6-$,$J$$(B
-          <li> $B%j%=!<%9%(%G%#%?$,$J$$(B
+          <li> 統合環境がない
+          <li> リソースエディタがない
 <p>
-bcc$B$,L5NA$GG[$i$l$F$$$k$H$$$C$F$b!"E}9g4D6-$OAjJQ$o$i$:Gd$jJ*$G$9!#(B
-$B%3%^%s%I%i%$%s$+$i;H$($k%3%s%Q%$%i!"%j%s%+$J$I0l<0$rG[$C$F$$$k$@$1$G!"(B
-$B%j%=!<%9%(%G%#%?$d8+1I$($N$9$k%G%P%C%,$J$I$O$D$$$F$-$^$;$s!#(B
-$B$=$&$$$&0UL#$G!"(Bgcc$B4D6-$H;w$?$h$&$J$b$N$G$9!#(B
-$B2aEY$N4|BT$r$7$F$O$$$1$^$;$s!#(B
+bccが無料で配られているといっても、統合環境は相変わらず売り物です。
+コマンドラインから使えるコンパイラ、リンカなど一式を配っているだけで、
+リソースエディタや見栄えのするデバッガなどはついてきません。
+そういう意味で、gcc環境と似たようなものです。
+過度の期待をしてはいけません。
 </p>
-          <li> $B;qNA$,>/$J$$(B
+          <li> 資料が少ない
 <p>
-$B%f!<%6!<$,>/$J$$$;$$$J$N$G$9$,!"(B
-bcc$B$b(BCygwin$B$b;qNA$,$[$H$s$I$"$j$^$;$s!#(B
-web$B>e$K$"$k;qNA$O(BVC++$B$+(Bdelphi$B$N$b$N$P$+$j$G$9!#(B
+ユーザーが少ないせいなのですが、
+bccもCygwinも資料がほとんどありません。
+web上にある資料はVC++かdelphiのものばかりです。
 </p>
 
-          <li> $B$$$+$9%/%i%9%i%$%V%i%j$,$J$$(B
+          <li> いかすクラスライブラリがない
 <p>
-SDK$B%l%Y%k$N%W%m%0%i%_%s%0$7$+$G$-$^$;$s!#(B
-MFC$B$,;H$$$?$1$l$P(BVC++$B$,I,MW$G$9!#(B
-bcc$B$G$bGd$jJ*$rGc$o$J$$$H(BOWL$B$d$i(BVCL$B$d$i$r;H$&$N$OL5M}$N$h$&$G$9!#(B
+SDKレベルのプログラミングしかできません。
+MFCが使いたければVC++が必要です。
+bccでも売り物を買わないとOWLやらVCLやらを使うのは無理のようです。
 </p>
 
         </ul>
 
-      <li> bcc$B$N7gE@(B
+      <li> bccの欠点
         <ul>
-          <li> $B%G%P%C%,$,%$%^%$%A(B
+          <li> デバッガがイマイチ
 <p>
-$B$"$^$j;H$C$F$$$J$$$G$9$,!"8+$F$/$l$,0-$9$.$^$9!#(B
+あまり使っていないですが、見てくれが悪すぎます。
 </p>
         </ul>
 
-      <li> Cygwin$B$N7gE@(B
+      <li> Cygwinの欠点
         <ul>
-          <li> SJIS$B$NF|K\8lJ8;zNs$K(B\$B$,F~$C$F$$$k$HJ8;z2=$1$9$k(B
+          <li> SJISの日本語文字列に\が入っていると文字化けする
 <p>
-"$BI=<((B"$B$H$+$G$9!#(B
-Windows$B$N%W%m%0%i%`$@$HJ8;zNs$O(BSJIS$B$G=q$/$7$+$J$$$s$G$9$h$M!E!#(B
-"$BI=(B\$B<((B"$B$H$+$d$l$P$&$^$/$$$-$^$9!#F1$8%=!<%9$O(Bbcc$B$G$bDL$j$^$9!#(B
-$B$G$b$"$^$j$d$k5$$O$7$^$;$s!#(B
+"表示"とかです。
+Windowsのプログラムだと文字列はSJISで書くしかないんですよね‥。
+"表\示"とかやればうまくいきます。同じソースはbccでも通ります。
+でもあまりやる気はしません。
 </p>
 
-          <li> $B3+H/?X$K(BVC++$B$N%=!<%9$rDL$=$&$H$$$&5$$,$J$$(B<br>
+          <li> 開発陣にVC++のソースを通そうという気がない<br>
 <p>
-VC++$B$K$O(BANSI$B$K$J$$4X?t$,$+$J$j$"$j$^$9!#(B
-VC++$B$N?M$OEvA3$N$h$&$K;H$C$F$$$^$9!#(B
-bcc$B$O$+$J$jDI?o$7$F$$$k$h$&$G$9$,!"(B
-Cygwin$B$K$O$J$$4X?t$,B?$$$G$9!#(B
+VC++にはANSIにない関数がかなりあります。
+VC++の人は当然のように使っています。
+bccはかなり追随しているようですが、
+Cygwinにはない関数が多いです。
 </p>
 
         </ul>
     </ul>
 
 <p>
-$B$3$s$J46$8$G$7$g$&$+!#(B
-$B2?$+I.<T$N8m2r$7$F$$$kE@$,$"$j$^$7$?$i!"$4O"Mm$$$?$@$1$k$H=u$+$j$^$9!#(B
+こんな感じでしょうか。
+何か筆者の誤解している点がありましたら、ご連絡いただけると助かります。
 </p>
 <p>
-$B$3$N5-;v$G$O(BCygwin$B$N%D!<%k$r;H$&$3$H$r$+$J$jA0Ds$K$7$F$$$^$9!#(B
-bcc$B$H!"(BWindows$BI8=`$N%D!<%k$@$1$G$bF1$8$3$H$,$G$-$k$O$:$G$9$,!"(B
-$B$=$N:]$K$OE,59FI$_BX$($F$/$@$5$$!J(Brm$B$r(Bdel$B$H$9$k$J$I!K!#(B
-$B$^$?!"(Bmake$B$r;H$C$?%W%m%0%i%`3+H/$N7P83$bA0Ds$K$7$F$$$^$9!#(B
+この記事ではCygwinのツールを使うことをかなり前提にしています。
+bccと、Windows標準のツールだけでも同じことができるはずですが、
+その際には適宜読み替えてください（rmをdelとするなど）。
+また、makeを使ったプログラム開発の経験も前提にしています。
 </p>
 <p>
-$B;29M$^$G$KI.<T$N4D6-$r=q$-$^$9!#(B
-Celeron466MHz/128M/Windows2000$B$N%^%7%s$G!"(B
-shell$B$O(Bbash$B$r;H$$!"(B
-$B%3%s%Q%$%k$O(BGNU make$B$G9T$C$F$$$^$9!#(B
-$B:#$N$H$3$m(Bbcc$B$b(Bgcc$B$bF1DxEY;H$C$F$$$^$9!#(B
+参考までに筆者の環境を書きます。
+Celeron466MHz/128M/Windows2000のマシンで、
+shellはbashを使い、
+コンパイルはGNU makeで行っています。
+今のところbccもgccも同程度使っています。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="requirement">$BI,MW$J$b$N(B</a></h2>
+<h2><a name="requirement">必要なもの</a></h2>
 
 <p>
-$B$3$l0J30$N$b$N$r;H$C$F$b9=$$$^$;$s$1$I$M!JNc$($P!"(BLinux$B>e$G%/%m%9%3%s%Q%$%i$G3+H/$H$+!E!K!#(B
+これ以外のものを使っても構いませんけどね（例えば、Linux上でクロスコンパイラで開発とか‥）。
 </p>
     <ul>
-      <li> Windows$B%^%7%s(B
+      <li> Windowsマシン
 <p>
-OS$B$O$G$-$k$@$1(BNT/2000$B$r;H$&$Y$-$G$7$g$&!#(B
-95/98$B$O$?$@$G$5$(Mn$A$d$9$$$N$G!"(B
-$B3+H/Cf$K%]%$%s%?<~$j$N%P%0$,$"$C$?$j$9$k$H$R$I$$L\$K2q$&$+$b$7$l$^$;$s!#(B
+OSはできるだけNT/2000を使うべきでしょう。
+95/98はただでさえ落ちやすいので、
+開発中にポインタ周りのバグがあったりするとひどい目に会うかもしれません。
 </p>
 
-      <li> $B%3%s%Q%$%i(B
+      <li> コンパイラ
 <p>
-$B%3%s%Q%$%i$O!"(B
-Borland C++ Compiler 5.5$B$K4^$^$l$k(Bbcc$B$+!"(B
-Cygwin$B$K4^$^$l$k(Bgcc$B$r;H$$$^$9!#(B
+コンパイラは、
+Borland C++ Compiler 5.5に含まれるbccか、
+Cygwinに含まれるgccを使います。
 </p>
 
       <li> Microsoft Platform SDK
 <p>
-Platform SDK$B$H$$$&$N$O!"(B
-Microsoft$B$,G[$C$F$$$k3+H/<TMQ$N%D!<%k$d%X%k%W$J$I$N%Q%C%1!<%8$G$9!#(B
-$B$3$l$K4^$^$l$k%X%k%W$,3+H/$K$O7g$+$;$^$;$s!#(B
-$B$3$N%X%k%W$,$J$$$H;W$$DL$j$N%W%m%0%i%`$r=q$/$N$O:$Fq$H8@$C$F$$$$$G$7$g$&!#(B
+Platform SDKというのは、
+Microsoftが配っている開発者用のツールやヘルプなどのパッケージです。
+これに含まれるヘルプが開発には欠かせません。
+このヘルプがないと思い通りのプログラムを書くのは困難と言っていいでしょう。
 </p>
     </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="download"   >$B%@%&%s%m!<%I(B</a></h2>
+<h2><a name="download"   >ダウンロード</a></h2>
 
 <p>
 
-    $B$3$NJ8>O$N:G8e$N(B<a href="#bookmarks"
-    >$B%j%s%/=8(B</a>$B$r;29M$K!"I,MW$J$b$N$r%@%&%s%m!<%I$7$^$7$g$&!#(B
-    bcc$B$O(B8M$BDxEY!"(BCygwin$B$O(Bsnapshot$B$r4^$a$F(B25M$BDxEY$G$9!#(B
-    Platform SDK$B$O%U%k%Q%C%1!<%8$G(B550M$BDx$"$j$^$9!#(B
-    $BI,MW$JItJ,$@$1%@%&%s%m!<%I$7$F$/$l$k%$%s%9%H!<%i$b$"$j$^$9$,!"(B
-    $B%X%k%W$@$1$G$b(B130M$BDx$"$j$^$9!#(B
-    $B@\B3>u67E*$K$I$&$7$F$bL5M}$J$i$"$-$i$a$^$7$g$&!#(B
-    $B%3%s%Q%$%i$@$1$"$l$P%3%s%Q%$%k$O$G$-$^$9!#(B
+    この文章の最後の<a href="#bookmarks"
+    >リンク集</a>を参考に、必要なものをダウンロードしましょう。
+    bccは8M程度、Cygwinはsnapshotを含めて25M程度です。
+    Platform SDKはフルパッケージで550M程あります。
+    必要な部分だけダウンロードしてくれるインストーラもありますが、
+    ヘルプだけでも130M程あります。
+    接続状況的にどうしても無理ならあきらめましょう。
+    コンパイラだけあればコンパイルはできます。
 </p>
 <p>
-bcc$B$N(Breadme.txt$B$K=q$$$F$"$k$N$G$9$,!"(B
+bccのreadme.txtに書いてあるのですが、
 <a href="http://www.borland.com/techpubs/bcppbuilder/"
 >Borland C++Builder documentation site</a>
-$B$+$i%X%k%W$r$$$/$D$+<h$C$F$-$?J}$,$$$$$+$b$7$l$^$;$s!#(B
+からヘルプをいくつか取ってきた方がいいかもしれません。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="install"    >$B%$%s%9%H!<%k(B</a></h2>
+<h2><a name="install"    >インストール</a></h2>
 
     <ul>
       <li> <a name="install.bcc">bcc</a>
 <p>
-$B$^$:$OMn$H$7$F$-$?(Bfreecompiler.exe$B$r<B9T$7$^$9!#(B
-$B%$%s%9%H!<%k$9$k%G%#%l%/%H%j$rJ9$$$F$/$k$N$G!"(B
-$BE,Ev$KEz$($k$H%$%s%9%H!<%k$5$l$^$9!#(B
-$B<!$K!"(Breadme.txt$B$K=q$$$F$"$kDL$j!"(B
-bin$B%G%#%l%/%H%j$K(Bbcc32.cfg$B$H(Bilink32.cfg$B$r:n$j$^$9!#(B
-$B:G8e$K!"$3$N%G%#%l%/%H%j$K%Q%9$rDL$9$J$jDL$5$J$$$J$jE,Ev$K$d$j$^$9!#(B
-$BI.<T$O!"(BGNU$B$N(Bmake$B$r;H$&$?$a$K(BCygwin$B$NJ}$,%Q%9$N>e0L$K$/$k$h$&$K$7$F$$$^$9!#(B
+まずは落としてきたfreecompiler.exeを実行します。
+インストールするディレクトリを聞いてくるので、
+適当に答えるとインストールされます。
+次に、readme.txtに書いてある通り、
+binディレクトリにbcc32.cfgとilink32.cfgを作ります。
+最後に、このディレクトリにパスを通すなり通さないなり適当にやります。
+筆者は、GNUのmakeを使うためにCygwinの方がパスの上位にくるようにしています。
 </p>
 <p>
-$B$b$&D>$C$F$$$k$+$b$7$l$^$;$s$,!"I.<T$,%@%&%s%m!<%I$7$?$H$-$K$O(B
-$BF|K\8lHG$O%X%C%@%U%!%$%k$,B-$j$J$$$h$&$K;W$$$^$7$?!#(B
-$B$=$s$J$o$1$GI.<T$O1Q8lHG$r;H$C$F$$$^$9$,!"(B
-$BF|K\8lHG$N%a%j%C%H$O%3%s%Q%$%k%(%i!<%a%C%;!<%8$H%X%k%W$,F|K\8l$K$J$C$F$$$k$3$H$G$9(B
-$B!J$G$bF|K\8lHG%X%k%W$@$H$&$^$/8+$($J$$%Z!<%8$,$"$k!E!K!#(B
+もう直っているかもしれませんが、筆者がダウンロードしたときには
+日本語版はヘッダファイルが足りないように思いました。
+そんなわけで筆者は英語版を使っていますが、
+日本語版のメリットはコンパイルエラーメッセージとヘルプが日本語になっていることです
+（でも日本語版ヘルプだとうまく見えないページがある‥）。
 </p>
 
       <li> <a name="install.gcc">gcc</a>
 <p>
-Cygwin$B$G(BUNIX$B$N%D!<%k$r%3%s%Q%$%k$G$-$k>uBV$K$J$C$F$$$l$P!"(B
-Windows$B$N%W%m%0%i%`$b%3%s%Q%$%k$G$-$k>uBV$K$J$C$F$$$k$O$:$G$9!#(B
+CygwinでUNIXのツールをコンパイルできる状態になっていれば、
+Windowsのプログラムもコンパイルできる状態になっているはずです。
 </p>
 <p>
-$B%$%s%9%H!<%k$7$F$$$J$1$l$P!">\$7$$%Z!<%8$r;2>H$7$?J}$,$$$$$G$7$g$&!#(B
-$BF#;^$5$s$N(B<a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
->$B!X(BCygwin$B>pJs!Y(B</a>$B$+$i$"$A$3$A$KHt$s$G$_$k$H$$$$$+$b$7$l$^$;$s!#(B
+インストールしていなければ、詳しいページを参照した方がいいでしょう。
+藤枝さんの<a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
+>『Cygwin情報』</a>からあちこちに飛んでみるといいかもしれません。
 </p>
 <!--
-$B4pK\E*$K$O(Bfull.exe$B$G%$%s%9%H!<%k$7$F!"(B
-snapshot$B$N(Bcygwin-inst-*.tar.gz$B$rE83+!u>e=q$-%3%T!<$9$l$P(BOK$B$G$9$,!"(B
-snapshot$B$N!J$*$=$i$/!K@5$7$$%$%s%9%H!<%kJ}K!$O(B
-$B$"$^$jCN$i$l$F$$$J$$$h$&$K;W$$$^$9!#(B
-$B$I$3$N%Z!<%8$K=q$$$F$"$C$?$+K:$l$^$7$?$,!"(B
-tar$B$G$[$I$$$F$G$-$k(Bi586-pc-cygwin32$B$N2<A4It$r!"(B
-i586-cygwin32$B$N2<$K>e=q$-%3%T!<$7$J$$$H!"(B
-gcc$B$,$$$^$$$A$&$^$/F0$-$^$;$s!#(B
-$B$H!";W$$$^$7$?$,!"$=$l$,@5$7$$$N$+$I$&$+<+?.$r<:$$$^$7$?!#(B
-bin$B$N2<0J30$OCV$-49$($A$c$@$a$J$N$+$J!)(B
+基本的にはfull.exeでインストールして、
+snapshotのcygwin-inst-*.tar.gzを展開＆上書きコピーすればOKですが、
+snapshotの（おそらく）正しいインストール方法は
+あまり知られていないように思います。
+どこのページに書いてあったか忘れましたが、
+tarでほどいてできるi586-pc-cygwin32の下全部を、
+i586-cygwin32の下に上書きコピーしないと、
+gccがいまいちうまく動きません。
+と、思いましたが、それが正しいのかどうか自信を失いました。
+binの下以外は置き換えちゃだめなのかな？
 
-$B4pK\E*$K$O(Bfull.exe$B$G%$%s%9%H!<%k$7$F!"(B
-snapshot$B$N(Bcygwin-inst-*.tar.gz$B$rE83+$7!"(B
-$BI,MW$J$b$N$r>e=q$-%3%T!<$9$l$P(BOK$B$G$9!#(B
-$B;d$O(B2000/04/15$B8=:_!"(B2000/03/30$B$N(Bsnapshot$B$N(Bbin/$B0J2<$H!"(B
-2000/04/13$B$N(Bcygwin1.dll$B$r;H$C$F$$$^$9!#(B
-$B:G6a$N(Bsnapshot$B$N(Bi686-pc-cygwin/include/$B$K$O!"(B
-winsock2.h$B$J$I?7$?$KDI2C$5$l$?%X%C%@%U%!%$%k$,$"$k$N$G$9$,!"(B
-$B$3$l$r;H$&$N$OLLE]$K$J$C$F$"$-$i$a$^$7$?(B
-$B!J(Bi686-pc-cygwin/$B$N2<$r(B
-i586-cygwin32/$B$N2<$K>e=q$-%3%T!<$9$k$H0l8+F0$/$b$N$N!"5sF0$,2x$7$$!K!#(B
-$B$=$NJU$O(BCygwin 1.1$B$K4|BT$H$$$&$3$H$G!#(B
+基本的にはfull.exeでインストールして、
+snapshotのcygwin-inst-*.tar.gzを展開し、
+必要なものを上書きコピーすればOKです。
+私は2000/04/15現在、2000/03/30のsnapshotのbin/以下と、
+2000/04/13のcygwin1.dllを使っています。
+最近のsnapshotのi686-pc-cygwin/include/には、
+winsock2.hなど新たに追加されたヘッダファイルがあるのですが、
+これを使うのは面倒になってあきらめました
+（i686-pc-cygwin/の下を
+i586-cygwin32/の下に上書きコピーすると一見動くものの、挙動が怪しい）。
+その辺はCygwin 1.1に期待ということで。
 -->
 <p>
-2000/04/27$B$K(BCygwin 1.1$B$$$l$F$_$?$H$3$m!"$I$&$b(Bgdb$B$,F0$+$J$$!E!#$J$s$G$@$m!#(B
-$B$=$l0J30$O$"$l$3$l2~A1$5$l$F$F%&%O%&%O$J$s$G$9$1$I!#(B
-$B$H;W$C$?$i(Bw2k$B$G$@$1F0$+$J$+$C$?$_$?$$$G$9$M!#(B
-2000/08/03$B$N;~E@$G$O!J$=$l$J$j$K!KF0$$$F$^$9!#(B
+2000/04/27にCygwin 1.1いれてみたところ、どうもgdbが動かない‥。なんでだろ。
+それ以外はあれこれ改善されててウハウハなんですけど。
+と思ったらw2kでだけ動かなかったみたいですね。
+2000/08/03の時点では（それなりに）動いてます。
 </p>
 <p>
-Cygwin1.1$B$K4X$7$F$OF|K\8l$N;qNA$,$^$@>/$J$$>u67$G$9$M!#(B
-$BAaED$5$s$N(B<a
+Cygwin1.1に関しては日本語の資料がまだ少ない状況ですね。
+早田さんの<a
 href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/cygwin11.html"
->$B!X(BCygwin 1.1 $B4D6-$N9=C[!Y(B</a>$B$H(B
-yzone$B$5$s$N(B<a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
->$B!X(BCygwin 1.1 Information$B!Y(B</a>$B$/$i$$$G$7$g$&$+!#(B
-$BI.<T$bIT?F@Z$J5-;v$r=q$$$F$$$^$9!J(B<a href="../cygwin/index.html">
-$B!X(BCygwin 1.x$B$G(BUNIX$B5$J,$NAk@83h!Y(B</a>$B!K!#(B
+>『Cygwin 1.1 環境の構築』</a>と
+yzoneさんの<a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
+>『Cygwin 1.1 Information』</a>くらいでしょうか。
+筆者も不親切な記事を書いています（<a href="../cygwin/index.html">
+『Cygwin 1.xでUNIX気分の窓生活』</a>）。
 </p>
 
       <li> <a name="install.psdk">Platform SDK</a>
 <p>
-$BI,MW$J$b$N$r>!<j$K(Bftp$B$G<h$C$F$-$F$/$l$k(Bexe$B$r%@%&%s%m!<%I$7$?>l9g$O!"(B
-$B$=$l$r<B9T$9$l$PI,MW$J$b$N$@$1%$%s%9%H!<%k$7$F$/$l$^$9!#(B
+必要なものを勝手にftpで取ってきてくれるexeをダウンロードした場合は、
+それを実行すれば必要なものだけインストールしてくれます。
 </p>
 <p>
-Microsoft$B$N(Bftp$B%5!<%P$+$i!"(B
-$B:G?7$N(BPlatform SDK$B$N%G%#%l%/%H%j!JNc$($P(B April2000/$B!K(B
-$B$N2<$rA4$F%@%&%s%m!<%I$7$F$-$?>l9g$d!"(B
-MSDN$B$N(BPlatform SDK$B$r<Z$j$F$-$?>l9g!J%i%$%;%s%9E*$KLdBj$O$J$$$O$:!K!"(B
-msi$B%U%!%$%k$r%@%V%k%/%j%C%/$9$l$P(B
-$B%m!<%+%k$N%U%!%$%k$r%$%s%9%H!<%k$7$F$/$l$k$O$:$G$9!#(B
+Microsoftのftpサーバから、
+最新のPlatform SDKのディレクトリ（例えば April2000/）
+の下を全てダウンロードしてきた場合や、
+MSDNのPlatform SDKを借りてきた場合（ライセンス的に問題はないはず）、
+msiファイルをダブルクリックすれば
+ローカルのファイルをインストールしてくれるはずです。
 </p>
     </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="programming">$B%W%m%0%i%_%s%0(B</a></h2>
+<h2><a name="programming">プログラミング</a></h2>
 
 <p>
-$B=i$a$F(BWindows$B%W%m%0%i%_%s%0$r$9$kJ}$O!"(B
-$BK\$d%&%'%V%Z!<%8$J$I$r;29M$K4hD%$C$F$/$@$5$$!#(B
-MFC$B$G$X$m$X$m=q$$$F$$$k$b$N$O;29M$K$J$j$^$;$s!#(B
-SDK$B$H$+(BAPI$B$H$+$$$&%-!<%o!<%I$r$?$h$j$KC5$7$F$/$@$5$$!#(B
-$B$b$7$/$O!"(BPlatform SDK$B$N%X%k%W$@$1$G$b2?$H$+$J$k$+$b$7$l$^$;$s!#(B
+初めてWindowsプログラミングをする方は、
+本やウェブページなどを参考に頑張ってください。
+MFCでへろへろ書いているものは参考になりません。
+SDKとかAPIとかいうキーワードをたよりに探してください。
+もしくは、Platform SDKのヘルプだけでも何とかなるかもしれません。
 </p>
 <p>
-$B<B:]$K%W%m%0%i%`$r=q$$$F$_$F:$$k$N$O!"(B
-$B%&%$%s%I%&$N%G%6%$%s$r$I$&$d$k$+$H$$$&$3$H$G$9!#(B
-$B$3$l$P$C$+$j$O(BGUI$B$NJ}$,$$$$$K7h$^$C$F$^$9$,!"(B
-$B$=$s$J$b$N$O(Bbcc$B$K$b(BCygwin$B$K$b$D$$$F$-$^$;$s!#(B
-$B0l1~!"(BPlatform SDK$B$N%D!<%k$H$7$F%@%$%"%m%0%(%G%#%?$,$D$$$F$-$^$9$,!"(B
-$B$3$l$O(BWindows3.1$B;~Be$N0dJ*$G!"F0$-$O$9$k$b$N$N;HMQ$K4.$($^$;$s(B
-$B!JCV$1$k%3%s%H%m!<%k$b8B$i$l$F$$$^$9$7!E!K!#(B
-$B8=:_$O$"$-$i$a$F%F%-%9%H%(%G%#%?$G%j%=!<%9%U%!%$%k$r=q$$$F$^$9!#(B
+実際にプログラムを書いてみて困るのは、
+ウインドウのデザインをどうやるかということです。
+こればっかりはGUIの方がいいに決まってますが、
+そんなものはbccにもCygwinにもついてきません。
+一応、Platform SDKのツールとしてダイアログエディタがついてきますが、
+これはWindows3.1時代の遺物で、動きはするものの使用に堪えません
+（置けるコントロールも限られていますし‥）。
+現在はあきらめてテキストエディタでリソースファイルを書いてます。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="compile"    >$B%3%s%Q%$%k(B</a></h2>
+<h2><a name="compile"    >コンパイル</a></h2>
 
 <p>
-$BE,Ev$J%=!<%9$r=&$C$F$/$k$J$j!"<+J,$G=q$/$J$j$7$F!"%3%s%Q%$%k$7$F$_$^$7$g$&!#(B
-$BE,Ev$J$b$N$,8+Ev$?$i$J$1$l$P(B<a href="hogerara.zip">$B$3$l(B</a>$B$G$b$I$&$>!#(B
+適当なソースを拾ってくるなり、自分で書くなりして、コンパイルしてみましょう。
+適当なものが見当たらなければ<a href="hogerara.zip">これ</a>でもどうぞ。
 </p>
     <ul>
       <li> <a name="compile.bcc">bcc</a>
 <p>
-$B%3%s%Q%$%i$O(Bbcc32$B!"%j%=!<%9%3%s%Q%$%i$O(Bbrc32$B$+(Bbrcc32$B!"%j%s%+$O(Bilink32$B$H$$$&L>A0$G$9!#(B
+コンパイラはbcc32、リソースコンパイラはbrc32かbrcc32、リンカはilink32という名前です。
 </p>
 <p>
-bcc32$B$G$O!"(Bgcc$B$G$N(B-o$B!J%*%V%8%'%/%H%U%!%$%k$d<B9T%U%!%$%k$NL>A0$r;XDj!K(B
-$B$K$"$?$k$b$N$,(B-o,-e$B$H(B2$B$D$"$k>e$K!"(B
-$B$=$l$>$l$N8e$m$K6uGr$rF~$l$:$K%U%!%$%kL>$r=q$+$J$/$F$O$J$i$J$$$3$H$KCm0U$,I,MW$G$9!#(B
-$B%i%$%V%i%j$OB>$N(Bobj$B%U%!%$%kF1MM$KNs5s$9$l$P%j%s%/$G$-$^$9!#(B
-$B%j%s%+$N%*%W%7%g%s$bJJ$,$"$j$9$.$FG:$_$^$7$?(B (^^;
+bcc32では、gccでの-o（オブジェクトファイルや実行ファイルの名前を指定）
+にあたるものが-o,-eと2つある上に、
+それぞれの後ろに空白を入れずにファイル名を書かなくてはならないことに注意が必要です。
+ライブラリは他のobjファイル同様に列挙すればリンクできます。
+リンカのオプションも癖がありすぎて悩みました (^^;
 </p>
 
       <ul>
-        <li> <a name="compile.bcc.con">$B%3%s%=!<%k%"%W%j$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.bcc.con">コンソールアプリのコンパイル</a>
 <p>
-$B2<$N$h$&$K!"$U$D!<$K%3%s%Q%$%k$9$k$@$1$G$9!#(B
--e$B$H(B-o$B$OJQ$o$C$F$^$9$1$I!"(B
-$BIaDL$O>JN,$9$k$N$G5$$K$J$i$J$$$H;W$$$^$9!#(B
+下のように、ふつーにコンパイルするだけです。
+-eと-oは変わってますけど、
+普通は省略するので気にならないと思います。
 </p>
 <pre>
 $ bcc32 -c -otest.obj test.c
@@ -407,75 +407,75 @@ $ bcc32 -etest.exe test.obj
 $ bcc32 -etest.exe test.c
 </pre>
 
-        <li> <a name="compile.bcc.win">Windows$B%"%W%j$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.bcc.win">Windowsアプリのコンパイル</a>
 <p>
--W$B%*%W%7%g%s$r$D$1$F%3%s%Q%$%k$9$l$P(BWindows$B%"%W%j$,$G$-$^$9!#(B
-$B%j%=!<%9%3%s%Q%$%i$G(Bres$B%U%!%$%k$b:n$l$^$9!#(B
+-WオプションをつけてコンパイルすればWindowsアプリができます。
+リソースコンパイラでresファイルも作れます。
 </p>
 <pre>
 $ bcc32 -W wtest.c
 $ brcc32 -r wtest.rc
 </pre>
 <p>
-$B$?$@!"%j%=!<%9$r(Bexe$B$K$/$C$D$1$kJ}K!$,$o$+$j$^$;$s!#(B
-brc32$B$G$G$-$k$O$:$@$H;W$&$s$G$9$1$I!E!#(B
-$B8=:_$O%j%s%+$r6lO+$7$F;H$C$F$$$^$9!#(B
+ただ、リソースをexeにくっつける方法がわかりません。
+brc32でできるはずだと思うんですけど‥。
+現在はリンカを苦労して使っています。
 </p>
 <pre>
 $ ilink32 c0w32.obj wtest.obj,wtest.exe,,cw32.lib import32.lib,,wtest.res
 </pre>
 
-        <li> <a name="compile.bcc.mt" >$B%^%k%A%9%l%C%I%W%m%0%i%`$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.bcc.mt" >マルチスレッドプログラムのコンパイル</a>
 <p>
--WM$B$r$D$1$k$H!"(Bmt-safe$B$J%i%$%V%i%j$r%j%s%/$7$F$/$l$^$9!#(B
-VC++$BF1MM!"(B_beginthread()$B$b;H$($^$9!#(B
-Windows$B%"%W%j%1!<%7%g%s$N>l9g$K$O(B
+-WMをつけると、mt-safeなライブラリをリンクしてくれます。
+VC++同様、_beginthread()も使えます。
+Windowsアプリケーションの場合には
 </p>
 <pre>
 $ bcc32 -W -WM mttest-w.c
 </pre>
 <p>
-$B$N$h$&$K!"(B-W$B$HN>J}$D$1$l$P(BOK$B$G$9!#(B
+のように、-Wと両方つければOKです。
 </p>
 
-        <li> <a name="compile.bcc.dll">DLL$B$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.bcc.dll">DLLのコンパイル</a>
 <p>
-$B<!$N$h$&$K(B-WD$B%*%W%7%g%s$r$D$1$F%3%s%Q%$%k$9$l$P(BDLL$B$,$G$-$^$9!#(B
+次のように-WDオプションをつけてコンパイルすればDLLができます。
 </p>
 <pre>
 $ bcc32 -WD dlltest.c
 </pre>
 <p>
-DLL$B%U%!%$%kL>$N;XDj$O<B9T%U%!%$%kF1MM(B-e$B$G$9!#(B
+DLLファイル名の指定は実行ファイル同様-eです。
 </p>
 <p>
-$B%$%s%]!<%H%i%$%V%i%j$O!"(Bimplib$B%3%^%s%I$G:n$j$^$9!#(B
-def$B%U%!%$%k$+$i:n$k$+!"$^$?$O(Bdll$B$+$i$$$-$J$j:n$j$^$9!#(B
+インポートライブラリは、implibコマンドで作ります。
+defファイルから作るか、またはdllからいきなり作ります。
 </p>
 <pre>
 $ implib dlltest.lib dlltest.dll
 </pre>
 <p>
-def$B%U%!%$%k$,I,MW$J$H$-$K$O!"(B
-impdef$B%3%^%s%I$G(Bdll$B$+$i(Bdef$B%U%!%$%k$r:n$k$3$H$,$G$-$^$9$,!"(B
-$BIaDL$O(Bdef$B%U%!%$%k$r:n$kI,MW$O$J$$$G$7$g$&!#(B
+defファイルが必要なときには、
+impdefコマンドでdllからdefファイルを作ることができますが、
+普通はdefファイルを作る必要はないでしょう。
 </p>
 <p>
-$B%7%s%\%kL>$NJQ49%k!<%k$,0c$&$N$G!"(B
-Cygwin$B$G:n$C$?(Bdef$B%U%!%$%k$,F1$8%G%#%l%/%H%j$K$"$C$?$j$9$k$H(B
-$B!V(BAttempt to export non-public symbol '***'$B!W(B
-$B$J$I$HJ86g$r$$$o$l$^$9!J$,!"%$%s%]!<%H%i%$%V%i%j$O@5$7$/$G$-$F$$$^$9!K!#(B
+シンボル名の変換ルールが違うので、
+Cygwinで作ったdefファイルが同じディレクトリにあったりすると
+「Attempt to export non-public symbol '***'」
+などと文句をいわれます（が、インポートライブラリは正しくできています）。
 </p>
 <p>
-$B$=$N%$%s%]!<%H%i%$%V%i%j$r%j%s%/$9$l$P(BDLL$BFb$N4X?t$,;H$($^$9!#(B
+そのインポートライブラリをリンクすればDLL内の関数が使えます。
 </p>
 <pre>
 $ bcc32 usedll.c dlltest.lib
 </pre>
 
-        <li> <a name="compile.bcc.mkf">Makefile$B$NNc(B</a>
+        <li> <a name="compile.bcc.mkf">Makefileの例</a>
 <p>
-$B0J2<$O(BGNU make$BMQ$N(BMakefile$B$G$9!#(Bbcc$B$K$D$$$F$/$k(Bmake$B$G$O$*$=$i$/F0$-$^$;$s!#(B
+以下はGNU make用のMakefileです。bccについてくるmakeではおそらく動きません。
 </p>
 <pre>
 ### Makefile.bcc
@@ -512,40 +512,40 @@ $(EXE): $(OBJS) $(RES)
 
       <li> <a name="compile.gcc">gcc</a>
 <p>
-Cygwin$B$N%3%s%Q%$%i$O(Bgcc$B!J(Bg++$B$H$+(Bg77$B$r;H$&J}$,$$$F$b$$$$$G$9$,!K!"(B
-$B%j%=!<%9%3%s%Q%$%i$O(Bwindres$B$H$$$&L>A0$G$9!#(B
-$B%j%s%+$O(Bld$B$G$9$1$I!"(B
-gcc$B$,>!<j$K8F$S=P$7$F$/$l$^$9$N$G!"L@<(E*$K;H$&$3$H$O$J$$$G$7$g$&!#(B
+Cygwinのコンパイラはgcc（g++とかg77を使う方がいてもいいですが）、
+リソースコンパイラはwindresという名前です。
+リンカはldですけど、
+gccが勝手に呼び出してくれますので、明示的に使うことはないでしょう。
 </p>
 
       <ul>
-        <li> <a name="compile.gcc.con">$B%3%s%=!<%k%"%W%j$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.gcc.con">コンソールアプリのコンパイル</a>
 <p>
-$B$U$D!<$N(Bgcc$B$G$9!#(B
+ふつーのgccです。
 </p>
 <pre>
 $ gcc -o test.o -c test.c
 $ gcc -o test.exe test.o
 </pre>
 
-        <li> <a name="compile.gcc.win">Windows$B%"%W%j$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.gcc.win">Windowsアプリのコンパイル</a>
 <p>
--mwindows$B$r$D$1$F%3%s%Q%$%k$9$k$@$1$G$9!#(B
+-mwindowsをつけてコンパイルするだけです。
 </p>
 <p>
-Cygwin$B$G2?$b9M$($:$K:n$C$?%P%$%J%j$O(Bcygwin1.dll$B$,$J$$4D6-$G$OF0$-$^$;$s!#(B
-$B$=$l$8$c@^3Q%P%$%J%j$r:n$C$F$bG[$j$E$i$$$J$"!"$H;W$o$l$k$G$7$g$&$,!"(B
-$B:G6a$N(BCygwin$B$O(Bmingw32$B$H$$$&%Q%C%1!<%8$r4^$s$G$*$j!"(B
--mwindows$B$K2C$($F(B-mno-cygwin$B$r$D$1$k$3$H$G!"(B
-cygwin1.dll$B$J$7$GF0$/%P%$%J%j$r:n$k$3$H$,$G$-$^$9!#(B
-$B>/$7F0:n$,JQ$o$C$?$j$7$^$9$1$I!"IaDL$O5$$K$J$i$J$$$O$:$G$9!#(B
+Cygwinで何も考えずに作ったバイナリはcygwin1.dllがない環境では動きません。
+それじゃ折角バイナリを作っても配りづらいなあ、と思われるでしょうが、
+最近のCygwinはmingw32というパッケージを含んでおり、
+-mwindowsに加えて-mno-cygwinをつけることで、
+cygwin1.dllなしで動くバイナリを作ることができます。
+少し動作が変わったりしますけど、普通は気にならないはずです。
 </p>
 <p>
-$B%j%=!<%9%3%s%Q%$%i(Bwindres$B$N(Bsyntax$B$O!"(B
-MS$B$N$b$N$H>/!98_49@-$,$J$$$N$G<j$r>F$-$^$9(B
-$B!J%G%#%l%/%F%#%V$K$h$C$F$O(Bquote$B$9$k$H%(%i!<$K$J$k$J$I!K!#(B
-$B$^$?!"(BCygwin$B$G$O%j%=!<%9$r(Bres$B7A<0$K$7$F$b%j%s%+$,2r<a$G$-$^$;$s$N$G!"(B
-coff$B7A<0$K$7$F%j%s%/$7$J$/$F$O$J$j$^$;$s!#(B
+リソースコンパイラwindresのsyntaxは、
+MSのものと少々互換性がないので手を焼きます
+（ディレクティブによってはquoteするとエラーになるなど）。
+また、Cygwinではリソースをres形式にしてもリンカが解釈できませんので、
+coff形式にしてリンクしなくてはなりません。
 </p>
 <pre>
 $ gcc -c wtest.c
@@ -553,27 +553,27 @@ $ windres -i wtest.rc -o wtest.coff
 $ gcc -mwindows -o wtest.exe wtest.o wtest.coff
 </pre>
 <p>
-printf$B%G%P%C%0$r$9$k$J$I!J>P!K$NM}M3$G!"(B
-Windows$B%"%W%j$G%3%s%=!<%k$,M_$7$/$J$k$3$H$b$"$k$G$7$g$&!#(B
--mwindows$B$K2C$($F(B-Wl,--subsystem,console$B%*%W%7%g%s$r$D$1$l$P%3%s%=!<%k$,$G$-$^$9!#(B
-$B$b$A$m$s!"$5$i$K(B-mno-cygwin$B$r$D$1$k$3$H$b$G$-$^$9!#(B
+printfデバッグをするなど（笑）の理由で、
+Windowsアプリでコンソールが欲しくなることもあるでしょう。
+-mwindowsに加えて-Wl,--subsystem,consoleオプションをつければコンソールができます。
+もちろん、さらに-mno-cygwinをつけることもできます。
 </p>
 
-        <li> <a name="compile.gcc.mt" >$B%^%k%A%9%l%C%I%W%m%0%i%`$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.gcc.mt" >マルチスレッドプログラムのコンパイル</a>
 <p>
-$BA4A3$o$+$C$F$^$;$s!#(B
-$B:G6a$N(BCygwin$B$N%i%$%V%i%j$O(Bmt-safe$B$K$J$C$?$H$+$$$&OC$rM'?M$KJ9$$$?$N$G!"(B
-pthread$B$N%W%m%0%i%`$O$5$/$C$HF0$/$N$+$b$7$l$^$;$s!#(B
-$B$,!"(BVC++$B$N?MC#$,$h$/;H$&(B_beginthread()$B$OF0$+$J$5$=$&$G$9!#(B
+全然わかってません。
+最近のCygwinのライブラリはmt-safeになったとかいう話を友人に聞いたので、
+pthreadのプログラムはさくっと動くのかもしれません。
+が、VC++の人達がよく使う_beginthread()は動かなさそうです。
 </p>
 
-        <li> <a name="compile.gcc.dll">DLL$B$N%3%s%Q%$%k(B</a>
+        <li> <a name="compile.gcc.dll">DLLのコンパイル</a>
 
 <p>
-DLL$B$O!"(Bdllwrap$B$G:n$j$^$9!#(B
-$B$3$l$OL>A0$NDL$j(Bwrapper$B$G$9$,!"(B
-gcc$B$H(Bdlltool$B$r2?EY$b8F$s$G$$$FM}2r$7$,$?$$$G$9!#(B
-$B$^$:$O(B.def$B%U%!%$%k$r:n$j$^$9!#(B
+DLLは、dllwrapで作ります。
+これは名前の通りwrapperですが、
+gccとdlltoolを何度も呼んでいて理解しがたいです。
+まずは.defファイルを作ります。
 </p>
 <pre>
 $ gcc -c a.c b.c c.c dllinit.c
@@ -581,7 +581,7 @@ $ dlltool --export-all --output-def app.def a.o b.o c.o dllinit.o
 </pre>
 
 <p>
-$B:n$C$?(B.def$B%U%!%$%k$r;H$C$F!"(Bdll$B$r:n$j$^$9!#(B
+作った.defファイルを使って、dllを作ります。
 </p>
 
 <pre>
@@ -589,7 +589,7 @@ $ dllwrap --driver-name gcc --def app.def -o foo.dll a.o b.o c.o dllinit.o
 </pre>
 
 <p>
-$B%$%s%]!<%H%i%$%V%i%j$b(B.def$B%U%!%$%k$+$i:n$j$^$9!#(B
+インポートライブラリも.defファイルから作ります。
 </p>
 <pre>
 $ dlltool --dllname foo.dll --def app.def --output-lib libapp.a
@@ -597,7 +597,7 @@ $ dlltool --dllname foo.dll --def app.def --output-lib libapp.a
 
 
 <p>
-$B0J>e$r0l5$$K$d$k%3%^%s%I$,(B
+以上を一気にやるコマンドが
 </p>
 
 <pre>
@@ -605,12 +605,12 @@ $ dllwrap --export-all --output-def app.def --implib libapp.a --driver-name gcc 
 </pre>
 
 <p>
-$B$H$$$&$3$H$_$?$$$G$9!J:#$R$H$D$o$+$C$F$^$;$s!K!#(B
-mingw32$B$J(BDLL$B$O!"(Bdllwrap$B$K(B'--target i386-mingw32'$B$r$D$1$F!"(B
-'--driver-name=gcc -mno-cygwin'$B$H$9$l$P$G$-$^$9!#(B
+ということみたいです（今ひとつわかってません）。
+mingw32なDLLは、dllwrapに'--target i386-mingw32'をつけて、
+'--driver-name=gcc -mno-cygwin'とすればできます。
 </p>
 <p>
-$B$G$-$?%$%s%]!<%H%i%$%V%i%j$r(B
+できたインポートライブラリを
 </p>
 
 <pre>
@@ -618,21 +618,21 @@ $ gcc usedll.c -L. -lapp
 </pre>
 
 <p>
-$B$H$$$&$h$&$K%j%s%/$9$l$P(BDLL$BFb$N4X?t$,;H$($^$9!#(B
+というようにリンクすればDLL内の関数が使えます。
 </p>
 
 <p>
-$B$A$J$_$K!";29M$K$7$?;qNA$O(BMumit Khan$B$5$s$N(B
+ちなみに、参考にした資料はMumit Khanさんの
 <a href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/dllhelpers.html"
->DLL Helpers</a>$B$N(BREADME$B$G$9!#(B
-$B$3$N?M$O$I$&$d$i(Bdllwrap$B$N:n<T$_$?$$$G$9!#(B
-mingw32$B$N:n<T$G$"$k(BColin Peters$B$5$s$K$h$k%A%e!<%H%j%"%k(B
+>DLL Helpers</a>のREADMEです。
+この人はどうやらdllwrapの作者みたいです。
+mingw32の作者であるColin Petersさんによるチュートリアル
 <a href="http://www.geocities.com/Tokyo/Towers/6162/win32/index.html"
->$B!X(BProgramming Win32 with GNU C and C++$B!Y(B</a>$B$N(BDLL$B$N>O$K$b$$$m$$$m=q$$$F$"$j$^$9$1$I!"(B
-$B$h$/$o$+$i$J$$$N$G(B (^^;$B!"(Bdllwrap$B$r;H$C$?J}$,$$$$$H;W$$$^$9!#(B
+>『Programming Win32 with GNU C and C++』</a>のDLLの章にもいろいろ書いてありますけど、
+よくわからないので (^^;、dllwrapを使った方がいいと思います。
 </p>
 
-        <li> <a name="compile.gcc.mkf">Makefile$B$NNc(B</a>
+        <li> <a name="compile.gcc.mkf">Makefileの例</a>
 <pre>
 ### Makefile.gcc
 SRCS = hogarara.c
@@ -676,47 +676,47 @@ $(EXE): $(OBJS) $(RES)
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="debug"      >$B%G%P%C%0(B</a></h2>
+<h2><a name="debug"      >デバッグ</a></h2>
 
 <p>
-Platform SDK$B$K4^$^$l$k(Bspy$B$r;H$&$H!"Ht$s$G$$$k%a%C%;!<%8$r8+$k$3$H$,$G$-$^$9!#(B
-$B<+J,$N%W%m%0%i%`$,;W$$DL$j$N%a%C%;!<%8$r=P$7$F$$$k$+$rD4$Y$?$j!"(B
-$BB>$N%"%W%j%1!<%7%g%s$,$I$s$J%a%C%;!<%8$r$d$j$H$j$7$F$$$k$N$+$r3X$Y$?$j$H!"(B
-$B$J$+$J$+M-MQ$J%D!<%k$G$9!#(B
-$B$7$+$7!"(BVC++$BIUB0$N(Bspy++$B$KHf$Y$k$HHs>o$K;H$$$K$/$/!"(B
-$B$b$&>/$7$J$s$H$+$J$i$s$+$C$?$N$+!"$H$$$&5$$,$7$^$9!#(B
+Platform SDKに含まれるspyを使うと、飛んでいるメッセージを見ることができます。
+自分のプログラムが思い通りのメッセージを出しているかを調べたり、
+他のアプリケーションがどんなメッセージをやりとりしているのかを学べたりと、
+なかなか有用なツールです。
+しかし、VC++付属のspy++に比べると非常に使いにくく、
+もう少しなんとかならんかったのか、という気がします。
 </p>
     <ul>
       <li> <a name="debug.bcc">bcc</a>
 <p>
 	   <a href="http://www.inprise.co.jp/cppbuilder/freecompiler/turbodebugger.html"
-	   >Turbo Debugger</a>$B$,0l1~;H$($k$_$?$$$G$9!#(B
-	   $B3N$+$K(BGUI$B$G$O$"$k$s$G$9$,!"(B
-	   NT$B%3%s%=!<%k%Y!<%9$H$G$b8@$&$N$G$7$g$&$+!"(B
-	   $B$H$K$+$/%$%^%$%A$G$9!#(B
-	   Platform SDK$B$K4^$^$l$k%G%P%C%,$b;H$($k$N$+$b$7$l$^$;$s$,!"(B
-	   $B$h$/$o$+$j$^$;$s!#(B
+	   >Turbo Debugger</a>が一応使えるみたいです。
+	   確かにGUIではあるんですが、
+	   NTコンソールベースとでも言うのでしょうか、
+	   とにかくイマイチです。
+	   Platform SDKに含まれるデバッガも使えるのかもしれませんが、
+	   よくわかりません。
 </p>
 
       <li> <a name="debug.gcc">gcc</a>
 <p>
-	   gdb$B$,;H$($^$9!#(BSEGV$B$,Ht$s$G$-$?$h!"(B
-	   $B$J$I$H8@$C$F$/$l$F(BUNIX$B5$J,$r4.G=$G$-$^$9!#(B
-	   $B:G6a$O(BGUI$B$b$G$-$F$$$$46$8$G$9!#(B
-	   $B%^%k%A%9%l%C%I%W%m%0%i%`$N%G%P%C%0$O$G$-$J$$$N$@$m$&$+!E!)(B
+	   gdbが使えます。SEGVが飛んできたよ、
+	   などと言ってくれてUNIX気分を堪能できます。
+	   最近はGUIもできていい感じです。
+	   マルチスレッドプログラムのデバッグはできないのだろうか‥？
 </p>
     </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="benchmark"  >$B%Y%s%A%^!<%/(B</a></h2>
+<h2><a name="benchmark"  >ベンチマーク</a></h2>
 
 <p>
-$B%3%s%Q%$%i$N@-G=$O$I$&$J$N$+!"D4$Y$F$_$^$7$?!#(B
-$B0J2<$O!"(B<a href="cctest.c.txt"
->$B$d$k5$$N$J$$%W%m%0%i%`(B</a>$B$r%3%s%Q%$%k$7!"(B
-time$B%3%^%s%I$G<B9T;~4V$rB,Dj$7$?7k2L$G$9!#(B
-$BB,Dj$O(BCeleron466MHz/128M/Windows2000$B$J%^%7%s$G9T$$$^$7$?!#(B
+コンパイラの性能はどうなのか、調べてみました。
+以下は、<a href="cctest.c.txt"
+>やる気のないプログラム</a>をコンパイルし、
+timeコマンドで実行時間を測定した結果です。
+測定はCeleron466MHz/128M/Windows2000なマシンで行いました。
 </p>
 <pre>
 gcc:         4m33.463s
@@ -729,17 +729,17 @@ bcc -O2 -5:  2m36.225s
 bcc -O2 -6:  2m23.366s
 </pre>
 <p>
-bcc$B$O!"%G%U%)%k%H$G?'!9$J:GE,2=$,$5$l$F$7$^$&$N$G!"(B
-$B:GE,2=$r$5$;$J$$$?$a$K$O(B-Od$B%*%W%7%g%s$r$D$1$J$/$F$O$J$j$^$;$s!#(B
-bcc$B$N(B-4,-5,-6$B$O$=$l$>$l(B486,pentium,pentium pro$BMQ$N%P%$%J%j$rEG$/$N$G$9$,!"(B
-386$BMQ$N%P%$%J%j$h$j$+$($C$FCY$/$J$C$F$7$^$C$F$$$^$9!#(B
--O2$BF1;N$G$J$i(Bbcc$B$NJ}$,B.$$%P%$%J%j$r:n$l$k$h$&$G$9!#(B
+bccは、デフォルトで色々な最適化がされてしまうので、
+最適化をさせないためには-Odオプションをつけなくてはなりません。
+bccの-4,-5,-6はそれぞれ486,pentium,pentium pro用のバイナリを吐くのですが、
+386用のバイナリよりかえって遅くなってしまっています。
+-O2同士でならbccの方が速いバイナリを作れるようです。
 </p>
 <p>
-$B<!$K!"<B:]$N%"%W%j%1!<%7%g%s$K$D$$$F8+$F$_$^$9!#(B
-mp3$B%(%s%3!<%@!<$N(Blame 3.67beta$B$rN><T$G%3%s%Q%$%k$7$F!"(B
-$B<j85$K$"$C$?(B6$BJ,DxEY$N(Bwav$B%U%!%$%k$r%(%s%3!<%I$7$F$_$^$7$?!#(B
-$B$I$A$i$b%3%s%Q%$%k%*%W%7%g%s$O(B-O2$B$N$_$H$7$^$7$?!#(B
+次に、実際のアプリケーションについて見てみます。
+mp3エンコーダーのlame 3.67betaを両者でコンパイルして、
+手元にあった6分程度のwavファイルをエンコードしてみました。
+どちらもコンパイルオプションは-O2のみとしました。
 </p>
 <pre>
 LAME version 3.67 (www.sulaco.org/mp3)
@@ -760,9 +760,9 @@ Encoding as 44.1 kHz 128 kbps stereo MPEG1 LayerIII (11.0x)  qval=5
  13705/ 13705(100%)| 0:02:08/ 0:02:08| 0:02:09/ 0:02:09|    2.7866| 0:00:00
 </pre>
 <p>
-lame$B$K$O(Bbcc$BMQ$N%"%;%s%V%j%3!<%I$,4^$^$l$F$$$^$;$s$N$G!"(B
-$B>e$N7k2L$O$=$NJ,(Bbcc$B$KITMx$G$9!#(B
-gcc$B$G$b!"(Bquantize-pvt.c$B$GF1$8%3!<%I$r;H$o$;$F$_$?$H$3$m!"(B
+lameにはbcc用のアセンブリコードが含まれていませんので、
+上の結果はその分bccに不利です。
+gccでも、quantize-pvt.cで同じコードを使わせてみたところ、
 </p>
 <pre>
 LAME version 3.67 (www.sulaco.org/mp3)
@@ -774,31 +774,31 @@ Encoding as 44.1 kHz 128 kbps stereo MPEG1 LayerIII (11.0x)  qval=5
  13705/ 13705(100%)| 0:02:51/ 0:02:51| 0:03:00/ 0:03:00|    2.0980| 0:00:00
 </pre>
 <p>
-$B$H$J$C$F!"$d$O$j(Bbcc$B$NJ}$,CY$$$H$$$&7k2L$K$J$j$^$7$?(B
-$B!J%=!<%9$rGD0.$7$F$$$k$o$1$G$O$J$$$N$G!"(B
-$BB>$K$b(Bgcc$B$NJ}$,M-Mx$J8D=j$,$"$k$N$+$b$7$l$^$;$s!K!#(B
-$B%3%s%Q%$%k%*%W%7%g%s$r$$$m$$$m;n$7$F$_$^$7$?$,!"(B
-$B$"$^$jJQ$o$j$^$;$s$G$7$?!#(B
-$BB>$N%"%W%j%1!<%7%g%s$G$b;n$7$F$_$?$$$H$3$m$G$9!#(B
+となって、やはりbccの方が遅いという結果になりました
+（ソースを把握しているわけではないので、
+他にもgccの方が有利な個所があるのかもしれません）。
+コンパイルオプションをいろいろ試してみましたが、
+あまり変わりませんでした。
+他のアプリケーションでも試してみたいところです。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="misc"       >$B$[$+$K5$$E$$$?$3$H(B</a></h2>
+<h2><a name="misc"       >ほかに気づいたこと</a></h2>
 
 <p>
-gcc$B$G%(%G%#%C%H%3%s%H%m!<%k$r:n$k$H%4%_$,=P$k$h$&$J5$$,!#(B
-$B$I$&$d$i(Bwindres$B$N%P%0!E$H$$$&$+(Bsyntax$B$,0c$&$h$&$@!#(B
-brc32$B$G(Bres$B%U%!%$%k$r:n$C$F!"(B
-windres$B$G(Bres$B$+$i(Bcoff$B$KJQ49$9$k$H$&$^$/$$$C$?!#$J$s$8$c$=$j$c!#(B
+gccでエディットコントロールを作るとゴミが出るような気が。
+どうやらwindresのバグ‥というかsyntaxが違うようだ。
+brc32でresファイルを作って、
+windresでresからcoffに変換するとうまくいった。なんじゃそりゃ。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="appendix"   >$BIUO?(B</a></h2>
+<h2><a name="appendix"   >付録</a></h2>
 
     <ul>
-      <li> <a name="appendix.bashrc">$BI.<T$N(B.bashrc</a>
+      <li> <a name="appendix.bashrc">筆者の.bashrc</a>
 
 <pre>
 ### .bashrc
@@ -833,15 +833,15 @@ fi
 
 case `uname` in
 CYGWIN_95* )
-    alias cddesktop='cd /windows/(IC^=8D/L_(B'
+    alias cddesktop='cd /windows/デスクトップ'
     alias start='convexec -n/b,/d,/i,/min,/max,/separate,/shared,/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? start'
     ;;
 CYGWIN_NT* )
-    alias cddesktop='cd /Documents\ and\ Settings/'$USERNAME'/$B%G%9%/%H%C%W(B'
+    alias cddesktop='cd /Documents\ and\ Settings/'$USERNAME'/デスクトップ'
     alias start='convexec -v -n4 -i -n/b,/d,/i,/min,/max,/separate,/shared,/low,/normal,/high,/realtime,/abovenomal,/belownormal,/wait,/\? cmd /c start ""'
     ;;
 * )
-    alias cddesktop='cd /windows/(IC^=8D/L_(B'
+    alias cddesktop='cd /windows/デスクトップ'
     ;;
 esac
 
@@ -861,9 +861,9 @@ alias ilink=ilink32
 #alias ilink32='PATH=/apps/Borland/bcc55/Bin:$PATH ilink32'
 </pre>
 
-      <li> <a name="appendix.bcccfg">bcc$B$N(Bcfg$B%U%!%$%k(B</a>
+      <li> <a name="appendix.bcccfg">bccのcfgファイル</a>
 <p>
-readme.txt$B$K=q$$$F$"$kDL$j$G$9$1$I!#(B
+readme.txtに書いてある通りですけど。
 </p>
 
 <ul>
@@ -885,13 +885,13 @@ readme.txt$B$K=q$$$F$"$kDL$j$G$9$1$I!#(B
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="bookmarks"  >$B%j%s%/=8(B</a></h2>
+<h2><a name="bookmarks"  >リンク集</a></h2>
 
   <ul>
     <li><a href="http://www.inprise.co.jp/cppbuilder/freecompiler/index.html"
 	>Borland C++ Compiler 5.5</a>
         <a href="http://www.inprise.com/bcppbuilder/freecompiler/"
-	>[$B1Q8lHG(B]</a><br>
+	>[英語版]</a><br>
     <li><a href="http://sourceware.cygnus.com/cygwin/"
 	>Cygwin</a>
 	<a href="http://sourceware.cygnus.com/cygwin/download.html"
@@ -901,47 +901,47 @@ readme.txt$B$K=q$$$F$"$kDL$j$G$9$1$I!#(B
     <li><a href="http://msdn.microsoft.com/downloads/sdks/platform/platform.asp"
 	>Microsoft Platform SDK</a><br>
     <li><a href="http://www.bloodshed.nu/devc.html"
-	>Dev-C++</a> Cygwin$B$K$h$kE}9g4D6-!#$^$H$b$J%j%=!<%9%(%G%#%?$,$"$l$P$J!E(B<br>
+	>Dev-C++</a> Cygwinによる統合環境。まともなリソースエディタがあればな‥<br>
 <br>
     <li><a href="http://www.geocities.com/Tokyo/Towers/6162/win32/index.html"
 	>Programming Win32 with GNU C and C++</a>
-        mingw32$B$N:n<T$K$h$k%A%e!<%H%j%"%k!J=q$-$+$1!K(B<br>
+        mingw32の作者によるチュートリアル（書きかけ）<br>
     <li><a href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/"
 	>GNU Win32 Related Projects</a>
-        $B$^$@A4It8+$F$O$$$^$;$s$,!"(Bcygwin$B$G$$$m$$$m$d$C$F$^$9!#(B<br>
+        まだ全部見てはいませんが、cygwinでいろいろやってます。<br>
     <li><a href="http://www.bekkoame.ne.jp/~bero/docj/mingw32/gcc.html"
 	>gcc for Win32</a>
         <a href="http://www.geocities.com/Tokyo/Towers/6162/gcc.html"
-	>[$B86J8(B]</a><br>
+	>[原文]</a><br>
     <li><a href="http://www.ohnolab.org/~kimoto/winprog.html"
-	>Windows$B$,7y$$$J?M$N$?$a$N(BWin32$B%W%m%0%i%_%s%0(B</a>
-        $B99?7$7$F$/$@$5$$!#%^%8$GBT$C$F$^$9!#(B<br>
+	>Windowsが嫌いな人のためのWin32プログラミング</a>
+        更新してください。マジで待ってます。<br>
 	 <!--http://ohnolab-www.is.titech.ac.jp/~kimoto/winprog.html-->
 <br>
     <li><a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
-	>Cygwin$B>pJs(B</a> Snapshot News<br>
+	>Cygwin情報</a> Snapshot News<br>
     <li><a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/"
-	>Cygwin $B$r;H$&!#(B</a>
+	>Cygwin を使う。</a>
 	<a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/cygwin11.html"
 	>[Cygwin 1.1]</a><br>
     <li><a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
 	>Cygwin 1.1 Information</a><br>
     <li><a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/cygwin32.htm"
-	>Windows$B$G(BUNIX? Cygnus$B$N%Z!<%8(B</a>
+	>WindowsでUNIX? Cygnusのページ</a>
 	<a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/junixwin32.htm"
 	>[bookmarks]</a><br>
     <li><a href="http://www.matsusaka-u.ac.jp/~okumura/c/"
-	>C$B!$(BC++</a><br>
+	>C，C++</a><br>
     <li><a href="http://www.math.s.chiba-u.ac.jp/~okada/cygwin/index.html"
 	>Cygwin</a>
 	<a href="http://www.math.s.chiba-u.ac.jp/~okada/mahojin/index.html"
-	>[$BKbJ}?X(B]</a> Cygwin$B$K$h$kAk%"%W%j$N?t>/$J$$Nc(B<br>
+	>[魔方陣]</a> Cygwinによる窓アプリの数少ない例<br>
     <li><a href="http://www.hm.aitai.ne.jp/~mtani/index.html"
 	>Binary Wiz</a><br>
     <li><a href="http://www.netlaputa.ne.jp/%7Ekose/Software/compile/index.html"
 	>Compile ! (^.^)v</a><br>
     <li><a href="http://www.kt.rim.or.jp/~ksk/gnu-win32/indexj.html"
-	>Cygwin $B$N%Z!<%8(B</a> Cygwin FAQ $BF|K\8lLu(B<br>
+	>Cygwin のページ</a> Cygwin FAQ 日本語訳<br>
   </ul>
 
 <address>

@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -16,108 +16,108 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>HTTP-tunneling $B$H(B VMware</h1>
+<h1>HTTP-tunneling と VMware</h1>
 
 <p class="abstract">
-$BI.<T$O(BVMware2.0$B$G!"(B
-$B%[%9%H(BOS$B!JK\Mh$N%^%7%s$GF0$$$F$$$k(BOS)$B$r(BWindows2000$B!"(B
-$B%2%9%H(BOS$B!J(Bvmware$B$,:n$j$@$7$?2>A[%^%7%s$GF0$/(BOS$B!K$r(BLinux$B$K$7$F;H$C$F$$$k!#(B
-$B$3$N2>A[%M%C%H%o!<%/$r(Bhost-only$B$G;H$C$F$$$k$N$@$,!"(B
-$B%2%9%H(BOS$B$+$i8+$($k%^%7%s$,%[%9%H(BOS$B$7$+$J$$$N$G!"(B
-$B30$N%^%7%s$H$N%G!<%?8r49$,Hs>o$KITJX$@$C$?!#(B
+筆者はVMware2.0で、
+ホストOS（本来のマシンで動いているOS)をWindows2000、
+ゲストOS（vmwareが作りだした仮想マシンで動くOS）をLinuxにして使っている。
+この仮想ネットワークをhost-onlyで使っているのだが、
+ゲストOSから見えるマシンがホストOSしかないので、
+外のマシンとのデータ交換が非常に不便だった。
 </p>
 <p class="abstract">
-$B$3$l$KBP$7!"(BHTTP-tunneling$B$H8F$P$l$k%F%/%K%C%/$G!"(B
-$B%2%9%H(BOS$B$+$i30It%M%C%H%o!<%/$K@\B3$9$k$3$H$,$G$-$?$N$G!"(B
-$B5-;v$K$^$H$a$k$3$H$K$7$?!#(B
+これに対し、HTTP-tunnelingと呼ばれるテクニックで、
+ゲストOSから外部ネットワークに接続することができたので、
+記事にまとめることにした。
 </p>
 <p class="abstract">
-$B<RFb%M%C%H%o!<%/$J$I$G%$%s%?!<%M%C%H$X$N=P8}$,(Bproxy$B$7$+$J$$!"(B
-$B$J$I$H$$$&>u67$G$bF1MM$N%F%/%K%C%/$G(Bssh$B$G30$K=P$i$l$k!#(B
-$B$H$$$&$+!"I.<T$N$h$&$J>u67$h$j$O!"(B
-$B$`$7$m$=$&$$$&>u67$GMxMQ$9$k%Q%?!<%s$NJ}$,B?$$$@$m$&!#(B
+社内ネットワークなどでインターネットへの出口がproxyしかない、
+などという状況でも同様のテクニックでsshで外に出られる。
+というか、筆者のような状況よりは、
+むしろそういう状況で利用するパターンの方が多いだろう。
 </p>
 <p class="abstract">
-VMware$B$rCN$i$J$$$H0UL#ITL@$+$b$7$l$J$$$,!"(B
-VMware$B$,L5$$>l9g$G$b2?$+$N=u$1$K$J$l$P$H;W$C$F$$$k$N$G!"(B
-$B$d$dCzG+$K=q$$$F$$$k$D$b$j!#(B
+VMwareを知らないと意味不明かもしれないが、
+VMwareが無い場合でも何かの助けになればと思っているので、
+やや丁寧に書いているつもり。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="intro">$B$O$8$a$K(B</a></h2>
+<h2><a name="intro">はじめに</a></h2>
 
 <p>
-$BMW$O!"(BVMware2.0 on Windows + host-only network $B$N4D6-$G!"(B
-HTTP-tunneling$B$H(Bwindows$B$N%m!<%+%k%W%m%/%7$r;H$C$F(B
-$B%2%9%H(BOS$B$+$i(Bssh$B$G30$K=P$h$&!"$H$$$&5-;v$G$9!#(B
+要は、VMware2.0 on Windows + host-only network の環境で、
+HTTP-tunnelingとwindowsのローカルプロクシを使って
+ゲストOSからsshで外に出よう、という記事です。
 </p>
 <p>
-$BI.<T$N>l9g!"(BVMware$B$N%$%s%9%H!<%k;~$K(Bbridged$B$N@_Dj$r$7$/$8$C$F(B
-$B$5$C$Q$j$&$^$/$$$+$J$+$C$?$N$G!"(Bhost-only$B$G2fK}$9$k$3$H$K$7$^$7$?!#(B
-$BF1MM$N4D6-$G$"$C$F$b(BVMware3.0$B$G$O(BNAT$B$,;H$($k$@$m$&$7!"(B
-VMware2.0$B$G$b%$%s%?!<%M%C%H6&M-$G;H$C$F$$$k?M$NJ}$,B?$$$+$H;W$$$^$9$,!"(B
-$B$3$s$JJ}K!$b$"$k$h!"$H$$$&$3$H$G!#(B
+筆者の場合、VMwareのインストール時にbridgedの設定をしくじって
+さっぱりうまくいかなかったので、host-onlyで我慢することにしました。
+同様の環境であってもVMware3.0ではNATが使えるだろうし、
+VMware2.0でもインターネット共有で使っている人の方が多いかと思いますが、
+こんな方法もあるよ、ということで。
 </p>
 <p>
-Vmware$B%f!<%6!<$8$c$J$$?M$N$?$a$K(Bhost-only network$B$K$D$$$F@bL@$7$F$*$-$^$9!#(B
-VMware$B$r(Bhost-only$B$G%$%s%9%H!<%k$9$k$H!"(B
-$B%[%9%H(BOS$B!J%M%$%F%#%V(BOS$B!#:#2s$N>l9g$O(BWindows$B!K$H(B
-$B%2%9%H(BOS$B!J(Bvmware$B>e$N(BOS$B!#:#2s$N>l9g$O(BLinux$B!K$K$=$l$>$l(B
-$B2>A[E*$J(BNIC$B$,0l$D:n$i$l!"(B
-$B$3$N(B2$B%^%7%s$N$_$r7R$0%W%i%$%Y!<%H%M%C%H%o!<%/$,AH$^$l$^$9!#(B
-$B$3$l$,(Bhost-only$B$H8F$P$l$k2>A[%M%C%H%o!<%/$G$9!#(B
-$BL>A0$NDL$j!"$3$N(B2$B%^%7%s4V$NDL?.$K$7$+;H$&$3$H$,$G$-$^$;$s!#(B
+Vmwareユーザーじゃない人のためにhost-only networkについて説明しておきます。
+VMwareをhost-onlyでインストールすると、
+ホストOS（ネイティブOS。今回の場合はWindows）と
+ゲストOS（vmware上のOS。今回の場合はLinux）にそれぞれ
+仮想的なNICが一つ作られ、
+この2マシンのみを繋ぐプライベートネットワークが組まれます。
+これがhost-onlyと呼ばれる仮想ネットワークです。
+名前の通り、この2マシン間の通信にしか使うことができません。
 </p>
 <p>
-$B:#2s$N>l9g!"(BWindows$B$K$O(B172.22.0.1$B$r!"(B
-Linux$B$K$O(B172.22.0.101$B$r!"$=$l$>$l3d$j?6$j$^$7$?!#(B
-Windows$BB&$GFC$K2?$b@_Dj$r$7$F$$$^$;$s$N$G!"(B
-Linux$B$+$i$OD>@\%$%s%?!<%M%C%H$O8+$k$3$H$,$G$-$^$;$s!#(B
+今回の場合、Windowsには172.22.0.1を、
+Linuxには172.22.0.101を、それぞれ割り振りました。
+Windows側で特に何も設定をしていませんので、
+Linuxからは直接インターネットは見ることができません。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
 
-<h2><a name="install">$B=`Hw(B</a></h2>
+<h2><a name="install">準備</a></h2>
 
 <p>
-$BI.<T$N4D6-$O0J2<$N$H$*$j$G$9!#(B
+筆者の環境は以下のとおりです。
 </p>
 <ul>
-  <li> $B%N!<%H%Q%=%3%s(B (OS: Windows 2000)
-  <li> 10/100M LAN$B%+!<%I(B
-  <li> $BL5@~(BLAN$B%+!<%I(B
-  <li> VMware 2.0 on windows ($B%2%9%H(BOS: Linux)
-  <li> Proxomitron ($B%?%9%/%H%l%$$K>oCs$9$k%m!<%+%k%W%m%/%7(B)
+  <li> ノートパソコン (OS: Windows 2000)
+  <li> 10/100M LANカード
+  <li> 無線LANカード
+  <li> VMware 2.0 on windows (ゲストOS: Linux)
+  <li> Proxomitron (タスクトレイに常駐するローカルプロクシ)
 </ul>
 
 <p>
-Proxomitron$B$O(B<a href="../win4unix/proron.html"
->$BJL%Z!<%8(B</a>$B$G@bL@$7$F$"$k$N$G8+$F$b$i$&$H$7$F!"(B
-$B$5$i$K(BVMware$B$+$i%"%/%;%9$G$-$k$h$&$K$9$kI,MW$,$"$j$^$9!#(B
-$B:#2s$NNc$G$"$l$P!"@_Dj%&%$%s%I%&$N!V(BConfig$B!W(B-$B!V(BAccess$B!W$G(B
-172.22.0.2$B$+$i(B172.22.0.254$B$^$G5v2D!"(B
-$B$b$7$/$O(B172.22.0.101$B$+$i$N$_5v2D$J$I$H$7$F$*$-$^$9!#(B
+Proxomitronは<a href="../win4unix/proron.html"
+>別ページ</a>で説明してあるので見てもらうとして、
+さらにVMwareからアクセスできるようにする必要があります。
+今回の例であれば、設定ウインドウの「Config」-「Access」で
+172.22.0.2から172.22.0.254まで許可、
+もしくは172.22.0.101からのみ許可などとしておきます。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="abstract">$B;EAH$_(B($B35N,(B)</a></h2>
+<h2><a name="abstract">仕組み(概略)</a></h2>
 
 <p>
-$BMW$9$k$K!"30$N%M%C%H%o!<%/$,8+$($F!"$+$D(BSSL$B$bDL$;$k$h$&$J(Bproxy$B$r;H$&$H!"(B
-ssh$B$,DL$;$k!"$C$FOC$G$9!#(B
-SSL$B$,DL$k(Bproxy$B$G$O!"<B$OA4$F$N%W%m%H%3%k$,DL$;$k$N$G$9!#(B
-$B$b$A$m$s@)8B$,$"$C$?$j$b$9$k$,!"$I$&$C$F$3$H$O$"$j$^$;$s!#(B
-$B!J$3$l$K4X$7$F$O8e=R!K(B
+要するに、外のネットワークが見えて、かつSSLも通せるようなproxyを使うと、
+sshが通せる、って話です。
+SSLが通るproxyでは、実は全てのプロトコルが通せるのです。
+もちろん制限があったりもするが、どうってことはありません。
+（これに関しては後述）
 </p>
 <p>
-$B$I$&$$$&$3$H$+$H$$$&$H!"(B
-proxy$B$KBP$7$FIaCJ$O(BGET$B$H$+(BHEAD$B$H$+(BPOST$B$H$+$N%a%=%C%I$r;H$&$o$1$@$,!"(B
-CONNECT$B$H$$$&%a%=%C%I$,$"$C$F!"(B
-SSL$B$d(Bssh$B$J$I$NLLE]$J%W%m%H%3%k$rDL$9>l9g$K$O$3$l$r;H$&!#(B
-$BNc$($P!"(B172.22.0.1:8080$B$K(Bproxy$B$,N)$C$F$$$k>l9g!"(B
+どういうことかというと、
+proxyに対して普段はGETとかHEADとかPOSTとかのメソッドを使うわけだが、
+CONNECTというメソッドがあって、
+SSLやsshなどの面倒なプロトコルを通す場合にはこれを使う。
+例えば、172.22.0.1:8080にproxyが立っている場合、
 </p>
 <pre>
 $ telnet 172.22.0.1 8080
@@ -131,115 +131,115 @@ HTTP/1.0 200 Connection established
 SSH-1.5-OpenSSH-1.2.3
 </pre>
 <p>
-$B$H$J$C$F!"JL$N%5!<%P$N(Bsshd$B$K$D$J$0$3$H$,$G$-$k!#(B
-$B$D$^$j!"(Bproxy$B$K%"%/%;%9$G$-$k%^%7%s$J$i$P(B
-proxy$B$,%"%/%;%9$G$-$k%M%C%H%o!<%/$I$3$K$G$b%"%/%;%9$G$-$A$c$&!#(B
-$B!J$3$N;EAH$_$r(BHTTP-tunneling$B$H$+8@$&$i$7$$!K(B
-$B$b$&0l$R$M$j$9$l$P(Bssh$B$G@\B3$G$-$=$&$G$7$g!)(B
+となって、別のサーバのsshdにつなぐことができる。
+つまり、proxyにアクセスできるマシンならば
+proxyがアクセスできるネットワークどこにでもアクセスできちゃう。
+（この仕組みをHTTP-tunnelingとか言うらしい）
+もう一ひねりすればsshで接続できそうでしょ？
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="proxycommand">ProxyCommand$B$H(Bconnect.c</a></h2>
+<h2><a name="proxycommand">ProxyCommandとconnect.c</a></h2>
 
 <p>
-$B$G!"$=$N0l$R$M$j$N=`Hw$,(BOpenSSH$B$K$OMQ0U$5$l$F$$$k!#(B
-ProxyCommand$B$H$$$&$N$,$=$l$G!"(B
-ssh_config$B$K=q$/$3$H$G!"@\B3$N$?$a$N(Bfilter$B!J30It%3%^%s%I!K$r=q$1$k!#(B
-$B$D$^$j!"(Bproxy$B$KBP$7$F(BCONNECT$B$r$7$F!"(B
-$B;D$j$NF~=PNO$rAGDL$7$9$k$h$&$J%3%^%s%I$,$"$l$P!"(B
-proxy$B1[$7$N(Bssh$B$,;H$($A$c$&$H$$$&$o$1!#(B
+で、その一ひねりの準備がOpenSSHには用意されている。
+ProxyCommandというのがそれで、
+ssh_configに書くことで、接続のためのfilter（外部コマンド）を書ける。
+つまり、proxyに対してCONNECTをして、
+残りの入出力を素通しするようなコマンドがあれば、
+proxy越しのsshが使えちゃうというわけ。
 </p>
 <p>
-$B$G!"$=$N(Bfilter$B$r:n$l$P$$$$$o$1$@$,!"(B
-$B<+:n$;$:$H$bMQ0U$7$F$/$l$F$$$kJ}$,$$$k$N$G!"(B
-$B$"$j$,$?$/;H$&$3$H$K$9$k!#(B
+で、そのfilterを作ればいいわけだが、
+自作せずとも用意してくれている方がいるので、
+ありがたく使うことにする。
 <a href="http://www.taiyo.co.jp/~gotoh/ssh/connect.html
 ">
 SSH Proxy Command -- connect.c
 </a>
-$B$,$=$l!#1Q8l$N$_$G$9$,>\:Y$J@bL@$,$"$j$^$9!#(B
+がそれ。英語のみですが詳細な説明があります。
 </p>
 <p>
-$B2?$d$i(Bsocks$B$KBP1~$7$F$?$j$7$F!"$3$@$o$j$NIJ$C$F46$8!#(B
-$B$^$"!"I.<T$O(Bhttp-proxy$B;H$&$@$1$J$N$G%*!<%P!<%9%Z%C%/$J$N$@$,!#(B
+何やらsocksに対応してたりして、こだわりの品って感じ。
+まあ、筆者はhttp-proxy使うだけなのでオーバースペックなのだが。
 </p>
 <pre>
 $ gcc -o ~/bin/proxy-connect connect.c
 </pre>
 <p>
-$B$J$I$H$7$F!"(B~/.ssh/config$B$N@hF,$K(B
+などとして、~/.ssh/configの先頭に
 </p>
 <pre>
 ProxyCommand  /home/hanawa/bin/proxy-connect -H 172.22.0.1:8080 %h %p
 </pre>
 <p>
-$B$H$d$C$F$G$-$"$,$j!#(B
+とやってできあがり。
 </p>
 <p>
-$B$7$+$7!"(BProxomitron$B$O$3$s$J;H$$J}$G$bA4$/LdBj$J$$!#(B
-SSL$B$rDL$9$s$@$+$i@5>o$KF0:n$7$FEvA3$J$N$+$b$7$l$J$$$,!"(B
-$B:n<T$bA[Dj30$N;H$$J}$J$s$8$c$J$$$@$m$&$+!#(B
+しかし、Proxomitronはこんな使い方でも全く問題ない。
+SSLを通すんだから正常に動作して当然なのかもしれないが、
+作者も想定外の使い方なんじゃないだろうか。
 </p>
 <p>
-VMware$BFb$+$i%[%9%HL>$r2r7h$9$k$N$OIT2DG=$G$b!"(B
-$B$3$NOHAH$@$H(BProxy$B$GL>A02r7h$7$F$/$l$k$N$G!"(B
-$B$$$A$$$A(BIP$B$H%[%9%HL>$NBP1~$r=q$/I,MW$b$J$/$F9,$;!#(B
-</p>
-
-<hr><!-- ____________________________________________________________ -->
-
-<h2><a name="appendix">$B$*$^$1(B</a></h2>
-
-<p>
-$B0J>e$GI.<T$N;H$$J}$G$O%P%C%A%j$J$N$G$9$,!"(B
-$B@$4V0lHL$G$O(BCONNECT$B$G(B443$BHV(B(SSL)$B$K$7$+$D$J$2$J$$@_Dj$K$J$C$F$$$k(Bproxy$B$NJ}$,IaDL$G$9!#(B
-CONNECT$B%a%=%C%I$r(BSSL$B0J30$K;H$&$J!"$C$F$3$H$J$s$G$7$g$&$,!"(B
-$B@$$NCf(B443$BHV0J30$K(BSSL$B$,N)$C$F$$$k$3$H$O$"$j$($J$$$s$G$9$+$M$(!)(B
-$B$=$s$J$3$H$@$+$i$$$D$^$G$b%Y%j%5%$%s4]LY$1$J$s$@$h$J$"!"$J$I$H6rCT$j$D$D!"(B
-$BBP:v$r9M$($F$_$^$9!#(B
-</p>
-<p>
-$B$^$:;W$$$D$/BP:v$O!"@\B3$7$?$$%5!<%P$N(B443$BHV$K(Bsshd$B$rN)$F$F$7$^$&$3$H$G$9!#(B
-$B$^$?$O!"BP>]$N(Bproxy$B$,(Bsquid$B$N%G%U%)%k%H@_Dj$N$^$^$G1?MQ$7$F$$$k>l9g$K$O!"(B
-563$BHV$bMxMQ$G$-$k$+$b$7$l$^$;$s!#(B
-</p>
-<p>
-$B$b$7$/$O!"LdBj$N(Bproxy$B$+$i(B443$BHV$rC!$-$KMh$?$H$-$N$_!"(B
-22$BHV$K(BREDIRECT$B$9$k$h$&(Bipchains$B$N@_Dj$r$9$k!"(B
-$B$J$I$H$$$&$N$b%"%j$+$H;W$$$^$9!#(B
-</p>
-<p>
-$B;DG0$J$,$i!"$I$A$i$bL5M}$H$$$&>l9g$K$OBG$D<j$J$7$+$J!D!#(B
-proxy$B4IM}<T$r4]$a9~$s$G!"(B22$BHV$b3+$1$5$;$^$7$g$&!#(B
-squid$B$N>l9g$N@_Dj$O$=$l$[$IFq$7$/$"$j$^$;$s$,!"(B
-$B8x3+(Bproxy$B$G$3$l$r$d$k$HF'$_Bf$K$5$l$k2DG=@-$b$"$j$^$9!#$4Cm0U$r!#(B
-$B<RFb(Bpxory$B$N>l9g$K$O!"(B
-$B3F8D?M$,JQ$J7PO)$G7j$r6u$1$k$N$KHf$Y$l$P7PO)$r0l852=$G$-$k$N$G!"(B
-$B0-$/$J$$@_Dj$@$m$&$H;W$$$^$9!#(B
-$B$^$"!"$=$s$J0U8+$,DL$k$H$O8B$i$J$$$G$9$1$I!#(B
+VMware内からホスト名を解決するのは不可能でも、
+この枠組だとProxyで名前解決してくれるので、
+いちいちIPとホスト名の対応を書く必要もなくて幸せ。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="bookmarks">$B%j%s%/=8(B</a></h2>
+<h2><a name="appendix">おまけ</a></h2>
 
 <p>
-$B$3$s$J5-;v$h$jAG@2$i$7$$J8>O$,$$$C$Q$$$"$j$^$9!#(B
-$B$3$N5-;v$N$h$&$JL/$J4D6-$G$d$C$?Nc$O8+$?$3$H$J$$$G$9$,!"(B
-$BL\@h$,JQ$o$C$F$$$k$@$1$G5;=QE*$K$OB>$N4D6-$HF1$8$3$H$r$7$F$$$^$9$N$G!"(B
-$B2<5-%j%s%/$,;29M$K$J$k$H;W$$$^$9!#(B
+以上で筆者の使い方ではバッチリなのですが、
+世間一般ではCONNECTで443番(SSL)にしかつなげない設定になっているproxyの方が普通です。
+CONNECTメソッドをSSL以外に使うな、ってことなんでしょうが、
+世の中443番以外にSSLが立っていることはありえないんですかねえ？
+そんなことだからいつまでもベリサイン丸儲けなんだよなあ、などと愚痴りつつ、
+対策を考えてみます。
+</p>
+<p>
+まず思いつく対策は、接続したいサーバの443番にsshdを立ててしまうことです。
+または、対象のproxyがsquidのデフォルト設定のままで運用している場合には、
+563番も利用できるかもしれません。
+</p>
+<p>
+もしくは、問題のproxyから443番を叩きに来たときのみ、
+22番にREDIRECTするようipchainsの設定をする、
+などというのもアリかと思います。
+</p>
+<p>
+残念ながら、どちらも無理という場合には打つ手なしかな…。
+proxy管理者を丸め込んで、22番も開けさせましょう。
+squidの場合の設定はそれほど難しくありませんが、
+公開proxyでこれをやると踏み台にされる可能性もあります。ご注意を。
+社内pxoryの場合には、
+各個人が変な経路で穴を空けるのに比べれば経路を一元化できるので、
+悪くない設定だろうと思います。
+まあ、そんな意見が通るとは限らないですけど。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="bookmarks">リンク集</a></h2>
+
+<p>
+こんな記事より素晴らしい文章がいっぱいあります。
+この記事のような妙な環境でやった例は見たことないですが、
+目先が変わっているだけで技術的には他の環境と同じことをしていますので、
+下記リンクが参考になると思います。
 </p>
     <ul>
-      <li>$B!V0lJb?J$s$@%5!<%P9=C[!&1?MQ=Q!W(B
+      <li>「一歩進んだサーバ構築・運用術」
          <a href="http://www.gcd.org/sengoku/docs/NikkeiLinux00-12/config.ja.html"
-	  >[ssh($BA0JT(B)]</a>
+	  >[ssh(前編)]</a>
          <a href="http://www.gcd.org/sengoku/docs/NikkeiLinux01-01/telnet.ja.html"
-	  >[ssh($BCfJT(B)]</a> $B@g@P$5$s!#<+?H$NO":\5-;v$NE>:\$@$=$&$@$,!"FbMF$,G;$$!#(B<br>
+	  >[ssh(中編)]</a> 仙石さん。自身の連載記事の転載だそうだが、内容が濃い。<br>
       <li><a href="http://marimo.sakura.ne.jp/~buchio/Tech/Windows.html"
-	  >Windows$B$HJk$i$9(B</a> windows$B$N(Bssh$B$G%$%s%H%i$+$i30$K=P$F$^$9!#(B<br>
+	  >Windowsと暮らす</a> windowsのsshでイントラから外に出てます。<br>
       <li><a href="http://www.hmc.gr.jp/rio/ssh_socks/"
-	  >OpenSSH thru SOCKS5</a> $B$J$K$d$i(BSOCKS$B$G$,$s$P$C$F$^$9!#(B<br>
+	  >OpenSSH thru SOCKS5</a> なにやらSOCKSでがんばってます。<br>
 <br>
       <li><a href="http://www.taiyo.co.jp/~gotoh/ssh/connect.html"
 	  >connect.c</a>
@@ -251,7 +251,7 @@ squid$B$N>l9g$N@_Dj$O$=$l$[$IFq$7$/$"$j$^$;$s$,!"(B
 
     </ul>
 <p>
-$B$"!"$I$C$+$GJ9$$$?L>A0$@$H;W$C$?$i(Bstone$B$N:n<T$@!d@g@P$5$s(B
+あ、どっかで聞いた名前だと思ったらstoneの作者だ＞仙石さん
 </p>
 
 <address>

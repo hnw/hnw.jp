@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../css/default.css" type="text/css">
@@ -16,12 +16,12 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>10$BJ,%D!<%k(B</h1>
+<h1>10分ツール</h1>
 
 <p class="abstract">
-$B$F$-$H!<$K:n$i$l$?%D!<%kC#!#(B
-$BBgDq$N2~9T%3!<%I$O(BLF$B$J$N$G!"(BWindows $B$N?M$OCm0U$7$F$/$@$5$$!#(B
-$B$^$?!"(BPerl$B%9%/%j%W%H$OA4$F(B ".pl.txt" $B$H$$$&3HD%;R$G%"%C%W%m!<%I$7$F$"$j$^$9!#(B
+てきとーに作られたツール達。
+大抵の改行コードはLFなので、Windows の人は注意してください。
+また、Perlスクリプトは全て ".pl.txt" という拡張子でアップロードしてあります。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -31,12 +31,12 @@
 
 <div class="indent">
 <p>
-        Cygwin$B$N%Q%9$r(BWin32$B$N%Q%9$KJQ49$9$k$3$H$G!"(B
-        Cygwin$B$N%7%'%k$+$i(BWin32$B$N%D!<%k$r;H$$$d$9$/$9$k%W%m%0%i%`$G$9!#(B
+        CygwinのパスをWin32のパスに変換することで、
+        CygwinのシェルからWin32のツールを使いやすくするプログラムです。
 </p>
 <p>
-  $B$b$&>/$7$^$7$J@bL@!'(B<a href="convexec.txt">[readme(SJIS)]</a><br>
-  $BG:$^$:%@%&%s%m!<%I!'(B<a href="convexec.tgz">[package(tgz)]</a><br>
+  もう少しましな説明：<a href="convexec.txt">[readme(SJIS)]</a><br>
+  悩まずダウンロード：<a href="convexec.tgz">[package(tgz)]</a><br>
 </p>
 </div>
 
@@ -45,20 +45,20 @@
 <h2><a class="title" href="whois.pl.txt">whois.pl</a></h2>
 
 <p>
-        whois $B$G!"%I%a%$%s$K1~$8$FE,Ev$J(Bwhois$B%5!<%P$KLd$$9g$o$;$k%i%C%Q!<$G$9!#(B
-        FreeBSD$B$d(BDebian$B$N(Bwhois$B$O@$3&Cf$N(Bwhois$B%5!<%P$rCN$C$F$$$k$N$G$9$,!"(B
-        RedHat$B$d(BSolaris$B$N(Bwhois$B$G(BgTLD$B0J30$N%I%a%$%s$rLd$$9g$o$;$k>l9g!"(B
-        whois$B%5!<%P$r%f!<%6!<$,%3%^%s%I%i%$%s%*%W%7%g%s$G;XDj$9$kI,MW$,$"$j!"(B
-        $B%?%$%W$9$k$N$,$@$k$$?M$bB?$$$+$H;W$$$^$9!#(B
-        $B$=$3$G!"(B<a href="http://www.gnu.org/software/jwhois/jwhois.html"
-        >jwhois</a>$B$+$i>pJs$r%Q%/$C$F$-$F%i%C%Q!<$r:n$C$F$_$^$7$?!#(B
+        whois で、ドメインに応じて適当なwhoisサーバに問い合わせるラッパーです。
+        FreeBSDやDebianのwhoisは世界中のwhoisサーバを知っているのですが、
+        RedHatやSolarisのwhoisでgTLD以外のドメインを問い合わせる場合、
+        whoisサーバをユーザーがコマンドラインオプションで指定する必要があり、
+        タイプするのがだるい人も多いかと思います。
+        そこで、<a href="http://www.gnu.org/software/jwhois/jwhois.html"
+        >jwhois</a>から情報をパクってきてラッパーを作ってみました。
 </p>
 <p>
-        $B$3$s$J%D!<%k$r;H$&$J$i!"$^$H$b$J(Bwhois$B$r%3%s%Q%$%k$7$?J}$,$$$$$H$O;W$$$^$9!#(B
-        $BFC$K(B<a href="http://www.gnu.org/software/jwhois/jwhois.html"
-        >jwhois</a>$B$O!"(Bwhois$B>pJs$NDs6!$,(BHTTP$B$N$_$N%I%a%$%s$+$i$b(B
-        $B>pJs$r<h$C$F$-$F$/$l$kM%$l$b$N$G$9!#(B
-        $B$$$A$$$A%3%s%Q%$%k$9$k$N$O$@$k$$!"$H$$$&?M$K$@$12ACM$N$"$k%9%/%j%W%H$G$9!#(B
+        こんなツールを使うなら、まともなwhoisをコンパイルした方がいいとは思います。
+        特に<a href="http://www.gnu.org/software/jwhois/jwhois.html"
+        >jwhois</a>は、whois情報の提供がHTTPのみのドメインからも
+        情報を取ってきてくれる優れものです。
+        いちいちコンパイルするのはだるい、という人にだけ価値のあるスクリプトです。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -66,16 +66,16 @@
 <h2><a class="title" href="jpginfo.pl.txt">jpginfo.pl</a></h2>
 
 <p>
-        JPEG $B$N%^!<%+!<$r=g$K$?$I$j$J$,$i%U%!%$%k$N>pJs$rI=<($9$k%9%/%j%W%H!#(B
-        $BEv=i$O(BPerl$B$G%P%$%J%j%G!<%?$r07$&<B83%W%m%8%'%/%H$G$7$?$,!"(B
-        $B:#$d>oMQ%9%/%j%W%H$N0l$D!#(B
-        wget$B$G%@%&%s%m!<%I$7$F$-$?%U%!%$%k72$KBP$7$F$^$:!V(Bjpginfo *$B!W$H$d$C$F$^$9!#(B
+        JPEG のマーカーを順にたどりながらファイルの情報を表示するスクリプト。
+        当初はPerlでバイナリデータを扱う実験プロジェクトでしたが、
+        今や常用スクリプトの一つ。
+        wgetでダウンロードしてきたファイル群に対してまず「jpginfo *」とやってます。
 </p>
 <p>
-        $B$A$J$_$K(B0xff$B$r2~9TJ8;z$H$7$F07$C$F$*$j!"(B
-        $B%P%$%J%j%G!<%?$r07$&<B83$H$7$F$b@.8y$7$F$$$^$9!#(B
-        $B$b$A$m$s!"(BJPEG$B%U%)!<%^%C%H$,Hf3SE*FC<l$J$N$b4X78$7$F$$$^$9$N$G!"(B
-        $B$"$i$f$k%P%$%J%j%G!<%?$r(BPerl$B$G$&$^$/07$($k$o$1$G$b$"$j$^$;$s$,!#(B
+        ちなみに0xffを改行文字として扱っており、
+        バイナリデータを扱う実験としても成功しています。
+        もちろん、JPEGフォーマットが比較的特殊なのも関係していますので、
+        あらゆるバイナリデータをPerlでうまく扱えるわけでもありませんが。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -83,25 +83,25 @@
 <h2><a class="title" href="usocat.pl.txt">usocat.pl</a></h2>
 
 <p>
-        usojpeg$B%U%!%$%k$r7k9g$9$k%9%/%j%W%H!#(B
-        usojpeg$B%U%!%$%k$H$O:n<T$,JX59>e$D$1$?8F$SL>$G!"(B
-        $B$"$k%U%!%$%kJ,3d%D!<%k$,EG$/J,3d%U%!%$%k$N$3$H!#(B
-        $BJ,3d%U%!%$%k$r=&$C$FE,Ev$K=hM}$7$?$iI|85$G$-$?$N$G8x3+$9$k!#(B
+        usojpegファイルを結合するスクリプト。
+        usojpegファイルとは作者が便宜上つけた呼び名で、
+        あるファイル分割ツールが吐く分割ファイルのこと。
+        分割ファイルを拾って適当に処理したら復元できたので公開する。
 </p>
 <p>
-        $B$=$NJ,3d%D!<%k$OB?J,$3$N%D!<%k$@!"$H$$$&$N$,$"$k$N$@$,!"(B
-        $BK\J*$r;H$C$?$3$H$,$J$$$N$GJ,3d%D!<%kL>$K3N?.$,;}$F$J$$!#(B
+        その分割ツールは多分このツールだ、というのがあるのだが、
+        本物を使ったことがないので分割ツール名に確信が持てない。
 </p>
-<!-- $B$H$$$&$+8uJd$,(B2$B8D$"$k$s$G$9$,!#(B $BG>E7EbC]3d$j!)(B $B$&$=$T$g$s(BII$B!)(B -->
+<!-- というか候補が2個あるんですが。 脳天唐竹割り？ うそぴょんII？ -->
 
 <hr><!-- ____________________________________________________________ -->
 
 <h2><a class="title" href="mkfn.pl.txt">mkfn.pl</a></h2>
 
 <p>
-        $BO"B3$9$k%U%!%$%kL>$r:n$k%9%/%j%W%H!#(B
-        $B@bL@$7$K$/$$$s$@$1$I(B (^^;
-        $B$[$\!J:n<T$N!K;W$C$?DL$j$KF0$-$^$9!#(B(w
+        連続するファイル名を作るスクリプト。
+        説明しにくいんだけど (^^;
+        ほぼ（作者の）思った通りに動きます。(w
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -109,8 +109,8 @@
 <h2><a class="title" href="rename.pl.txt">rename.pl</a></h2>
 
 <p>
-        $B%U%!%$%kL>JQ99!#(B
-        $B@V%i%/%@K\$K:\$C$F$?$b$N$N2~B$!#$3$l$O3N$+$KJXMx!#(B
+        ファイル名変更。
+        赤ラクダ本に載ってたものの改造。これは確かに便利。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -118,9 +118,9 @@
 <h2><a href="mikaka.pl.txt">mikaka.pl</a></h2>
 
 <p>
-       $B$_$+$+0E9f2=!#(B
-       $B0l1~<BMQ%l%Y%k$@$H;W$$$^$9!#(B
-       $B8=>u$G$OK\2H!JFf!K$H8_49@-$N$J$$ItJ,$b$"$j$^$9!#(B
+       みかか暗号化。
+       一応実用レベルだと思います。
+       現状では本家（謎）と互換性のない部分もあります。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -128,8 +128,8 @@
 <h2><a href="url2link.pl.txt">url2link.pl</a></h2>
 
 <p>
-       $BF~NO%F%-%9%H$N(BURL$B$C$]$$ItJ,$r(BHTML$B$N%j%s%/$K$9$k!#(B
-       $B$=$l$[$I;H$$F;$O$J$5$=$&$G$9!#(B
+       入力テキストのURLっぽい部分をHTMLのリンクにする。
+       それほど使い道はなさそうです。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -137,8 +137,8 @@
 <h2><a href="printenv.pl.txt">printenv.pl</a></h2>
 
 <p>
-        $BL>A0$NDL$j$N$J$2$d$j$J(BCGI$B!#(B
-        $B$3$s$J$b$s(B sh $B$G=q$1$H$$$o$l$?!#(B
+        名前の通りのなげやりなCGI。
+        こんなもん sh で書けといわれた。
         <a href="http://lightning.prohosting.com/~g5432/cgi-bin/printenv.pl"
         >[example]</a>
 </p>
@@ -146,24 +146,24 @@
 <!-- 
 
 <p>
-========== $B%\%D:nIJ$NJh>l(B ==========
+========== ボツ作品の墓場 ==========
 </p>
 <ul>
   <li> <a href="httpfilt.pl.txt"><strong>httpfilt.pl</strong></a>
 <p>
-        $B$^$@$^$@:n$j$+$1!#(B
-        Web $B%Z!<%8$N9-9p$r@Z$jMn$H$=$&$H$$$&4k2h!#(B
-        CGI Proxy $B$rCN$C$F5$NOD68:B`!#(B
-        $B$3$NFbMF$,(B CGI Proxy $B$N%Q%C%A$H$7$FB?>/@8$-$F$$$J$/$b$J$$!#(B
-        $B!J$=$N%Q%C%A$r8x3+$9$k5$$O$"$^$j$J$$$1$I!K(B
+        まだまだ作りかけ。
+        Web ページの広告を切り落とそうという企画。
+        CGI Proxy を知って気力超減退。
+        この内容が CGI Proxy のパッチとして多少生きていなくもない。
+        （そのパッチを公開する気はあまりないけど）
 </p>
 
   <li> <a href="same-md5.pl.txt"><strong>same-md5.pl</strong></a>
 <p>
-        $B:n$j$+$1$N$O$:!#(B
-        $B%j%9%H$NCf$+$i(B md5 $BCM$,F1$8%U%!%$%k$rC5$9$b$N!#(B
-        $BMn$H$7$F$-$?%V%D$r4{$K;}$C$F$$$k$+$I$&$+$rCN$k$N$,L\E*!#(B
-        $BI,MW@-$r46$8$J$/$J$C$?$N$GJ|$C$F$"$k!#(B
+        作りかけのはず。
+        リストの中から md5 値が同じファイルを探すもの。
+        落としてきたブツを既に持っているかどうかを知るのが目的。
+        必要性を感じなくなったので放ってある。
 </p>
 
 -->

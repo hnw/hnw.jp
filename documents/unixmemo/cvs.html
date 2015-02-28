@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <title>how to use CVS</title>
@@ -31,63 +31,63 @@
       vlink="#000000" alink="#ffffff">
 
 
-    <h1>CVS$B$N$D$+$$$+$?(B($B$J$2$d$j(B)</h1>
+    <h1>CVSのつかいかた(なげやり)</h1>
 
 <p>
-$B<RFbMQ$N%a%b$r8x3+$7$F$_$^$9!#(B
+社内用のメモを公開してみます。
 </p>
 
-    <h2>$BIaCJ;H$&>e$G$NCN<1(B</h2>
+    <h2>普段使う上での知識</h2>
 
 <ul>
-  <li>$B%U%!%$%k!&%G%#%l%/%H%j$rDI2C(B
+  <li>ファイル・ディレクトリを追加
 <strong><pre>
     $ cvs add [filename/dirname]
 </pre></strong>
 
-  <li>$B%3%_%C%H!J%j%]%8%H%j$K<+J,$N99?7$r=q$-9~$`!K(B
+  <li>コミット（リポジトリに自分の更新を書き込む）
 <pre>
     <strong>$ cvs ci</strong>
-$B!J(Bvi$B$,N)$A>e$,$k$N$G99?7FbMF$r=q$-9~$`!K(B
+（viが立ち上がるので更新内容を書き込む）
 </pre>
-  <li>$B%"%C%W%G!<%H!J:G?7$N>uBV$KDI=>!K(B
+  <li>アップデート（最新の状態に追従）
 <strong><pre>
     $ cvs up
 </pre></strong>
 
-  <li>$B:G?7%P!<%8%g%s$+$i$N<+J,$NJQ99FbMF$r8+$k(B
+  <li>最新バージョンからの自分の変更内容を見る
 <strong><pre>
     $ cvs diff [filename]
 </pre></strong>
 
-  <li>$B$o$1$o$+$i$J$/$J$C$?$N$G:#JT=8Cf$N%U%!%$%k$O<N$F$F:G?7%P!<%8%g%s$KLa$7$?$$(B
+  <li>わけわからなくなったので今編集中のファイルは捨てて最新バージョンに戻したい
 <strong><pre>
     $ rm [filename] ; cvs up
 </pre></strong>
 
-  <li>$B%W%m%8%'%/%H$+$i$3$N%U%!%$%k$r>C$7$?$$(B
+  <li>プロジェクトからこのファイルを消したい
 <strong><pre>
     $ rm [filename] ; cvs remove [filname]
 </pre></strong>
 
-  <li>cvs up$B$7$?$H$-$K%U%!%$%kL>$NA0$KI=<($5$l$kJ8;z$N0UL#(B
+  <li>cvs upしたときにファイル名の前に表示される文字の意味
 <pre>
-    <strong>?</strong> : CVS$B$G4IM}$7$F$J$$%U%!%$%k$"$k$1$I!"(Badd$B$7$J$/$F$$$$$N!)(B
-    <strong>A</strong> : $B<!$N(Bci$B$G(Badd$B$9$k$<(B
-    <strong>R</strong> : $B<!$N(Bci$B$G(Bremove$B$9$k$<(B
-    <strong>U</strong> : $B$?$C$?$$$^99?7$7$?(B
-    <strong>P</strong> : $B$?$C$?$$$^99?7$7$?(B
-    <strong>M</strong> : $BJQ99$5$l$F$k!J<!$N(Bci$B$G=q$-9~$`!K(B
-    <strong>C</strong> : $B99?7$7$h$&$H$7$F%3%s%U%j%/%H$7$?!J$d$P!<!D!K(B
+    <strong>?</strong> : CVSで管理してないファイルあるけど、addしなくていいの？
+    <strong>A</strong> : 次のciでaddするぜ
+    <strong>R</strong> : 次のciでremoveするぜ
+    <strong>U</strong> : たったいま更新した
+    <strong>P</strong> : たったいま更新した
+    <strong>M</strong> : 変更されてる（次のciで書き込む）
+    <strong>C</strong> : 更新しようとしてコンフリクトした（やばー…）
 </pre>
 </ul>
 
 
-    <h2>$B$?$^$KI,MW$JCN<1(B</h2>
+    <h2>たまに必要な知識</h2>
 
 <ul>
-  <li>$B?75,%W%m%8%'%/%H3+;O(B<br>
-import$B$O$o$1$o$+$i$s$+$i6u$C$]$G:n$C$A$c$(!"$H$$$&Ej$2$d$j$JJ}?K!#(B
+  <li>新規プロジェクト開始<br>
+importはわけわからんから空っぽで作っちゃえ、という投げやりな方針。
 <pre><strong
 >    $ mkdir doc
     $ cd doc
@@ -95,11 +95,11 @@ import$B$O$o$1$o$+$i$s$+$i6u$C$]$G:n$C$A$c$(!"$H$$$&Ej$2$d$j$JJ}?K!#(B
     $ cd ..
     $ rmdir doc
     $ cvs co doc</strong>
-($B$"$H$O%U%!%$%k(Badd$B$7$^$/$j(B)
+(あとはファイルaddしまくり)
 </pre>
 
 
-  <li>$B:G?7HG$+$i?75,%V%i%s%A:n@.(B
+  <li>最新版から新規ブランチ作成
 <pre><strong
 >    $ cvs tag cosme_branch_root
     $ cvs co -d rs-cosme1 rs
@@ -109,28 +109,28 @@ import$B$O$o$1$o$+$i$s$+$i6u$C$]$G:n$C$A$c$(!"$H$$$&Ej$2$d$j$JJ}?K!#(B
     $ rm -rf rs-cosme
 </strong></pre>
 
-  <li>$B%V%i%s%A$r%A%'%C%/%"%&%H(B
+  <li>ブランチをチェックアウト
 
 <pre><strong
 >    $ cvs co -r cosme_branch -d rs-cosme rs
 </strong></pre>
 
-  <li>$BK\N.$N99?7FbMF$r%V%i%s%A$KH?1G!J$3$l$d$k$H(BCVS$B$,:.Mp$9$k5$$,!)!K(B
+  <li>本流の更新内容をブランチに反映（これやるとCVSが混乱する気が？）
 
 <pre><strong
 >    $ cvs up -j HEAD
 </strong></pre>
 
-  <li>cvs ci $B$7$?$,%a%C%;!<%8=q$-B;$M$?(B
+  <li>cvs ci したがメッセージ書き損ねた
 
 <pre><strong
->    $ cvs admin -m1.18:"$B$P$C$A$j$K$J$C$?(B" hello.c
+>    $ cvs admin -m1.18:"ばっちりになった" hello.c
 </strong></pre>
 
 <p>
-  cvs ci$B$7$?$H$-$K0J2<$N$h$&$K8+$($k$,!"(B
-  $B$&$C$+$j(Bprevious revision $B$N%a%C%;!<%8$r99?7$7$J$$$h$&$KCm0U!#(B
-  $B$3$NNc$G8@$&$H:G?7%P!<%8%g%s$O$b$A$m$s(B1.18$B!#(B
+  cvs ciしたときに以下のように見えるが、
+  うっかりprevious revision のメッセージを更新しないように注意。
+  この例で言うと最新バージョンはもちろん1.18。
 </p>
 
 <pre><strong
@@ -141,9 +141,9 @@ import$B$O$o$1$o$+$i$s$+$i6u$C$]$G:n$C$A$c$(!"$H$$$&Ej$2$d$j$JJ}?K!#(B
 
   <li>.cvsrc<br>
 <p>
-~/.cvsrc$B$G!"2?$b8@$o$J$/$F$bDI2C$9$k%*%W%7%g%s$r;XDj$G$-$k!#(B
--P$B$O6u$N%G%#%l%/%H%j$,$"$C$?$H$-$K>!<j$K>C$9!#(B
--d$B$O?75,%G%#%l%/%H%j$r:n$k!#$3$l$,$J$$$H$d$C$F$i$l$s!#(B
+~/.cvsrcで、何も言わなくても追加するオプションを指定できる。
+-Pは空のディレクトリがあったときに勝手に消す。
+-dは新規ディレクトリを作る。これがないとやってられん。
 </p>
 <pre><strong
 >    ----------
@@ -154,7 +154,7 @@ import$B$O$o$1$o$+$i$s$+$i6u$C$]$G:n$C$A$c$(!"$H$$$&Ej$2$d$j$JJ}?K!#(B
 
   <li>.cvswrappers<br>
 <p>
-$B2hA|$O%P%$%J%j$GJ]B8$9$k@_Dj!#(B
+画像はバイナリで保存する設定。
 </p>
 
 <pre><strong

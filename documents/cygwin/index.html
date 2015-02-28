@@ -1,11 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
-<title>Cygwin 1.x$B$G(BUNIX$B5$J,$NAk@83h(B</title>
+<title>Cygwin 1.xでUNIX気分の窓生活</title>
 </head>
 <body bgcolor="#BBBBBB" text="#000000" link="#0000ff"
       vlink="#000000" alink="#ffffff">
@@ -17,58 +17,58 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>Cygwin 1.x$B$G(BUNIX$B5$J,$NAk@83h(B</h1>
+<h1>Cygwin 1.xでUNIX気分の窓生活</h1>
 
 <p class="abstract">
-Windows$B$r;H$C$F$$$k(BUNIX$BLnO:$J$i(Bcygwin$B$NL>A0$r0lEY$O<*$K$7$F$$$k$O$:!#(B
-$BI.<T$O(Bb20.1$B$r;H$C$?$j;H$o$J$+$C$?$j$7$F$$$?$,!"(B
-Cygwin 1.1$B$r;H$C$F$_$F$3$l$O;H$$J*$K$J$k$H3N?.$7$?!#(B
+Windowsを使っているUNIX野郎ならcygwinの名前を一度は耳にしているはず。
+筆者はb20.1を使ったり使わなかったりしていたが、
+Cygwin 1.1を使ってみてこれは使い物になると確信した。
 </p>
 <p class="abstract">
-$B$3$l$O!"$=$s$JI.<T$,(Bcygwin$B$r;H$$$J$,$i=q$-$H$a$?J8>O$G$9!#(B
-$B$+$J$jIT?F@Z$JItN`$@$H;W$$$^$9$N$G!"(B
-$B:#$^$G(BCygwin$B$r;H$C$?$3$H$b$J$$$H$$$&J}$O!"(B
-$B4pK\E*$K$O$h$=$N%Z!<%8$r;29M$K$9$k$N$,$$$$$H;W$$$^$9!#(B
-$B?=$7Lu$"$j$^$;$s$,!"<+J,MQ$N%a%b!\&A$G$9$N$G!"$3$NDxEY$,8B3&$G$9!#(B
-$B$h$=$H0c$C$?;kE@$+$iLr$KN)$D%Z!<%8$,$G$-$l$P$H9M$($F$$$^$9!#(B
+これは、そんな筆者がcygwinを使いながら書きとめた文章です。
+かなり不親切な部類だと思いますので、
+今までCygwinを使ったこともないという方は、
+基本的にはよそのページを参考にするのがいいと思います。
+申し訳ありませんが、自分用のメモ＋αですので、この程度が限界です。
+よそと違った視点から役に立つページができればと考えています。
 </p>
 <p class="abstract">
-$B0U8+!&<ALdEy$N%a!<%k$OBg4?7^$G$9$,!"(B
-$B;~4VE*!&G=NOE*$K4|BT$K1h$($k$H$O8B$j$^$;$s$N$G$"$7$+$i$:!#(B
+意見・質問等のメールは大歓迎ですが、
+時間的・能力的に期待に沿えるとは限りませんのであしからず。
 </p>
 
 <ul class="news">
-<li>2004/11/10$BDI5-!'(B<br>
-coLinux$B$K$D$$$F>/!9DI5-$7$^$7$?!#(B
-<li>2004/05/31$BDI5-!'(B<br>
-Cygwin$B$O(B1.5.x$B$,=P$F$$$^$9!#(B
-1.3.x$B$+$i2?$,JQ2=$7$?$N$+$OCN$i$J$+$C$?$j$7$^$9$,!D!#(B
-Cygwin$B<+BN$NOCBj$G$O$J$$$N$G$9$,!"(BUn*x$B7O%=%U%HA4BN$N:G6a$N798~$H$7$F!"(B
-UTF-8$B$X$NBP1~$,?oJ,?J$s$G$$$k$3$H$,5s$2$i$l$k$H;W$$$^$9!#(B
-Samba$B$d(BFedora Core$B$"$?$j$b(BUTF-8$B2=$5$l$D$D$"$j$^$9$7!"(B
-mule-ucs$B$H(Bnkf$B$H(Blv$B$H(Bcocot$B$J$I$rMxMQ$9$l$P!"(B
-$B2?$H$+;H$($k>u67$H8@$($k$G$7$g$&!#(B
-Windows$B4D6-$K4X$7$F$$$($P!"(Bxyzzy$B$K2C$($F(B
+<li>2004/11/10追記：<br>
+coLinuxについて少々追記しました。
+<li>2004/05/31追記：<br>
+Cygwinは1.5.xが出ています。
+1.3.xから何が変化したのかは知らなかったりしますが…。
+Cygwin自体の話題ではないのですが、Un*x系ソフト全体の最近の傾向として、
+UTF-8への対応が随分進んでいることが挙げられると思います。
+SambaやFedora CoreあたりもUTF-8化されつつありますし、
+mule-ucsとnkfとlvとcocotなどを利用すれば、
+何とか使える状況と言えるでしょう。
+Windows環境に関していえば、xyzzyに加えて
 <a href="http://www.geocities.co.jp/SiliconValley-PaloAlto/8946/"
->ck</a>$B$,6/NO$G$9!#(B
-$B$3$N%=%U%H$N$*$+$2$GBgH>$NG:$_$,>C$($D$D$"$j$^$9!#(B
-$B$7$P$i$/$OMWCmL\$N%=%U%H$G$9!#(B
+>ck</a>が強力です。
+このソフトのおかげで大半の悩みが消えつつあります。
+しばらくは要注目のソフトです。
 </li>
-<li>2002/06/19$BDI5-!'(B<br>
-$B:G6a$O$5$9$,$K(B1.3.10$B;H$C$F$^$9!#$=$m$=$m<!$N(Bcygwin DLL$B$,=P$=$&$G$9$M!#(B
-$B$+$J$jA0$K$J$j$^$9$,!"(BSoftware Design5$B7n9f$KI.<T$NBLJ8$,7G:\$5$l$^$7$?!#(B
-$B$b$C$H$$$$?M$b$$$k$@$m$&$K!"$J$<I.<T$J$s$+$KOC$r?6$C$FMh$?$N$+$OFf$G$9$,!"(B
-$B@^3Q$J$N$G=q$+$;$F$b$i$$$^$7$?!#(B
-$B$D$$$G$K%Z!<%8$N%?%$%H%k$rJQ99$7$F$_$^$7$?!#(B
+<li>2002/06/19追記：<br>
+最近はさすがに1.3.10使ってます。そろそろ次のcygwin DLLが出そうですね。
+かなり前になりますが、Software Design5月号に筆者の駄文が掲載されました。
+もっといい人もいるだろうに、なぜ筆者なんかに話を振って来たのかは謎ですが、
+折角なので書かせてもらいました。
+ついでにページのタイトルを変更してみました。
 </li>
 </ul>
 
 <ul>
-  <li> <a href="#intro"      >$B$O$8$a$K(B</a>
-  <li> <a href="#download"   >$B%@%&%s%m!<%I(B</a>
-  <li> <a href="#install"    >$B%$%s%9%H!<%k(B</a>
-  <li> <a href="#settings"   >$B@_Dj(B</a>
-  <li> <a href="#maketools"  >$B%D!<%k$N%3%s%Q%$%k(B</a>
+  <li> <a href="#intro"      >はじめに</a>
+  <li> <a href="#download"   >ダウンロード</a>
+  <li> <a href="#install"    >インストール</a>
+  <li> <a href="#settings"   >設定</a>
+  <li> <a href="#maketools"  >ツールのコンパイル</a>
   <ul>
     <li> <a href="#less"     >less-358+iso254</a>
     <li> <a href="#lv"       >lv 4.49.5</a>
@@ -82,213 +82,213 @@ Windows$B4D6-$K4X$7$F$$$($P!"(Bxyzzy$B$K2C$($F(B
     <li> <a href="#ck"       >ck 0.9.5</a>
     <li> <a href="#unrar"    >unrar 3.3.6</a>
   </ul>
-  <li> <a href="#bookmarks"  >$B%j%s%/=8(B</a>
+  <li> <a href="#bookmarks"  >リンク集</a>
 </ul>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="intro"      >$B$O$8$a$K(B</a></h2>
+<h2><a name="intro"      >はじめに</a></h2>
 
 <p>
-Cygwin$B$H$$$&$N$O!"(BUNIX$B$N%7%9%F%`%3!<%k$r<B8=$9$k$h$&$J(BWindows$B$N(BDLL$B$rDs6!$7!"(B
-UNIX$BMQ$N%=!<%9$rJQ99$J$7$K%3%s%Q%$%k$9$k$3$H$G(B
-Windows$B$GF0$/%P%$%J%j$r:n$l$k$h$&$K$7$h$&!"(B
-$B$H$$$&%W%m%8%'%/%H$G$9!#(B
-gcc$B$O$b$A$m$s(Bbash$B$d(Btcsh$B$d(Bless$B$J$I!"B?$/$N%D!<%k$,(BWindows$B>e$GF0$-$^$9!#(B
+Cygwinというのは、UNIXのシステムコールを実現するようなWindowsのDLLを提供し、
+UNIX用のソースを変更なしにコンパイルすることで
+Windowsで動くバイナリを作れるようにしよう、
+というプロジェクトです。
+gccはもちろんbashやtcshやlessなど、多くのツールがWindows上で動きます。
 </p>
 <p>
-$B$=$l$OL%NOE*$@!"$H;W$&J}$b>/$7BT$C$F$/$@$5$$!#(B
-$B2L$?$7$F$"$J$?$K$H$C$FK\Ev$K(BCygwin$B$OI,MW$J$N$G$7$g$&$+!#(B
-$B$"$J$?$,(BCygwin$B$rF3F~$9$kL\E*$K$h$C$F$O!"(B
-$BB>$N4D6-$NJ}$,M%$l$F$$$k$+$b$7$l$^$;$s!#(B
-$B$^$:$O!"(BCygwin$B$N%a%j%C%H$r9M$(!"(B
-$B%i%$%P%k$H$J$k4D6-$H$N0c$$$r9M$($F$$$/$3$H$K$7$^$9!#(B
+それは魅力的だ、と思う方も少し待ってください。
+果たしてあなたにとって本当にCygwinは必要なのでしょうか。
+あなたがCygwinを導入する目的によっては、
+他の環境の方が優れているかもしれません。
+まずは、Cygwinのメリットを考え、
+ライバルとなる環境との違いを考えていくことにします。
 </p>
     <ul>
-      <li> UNIX$B$NBeMQIJ$H$7$F$N(BCygwin
+      <li> UNIXの代用品としてのCygwin
 <p>
-UNIX$B%^%7%s$,<j85$K$J$$$H$+!"(B
-$B$"$C$F$b%G%e%"%k%V!<%H$J$N$G;H$&$N$,2/9e$H$+!"(B
-$B$$$m$$$mM}M3$O$"$k$G$7$g$&$,!"(B
-Windows$B$r;H$C$F$$$k$1$l$I$b(B
-UNIX$B!J$^$?$O$=$NBeMQIJ!K$bI,MW$H$$$&>l9g$K$O!"(B
-$BA*Br;h$H$7$F<!$N(B4$B$D$,9M$($i$l$k$H;W$$$^$9!#(B
+UNIXマシンが手元にないとか、
+あってもデュアルブートなので使うのが億劫とか、
+いろいろ理由はあるでしょうが、
+Windowsを使っているけれども
+UNIX（またはその代用品）も必要という場合には、
+選択肢として次の4つが考えられると思います。
 </p>
         <ul>
           <li> coLinux
           <li> VMWare+Linux (or other PC UNIX)
-          <li> $B%M%C%H%o!<%/1[$7$K;H$($k(BUNIX$B%^%7%s(B+TeraTerm(+X server on windows)
+          <li> ネットワーク越しに使えるUNIXマシン+TeraTerm(+X server on windows)
           <li> Cygwin
         </ul>
 <p>
-$B$3$NL\E*$G(BCygwin$B$rA*$V$N$O!"$O$C$-$j8@$C$F4V0c$C$F$$$^$9!#(B
-$BK\J*$N(BUNIX$B$,;H$($k$J$i$=$NJ}$,$$$$$N$OL@$i$+$G$9$7!"(B
-VMWare$B$N$*$+$2$G%^%7%s(B1$BBf$G(BWindows$B$HK\J*$N(BUNIX$B$,;H$($k$o$1$G$9$+$i!"(B
-$B==J,9bB.$J4D6-$J$i0lHV$*>)$a$J4D6-$G$7$g$&!#(B
-$B$^$?!"(BcoLinux$B$OA4$/F1$8%+!<%M%k$rF0$+$7$F$$$k$o$1$G$O$J$$$N$G>/!9IT0B$G$9$,!"(B
-$B%"%W%j%1!<%7%g%s%f!<%6!<$K$H$C$F$O==J,$9$.$k0BDjEY$G!"$5$i$KHs>o$K9bB.$G$9!#(B
+この目的でCygwinを選ぶのは、はっきり言って間違っています。
+本物のUNIXが使えるならその方がいいのは明らかですし、
+VMWareのおかげでマシン1台でWindowsと本物のUNIXが使えるわけですから、
+十分高速な環境なら一番お奨めな環境でしょう。
+また、coLinuxは全く同じカーネルを動かしているわけではないので少々不安ですが、
+アプリケーションユーザーにとっては十分すぎる安定度で、さらに非常に高速です。
 </p>
 <p>
-UNIX$B$NJY6/$N$h$&$JL\E*$G(BCygwin$B$r;H$&M}M3$O3'L5$G$9!#(B
-2ch$B$N(Bcygwin$B%9%l$G$b!V(BcoLinux$B;H$(!W$,LOHO2rEz$K$J$C$F$$$^$9!#(B
+UNIXの勉強のような目的でCygwinを使う理由は皆無です。
+2chのcygwinスレでも「coLinux使え」が模範解答になっています。
 </p>
 
-      <li> Windows$B$N(BInterface$B$H$7$F$N(BCygwin
+      <li> WindowsのInterfaceとしてのCygwin
 <p>
-Windows$B$G$N;E;v$N$?$a$K(BUNIX$B$N%7%'%k$d%D!<%k$,I,MW$@$H$$$&>l9g$K$O!"(B
-$BA*Br;h$O(B2$B$D$"$j$^$9!#(B
+Windowsでの仕事のためにUNIXのシェルやツールが必要だという場合には、
+選択肢は2つあります。
 </p>
 
         <ul>
-          <li> Win32$B$K(Bport$B$5$l$?%D!<%k(B
+          <li> Win32にportされたツール
           <li> Cygwin
         </ul>
 
 <p>
-UNIX$B$N%D!<%k$r(BWindows$B$K(Bport$B$7$?$b$N$OB?$/$"$j$^$9!#(B
-tcsh$B$b(BWin32$BHG$,$"$j$^$9$7!"(B
-Meadow$B$d(BpTeX for Win32$B$J$I!"$+$J$j40@.EY$N9b$$$b$N$,B?$$$G$9!#(B
-UNIX$BMQ$N%=!<%9$r(BCygwin$B$G%3%s%Q%$%k$7$?$b$N$h$j!"(B
-port$B$5$l$?%D!<%k$NJ}$,(B
-Windows$B$N%D!<%k$H$7$F?e=`$,9b$$$N$,IaDL$@$H;W$$$^$9$+$i!"(B
-$B$G$-$k$3$H$J$i$P(Bport$B$5$l$?%D!<%k$G4D6-$r:n$j$?$$$H$3$m$G$9$,!"(B
-$BLdBjE@$b$"$j$^$9!#(B
+UNIXのツールをWindowsにportしたものは多くあります。
+tcshもWin32版がありますし、
+MeadowやpTeX for Win32など、かなり完成度の高いものが多いです。
+UNIX用のソースをCygwinでコンパイルしたものより、
+portされたツールの方が
+Windowsのツールとして水準が高いのが普通だと思いますから、
+できることならばportされたツールで環境を作りたいところですが、
+問題点もあります。
 </p>
 <p>
-$BBh0l$K!"<+J,$N$*5$$KF~$j$N%D!<%kA4$F$,(BWin32$B$K(Bport$B$5$l$k$o$1$O$J$$$H$$$&$3$H!#(B
-$BBhFs$K!"B?$/$N%D!<%k$OFHN)$K(Bport$B$5$l$F$$$F!"(B
-$BE}0l@-$,$J$+$C$?$j$9$k$3$H!#(B
-Cygwin$B$O$=$NN>J}$r2r7h$7$F$/$l$^$9!#(B
+第一に、自分のお気に入りのツール全てがWin32にportされるわけはないということ。
+第二に、多くのツールは独立にportされていて、
+統一性がなかったりすること。
+Cygwinはその両方を解決してくれます。
 </p>
 <p>
-$B$b$C$H$b!"A4It(BCygwin$B$GE}0l$9$k$N$bF@:v$G$O$J$$$N$G!"(B
-$BE}0l@-$NLdBj$O;D$k$b$N$N!"(B
-$B%7%9%F%`$H$7$FE}0l@-$,$"$k$b$N$K$D$$$F$O(B
-Win32$B$X$N(Bport$B$r;H$&J}$,8=<BE*$@$H$$$&$N$,I.<T$N9M$($G$9(B
-$B!J(BTeX$B$d(BMeadow$B$r(BCygwin$B$G%3%s%Q%$%k$7$F$b$$$$$G$9$1$I$M!K!#(B
+もっとも、全部Cygwinで統一するのも得策ではないので、
+統一性の問題は残るものの、
+システムとして統一性があるものについては
+Win32へのportを使う方が現実的だというのが筆者の考えです
+（TeXやMeadowをCygwinでコンパイルしてもいいですけどね）。
 </p>
 <p>
-Windows$B$G$N;E;v$,(BGUI$B$@$1$G$"$l$P!"(B
-$B%U%!%$%k$r(BUNIX$B%^%7%s$KE>Aw$7$F;E;v$r$9$k$H$$$&A*Br;h$b$"$j$^$9$,!"(B
-$B$=$&$G$J$1$l$P!J(BWindows,UNIX$BN>J}$N%3%s%=!<%k$r;H$&I,MW$,$"$k$J$i!K(B
-$B>/!9ITJX$G$7$g$&$+$i!">e$K$O5s$2$^$;$s$G$7$?!#(B
+Windowsでの仕事がGUIだけであれば、
+ファイルをUNIXマシンに転送して仕事をするという選択肢もありますが、
+そうでなければ（Windows,UNIX両方のコンソールを使う必要があるなら）
+少々不便でしょうから、上には挙げませんでした。
 </p>
 
-      <li> Windows$B$N3+H/4D6-$H$7$F$N(BCygwin
+      <li> Windowsの開発環境としてのCygwin
 <p>
-Windows$B$G$N3+H/4D6-$,I,MW$@$H$$$&>l9g$K$O!"A*Br;h$O(B3$B$D$"$j$^$9!#(B
+Windowsでの開発環境が必要だという場合には、選択肢は3つあります。
 </p>
 
         <ul>
-          <li> Visual C++ $B$r$O$8$a$H$9$k>&MQ3+H/4D6-(B
+          <li> Visual C++ をはじめとする商用開発環境
           <li> Borland C++ Compiler 5.5
           <li> cygwin
         </ul>
 
 <p>
-$B@5D>$J$H$3$m!"$3$NL\E*$G(BCygwin$B$r;H$&$N$O$I$&$+$H;W$$$^$9!#(B
-$BE}9g4D6-$O7y$$$@$+$i(Bmake(nmake)$B$r;H$&$H$$$&>l9g$G$b!"(B
-Visual C++$B$N4D6-$O8+$F$$$F$&$i$d$^$7$$$b$N$,$"$j$^$9(B
-$B!JI.<T$O;}$C$F$$$^$;$s!K!#(B
-$B3+H/$,$7$?$$$N$J$i6b$r@K$7$^$:(BVisual C++$B$rGc$&$Y$-$G$7$g$&(B
-$B!JB>$N%Y%s%@!<$N3+H/4D6-$G$b$$$$$G$9$1$I!"(B
-$BCg4V$,B?$$J}$,3Z$@$H;W$$$^$9$N$G!K!#(B
+正直なところ、この目的でCygwinを使うのはどうかと思います。
+統合環境は嫌いだからmake(nmake)を使うという場合でも、
+Visual C++の環境は見ていてうらやましいものがあります
+（筆者は持っていません）。
+開発がしたいのなら金を惜しまずVisual C++を買うべきでしょう
+（他のベンダーの開発環境でもいいですけど、
+仲間が多い方が楽だと思いますので）。
 </p>
 <p>
-$B6b$rJ'$C$F$^$G(BWindows$B$G3+H/$r$9$k5$$O$J$$$H$$$&>l9g$b!"(B
-Borland C++ Compiler$B$+(Bcygwin$B$N(B2$B$D$NA*Br;h$,$"$j$^$9!#(B
-$B$I$A$i$r;H$&$K$;$h!";qNA$,@dBPE*$KB-$j$J$$$N$,FqE@$G$9$,!"(B
-$B6lO+$9$l$P$I$&$K$+$J$j$^$9!#(B
-$B;d$N5-;v!X(B<a href="../winprog/index.html">
-$B%3%s%Q%$%i$K(B1$B1_$bJ'$o$J$$Ak%W%m%0%i%_%s%0(B</a>$B!Y$b;29M$K$7$F$/$@$5$$!#(B
+金を払ってまでWindowsで開発をする気はないという場合も、
+Borland C++ Compilerかcygwinの2つの選択肢があります。
+どちらを使うにせよ、資料が絶対的に足りないのが難点ですが、
+苦労すればどうにかなります。
+私の記事『<a href="../winprog/index.html">
+コンパイラに1円も払わない窓プログラミング</a>』も参考にしてください。
 </p>
 <p>
-cygwin$B$G3+H/$9$k$N$O$`$7$m%G%a%j%C%H$NJ}$,B?$$$/$i$$$J$N$G$9$,!"(B
-UNIX$B>e$HF1$84D6-(B(emacs,gcc,make,gdb)$B$G3+H/$G$-$k$3$H$OBg$-$J%a%j%C%H$@$H8@$($^$9!#(B
+cygwinで開発するのはむしろデメリットの方が多いくらいなのですが、
+UNIX上と同じ環境(emacs,gcc,make,gdb)で開発できることは大きなメリットだと言えます。
 </p>
     </ul>
 
 <p>
-$B$^$H$a$k$H!"I.<T$O!"(B
+まとめると、筆者は、
 </p>
 
         <ol>
-          <li> UNIX$B>e$G$G$-$k$3$H$K4X$7$F$O(BUNIX$B!J4^(BVMWare$B!"(BcoLinux$B!K$G$d$k(B
-          <li> Windows$B$NJ}$,M%$l$F$$$k%"%W%j$OEvA3;H$&(B
-          <li> Windows$B%3%s%=!<%k$G$N:n6H$O!"4pK\E*$K(BCygwin$B$r;H$$!"0lIt$O(BWin32$B$X$N(Bport$B$r;H$&(B
+          <li> UNIX上でできることに関してはUNIX（含VMWare、coLinux）でやる
+          <li> Windowsの方が優れているアプリは当然使う
+          <li> Windowsコンソールでの作業は、基本的にCygwinを使い、一部はWin32へのportを使う
         </ol>
 
 <p>
-$B$H$$$&$N$,M}A[$@$H9M$($F$$$^$9!#(B
-Windows$B$G%3%s%=!<%k$r;H$&$3$H$,$"$k>l9g!"(B
-Cygwin$B$O(BUNIX$BLnO:$K$H$C$FHs>o$KL%NOE*$J2r$@$H;W$$$^$9!#(B
-$BNc$($P;d$N>l9g$G$"$l$P!"(Bxyzzy$B$GJ8>O$r=q$$$F(BCVS$B$G4IM}$7!"(B
-ssh$B$G%m%0%$%s$7$?@h$N%W%m%/%7$r%]!<%H%U%)%o!<%I$7$F(B
-$B%m!<%+%k$+$i(BProxomitron$B$G@\B3$7$?$j$7$F$$$^$9$,!"(B
-$B$3$l$O(Bcygwin$B$,$"$l$P$3$=$@$H;W$$$^$9!#(B
+というのが理想だと考えています。
+Windowsでコンソールを使うことがある場合、
+CygwinはUNIX野郎にとって非常に魅力的な解だと思います。
+例えば私の場合であれば、xyzzyで文章を書いてCVSで管理し、
+sshでログインした先のプロクシをポートフォワードして
+ローカルからProxomitronで接続したりしていますが、
+これはcygwinがあればこそだと思います。
 </p>
 <p>
-$BFC$K(BCygwin 1.1$B0J9_!"%$%s%9%H!<%i$N=PMh$OHs>o$KNI$/$J$C$F$*$j!"(B
-$BF3F~$N$?$a$NI_5o$O2<$,$C$F$$$^$9$N$G!"(B
-$BNI$5$=$&$@$H9M$($?>l9g$O;n$7$KF~$l$F$_$F$b$$$$$+$H;W$$$^$9!#(B
+特にCygwin 1.1以降、インストーラの出来は非常に良くなっており、
+導入のための敷居は下がっていますので、
+良さそうだと考えた場合は試しに入れてみてもいいかと思います。
 </p>
 <p>
-$B$J$<$$$-$J$j$3$s$J$3$H$r=q$$$?$+$H$$$&$H!"(B
-$B!V(BCygwin$B$C$F2?$,$$$$$N!)(BVMWare+Linux$B$G==J,$8$c$J$$$N!)!W(B
-$B$H8@$o$l$F9M$($F$7$^$C$?$+$i$G$9!#(B
-$B!J8=;~E@$G$O!KI.<T$O!"(B
-$B!V(BCygwin$B$,0UL#$,$"$k?M$K$O0UL#$,$"$k$7!"0UL#$,$J$$?M$K$O0UL#$,$J$$!W(B
-$B$H9M$($F$$$^$9!#(B
-$B>e$N5DO@$r;29M$K!"(B
-$B<+J,$K$H$C$FF3F~$9$k0UL#$,$"$k$+$I$&$+$r9M$($F$_$F$/$@$5$$!#(B
+なぜいきなりこんなことを書いたかというと、
+「Cygwinって何がいいの？VMWare+Linuxで十分じゃないの？」
+と言われて考えてしまったからです。
+（現時点では）筆者は、
+「Cygwinが意味がある人には意味があるし、意味がない人には意味がない」
+と考えています。
+上の議論を参考に、
+自分にとって導入する意味があるかどうかを考えてみてください。
 <p>
-Cygwin$B7<LX$N$?$a$NJ8>O$H$O;W$($J$$$G$9$M!E!#(B
-$B$3$3$^$GFI$s$G9M$(9~$s$G$7$^$C$?J}$,$$$i$C$7$c$k$+$b$7$l$^$;$s!#(B
-$B$=$&$$$&J}$O!"$H$j$"$($:%$%s%9%H!<%k$7$F;H$C$F$_$k$3$H$r4+$a$^$9(B
-$B!JG:$`$h$&$J$iE,@-$,$"$k$H;W$$$^$9$N$G!K!#(B
-$B$H$$$&$o$1$G!"$h$&$d$/K\Bj$KF~$j$^$9!#(B
-</p>
-
-<hr><!-- ____________________________________________________________ -->
-
-<h2><a name="download">$B%@%&%s%m!<%I(B</a></h2>
-
-<p>
-<a href="http://cygwin.com/">cygwin.com</a>$B$+$i(B
-setup.exe$B$rMn$H$;$P%M%C%H%o!<%/%$%s%9%H!<%k$7$F$/$l$^$9!#(B
-$BF|K\Cf$N(Bring$B%5!<%P$,%_%i!<$H$7$F%j%9%H$5$l$F$$$k$N$G!"(B
-$B$+$J$j9bB.$K%@%&%s%m!<%I$G$-$k$O$:$G$9!#(B
+Cygwin啓蒙のための文章とは思えないですね‥。
+ここまで読んで考え込んでしまった方がいらっしゃるかもしれません。
+そういう方は、とりあえずインストールして使ってみることを勧めます
+（悩むようなら適性があると思いますので）。
+というわけで、ようやく本題に入ります。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="install">$B%$%s%9%H!<%k(B</a></h2>
+<h2><a name="download">ダウンロード</a></h2>
 
 <p>
-setup.exe$B$r%@%&%s%m!<%I$7$F!"(B
-$B$"$H$O8@$o$l$k$,$^$^$KF~NO$7$F$$$l$P!"(B
-$B>!<j$K%M%C%H%o!<%/%$%s%9%H!<%k$5$l$^$9!#(B
+<a href="http://cygwin.com/">cygwin.com</a>から
+setup.exeを落とせばネットワークインストールしてくれます。
+日本中のringサーバがミラーとしてリストされているので、
+かなり高速にダウンロードできるはずです。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="install">インストール</a></h2>
+
+<p>
+setup.exeをダウンロードして、
+あとは言われるがままに入力していれば、
+勝手にネットワークインストールされます。
 </p>
 <p>
-$B%$%s%9%H!<%k$,=*$o$C$?$i!"%Q%9$N@_Dj$J$I$r$9$kA0$K!"(B
-$B%G%#%l%/%H%j9=@.$r9M$($k$Y$-$G$7$g$&!#(B
-Cygwin$B$r(Bc:\cygwin$B$K%$%s%9%H!<%k$7$F!"$=$l$r(B/$B$K%^%&%s%H$9$k!"(B
-$B$H$$$&$N$,%G%U%)%k%H$N@_Dj$J$s$G$9$,!"(B
-Cygwin$B0J30$N%D!<%k$r;H$&$H$-$K:.Mp$N85$K$J$k$H;W$$$^$9!#(B
-$B$d$O$j!"(Bc:\$B!J$^$?$O0lHV$h$/;H$&%I%i%$%V$N%k!<%H!K$r(B/$B$K$9$k$Y$-$G$7$g$&!#(B
+インストールが終わったら、パスの設定などをする前に、
+ディレクトリ構成を考えるべきでしょう。
+Cygwinをc:\cygwinにインストールして、それを/にマウントする、
+というのがデフォルトの設定なんですが、
+Cygwin以外のツールを使うときに混乱の元になると思います。
+やはり、c:\（または一番よく使うドライブのルート）を/にするべきでしょう。
 </p>
 <p>
-$B0J2<$K;d$N<h$C$?%]%j%7!<$r@bL@$7$^$9!#(B
+以下に私の取ったポリシーを説明します。
 </p>
     <ul>
-      <li> c:\ $B$r(B / $B$K$9$k!#(B
-      <li> c:\cygwin$B$K(BCygwin1.1$B$r%$%s%9%H!<%k$7$F!"(B
-           $B$=$N2<$N(Bc:\cygwin\{bin,etc,usr}$B$r$=$l$>$l(B/{bin,etc,usr}$B$K%^%&%s%H!#(B
-      <li> c:\local$B$r:n$j!"(B/usr/local$B$K%^%&%s%H!#(B
-      <li> d:\$B$r(B/cdrom$B$K%^%&%s%H!#(B
+      <li> c:\ を / にする。
+      <li> c:\cygwinにCygwin1.1をインストールして、
+           その下のc:\cygwin\{bin,etc,usr}をそれぞれ/{bin,etc,usr}にマウント。
+      <li> c:\localを作り、/usr/localにマウント。
+      <li> d:\を/cdromにマウント。
     </ul>
 <p>
-$B$H$$$&$o$1$G!"(B
+というわけで、
 </p>
 <pre>
 $ mount -b -s c:/ /
@@ -299,65 +299,65 @@ $ mount -b -s c:/local /usr/local
 $ mount -b -s d:/ /cdrom
 </pre>
 <p>
-$B$N$h$&$K$7$^$7$?!#(Btextmode$B$G%^%&%s%H$9$k$H!"(B
-$B%U%!%$%k$r(Btext mode$B$G(Bopen$B$5$l$FIT9,$J;v8N$,B?H/$7$^$9$N$G!"(B
-binmode$B$G%^%&%s%H$9$k$3$H$r$*>)$a$7$^$9!#(B
-$B:G=i$K(Bwarning$B$,=P$k$N$r5$$K$7$J$1$l$P!"(B
-$BI,$:$7$b%^%&%s%H%]%$%s%H$r:n$kI,MW$O$"$j$^$;$s$,!"(B
-$B%7%'%k$N%U%!%$%kL>Jd40$J$I$G:.Mp$7$+$M$J$$$N$G!"(B
-$B%^%&%s%H%]%$%s%H$O<B:]$K$"$C$?J}$,$$$$$H;W$$$^$9!#(B
+のようにしました。textmodeでマウントすると、
+ファイルをtext modeでopenされて不幸な事故が多発しますので、
+binmodeでマウントすることをお奨めします。
+最初にwarningが出るのを気にしなければ、
+必ずしもマウントポイントを作る必要はありませんが、
+シェルのファイル名補完などで混乱しかねないので、
+マウントポイントは実際にあった方がいいと思います。
 </p>
 <p>
-/usr/local$B$H$7$F(Bc:\cygwin\usr\local$B$r:n$i$J$+$C$?$N$O!"(B
-c:\cygwin$B$N2<$K$O(Bcygnus$B$+$iG[$i$l$k$b$N$7$+F~$l$J$$$h$&$K$7$F!"(B
-$B<+J,$G%3%s%Q%$%k$7$?$b$N$H:.$6$i$J$$$h$&$K$7$h$&!"$H$$$&0U?^$G$9!#(B
+/usr/localとしてc:\cygwin\usr\localを作らなかったのは、
+c:\cygwinの下にはcygnusから配られるものしか入れないようにして、
+自分でコンパイルしたものと混ざらないようにしよう、という意図です。
 <!--
-Cygwin$B<+BN$N%$%s%9%H!<%k>l=j$K$D$$$F$O!"(B
-c:\$B$K%$%s%9%H!<%k$7$F!"(B
-c:\{bin,usr,etc}$B$r(B/{bin,usr,etc}$B$K$7$?J}$,$9$C$-$j$7$?$+$b$7$l$^$;$s!#(B
+Cygwin自体のインストール場所については、
+c:\にインストールして、
+c:\{bin,usr,etc}を/{bin,usr,etc}にした方がすっきりしたかもしれません。
 -->
 </p>
 
 <p>
-$B$"!"$=$&$=$&!#(B
-$B%G%#%l%/%H%j9=@.$H$$$($P!"(B/tmp $B$r:n$k$N$bK:$l$F$O$$$1$^$;$s!#(B
-'/Documents\ and\ Settings/'$USERNAME'/Local\ Settings/Temp'$B$"$?$j$r(B
-$B%^%&%s%H$7$F$b$$$$$G$9$7!"<B:]$K%G%#%l%/%H%j$r7!$C$F$b9=$$$^$;$s!#(B
+あ、そうそう。
+ディレクトリ構成といえば、/tmp を作るのも忘れてはいけません。
+'/Documents\ and\ Settings/'$USERNAME'/Local\ Settings/Temp'あたりを
+マウントしてもいいですし、実際にディレクトリを掘っても構いません。
 </p>
 
 <p>
-2001/07/22$BDI5-!'(B<br>
-$B$3$NJU$j$N%]%j%7!<$K$D$$$F!"2,ED$5$s$N(B<a
+2001/07/22追記：<br>
+この辺りのポリシーについて、岡田さんの<a
 href="http://www.math.s.chiba-u.ac.jp/~okada/cygwin/index.html"
->Cygwin$B$N%Z!<%8(B</a>$B$G>R2p$7$F$b$i$C$F$^$9$1$I!"(B
-$B;DG0$J$,$i$3$N%Z!<%8$h$j2,ED$5$s$N%Z!<%8$NJ}$,M-MQ$J>pJs$,$?$/$5$s$"$j$^$9!#(B
-$B$?$H$($P!"8=>u$N(BCygwin$B$G$O!"(B
-\cygwin\bin$B$O!"(B/bin$B$K$b(B/usr/bin$B$K$b(Bmount$B$7$J$$$H(B
-$BF0$+$J$$$b$N$,$"$C$?$j$7$^$9$N$G!"(B
-$B>e$N5-=R$h$j>/$7:Y9)$7$J$$$H$@$a$G$9!#(B
+>Cygwinのページ</a>で紹介してもらってますけど、
+残念ながらこのページより岡田さんのページの方が有用な情報がたくさんあります。
+たとえば、現状のCygwinでは、
+\cygwin\binは、/binにも/usr/binにもmountしないと
+動かないものがあったりしますので、
+上の記述より少し細工しないとだめです。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="settings">$B@_Dj(B</a></h2>
+<h2><a name="settings">設定</a></h2>
 
 <p>
-$B%Q%9$r@_Dj$7$F!"(B.bashrc$B$J$I$N@_Dj%U%!%$%k$r=q$-$^$9!#(B
-$B=EMW$J$N$O!"4D6-JQ?t(BMAKE_MODE$B$r(BUNIX$B$K$9$k$3$H$/$i$$$G$7$g$&$+(B
-$B!J"+B?J,$3$l$OBg@N$NOC$G!":#$OI,MW$J$5$=$&!K!#(B
-$B$"$H$O$F$-$H!<$K$d$C$F$/$@$5$$!#(B
+パスを設定して、.bashrcなどの設定ファイルを書きます。
+重要なのは、環境変数MAKE_MODEをUNIXにすることくらいでしょうか
+（←多分これは大昔の話で、今は必要なさそう）。
+あとはてきとーにやってください。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="maketools">$B%D!<%k$N%3%s%Q%$%k(B</a></h2>
+<h2><a name="maketools">ツールのコンパイル</a></h2>
 
 <p>
-$B0J>e$G3d$H9,$;$J4D6-$,<j$KF~$C$F$$$k$O$:$G$9$,!"(B
-$BB?>/$NITK~$O$"$k$3$H$G$7$g$&!#(B
-$BITK~$JE@$O(Bmake$B$9$l$PJQ$($i$l$k$N$,(BCygwin$B$N$$$$$H$3$m$G$9$N$G!"(B
-$BITK~$J$b$N!"B-$j$J$$$b$N$rJR$CC<$+$i:n$C$F$$$-$^$9!#(B
-$B0J2<%W%m%s%W%H$O(Bbash$B$G$9$N$G!"(Btcsh$B$N>l9g$OE,59(Benv$B$r;H$C$F$/$@$5$$!#(B
+以上で割と幸せな環境が手に入っているはずですが、
+多少の不満はあることでしょう。
+不満な点はmakeすれば変えられるのがCygwinのいいところですので、
+不満なもの、足りないものを片っ端から作っていきます。
+以下プロンプトはbashですので、tcshの場合は適宜envを使ってください。
 </p>
 
     <ul>
@@ -365,13 +365,13 @@ href="http://www.math.s.chiba-u.ac.jp/~okada/cygwin/index.html"
 
 <p>
 <a href="http://www.greenwoodsoftware.com/less/"
->[The LESS Home Page]</a> $BK\2H$O%P!<%8%g%s$"$,$C$F$k$J$!(B<br>
+>[The LESS Home Page]</a> 本家はバージョンあがってるなぁ<br>
 <a href="http://www.io.com/~kazushi/less/"
 >[Jam less]</a> iso patch<br>
 </p>
 <p>
-$BF|K\8l$,8+$($k(Bless$B!#@N$+$i;H$C$F$$$F$=$l$[$IITK~$O$J$+$C$?$1$I!"(B
-UTF-8$B$J%W%m%8%'%/%H$N;~$K(Blv$B$KIb5$$7$F$+$iKX$I;H$o$J$/$J$j$^$7$?!#(B
+日本語が見えるless。昔から使っていてそれほど不満はなかったけど、
+UTF-8なプロジェクトの時にlvに浮気してから殆ど使わなくなりました。
 </p>
 
 <pre>
@@ -415,8 +415,8 @@ $ make install 2&gt;&amp;1 | tee install.log
 </p>
 
 <p>
-$BI.<T$NCf$G$O:G6a$O(Bless$B$h$j$b(Blv$B$NJ}$,IaDL$K$J$j$D$D$"$j$^$9!#(B
-install$B$^$o$j$N(BMakefile$B$r>/$7D4@0$7$F%$%s%9%H!<%k!#(B
+筆者の中では最近はlessよりもlvの方が普通になりつつあります。
+installまわりのMakefileを少し調整してインストール。
 </p>
 
 <pre>
@@ -449,7 +449,7 @@ $ make install
 </a> )
 </p>
 <p>
-$B8@$o$:$HCN$l$?4A;z%3%s%P!<%?!#(Bversion2$B$G(BUnicode$BBP1~$7$?$N$,JXMx!#(B
+言わずと知れた漢字コンバータ。version2でUnicode対応したのが便利。
 </p>
 
 <pre>
@@ -462,15 +462,15 @@ $ install nkf.1 /usr/local/man/man1/
 </pre>
 
 <p>
-$B%G%U%)%k%H$N=PNO%3!<%I$r(BSJIS$B$K$7$F$^$9!#(B
-$B:G6a$N(Bcygwin$B$J$i(BMakefile$B$NJQ99$OITMW$G$9!#(B
-$B$^$?!"$D$$$G$KF|K\8l$N%^%K%e%"%k$r(BEUC$B$KJQ49$7$F(Binstall$B$7$F$$$^$9!#(B
+デフォルトの出力コードをSJISにしてます。
+最近のcygwinならMakefileの変更は不要です。
+また、ついでに日本語のマニュアルをEUCに変換してinstallしています。
 </p>
 <p>
-nkf$B$O!"(B
-$B%G%U%)%k%HF0:n$G$OH>3Q%+%J$rA43Q$KJQ49$7$F$7$^$$$^$9$,!"(B
--x$B$GM^@)$G$-$^$9!#(B
-groff$B$@$HF|K\8l(Bman$B$,2=$12=$1$J$N$O;EJ}$J$$$N$@$m$&$+!E!#(B
+nkfは、
+デフォルト動作では半角カナを全角に変換してしまいますが、
+-xで抑制できます。
+groffだと日本語manが化け化けなのは仕方ないのだろうか‥。
 </p>
 
 <pre>
@@ -485,17 +485,17 @@ groff$B$@$HF|K\8l(Bman$B$,2=$12=$1$J$N$O;EJ}$J$$$N$@$m$&$+!E!#(B
 <p>
 <a href="ftp://ftp.media.kyoto-u.ac.jp/FreeBSD/ports/distfiles/tcs.shar.Z"
 >ftp://ftp.media.kyoto-u.ac.jp/FreeBSD/ports/distfiles/tcs.shar.Z</a
-> $BB>$K$b$"$A$3$A$K$"$k$,!"G[I[85$,$I$3$+$OITL@(B
+> 他にもあちこちにあるが、配布元がどこかは不明
 
 http://www.cma.co.jp/~ts1/patches/tcs-mskanji-fix.diff
 </p>
 
 <p>
-Unicode$BBP1~J8;z%3!<%I%3%s%P!<%?!#(B
-$B%P!<%8%g%s$O(B 'Sun Mar 26 02:42:25 EST 1995' $B$i$7$$!#(B
-$B$J$+$J$+$$$+$l$?%P!<%8%g%K%s%0$@!#(B
-$B$7$+$7!"$3$l$C$F(B5$BG/A0$K:n$i$l$?$b$N$J$N$+!)(B
-$B$D$$:G6a$^$GL>A0$9$iJ9$$$?$3$H$,$J$+$C$?$h!#(B
+Unicode対応文字コードコンバータ。
+バージョンは 'Sun Mar 26 02:42:25 EST 1995' らしい。
+なかなかいかれたバージョニングだ。
+しかし、これって5年前に作られたものなのか？
+つい最近まで名前すら聞いたことがなかったよ。
 </p>
 
 <pre>
@@ -511,13 +511,13 @@ $ install tcs.1 /usr/local/man/man1
 </pre>
 
 <p>
-uudecode$B$r$^$@:n$C$F$$$J$+$C$?$N$G!"(Buudeview$B$r;H$C$F$_$?!#(B
-$B$,!"(Bmake test$B!J$_$?$$$J$b$s!K$N:]$K;H$&$@$1$J$N$G!"(B
-$BL5$/$F$b%3%s%Q%$%k$O$G$-$k!#(B
+uudecodeをまだ作っていなかったので、uudeviewを使ってみた。
+が、make test（みたいなもん）の際に使うだけなので、
+無くてもコンパイルはできる。
 </p>
 <p>
-$BF~NO%3!<%I$r%3%^%s%I%i%$%s%*%W%7%g%s$G=q$+$J$$$H$$$1$J$$$N$,LLE]!#(B
-ms-kanji(SJIS)$B$GH>3Q%+%J$rFI$a$J$$$N$,$A$g$C$HDK$$!J>l9g$b$"$k$@$m$&!K!#(B
+入力コードをコマンドラインオプションで書かないといけないのが面倒。
+ms-kanji(SJIS)で半角カナを読めないのがちょっと痛い（場合もあるだろう）。
 </p>
 <pre>
   installed files
@@ -537,7 +537,7 @@ ms-kanji(SJIS)$B$GH>3Q%+%J$rFI$a$J$$$N$,$A$g$C$HDK$$!J>l9g$b$"$k$@$m$&!K!#(B
 </p>
 
 <p>
-ftp/webdav$BBP1~$N%U%!%$%k%"%C%W%m!<%I%W%m%0%i%`!#(B
+ftp/webdav対応のファイルアップロードプログラム。
 </p>
 <pre>
 $ wget http://www.lyra.org/sitecopy/sitecopy-0.12.1.tar.gz
@@ -570,12 +570,12 @@ $ make install
 >[download]</a> )
 </p>
 <p>
-$BI8=`F~=PNO$r%=%1%C%HDL?.$K$=$N$^$^;H$&$3$H$G!"(B
-server$B$d(Bclient$B$r4JC1$K:n$l$k$h$&$J%W%m%0%i%`$H!"(B
-$B%Q%1%C%H%U%)%o!<%@!<(B(relay)$B!#(B
-$B<g$K(Bconnect$B$r(Bmconnect$B$NBeBX$K;H$C$F$$$k$h$&$J5$$,$9$k!#(B
-$B!J(Bmconnect$B$J$s$F?tG/A0$K;H$C$?$C$-$j$@$+$i!"(B
-$B$I$s$J%W%m%0%i%`$@$C$?$+<+?.$J$$$1$I!K(B
+標準入出力をソケット通信にそのまま使うことで、
+serverやclientを簡単に作れるようなプログラムと、
+パケットフォワーダー(relay)。
+主にconnectをmconnectの代替に使っているような気がする。
+（mconnectなんて数年前に使ったっきりだから、
+どんなプログラムだったか自信ないけど）
 </p>
 <pre>
 $ wget http://download.sourceforge.net/italk/yaegashi-takeshi-1.02.tar.gz
@@ -587,22 +587,22 @@ $ ln -s relay /usr/local/bin/server
 $ ln -s relay /usr/local/bin/connect
 </pre>
 
-$B0J2<!";HMQNc!#(B
+以下、使用例。
 <pre>
   $ server 8080
 </pre>
-$B$H$+$d$C$F!"%V%i%&%6$+$i(Blocalhost:8080$B$K8~$1$F(B&lt;form&gt;$B$N(Baction$B$rHt$P$9!#(B
+とかやって、ブラウザからlocalhost:8080に向けて&lt;form&gt;のactionを飛ばす。
 
 <pre>
   $ connect www 80 < request.txt
 </pre>
-$B$H$+$d$C$F!"%F%-%9%H%U%!%$%k$NFbMF$r(Bweb$B%5!<%P$X$N%j%/%(%9%H$H$7$FAw$k!#(B
+とかやって、テキストファイルの内容をwebサーバへのリクエストとして送る。
 
 
 <pre>
   $ connect www.yahoo.co.jp 80 < request.txt > result.txt
 </pre>
-yahoo$B$N%l%9%]%s%9$X%C%@!"2~9T$,(BCRLF$B$K$J$C$F$J$$5$$,$9$k$>!"(B
+yahooのレスポンスへッダ、改行がCRLFになってない気がするぞ、
 
       <li> <a name="hex">hex 2.04</a>
 <p>
@@ -614,7 +614,7 @@ yahoo$B$N%l%9%]%s%9$X%C%@!"2~9T$,(BCRLF$B$K$J$C$F$J$$5$$,$9$k$>!"(B
 >[download]</a> )
 </p>
 <p>
-$B4A;z$,=P$k(B16$B?J%@%s%W!#F~NO$NF|K\8lJ8;z%3!<%I$r;XDj$G$-$k$N$,JXMx!#(B
+漢字が出る16進ダンプ。入力の日本語文字コードを指定できるのが便利。
 </p>
 
 <pre>
@@ -625,12 +625,12 @@ $ install hex /usr/local/bin
 </pre>
 
 <p>
-Windows$B$G%3%s%Q%$%k$9$k$H!"(B
-$B%G%U%)%k%H$N=PNO%3!<%I$O(BSJIS$B$K$J$k$h$&$@!JEvA3!)!K!#(B
-VC++$B$G%3%s%Q%$%k$7$?$b$N$,G[I[$5$l$F$$$k$,!"(B
-NT$B%3%s%=!<%k$G$O(B
-cygwin$B$G%3%s%Q%$%k$7$J$$$H?'$,$D$+$J$$$N$G<+J,$G%3%s%Q%$%k$7$?!#(B
-$BFC$KLdBj$J$7!#(B
+Windowsでコンパイルすると、
+デフォルトの出力コードはSJISになるようだ（当然？）。
+VC++でコンパイルしたものが配布されているが、
+NTコンソールでは
+cygwinでコンパイルしないと色がつかないので自分でコンパイルした。
+特に問題なし。
 </p>
 
 <pre>
@@ -649,9 +649,9 @@ cygwin$B$G%3%s%Q%$%k$7$J$$$H?'$,$D$+$J$$$N$G<+J,$G%3%s%Q%$%k$7$?!#(B
 >[download]</a> )
 </p>
 <p>
-$B9b5!G=$J(Buudecode/uudencode$B!#(B
-uu $B0J30$K$b!"(BBase64 $B$d(B BinHex $B$b$[$I$1$k!#(B
-$BJ,3d$5$l$F$F$b$[$I$1$k!#(B
+高機能なuudecode/uudencode。
+uu 以外にも、Base64 や BinHex もほどける。
+分割されててもほどける。
 </p>
 
 <pre>
@@ -665,8 +665,8 @@ $ install man/uu{de,en}view.1 /usr/local/man/man1
 </pre>
 
 <p>
-$B$$$i$s$3$H$r$7$F$/$l$=$&$J$N$G!"$$$m$$$m(B disable $B$7$?!#(B
-make install $B$O$&$^$/$$$+$J$$$N$G!"<jF0$G%$%s%9%H!<%k!#(B
+いらんことをしてくれそうなので、いろいろ disable した。
+make install はうまくいかないので、手動でインストール。
 </p>
 
 <pre>
@@ -686,7 +686,7 @@ make install $B$O$&$^$/$$$+$J$$$N$G!"<jF0$G%$%s%9%H!<%k!#(B
 
 </p>
 <p>
-$B%]%9%H(Blynx$BE*$J%F%-%9%H%Y!<%9$N%V%i%&%6!#(B
+ポストlynx的なテキストベースのブラウザ。
 </p>
 
 <pre>
@@ -700,7 +700,7 @@ Which directory do you want to put the support binary files?
 (default: /cygnus/cygwin-b20/H-i586-cygwin32/lib/w3m) /usr/local/lib/w3m
 Which directory do you want to put the helpfile?
 (default: /cygnus/cygwin-b20/H-i586-cygwin32/lib/w3m) /usr/local/lib/w3m
-$B!J0J2<E,Ev!K(B
+（以下適当）
 
 $ patch &lt; <a href="../../patches/w3m-0.1.6.cygwin-patch.txt"
              >../w3m-0.1.6.cygwin-patch.txt</a>
@@ -709,16 +709,16 @@ $ make install
 </pre>
 
 <p>
-$B;d$N4D6-$G$O>e$N%Q%C%A$N$h$&$KJQ99$7$J$$$H(B
-$TERM$B$,(Bcygwin$B$8$c$J$$$H$-$K(BSEGV$B$GMn$A$^$9!#(B
-termcap$B$N%P%0$@$H;W$o$l$^$9!#(B
+私の環境では上のパッチのように変更しないと
+$TERMがcygwinじゃないときにSEGVで落ちます。
+termcapのバグだと思われます。
 </p>
 
 <p>
-$B@5D>$J$H$3$m!"(Bcygwin$B$G%3%s%Q%$%k$7$F$b$"$^$j0UL#$J$$$h$&$J!#(B
-w3m http://somewhere.ac.jp/$B$C$FBG$D$N$H(B
-start http://somewhere.ac.jp/$B$C$FBG$D$N$H$@$C$?$i(B
-start$B$NJ}$,B.$=$&$@$b$s(B (^^;
+正直なところ、cygwinでコンパイルしてもあまり意味ないような。
+w3m http://somewhere.ac.jp/って打つのと
+start http://somewhere.ac.jp/って打つのとだったら
+startの方が速そうだもん (^^;
 </p>
 
 <pre>
@@ -729,31 +729,31 @@ start$B$NJ}$,B.$=$&$@$b$s(B (^^;
 
       <li> <a name="rxvt">rxvt 2.7.10-3-j05.0</a>
 <p>
-kterm$B$NBeBXIJ$H$7$FDjI>$NC<Kv%=%U%H(B
-$B!JI.<T$O(Bck$B$KIb5$$7$?$N$G:G6a$O;H$C$F$$$^$;$s!K!#(B
-libW11$B$H$$$&(BlibX11$B$NCV$-49$(%W%m%8%'%/%H$,$"$j!"(B
-$B$3$l$rMxMQ$7$F(BWin32$B%M%$%F%#%V$G$bF0$/!#(B
-$B$I$&$d$i(Bcygwin$BK\2H$+$iG[$i$l$F$$$k$b$N$O(B
-Win32$B%M%$%F%#%V$N>l9g$KF|K\8l$r=P$;$J$$$h$&$@!#(B
-$B$H$$$&$o$1$G%Q%C%AEv$F$F%3%s%Q%$%k$7$^$9!#(B
+ktermの代替品として定評の端末ソフト
+（筆者はckに浮気したので最近は使っていません）。
+libW11というlibX11の置き換えプロジェクトがあり、
+これを利用してWin32ネイティブでも動く。
+どうやらcygwin本家から配られているものは
+Win32ネイティブの場合に日本語を出せないようだ。
+というわけでパッチ当ててコンパイルします。
 </p>
 <p>
 <a href="http://hp.vector.co.jp/authors/VA021953/rxvt/"
->rxvt on Cygwin</a>$B$,F|K\8l2=%Q%C%AK\2H$@$C$?$,!"(B
-$B?7%P!<%8%g%s$X$N%Q%C%A$,(B
+>rxvt on Cygwin</a>が日本語化パッチ本家だったが、
+新バージョンへのパッチが
 <a href="http://iwa.ath.cx/software/cygwin/rxvt.html"
 >ja patched rxvt-2.7.10-3 on Cygwin</a>
-$B$K$"$j$^$9!#(B
-$B%P%$%J%jG[I[$5$l$F$$$^$9$+$i!"(B
-$B<+J,$G%3%s%Q%$%k$9$k$N$OC1$J$k<qL#$G$9!#(B
+にあります。
+バイナリ配布されていますから、
+自分でコンパイルするのは単なる趣味です。
 </p>
 <p>
-$B%3%s%Q%$%k$9$k$N$K$"$l$3$l<jF0$G$d$C$F$^$9!#(B
-Makefile$B$d(Bconfigure$B$r@0Hw$9$l$P$b$&>/$72?$H$+$J$j$=$&$@$,!E!#(B
+コンパイルするのにあれこれ手動でやってます。
+Makefileやconfigureを整備すればもう少し何とかなりそうだが‥。
 </p>
 <p>
-$B0l=o$K(Brclock$B$H$$$&(Bxclock$B$8$_$?%"%W%j$b%$%s%9%H!<%k$5$l$k$,!"@5BN$OITL@!#(B
-W11$B$N%G%b$+!D!)(B
+一緒にrclockというxclockじみたアプリもインストールされるが、正体は不明。
+W11のデモか…？
 </p>
 
 
@@ -789,19 +789,19 @@ $ make install
 </p>
 
 <p>
-Cygwin$B@lMQ$NC<Kv%=%U%H!"$H$$$&$J$+$J$+DA$7$$%=%U%H$G$9!#(B
-$BF)L@%&%#%s%I%&$N(Bck$B$HITF)L@%&%#%s%I%&$N(Bcko$B$H(B2$B$D$KJ,$+$l$F$$$^$9$,!"(B
-ck$B$NJ}$O$=$l$J$j$N(BGPU$B$G$J$$$H=E$/$F;H$$$K$/$$$H;W$$$^$9!#(B
-$B;d$O(Bcko$B$r;H$C$F$$$^$9!#(B
-JIS$B!"(BSJIS$B!"(BEUC$B!"(BUTF-8$B$KBP1~$7$F$*$j!"(B
-$B$7$+$bJ8;z%3!<%I$r<+F0H=JL$7$F$/$l$k$N$G(B
-$BF|K\8l$N%(%s%3!<%G%#%s%0$,?'!9:.$6$C$F$$$k4D6-$G$b(B
-$BFC$KJ8;z%3!<%I$N0U<1$r$;$:$KMxMQ$9$k$3$H$,$G$-$^$9!#(B
-$B$=$l$^$G(Brxvt+cocot$B$@$C$?$s$G$9$,!"CGA3JXMx$K$J$j$^$7$?!#(B
+Cygwin専用の端末ソフト、というなかなか珍しいソフトです。
+透明ウィンドウのckと不透明ウィンドウのckoと2つに分かれていますが、
+ckの方はそれなりのGPUでないと重くて使いにくいと思います。
+私はckoを使っています。
+JIS、SJIS、EUC、UTF-8に対応しており、
+しかも文字コードを自動判別してくれるので
+日本語のエンコーディングが色々混ざっている環境でも
+特に文字コードの意識をせずに利用することができます。
+それまでrxvt+cocotだったんですが、断然便利になりました。
 </p>
 <p>
-Cygwin$B@lMQ$N%=%U%H$,%P%$%J%jG[I[$5$l$F$$$k$o$1$G!"(B
-$B<+J,$G%3%s%Q%$%k$9$k0UL#$J$s$+KX$IL5$$$s$G$9$,!D!#(B
+Cygwin専用のソフトがバイナリ配布されているわけで、
+自分でコンパイルする意味なんか殆ど無いんですが…。
 </p>
 
 <pre
@@ -819,17 +819,17 @@ $ install cko.exe /usr/local/bin
 
       <li> <a name="unrar">unrar 3.3.6</a>
 <p>
-$BB?J,%P%$%J%j$bMn$A$F$$$k$H;W$$$^$9$,!"(B
-$B%=!<%9$+$i%3%^%s%I%i%$%sHG$r:n$C$F$_$^$9!#(B
+多分バイナリも落ちていると思いますが、
+ソースからコマンドライン版を作ってみます。
 </p>
 <p>
 <a href="http://www.rarlab.com/rar_add.htm"
->http://www.rarlab.com/rar_add.htm</a>$B$+$i%=!<%9%Q%C%1!<%8$r%@%&%s%m!<%I$7$F!"(B
-makefile.unix$B$r;H$C$F%3%s%Q%$%k$7$^$9!#(B
-$B<+J,$G%3%s%Q%$%k$9$k$N$O<qL#$G$9!#(B
+>http://www.rarlab.com/rar_add.htm</a>からソースパッケージをダウンロードして、
+makefile.unixを使ってコンパイルします。
+自分でコンパイルするのは趣味です。
 </p>
 <p>
-makefile$B$NLdBjE@$r>/!9=$@5$7$^$7$?!#(B
+makefileの問題点を少々修正しました。
 </p>
 
 <pre>
@@ -851,19 +851,19 @@ $ install -c -m 755 unrar /usr/local/bin/unrar
 
  
 <!--
-(01:48:58)[GANA] ./configure $B$7$F$+$i!"(B
-(01:49:04)[GANA] config.h $B$N$*$7$j$K(B
+(01:48:58)[GANA] ./configure してから、
+(01:49:04)[GANA] config.h のおしりに
 (01:49:07)[GANA] #undef WINNT
 (01:49:07)[GANA] #define NEEDgethostname
-(01:49:20)[GANA] $B$r$D$1$k!#(B
-(01:49:55)[GANA] $B$"$H!"(Btc.os.h $B$N(B 85 $B9TL\$K(B
+(01:49:20)[GANA] をつける。
+(01:49:55)[GANA] あと、tc.os.h の 85 行目に
 (01:49:59)[GANA]  || defined(__CYGWIN__)
-(01:50:02)[GANA] $B$rDI2C$@!#(B
+(01:50:02)[GANA] を追加だ。
 -->
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="bookmarks"  >$B%j%s%/=8(B</a></h2>
+<h2><a name="bookmarks"  >リンク集</a></h2>
 
   <ul>
     <li><a href="http://cygwin.com/"
@@ -874,26 +874,26 @@ $ install -c -m 755 unrar /usr/local/bin/unrar
 	>CygUtils</a><br>
 <br>
     <li><a href="http://www.jaist.ac.jp/~fujieda/cygwin/"
-	>Cygwin$B>pJs(B</a> / $BF#;^$5$s!#(BSnapshot NEWS $B$,3d$H?I8}!#(B<br>
+	>Cygwin情報</a> / 藤枝さん。Snapshot NEWS が割と辛口。<br>
     <li><a href="http://www.mars.dti.ne.jp/~sohda/cygwin/"
-	>Cygwin $B$r;H$&!#(B</a>
+	>Cygwin を使う。</a>
 	<a href="http://matsu-www.is.titech.ac.jp/~sohda/cygwin/antenna/"
-	>[Cygwin $B%"%s%F%J(B]</a> / $BAaED$5$s!#%Q%C%1!<%8%K%e!<%9$H$+!#(B<br>
+	>[Cygwin アンテナ]</a> / 早田さん。パッケージニュースとか。<br>
     <li><a href="http://www2.raidway.ne.jp/~yzone/cygwin.html"
-	>Cygwin Information</a> / yzone$B$5$s!#(Bhack$B$7$?%a%b$H$+!#(B<br>
+	>Cygwin Information</a> / yzoneさん。hackしたメモとか。<br>
     <li><a href="http://www.math.s.chiba-u.ac.jp/~okada/cygwin/index.html"
 	>cygwin</a>
 	<a href="http://www.math.s.chiba-u.ac.jp/~okada/mahojin/index.html"
-	>[$BKbJ}?X(B]</a> / $B2,ED$5$s!#(Bmount$B$N%]%j%7!<$H$+!#(B<br>
+	>[魔方陣]</a> / 岡田さん。mountのポリシーとか。<br>
 
     <li><a href="http://www.netlaputa.ne.jp/%7Ekose/Software/compile/index.html"
 	>Compile ! (^.^)v</a><br>
     <li><a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/cygwin32.htm"
-	>Windows$B$G(BUNIX? Cygnus$B$N%Z!<%8(B</a>
+	>WindowsでUNIX? Cygnusのページ</a>
 	<a href="http://crocus.sci.kumamoto-u.ac.jp/physics/astro/fujimoto/home/junixwin32.htm"
 	>[bookmarks]</a><br>
     <li><a href="http://plaza7.mbn.or.jp/~docile/japanese/gnu-win32/"
-	>GNU-Win32$B$N%Z!<%8(B</a>
+	>GNU-Win32のページ</a>
 	<a href="http://plaza7.mbn.or.jp/~docile/japanese/gnu-win32/ml.html"
 	>[cygwin-jpn ML]</a><br>
 
@@ -901,11 +901,11 @@ $ install -c -m 755 unrar /usr/local/bin/unrar
     <li><a href="http://www.hm.aitai.ne.jp/~mtani/index.html"
 	>Binary Wiz</a><br>
     <li><a href="http://www.kt.rim.or.jp/~ksk/gnu-win32/indexj.html"
-	>Cygwin $B$N%Z!<%8(B</a> / Cygwin FAQ $BF|K\8lLu(B<br>
+	>Cygwin のページ</a> / Cygwin FAQ 日本語訳<br>
     <li><a href="http://www.matsusaka-u.ac.jp/~okumura/c/"
-	>C$B!$(BC++</a><br>
+	>C，C++</a><br>
     <li><a href="http://www.ozawa.ics.keio.ac.jp/~kimura/"
-	>Kimura's Welcome Page</a> $B$^$H$^$C$?%a%b!#9TKv(BLF$B!#(B<br>
+	>Kimura's Welcome Page</a> まとまったメモ。行末LF。<br>
 -->
   </ul>
 

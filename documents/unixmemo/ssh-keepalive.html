@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -16,218 +16,218 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>NAT$B4D6-$GJ|CV$7$?(BSSH$B@\B3$,@Z$l$kLdBj$X$NBP=h(B</h1>
+<h1>NAT環境で放置したSSH接続が切れる問題への対処</h1>
 
 <p class="abstract">
-NAT$B$G30It$K@\B3$7$F$$$k%W%i%$%Y!<%H%M%C%H%o!<%/$J$I$G(B
-$B30It$K(BSSH$B%3%M%/%7%g%s$r:n$C$?:]$K!"(B
-$B%m%0%$%s$7$C$Q$J$7$G(B10$BJ,$[$IJ|CV$7$F$*$/$H@\B3$,@Z$l$k4D6-$,$"$j$^$9!#(B
-$BNc$($PI.<T$N?&>l$,$=$&$G$9!#(B
-$B%M%C%H>e$G$bB?$/$N?M$,F1$8LdBj$G:$$C$F$$$k$h$&$G!"(B
-$B$$$m$$$m$J2r7hJ}K!$,Ds0F$5$l$F$$$^$9!#(B
-$B$=$l$>$l$NJ}K!$N35N,$HLdBjE@$K$D$$$F$^$H$a$F$_$^$9!#(B
+NATで外部に接続しているプライベートネットワークなどで
+外部にSSHコネクションを作った際に、
+ログインしっぱなしで10分ほど放置しておくと接続が切れる環境があります。
+例えば筆者の職場がそうです。
+ネット上でも多くの人が同じ問題で困っているようで、
+いろいろな解決方法が提案されています。
+それぞれの方法の概略と問題点についてまとめてみます。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="intro">$B$O$8$a$K(B</a></h2>
+<h2><a name="intro">はじめに</a></h2>
 
 <p>
-$B$^$:!"$3$N$h$&$JLdBj$,$J$<5/$3$k$N$+!"$I$N$h$&$J32$,$"$k$N$+$r@bL@$7!"(B
-$BBP=hJ}K!$r%j%9%H%"%C%W$7$^$9!#(B
+まず、このような問題がなぜ起こるのか、どのような害があるのかを説明し、
+対処方法をリストアップします。
 </p>
 
 <p>
-$B$3$NLdBj$,H/@8$9$k$H!"(B
-$B8+$+$1>e$O(BSSH$B$G%m%0%$%s$7$?@h$N%7%'%k$,L5H?1~$K$J$j$^$9!#(B
-$B$7$P$i$/$7$F!V(BConnection to *** closed.$B!W$J$I$H8@$o$l$F!"(B
-SSH$B%/%i%$%"%s%H$,@\B3CG$rG'<1$7$^$9!#(B
+この問題が発生すると、
+見かけ上はSSHでログインした先のシェルが無反応になります。
+しばらくして「Connection to *** closed.」などと言われて、
+SSHクライアントが接続断を認識します。
 </p>
 <p>
-$B$3$l$O!"(BNAT$B$r$7$F$$$k%k!<%?$,!"(B
-$B0lDj;~4V%Q%1%C%H$NN.$l$J$$%3%M%/%7%g%s$r@\B3CG$HH=CG$7!"(B
-NAT$B%F!<%V%k$r%/%j%"$7$F$7$^$&$?$a$K5/$3$k$H9M$($i$l$^$9!#(B
-SSH$B%/%i%$%"%s%H$,$$$6%Q%1%C%H$rN.$=$&$H$7$?$H$-$K!"(B
-$B=i$a$F@\B3CG$K5$$E$/$H$$$&$o$1$G$9(B
-$B!J(BNAT$B%F!<%V%k$r%/%j%"$9$k:]$KN>B&$N%=%1%C%H$KBP$7$F%O%s%0%"%C%W$r(B
-$BCN$i$;$F$/$l$l$P$9$0$K@Z$l$k$H;W$&$N$G$9$,!"(B
-$B>/$J$/$H$b?&>l$N%V%m!<%I%P%s%I%k!<%?$O2?$b$7$J$$$h$&$G$9!K!#(B
-$B$^$?!"%U%!%$%d!<%&%)!<%k$N@_Dj$J$I$G!"(B
-$B0U?^E*$K@ZCG$7$F$$$k4D6-$b$"$k$G$7$g$&!#(B
+これは、NATをしているルータが、
+一定時間パケットの流れないコネクションを接続断と判断し、
+NATテーブルをクリアしてしまうために起こると考えられます。
+SSHクライアントがいざパケットを流そうとしたときに、
+初めて接続断に気づくというわけです
+（NATテーブルをクリアする際に両側のソケットに対してハングアップを
+知らせてくれればすぐに切れると思うのですが、
+少なくとも職場のブロードバンドルータは何もしないようです）。
+また、ファイヤーウォールの設定などで、
+意図的に切断している環境もあるでしょう。
 </p>
 <p>
-SSH$B$K8B$i$:!"%3%M%/%7%g%s$r:n$C$?8e$G(B
-$BD94|4V2?$b%Q%1%C%H$,N.$l$J$$$h$&$J%5!<%S%9$G$"$l$P(B
-$BF1$8$h$&$K@Z$l$k$O$:$G$9$,!"(BSSH$B0J30$O$^$:3:Ev$7$J$$$G$7$g$&!#(B
+SSHに限らず、コネクションを作った後で
+長期間何もパケットが流れないようなサービスであれば
+同じように切れるはずですが、SSH以外はまず該当しないでしょう。
 </p>
 <p>
-$BBP:v$H$7$F$O!"(BSSH$B$N@_Dj$G!V(BKeepAlive$B!W$r%*%s$K$9$l$PK|;v2r7h!D(B
-$B$N$h$&$J5$$,$7$^$9$,!"$3$l$O8e=R$9$k$h$&$KA4$/8z2L$,$"$j$^$;$s!#(B
-$BM-8z$JJ}K!$O0J2<$N$h$&$K$$$/$D$+$"$j$^$9$,!"$I$l$b%a%j%C%H$H%G%a%j%C%H$,$"$j$^$9!#(B
+対策としては、SSHの設定で「KeepAlive」をオンにすれば万事解決…
+のような気がしますが、これは後述するように全く効果がありません。
+有効な方法は以下のようにいくつかありますが、どれもメリットとデメリットがあります。
 </p>
 
 <ol>
-<li>SSH$B@\B3$rJ|CV$7$J$$(B
-<li>$B%k!<%?$N@_Dj$r$J$s$H$+$9$k(B
-<li>$B%m%0%$%s@h$GDj4|E*$K2?$+$r=PNO$9$k%W%m%0%i%`$r<B9T$9$k(B
-<li>KeepAlive$B$,4|BTDL$jF0$/$h$&$K(BOS$B$N(BTCP$B@_Dj$rJQ99$9$k(B
-<li>SSH$B%5!<%P$N@_Dj$G@Z$l$F$$$k$+$I$&$+3NG'$9$k%Q%1%C%H$rAw$k(B
-<li>SSH$B%/%i%$%"%s%H$N@_Dj$GL532$J%Q%1%C%H$rDj4|E*$KAw$k(B
+<li>SSH接続を放置しない
+<li>ルータの設定をなんとかする
+<li>ログイン先で定期的に何かを出力するプログラムを実行する
+<li>KeepAliveが期待通り動くようにOSのTCP設定を変更する
+<li>SSHサーバの設定で切れているかどうか確認するパケットを送る
+<li>SSHクライアントの設定で無害なパケットを定期的に送る
 </ol>
 
 <p>
-$B$^$?!"(BSSH$B@\B3$N:]$K@\B3@h$NC<Kv(B(tty)$B$,I,MW$+$I$&$+$K$h$C$F$bBP:v$OJQ$o$C$F$-$^$9!#(B
-$B$D$^$j!"%m%0%$%s$7$F%a%s%F%J%s%9$J$I$NL\E*$G%7%'%k$r;H$&>l9g$H!"(B
-$B%]!<%H%U%)%o!<%G%#%s%0$d(Bcron$B$K$h$kDj4|<B9T$N>l9g$H$G$O(B
-$BE,MQ$N2DH]$,JQ$o$C$F$-$^$9!#I=$K$^$H$a$k$H<!$N$h$&$K$J$j$^$9!#(B
+また、SSH接続の際に接続先の端末(tty)が必要かどうかによっても対策は変わってきます。
+つまり、ログインしてメンテナンスなどの目的でシェルを使う場合と、
+ポートフォワーディングやcronによる定期実行の場合とでは
+適用の可否が変わってきます。表にまとめると次のようになります。
 </p>
 
-<table summary="$B3FJ}K!$NE,MQ$N2DH](B">
-<tr><th>$BJ}K!(B</th><th>tty$B$"$j(B</th><th>tty$B$J$7(B</th><th>$B%*%9%9%aEY(B</th></tr>
-<tr><th class="description">1. <a href="#method1">$BJ|CV$7$J$$(B</a></th><td>$B!{(B</td><td>$B!_(B</td><td>$B!_(B</td></tr>
-<tr><th class="description">2. <a href="#method2">$B%k!<%?$N@_Dj$rJQ99(B</a></th><td>$B"$(B</td><td>$B"$(B</td><td>$B!{(B</td></tr>
-<tr><th class="description">3. <a href="#method3">$B%m%0%$%s@h$GDj4|E*$K2?$+$r=PNO(B</a></th><td>$B!{(B</td><td>$B"$(B</td><td>$B"$(B</td></tr>
-<tr><th class="description">4. <a href="#method4">OS$B$N@_DjJQ99(B</a></th><td>$B"$(B</td><td>$B"$(B</td><td>$B!_(B</td></tr>
-<tr><th class="description">5. <a href="#method5">SSH$B%5!<%P$GBP=h(B</a></th><td>$B"$(B</td><td>$B!_(B</td><td>$B"$(B</td></tr>
-<tr><th class="description">6. <a href="#method6">SSH$B%/%i%$%"%s%H$GBP=h(B</a></th><td>$B"$(B</td><td>$B"$(B</td><td>$B!{(B</td></tr>
+<table summary="各方法の適用の可否">
+<tr><th>方法</th><th>ttyあり</th><th>ttyなし</th><th>オススメ度</th></tr>
+<tr><th class="description">1. <a href="#method1">放置しない</a></th><td>○</td><td>×</td><td>×</td></tr>
+<tr><th class="description">2. <a href="#method2">ルータの設定を変更</a></th><td>△</td><td>△</td><td>○</td></tr>
+<tr><th class="description">3. <a href="#method3">ログイン先で定期的に何かを出力</a></th><td>○</td><td>△</td><td>△</td></tr>
+<tr><th class="description">4. <a href="#method4">OSの設定変更</a></th><td>△</td><td>△</td><td>×</td></tr>
+<tr><th class="description">5. <a href="#method5">SSHサーバで対処</a></th><td>△</td><td>×</td><td>△</td></tr>
+<tr><th class="description">6. <a href="#method6">SSHクライアントで対処</a></th><td>△</td><td>△</td><td>○</td></tr>
 </table>
 
 <p>
-$B0J2<!">e5-$NJ}K!$N>\:Y$HLdBjE@!&E,MQHO0O$K$D$$$F@bL@$7$F$$$-$^$9!#(B
+以下、上記の方法の詳細と問題点・適用範囲について説明していきます。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="method1">SSH$B@\B3$rJ|CV$7$J$$(B</a></h2>
+<h2><a name="method1">SSH接続を放置しない</a></h2>
 
 <p>
-$B%m%0%$%s$7$F;H$&>l9g$O!"MQ$,:Q$s$@$i(Bexit$B$7$^$7$g$&!#(B
-$BHFMQE*$G$+$D%;%-%e%j%F%#E*$K$bJ86g$N$J$$J}K!$G$9!#(B
+ログインして使う場合は、用が済んだらexitしましょう。
+汎用的でかつセキュリティ的にも文句のない方法です。
 </p>
 <p>
-$BI.<T$K$O@dBP$KL5M}$G$9!#(B
+筆者には絶対に無理です。
 
-</p>
-
-<hr><!-- ____________________________________________________________ -->
-
-<h2><a name="method2">$B%k!<%?$N@_Dj$r$J$s$H$+$9$k(B</a></h2>
-
-<p>
-$B%k!<%?$N%?%$%`%"%&%H@_Dj$r1d$P$9$N$,0lHV$^$H$b$J2r7hJ}K!$G$9!#(B
-$BC;;~4V$G(BNAT$B%F!<%V%k$r%/%j%"$7$F$7$^$&$?$a$K5/$3$k%H%i%V%k$J$N$G!"(B
-$B%/%j%"$9$k$^$G$N;~4V$rHs>o$KD9$/$9$l$P(BOK$B$H$$$&$3$H$K$J$j$^$9!#(B
-</p>
-<p>
-$B$b$C$H$b!"(B
-$B@_DjJQ99$,$G$-$J$$>l9g$b$"$k$G$7$g$&$7!"(B
-$B5!4o$K$h$C$F$O(BNAT$B%F!<%V%k$,$"$U$l$F$7$^$&2DG=@-$b$"$k$J$I!"(B
-$BE,MQ$G$-$J$$2DG=@-$b$"$j$^$9!#(B
-</p>
-<p>
-$B$^$?!"(B15$BJ,$G@Z$l$k$N$,(B2$B;~4V$G@Z$l$k$h$&$K$J$C$?$H$3$m$G(B
-$BLdBj$H$7$F$OJQ$o$C$F$$$J$$$H$b$$$($^$9!#(B
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="method3">$B%m%0%$%s@h$GDj4|E*$K2?$+$r=PNO$9$k%W%m%0%i%`$r<B9T$9$k(B</a></h2>
+<h2><a name="method2">ルータの設定をなんとかする</a></h2>
 
 <p>
-$BC<Kv$r<hF@$9$k>l9g$N$_M-8z$JJ}K!$G$9$,!"(B
-$B0lDj;~4V$*$-$K2?$+$NJ8;zNs$r=PNO$9$k$h$&$J%W%m%;%9$r(B
-$B%P%C%/%0%i%&%s%I<B9T$7$F$*$1$P(B
-$B$=$NJ8;zNs$,%3%M%/%7%g%s>e$rN.$l$^$9$N$G!"(B
-$B@\B3$r0];}$G$-$^$9!#(B
+ルータのタイムアウト設定を延ばすのが一番まともな解決方法です。
+短時間でNATテーブルをクリアしてしまうために起こるトラブルなので、
+クリアするまでの時間を非常に長くすればOKということになります。
 </p>
 <p>
-$B$^$?!"%]!<%H%U%)%o!<%G%#%s%0$,<gL\E*$N>l9g$J$I!"(B
-ping -i 300$B$J$I$H%j%b!<%H$G<B9T$9$kNc$,$h$/8+$i$l$^$9!#(B
+もっとも、
+設定変更ができない場合もあるでしょうし、
+機器によってはNATテーブルがあふれてしまう可能性もあるなど、
+適用できない可能性もあります。
 </p>
 <p>
-$BLdBjE@$O!"B>$N%W%m%;%9$N=PNO$H:.$6$C$F$7$^$&$3$H$G$9!#(B
-$B%j%b!<%H%m%0%$%s$7$F(BEmacs$B$J$I$NC<Kv@)8f$r9T$&%"%W%j%1!<%7%g%s$r<B9T$9$k$H!"(B
-$B$3$N%P%C%/%0%i%&%s%I%W%m%;%9$N=PNO$,2hLL$rMp$7$F$7$^$$$^$9!#(B
-$B%S!<%W(B(\a, 0x07)$B$r=PNO$9$l$P2hLL$,Mp$l$k$3$H$O$"$j$^$;$s$,!"(B
-$B$&$k$5$$$N$G%$%^%$%A$@$H;W$$$^$9!#(B
+また、15分で切れるのが2時間で切れるようになったところで
+問題としては変わっていないともいえます。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="method4">KeepAlive$B$,4|BTDL$jF0$/$h$&$K(BOS$B$N(BTCP$B@_Dj$rJQ99$9$k(B</a></h2>
+<h2><a name="method3">ログイン先で定期的に何かを出力するプログラムを実行する</a></h2>
 
 <p>
-$BA0=R$7$?$h$&$K!"$?$@(Bssh_config$B$G(BKeepAlive yes$B$H$7$?$@$1$G$O$3$NLdBj$O2r7h$7$^$;$s!#(B
-KeepAlive$B%*%W%7%g%s$O(BTCP$B%=%1%C%H$r:n$k$H$-$K(BSO_KEEPALIVE$B$rM-8z$K$9$k$b$N$G$9$,!"(B
-$B$3$l$O0lDj;~4V2?$b%Q%1%C%H$NN.$l$J$$%3%M%/%7%g%s$KBP$7!"(B
-$B@\B3$,@8$-$F$$$k$+$I$&$+$r3NG'$9$k$?$a$N%Q%1%C%H$rN.$9$b$N$G$9!#(B
-$B$3$N(Bkeepalive$B%a%C%;!<%8$rAw$k$^$G$N;~4V$O!"<j85$N(BLinux$B$@$H(B2$B;~4V$N@_Dj$G$9$N$G!"(B
-$B$H$C$/$K@Z$l$F$$$k$/$i$$$N;~4V$,7P2a$7$F$h$&$d$/@\B3CG$r(BOS$B$,G'<1$9$k$o$1$G$9!#(B
-$BI.<T$K$O$3$N$"$?$j$N%l%$%d!<$NOC$OA4$/$o$+$i$J$$$N$G$9$,!"(B
-$BB?J,$=$&$$$&$b$N$J$N$G$7$g$&!#(B
+端末を取得する場合のみ有効な方法ですが、
+一定時間おきに何かの文字列を出力するようなプロセスを
+バックグラウンド実行しておけば
+その文字列がコネクション上を流れますので、
+接続を維持できます。
 </p>
 <p>
-Linux$B$N>l9g$O(B
+また、ポートフォワーディングが主目的の場合など、
+ping -i 300などとリモートで実行する例がよく見られます。
+</p>
+<p>
+問題点は、他のプロセスの出力と混ざってしまうことです。
+リモートログインしてEmacsなどの端末制御を行うアプリケーションを実行すると、
+このバックグラウンドプロセスの出力が画面を乱してしまいます。
+ビープ(\a, 0x07)を出力すれば画面が乱れることはありませんが、
+うるさいのでイマイチだと思います。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="method4">KeepAliveが期待通り動くようにOSのTCP設定を変更する</a></h2>
+
+<p>
+前述したように、ただssh_configでKeepAlive yesとしただけではこの問題は解決しません。
+KeepAliveオプションはTCPソケットを作るときにSO_KEEPALIVEを有効にするものですが、
+これは一定時間何もパケットの流れないコネクションに対し、
+接続が生きているかどうかを確認するためのパケットを流すものです。
+このkeepaliveメッセージを送るまでの時間は、手元のLinuxだと2時間の設定ですので、
+とっくに切れているくらいの時間が経過してようやく接続断をOSが認識するわけです。
+筆者にはこのあたりのレイヤーの話は全くわからないのですが、
+多分そういうものなのでしょう。
+</p>
+<p>
+Linuxの場合は
 /proc/sys/net/ipv4/tcp_keepalive_time
-$B$J$I$r$$$8$C$F$3$N@_Dj$r(B5$BJ,$J$I$HJQ99$9$l$P(B
-$BLdBj$O2r7h$9$k$h$&$G$9$,!"?4M}E*$KDq93$,$"$j$^$9!#(B
+などをいじってこの設定を5分などと変更すれば
+問題は解決するようですが、心理的に抵抗があります。
 </p>
 <p>
 <a href="http://www.kt.rim.or.jp/~ksk/sock-faq/unix-socket-faq-ja-2.html#ss2.8"
->$B!V(BProgramming UNIX Sockets in C - Frequently Asked Questions$B!W(B</a
->$B$N5-=R$+$i$7$F$b!"(BOS$B$N@_Dj$OJQ99$;$:$K(B
-$B%"%W%j%1!<%7%g%s%l%Y%k$GBP=h$9$Y$-LdBj$N$h$&$K;W$$$^$9!#(B
+>「Programming UNIX Sockets in C - Frequently Asked Questions」</a
+>の記述からしても、OSの設定は変更せずに
+アプリケーションレベルで対処すべき問題のように思います。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="method5">SSH$B%5!<%P$N@_Dj$G@Z$l$F$$$k$+$I$&$+3NG'$9$k%Q%1%C%H$rAw$k(B</a></h2>
+<h2><a name="method5">SSHサーバの設定で切れているかどうか確認するパケットを送る</a></h2>
 
 <p>
-SSH$B%5!<%P$N@_Dj$G!"(B
-$B@ZCG$7$F$$$k$+$I$&$+$r3NG'$9$kL\E*$GDj4|E*$K%Q%1%C%H$rAw$k$3$H$,$G$-$^$9!#(B
-$B$3$l$OHf3SE*LdBj$N>/$J$$J}K!$@$H;W$$$^$9!#(B
+SSHサーバの設定で、
+切断しているかどうかを確認する目的で定期的にパケットを送ることができます。
+これは比較的問題の少ない方法だと思います。
 </p>
 <p>
-$B$3$N@_Dj$rM-8z$K$9$k$H!"(B
-$BK\Ev$O@Z$l$F$$$J$$$N$K$7$P$i$/DL?.$,ES@Z$l$?$@$1$G(B
-$B%3%M%/%7%g%s$,@Z$l$?$HH=Dj$5$l$k$+$b$7$l$^$;$s$,!"(B
-$BLdBj$K$J$k$3$H$O$^$:L5$$$G$7$g$&!#(B
+この設定を有効にすると、
+本当は切れていないのにしばらく通信が途切れただけで
+コネクションが切れたと判定されるかもしれませんが、
+問題になることはまず無いでしょう。
 </p>
 <pre>
 ClientAliveInterval 15
 ClientAliveCountMax 3
 </pre>
 <p>
-$B$3$NJ}K!$N7gE@$O!"(B
-$B%5!<%P!&%/%i%$%"%s%H$H$b(BOpenSSH$BF1;N$G$J$$$HMxMQ$G$-$:!"(B
-$B$7$+$b%W%m%H%3%k$,(BSSH2$B$G$J$$$HMxMQ$G$-$J$$$3$H$G$9!#(B
-$B$^$?!"$*$=$i$/C<Kv$,$J$$$H;H$($J$$$?$a!"(B
-$B%]!<%H%U%)%o!<%G%#%s%0MQES$K$O;H$($^$;$s!#(B
+この方法の欠点は、
+サーバ・クライアントともOpenSSH同士でないと利用できず、
+しかもプロトコルがSSH2でないと利用できないことです。
+また、おそらく端末がないと使えないため、
+ポートフォワーディング用途には使えません。
 </p>
 <p>
-$B$^$?!"%a%s%F%J%s%9$9$k%5!<%P%^%7%s$,A}$($k$?$S$K$3$N@_Dj$r$9$k$N$bLLE]$G$9!#(B
+また、メンテナンスするサーバマシンが増えるたびにこの設定をするのも面倒です。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="method6">SSH$B%/%i%$%"%s%H$N@_Dj$GL532$J%Q%1%C%H$rDj4|E*$KAw$k(B</a></h2>
+<h2><a name="method6">SSHクライアントの設定で無害なパケットを定期的に送る</a></h2>
 
 <p>
 <a href="http://www.sc.isc.tohoku.ac.jp/~hgot/sources/openssh-watchdog.html"
->Heartbeat/Watchdog Patch for OpenSSH</a>$B$r;H$C$F!"(B
-$B%/%i%$%"%s%H$,0lDj4|4V$4$H$K(BSSH_MSG_IGNORE$B%a%C%;!<%8$r=P$9$h$&$K$9$k!"(B
-$B$H$$$&J}K!$G$9!#8D?ME*$K$O$3$l$,%*%9%9%a$G$9!#(B
+>Heartbeat/Watchdog Patch for OpenSSH</a>を使って、
+クライアントが一定期間ごとにSSH_MSG_IGNOREメッセージを出すようにする、
+という方法です。個人的にはこれがオススメです。
 </p>
 <p>
-ssh_config($B$^$?$O(B.ssh/config)
-$B$K0J2<$N$h$&$K=q$/$3$H$G(B300$BIC$K(B1$B2sL532$J%Q%1%C%H$rN.$7$^$9!#(B
+ssh_config(または.ssh/config)
+に以下のように書くことで300秒に1回無害なパケットを流します。
 </p>
 <pre>
 Heartbeat 300
 </pre>
 <p>
-$BB>$K$b!"0J2<$N%/%i%$%"%s%H$K$O$3$N5!G=$,I8=`$G$D$$$F$$$k$h$&$G$9!#(B
+他にも、以下のクライアントにはこの機能が標準でついているようです。
 </p>
 <ul>
   <li><a HREF="http://www.chiark.greenend.org.uk/~sgtatham/putty/"
@@ -239,34 +239,34 @@ Heartbeat 300
 
 </ul>
 <p>
-$B;DG0$J$,$i$3$N5!G=$O(BOpenSSH$BI8=`$G$ODs6!$5$l$F$$$J$$$N$G!"(B
-$B>e5-$N(BHeartbeat$B%Q%C%A$r=&$C$F$-$F%3%s%Q%$%k$7D>$9I,MW$,$"$j$^$9!#(B
-$B$?$@$7!"(BDebian$B$GG[I[$5$l$F$$$k(BOpenSSH$B$K$O4{$KFCJL$J%Q%C%A$,Ev$?$C$F$*$j!"(B
-Heartbeat$B$HF1$85!G=$,(BProtocolKeepAlives$B$H$$$&L>A0$K$J$C$F$$$k$h$&$G$9!#(B
+残念ながらこの機能はOpenSSH標準では提供されていないので、
+上記のHeartbeatパッチを拾ってきてコンパイルし直す必要があります。
+ただし、Debianで配布されているOpenSSHには既に特別なパッチが当たっており、
+Heartbeatと同じ機能がProtocolKeepAlivesという名前になっているようです。
 </p>
 <p>
-Heartbeat$B%Q%C%A$NFbMF$rD/$a$F$_$^$7$?$,!"(B
-$BK\<AE*$JItJ,$O(B10$B9TDxEY$N$h$&$G$9!#(B
-$B$G$9$N$G!"(B
-$B<+J,$N;H$C$F$$$k%/%i%$%"%s%H%=%U%H$,$3$N5!G=$KBP1~$7$F$$$J$$>l9g$G$b(B
-$B%=!<%9$5$($"$l$PBP1~2DG=$@$H;W$$$^$9!#(B
+Heartbeatパッチの内容を眺めてみましたが、
+本質的な部分は10行程度のようです。
+ですので、
+自分の使っているクライアントソフトがこの機能に対応していない場合でも
+ソースさえあれば対応可能だと思います。
 </p>
 <p>
-Heartbeat$B%Q%C%A$NE:IUJ8=q$K$O!"(B
-$B0lIt$N8E$$<BAu$G$O(BSSH_MSG_IGNORE$B$r<u$1<h$k$H(B
-$B;`$L%5!<%P$,$"$k$+$b$7$l$J$$$J$I$H=q$$$F$"$j$^$9$,!"(B
-$B8D?ME*$K$O[9M+$@$m$&$H;W$C$F$$$^$9!#(B
+Heartbeatパッチの添付文書には、
+一部の古い実装ではSSH_MSG_IGNOREを受け取ると
+死ぬサーバがあるかもしれないなどと書いてありますが、
+個人的には杞憂だろうと思っています。
 </p>
 
 <ul class="news">
-<li>[2005/06/16$BDI5-(B] 
-$B?oJ,8E$$OC$K$J$j$^$9$,!"(BOpenSSH3.8$B0J9_$G$O(B ServerAliveInterval $B$H$$$&L>A0$G(B
-$B>e5-%Q%C%A$NFbMF$,I8=`AuHw$5$l$F$$$k$=$&$G$9!#(B
-$BI.<T$O(BRedHat7.2$B$H(BDebian woody$B$rD9$/;H$C$F$$$?$3$H$b$"$j5$IU$$$F$$$^$;$s$G$7$?!#(B
-$B$^$?!"(B<a href="http://sleep.mat-yan.jp/~yutaka/windows/index.html">UTF-8 TeraTerm Pro with TTSSH2</a>
-$B$b(BHeartBeat$B$KBP1~$7$F$$$k$=$&$G$9!#(B
-$B$5$i$K!"(B<a href="http://www.poderosa.org/">Poderosa</a>($B5lL>(BVaraTerm)$B$b(B
-$BBP1~$7$F$$$k$_$?$$$G$9!#(B
+<li>[2005/06/16追記] 
+随分古い話になりますが、OpenSSH3.8以降では ServerAliveInterval という名前で
+上記パッチの内容が標準装備されているそうです。
+筆者はRedHat7.2とDebian woodyを長く使っていたこともあり気付いていませんでした。
+また、<a href="http://sleep.mat-yan.jp/~yutaka/windows/index.html">UTF-8 TeraTerm Pro with TTSSH2</a>
+もHeartBeatに対応しているそうです。
+さらに、<a href="http://www.poderosa.org/">Poderosa</a>(旧名VaraTerm)も
+対応しているみたいです。
 </li>
 </ul>
 

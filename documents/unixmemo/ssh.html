@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <meta http-equiv="Content-Style-Type" content="text/css">
 <link rev="MADE" href="mailto:y@hnw.jp">
 <link rel="stylesheet" href="../../css/default.css" type="text/css">
@@ -16,13 +16,13 @@
 
 <hr><!-- ____________________________________________________________ -->
 
-<h1>SSH $B$N;H$$J}(B</h1>
+<h1>SSH の使い方</h1>
 
 <p class="abstract">
-$B<+J,$,$?$^$K;H$&$1$I$h$/K:$l$k5!G=$d!"(B
-$B?7%^%7%s$G@_Dj$7$?$i(B2$BEY$HJQ99$7$J$$$h$&$J5!G=!"(B
-$B$^$?$O$=$NB>$N$?$o$4$H$K$D$$$F!#(B
-$BA4A3;H$C$?$3$H$J$$?M$O(Bman$B8+$F$/$@$5$$!#(B
+自分がたまに使うけどよく忘れる機能や、
+新マシンで設定したら2度と変更しないような機能、
+またはその他のたわごとについて。
+全然使ったことない人はman見てください。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -30,10 +30,10 @@
 <h2><a name="proxycommand">ProxyCommand</a></h2>
 
 <p>
-        ssh_config$B$N@_Dj$G!"%U%!%$%d!<%&%)!<%k1[$(MQ!#(B
+        ssh_configの設定で、ファイヤーウォール越え用。
 </p>
 <p>
-        <a href="./httptunnel.html">HTTP-tunneling$B$H(Bvmware</a>$B$r;2>H$N$3$H!#(B
+        <a href="./httptunnel.html">HTTP-tunnelingとvmware</a>を参照のこと。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -41,14 +41,14 @@
 <h2><a name="forwardagent">ForwardAgent</a></h2>
 
 <p>
-        ssh_config$B$N@_Dj$G!"%m%0%$%s@h$+$i$5$i$K(Bssh$B$GB>$N%^%7%s$K%m%0%$%s$9$k$H$-$K!"(B
-        RSA$BG'>Z$r%m!<%+%k$N(Bssh-agent$B$KJV;v$5$;$k@_Dj!#(B
-        $B%U%!%$%d!<%&%)!<%k$NFbB&$J$I$G!"(B
-        $BJ#?tCJ%m%0%$%s$7$J$$$H9T$1$J$$%^%7%s$K9T$/>l9g$K!"(B
-        $B%m!<%+%k$G(B1$B2s(Bpassphrase$B$rF~$l$k$@$1$G<!!9%m%0%$%s$7$F$$$1$FJXMx!#(B
+        ssh_configの設定で、ログイン先からさらにsshで他のマシンにログインするときに、
+        RSA認証をローカルのssh-agentに返事させる設定。
+        ファイヤーウォールの内側などで、
+        複数段ログインしないと行けないマシンに行く場合に、
+        ローカルで1回passphraseを入れるだけで次々ログインしていけて便利。
 </p>
 <p>
-        $B%3%^%s%I%i%$%s%*%W%7%g%s$N(B-A$B$G$bF1$80UL#!#(B
+        コマンドラインオプションの-Aでも同じ意味。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
@@ -56,66 +56,66 @@
 <h2><a name="keygen">ssh-keygen</a></h2>
 
 <p>
-        $B8x3+80!&HkL)80$N80%Z%"$r:n$k%3%^%s%I!#(B
+        公開鍵・秘密鍵の鍵ペアを作るコマンド。
 </p>
 <p>
-        SSH1$B$N>l9g!"(B
-        ~/.ssh/identity $B$,HkL)800E9f$G0E9f2=$5$l$?8x3+800E9f$NHkL)80!"(B
-        ~/.ssh/identity.pub $B$,8x3+800E9f$N8x3+80$K$J$j$^$9!#(B
-        $B;E;v$G%m%0%$%sMQ$NHkL)80%U%!%$%k$H%Q%9%U%l!<%:$r(B
-        $B%a!<%k$GAw$j$D$1$i$l$?$3$H$,$"$j$^$9$,!"(B
-        $B4m$J$$$N$GNI$$;R$O??;w$7$A$c$@$a$G$9!#(B
+        SSH1の場合、
+        ~/.ssh/identity が秘密鍵暗号で暗号化された公開鍵暗号の秘密鍵、
+        ~/.ssh/identity.pub が公開鍵暗号の公開鍵になります。
+        仕事でログイン用の秘密鍵ファイルとパスフレーズを
+        メールで送りつけられたことがありますが、
+        危ないので良い子は真似しちゃだめです。
 </p>
 <p>
-        Tera Term$B$J$I(BWindows$B4D6-$+$i(BSSH$B$r;H$$$?$$>l9g$b!"(B
-        $B4pK\E*$K$O80%Z%"$O(Bcygwin$B$J$I$G%m!<%+%k$G:n$k$Y$-$G$9!#(B
-        $B%U%m%C%T!<$J$I$G0\F0$7$F$b9=$$$^$;$s$,IT0B$G$9$7!"(B
-        $BHkL)80$r<+J,08$N%a!<%k$GAw$C$?$j$9$k$H(B
-        $B$=$N8e$$$/$iMQ?4$7$F$bL5BL$K$J$j$+$M$^$;$s!#(B
+        Tera TermなどWindows環境からSSHを使いたい場合も、
+        基本的には鍵ペアはcygwinなどでローカルで作るべきです。
+        フロッピーなどで移動しても構いませんが不安ですし、
+        秘密鍵を自分宛のメールで送ったりすると
+        その後いくら用心しても無駄になりかねません。
 </p>
 <p>
-        SSH2$B$N>l9g!"(Bssh-keygen -t dsa $B$J$I$HBG$F$P$G$-$^$9!#(B
-        RSA$B<R$,FC5v$rJ|4~$7$?8=:_$G$O!"(Bdsa$B$H(Brsa$B$N0c$$$OFf$G$9!#(B
-        dsa$B$N>l9g$O(Bid_dsa$B$*$h$S(Bid_dsa.pub$B$,HkL)80$H8x3+80$K$J$j$^$9!#(B
+        SSH2の場合、ssh-keygen -t dsa などと打てばできます。
+        RSA社が特許を放棄した現在では、dsaとrsaの違いは謎です。
+        dsaの場合はid_dsaおよびid_dsa.pubが秘密鍵と公開鍵になります。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="ssh2key">SSH2$B$N(B2$B$D$N80%U%)!<%^%C%H(B</a></h2>
+<h2><a name="ssh2key">SSH2の2つの鍵フォーマット</a></h2>
 
 <p>
-	SSH2$B$K$J$C$F!"(BOpenSSH$B$O(B
-        RSA$B<R=c@5$N$b$N$H0[$J$k8x3+80%U%)!<%^%C%H$r:NMQ$7$?!#(B
-        $BITJX$J$@$1$G%a%j%C%H$,A4$/$o$+$i$J$$$,!"(B
-        $B$3$l$i$O4JC1$KAj8_JQ49$G$-$k!#(B
+	SSH2になって、OpenSSHは
+        RSA社純正のものと異なる公開鍵フォーマットを採用した。
+        不便なだけでメリットが全くわからないが、
+        これらは簡単に相互変換できる。
 </p>
 <pre>
 $ ssh-keygen -e -f openssh-key &gt; rsassh-key
 $ ssh-keygen -i -f rsassh-key &gt; openssh-key
 </pre>
 <p>
-OpenSSH$B$G:n$C$?80$r(BPuTTY$B$G;H$$$?$$!"$J$s$F$H$-$bLr$KN)$D$+$b$7$l$J$$!#(B
-$B!J;n$7$F$J$$$1$I!K(B
+OpenSSHで作った鍵をPuTTYで使いたい、なんてときも役に立つかもしれない。
+（試してないけど）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="from">$B%m%0%$%s85$r@)8B$9$k(B</a></h2>
+<h2><a name="from">ログイン元を制限する</a></h2>
 
 <p>
-        $BK\2H(BSSH$B$G$O(B/etc/sshd_config$B$G(B
-        $B@\B385%"%I%l%9$N@)8B$,$G$-$?$h$&$K;W$&$,!"(B
-        OpenSSH$B$G$O>JN,$5$l$F$$$k$h$&$@!#(B
-        $BBe$o$j$K!"(Btcp_wrappers$B$K$h$k@)8B$r;H$C$F$$$k!#(B
-        /etc/hosts.allow$B$"$?$j$KE,Ev$K@_Dj$9$l$P@)8B2DG=$J$O$:$@!#(B
+        本家SSHでは/etc/sshd_configで
+        接続元アドレスの制限ができたように思うが、
+        OpenSSHでは省略されているようだ。
+        代わりに、tcp_wrappersによる制限を使っている。
+        /etc/hosts.allowあたりに適当に設定すれば制限可能なはずだ。
 </p>
 <p>
-        password$BG'>Z$N>l9g$K3F%f!<%6!<$,@)8B$9$kJ}K!$O$J$$$h$&$K;W$&!#(B
+        password認証の場合に各ユーザーが制限する方法はないように思う。
 </p>
 <p>
-	RSA$BG'>Z$J$i$P!"(B~/.ssh/authorized_keys $B$K$h$C$F!"(B
-	$B80%Z%"$4$H$K@\B385%"%I%l%9$r@)8B$G$-$k!#(B
-        $B0J2<!"(BOpenSSH$B$N%^%K%e%"%k$+$i!#(B
+	RSA認証ならば、~/.ssh/authorized_keys によって、
+	鍵ペアごとに接続元アドレスを制限できる。
+        以下、OpenSSHのマニュアルから。
 </p>
 <pre>
 from="*.niksula.hut.fi,!pc.niksula.hut.fi" 1024 35 23...2334 ylo@niksula
@@ -123,57 +123,57 @@ from="*.niksula.hut.fi,!pc.niksula.hut.fi" 1024 35 23...2334 ylo@niksula
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="port-forwarding">$B%]!<%H%U%)%o!<%G%#%s%0(B</a></h2>
+<h2><a name="port-forwarding">ポートフォワーディング</a></h2>
 
 <p>
-	-L $B$H(B -R $B$OM}2r$9$k$N$,Fq$7$$%*%W%7%g%s$@$m$&!#(B
-	$B!J(Bman $B$NDL$j$J$N$@$,!K(B   
-	-L $B$O!"(BSSH $B$G$N@\B385$N%[%9%H$N$"$k%]!<%H$X$N@\B3$r!"(B
-	$B@\B3@h$+$i$N$"$k%[%9%H$N$"$k%]!<%H$X$N@\B3$K$D$J$.!"(B
-	-R $B$O!"(BSSH $B$G$N@\B3@h$N%[%9%H$N$"$k%]!<%H$X$N@\B3$r!"(B
-	$B@\B385$+$i$N$"$k%[%9%H$N$"$k%]!<%H$X$N@\B3$K$D$J$0!#(B
-	$B$3$N$H$-!"@\B3@h$H@\B385$H$N%U%)%o!<%G%#%s%0$K$O(B
-	SSH $B$N7PO)$,;H$o$l$k$N$G!"$"$d$7$/JI$r1[$($k86F0NO$K$J$k!#(B
+	-L と -R は理解するのが難しいオプションだろう。
+	（man の通りなのだが）   
+	-L は、SSH での接続元のホストのあるポートへの接続を、
+	接続先からのあるホストのあるポートへの接続につなぎ、
+	-R は、SSH での接続先のホストのあるポートへの接続を、
+	接続元からのあるホストのあるポートへの接続につなぐ。
+	このとき、接続先と接続元とのフォワーディングには
+	SSH の経路が使われるので、あやしく壁を越える原動力になる。
 </p>
 <p>
-        -L$B$G:n$C$?%]!<%H$K$O(Blocalhost$B$+$i$7$+@\B3$G$-$J$$$N$bCm0UE@$@(B
-        $B!J$3$l$rK:$l$k$H$O$^$k!K!#(B
-        -g$B$r$D$1$k$3$H$G!"(B-L$B$G:n$C$?%]!<%H$K%j%b!<%H$+$i@\B3$G$-$k$h$&$K$J$k!#(B
+        -Lで作ったポートにはlocalhostからしか接続できないのも注意点だ
+        （これを忘れるとはまる）。
+        -gをつけることで、-Lで作ったポートにリモートから接続できるようになる。
 </p>
 <p>
-        -R$B$G:n$C$?%]!<%H$K$O(Blocalhost$B$+$i$7$+@\B3$G$-$J$$!#(B
-        $B$3$l$rJQ99$9$kJ}K!$O(Bsshd_config$B$G!V(BGatewayPorts yes$B!W$H=q$/0J30$J$$!#(B
-        $BK\2H(BSSH$B$J$i$P%/%i%$%"%s%HB&@_Dj$GJQ99$G$-$k$h$&$J$N$G!"(B
-        OpenSSH$B$b2?$H$+$7$FM_$7$$$H$3$m$@!#(B
-</p>
-
-<hr><!-- ____________________________________________________________ -->
-
-<h2><a name="noshell">OpenSSH$B$G%]!<%H%U%)%o!<%I$r5v$7$?;~$N%j%9%/(B</a></h2>
-
-<p>
-OpenSSH$B$K$O!V(B-N$B!W$H$$$&%*%W%7%g%s$,$"$k!#(B
-SSH2$B$G$N$_;H$($k!"@\B3@h$G2?$N%3%^%s%I$b<B9T$7$J$$%*%W%7%g%s$@!#(B
-$B%]!<%H%U%)%o!<%I@lMQ%"%+%&%s%H$r:n$k$h$&$J>l9g$K$OHs>o$K=EJu$9$k!#(B
-</p>
-<p>
-$B$7$+$7$3$N5!G=!"%7%'%k$,(B/bin/false$B$@$m$&$H2?$@$m$&$H@\B3$K@.8y$7$F$7$^$&!#(B
-$B%m%0%$%s$r6X;_$7$?$$%f!<%6!<$K$D$$$F%7%'%k$@$1JQ99$7$F(B
-$B%"%+%&%s%H$r>C5n$7$J$$$^$^$@$C$?$j$9$k$H!"(B
-$B%]!<%H%U%)%o!<%I$@$1$O2DG=$K$J$C$F$7$^$&!#(B
-$B$3$N%^%7%s$,(BDMZ$B$@$C$?$j$7$?>l9g$K$O!"(B
-$B$3$l$r7PM3$7$F%W%i%$%Y!<%H%M%C%HFb$KF~$i$l$F$7$^$&$+$b$7$l$J$$!#(B
+        -Rで作ったポートにはlocalhostからしか接続できない。
+        これを変更する方法はsshd_configで「GatewayPorts yes」と書く以外ない。
+        本家SSHならばクライアント側設定で変更できるようなので、
+        OpenSSHも何とかして欲しいところだ。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="intra-cvs-repository">$B%$%s%H%iFbIt$N(BCVS$B%j%]%8%H%j$H30It$GF14|$r<h$k(B</a></h2>
+<h2><a name="noshell">OpenSSHでポートフォワードを許した時のリスク</a></h2>
 
 <p>
-$B%]!<%H%U%)%o!<%G%#%s%0$r;H$$!"(B
-$B%$%s%H%iFb$+$i$NA`:n$K$h$j30It%^%7%s$G(Bcvs update$B$9$k%a%b!#(B
-$B0J2<!"%$%s%H%iFbIt$N%^%7%s$r(Balita$B!"30It$N%^%7%s$r(Bgally$B$H$7$F!"(B
-alita$B$N(B$HOME/.ssh/config$B$K0J2<$N$h$&$K@_Dj$9$k!#(B
+OpenSSHには「-N」というオプションがある。
+SSH2でのみ使える、接続先で何のコマンドも実行しないオプションだ。
+ポートフォワード専用アカウントを作るような場合には非常に重宝する。
+</p>
+<p>
+しかしこの機能、シェルが/bin/falseだろうと何だろうと接続に成功してしまう。
+ログインを禁止したいユーザーについてシェルだけ変更して
+アカウントを消去しないままだったりすると、
+ポートフォワードだけは可能になってしまう。
+このマシンがDMZだったりした場合には、
+これを経由してプライベートネット内に入られてしまうかもしれない。
+</p>
+
+<hr><!-- ____________________________________________________________ -->
+
+<h2><a name="intra-cvs-repository">イントラ内部のCVSリポジトリと外部で同期を取る</a></h2>
+
+<p>
+ポートフォワーディングを使い、
+イントラ内からの操作により外部マシンでcvs updateするメモ。
+以下、イントラ内部のマシンをalita、外部のマシンをgallyとして、
+alitaの$HOME/.ssh/configに以下のように設定する。
 </p>
 <pre>
 Host gally-pf
@@ -182,7 +182,7 @@ Host gally-pf
    RemoteForward 20022 localhost:22
 </pre>
 <p>
-$B$G!"(Bgally$B$N(B$HOME/.ssh/config$B$G$O0J2<$N$h$&$K=q$/!#(B
+で、gallyの$HOME/.ssh/configでは以下のように書く。
 </p>
 <pre>
 Host alita-pf
@@ -191,45 +191,45 @@ Host alita-pf
   FallBackToRsh no
 </pre>
 <p>
-alita$B$+$i(Bgally-pf$B$K%m%0%$%s$7$F!"$=$3$G(B
-cvs -d alita-pf:/home/cvs checkout project $B$J$I$HBG$F$P(BOK$B!#(B
-<a href="#forwardagent">ForwardAgent</a>$B$N@_Dj$,$7$F$"$l$P!"(B
-cvs$B$r<B9T$9$k:]$N(Bgally$B"*(Balita$B4V$N(BSSH$BG'>Z$K$O(B
-alita$B$N(Bssh-agent$B$,JV;v$r$9$k$N$G!"(B
-cvs up$B$J$I$HBG$D$@$1$G99?7$,$G$-!"Hs>o$K3Z!#(B
+alitaからgally-pfにログインして、そこで
+cvs -d alita-pf:/home/cvs checkout project などと打てばOK。
+<a href="#forwardagent">ForwardAgent</a>の設定がしてあれば、
+cvsを実行する際のgally→alita間のSSH認証には
+alitaのssh-agentが返事をするので、
+cvs upなどと打つだけで更新ができ、非常に楽。
 </p>
 <p>
-DHCP$B$G(BIP$B$b$i$&%^%7%sFb$K%j%]%8%H%j$,$"$k>l9g$H$+!"<B$O1~MQHO0O$,9-$$!#(B
-$B$@$,!"<BMQE*$+$H8@$o$l$k$H:$$k!#(B
-$B!JIaDL$O%0%m!<%P%k(BIP$B$r;}$C$F$$$k%^%7%s$K%j%]%8%H%j:n$k$h$M!K(B
+DHCPでIPもらうマシン内にリポジトリがある場合とか、実は応用範囲が広い。
+だが、実用的かと言われると困る。
+（普通はグローバルIPを持っているマシンにリポジトリ作るよね）
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="user">$B%f!<%6!<8"8B$G(B sshd $B$rF0$+$9(B</a></h2>
+<h2><a name="user">ユーザー権限で sshd を動かす</a></h2>
 
 <p>
-	root$B8"8B$r$b$C$F$$$J$$$1$I$=$N%^%7%s$K(B
-        SSH$B$G%m%0%$%s$G$-$k$h$&$K$7$?$$$H$$$&>u67$G$O!"(B
-        $B%f!<%6!<8"8B$G(Bsshd$B$rF0$+$9$3$H$,2DG=$@!#(B
-        $B$b$A$m$s!"(Bsshd$B$r5/F0$7$?%f!<%6!<0J30$G$O%m%0%$%s$G$-$J$$!#(B
+	root権限をもっていないけどそのマシンに
+        SSHでログインできるようにしたいという状況では、
+        ユーザー権限でsshdを動かすことが可能だ。
+        もちろん、sshdを起動したユーザー以外ではログインできない。
 </p>
 <p>
-	$B%f!<%6!<8"8B$G(B sshd $B$rN)$F$k$H$-$N%]%$%s%H$O!"(B
-	$B@_Dj%U%!%$%k$r$I$&$9$k$+$@!#(B
-	$B>/$J$/$H$b!"FH<+$K(B hostkey $B$r:n$kI,MW$,$"$k!#(B
-	$B!J$=$N%^%7%s$NHkL)80$,4{$KB8:_$9$k$H$-$G$b(B root $B$N;}$AJ*$@$+$i!K(B
-	$B$5$i$K!"(Bquiet mode $B$K$7$F$*$/$H5H$G$O$J$$$@$m$&$+!#(B
-	$B$H$$$&$o$1$G(B
+	ユーザー権限で sshd を立てるときのポイントは、
+	設定ファイルをどうするかだ。
+	少なくとも、独自に hostkey を作る必要がある。
+	（そのマシンの秘密鍵が既に存在するときでも root の持ち物だから）
+	さらに、quiet mode にしておくと吉ではないだろうか。
+	というわけで
 </p>
 <pre>
 $ /usr/local/sbin/sshd -p 22022 -q -h ./my-sshd
 </pre>
 <p>
-	$B$H$+$J$s$H$+$G$$$$$@$m$&!#(B
-	$B2C$($F!"(Bsshd_config $B$H$+$N;X<($bI,MW$K$J$k$+$b$7$l$J$$!#(B
-	$BI.<T$N>l9g$O(B /etc/ $B$K$"$k$b$N$GITK~$,$J$+$C$?$N$G;XDj$7$J$+$C$?!#(B
-	$B$5$i$K!"%/%i%$%"%s%HB&$N(B .ssh/config $B$K(B
+	とかなんとかでいいだろう。
+	加えて、sshd_config とかの指示も必要になるかもしれない。
+	筆者の場合は /etc/ にあるもので不満がなかったので指定しなかった。
+	さらに、クライアント側の .ssh/config に
 </p>
 <pre>
 Host my-sshd
@@ -238,37 +238,37 @@ Host my-sshd
    FallBackToRsh no
 </pre>
 <p>
-	$B$J$I$H=q$$$F$*$1$P0l8+IaDL$K;H$($k$h$&$K$J$k!#(B
+	などと書いておけば一見普通に使えるようになる。
 </p>
 
 <hr><!-- ____________________________________________________________ -->
 
-<h2><a name="localhost">localhost $B$K(B SSH $B@\B3(B</a></h2>
+<h2><a name="localhost">localhost に SSH 接続</a></h2>
 
 <p>
-	SSH $B$G$O!"%[%9%H$NG'>Z$N$?$a$K8x3+800E9f$,;H$o$l$F$$$k!#(B
-	$B3F%[%9%H$N8x3+80$O!"4IM}<T$,(B /etc/ $B0J2<$KFCJL$KF~$l$J$$8B$j!"(B
-	$B8D?M$N%G%#%l%/%H%j$K$?$^$C$F$$$/$,!"(B
-	LAN $B4D6-$G(B NFS $B$G%[!<%`%G%#%l%/%H%j$r6&M-$7$F$$$k$h$&$J>l9g!"(B
-	localhost $B$N80$O%^%7%s$4$H$KJQ$o$k$?$a$K(B localhost $B$NG'>Z$O$G$-$J$$!#(B
-	$B$9$J$o$A!"(Blocalhost $B$K(B ssh $B$GF~$l$J$$(B
-	$B!JJL$N%[%9%H$G(B localhost $B$KF~$kEY$KE\$i$l$k$@$1$N$3$H$@$,!K!#(B
+	SSH では、ホストの認証のために公開鍵暗号が使われている。
+	各ホストの公開鍵は、管理者が /etc/ 以下に特別に入れない限り、
+	個人のディレクトリにたまっていくが、
+	LAN 環境で NFS でホームディレクトリを共有しているような場合、
+	localhost の鍵はマシンごとに変わるために localhost の認証はできない。
+	すなわち、localhost に ssh で入れない
+	（別のホストで localhost に入る度に怒られるだけのことだが）。
 </p>
 <p>
-	$B2r7h:v$H$7$F$O!"4IM}<T$KMj$s$G(B 
-	$B3F%^%7%s$N(B /etc/ $B$K(B localhost $B$N%[%9%H%-!<$r=q$$$F$b$i$&$3$H$@!#(B
-	$B!J(Blocalhost $B$X$N%Q%1%C%H$,%M%C%H%o!<%/$KN.$l$k$3$H$O$J$$$N$G!"(B
-	localhost $B$X(B ssh $B$7$F$b$"$^$j0UL#$O$J$$$,!"(B
-	ssh $B$G(B r$B%3%^%s%I$rCV$-49$($i$l$k$h$&$K$9$k$?$a$K$b(B
-	$B$3$&$$$&@_Dj$K$7$F$*$$$?J}$,$$$$$H;W$&!#(B
-	$B$5$i$K(B localhost $B$X$O05=L(Boff$B0E9f2=$O(Bblowfish
-        $B$H$$$&@_Dj$K$9$l$P$$$$$+$b!K(B
+	解決策としては、管理者に頼んで 
+	各マシンの /etc/ に localhost のホストキーを書いてもらうことだ。
+	（localhost へのパケットがネットワークに流れることはないので、
+	localhost へ ssh してもあまり意味はないが、
+	ssh で rコマンドを置き換えられるようにするためにも
+	こういう設定にしておいた方がいいと思う。
+	さらに localhost へは圧縮off暗号化はblowfish
+        という設定にすればいいかも）
 </p>
 <p>
-        $B$"!"(Blocalhost$B$K(Bssh$B$J$s$+BG$D$J!"$H$$$&0U8+$OHs>o$K$b$C$H$b$G$9!#(B
-        $B<+J,$,4IM}<T$G$J$$>l9g!"$3$N$h$&$J<gD%$,0l=3$5$l$F$bL5M}$O$"$j$^$;$s!#(B
-        $B$H$$$&$N$b!"$I$N%^%7%s$b(B127.0.0.1$B0J30$NL>A0$r;}$C$F$$$k$O$:$G!"(B
-        $B$=$NL>A0$r;H$($P<+%^%7%s$K(Bssh$B$G%m%0%$%s$9$k$3$H$,2DG=$@$+$i$G$9!#(B
+        あ、localhostにsshなんか打つな、という意見は非常にもっともです。
+        自分が管理者でない場合、このような主張が一蹴されても無理はありません。
+        というのも、どのマシンも127.0.0.1以外の名前を持っているはずで、
+        その名前を使えば自マシンにsshでログインすることが可能だからです。
 </p>
 
 <address>
