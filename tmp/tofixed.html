@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+    <title>Number.prototype.toFixed()</title>
+    <script type="text/javascript">
+      var v1 = 0.49999999999999994;
+      var v2 = 0.5;
+      var v3 = 9007199254740991;
+      var v4 = 9007199254740992;
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+
+    <table>
+      <tr>
+        <th>v</th>
+        <th>v.toFixed(0)</th>
+      </tr>
+      <tr>
+        <th><script>document.write(v1)</script></th>
+        <td><script>document.write(v1.toFixed(0))</script></td>
+      </tr>
+      <tr>
+        <th><script>document.write(v2)</script></th>
+        <td><script>document.write(v2.toFixed(0))</script></td>
+      </tr>
+      <tr>
+        <th><script>document.write(v3)</script></th>
+        <td><script>document.write(v3.toFixed(0))</script></td>
+      </tr>
+      <tr>
+        <th><script>document.write(v4)</script></th>
+        <td><script>document.write(v4.toFixed(0))</script></td>
+      </tr>
+    </table>
+
+</div><!-- /.container -->
+
+  </body>
+</html>
